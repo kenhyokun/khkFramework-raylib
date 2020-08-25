@@ -1,5 +1,5 @@
 # khkFramework-raylib (still rough...)
-Experimental C/C++ 2D game framework with raylib.</br>
+Experimental C/C++ 2D game framework with raylib inspired by popular game engine like Ogre3D and Unity3D.</br>
 Build and tested on Ubuntu 18.04.
 
 # 3rd party library:

@@ -35,7 +35,19 @@ static float time_step = 1.0f / 60.0f;
 static int32 velocity_iterations = 6;
 static int32 position_iterations = 6;
 
+/*
+  Available namespace:
+  - Component
+  - B2D
+*/
+
 namespace Component{
+
+  /*
+    Available component:
+    - BoxCollider
+    - RigidBody
+  */
 
   typedef struct BoxCollider : BaseComponent{
     b2PolygonShape *box_collision_shape;
@@ -65,7 +77,7 @@ namespace Component{
 
 }; // Component namespace
 
-namespace B2D{ // box2d
+namespace B2D{
   static vector<Node*> node_list;
   
   void Attach(Node *node);

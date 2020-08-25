@@ -25,6 +25,24 @@
 
 #include<Component.h>
 
+Rectangle Component::BaseComponent::_GetSrcRect(int tile){
+  int begin_column = 1;
+  int range_column = texture_column - begin_column;
+  int temp_row = (tile + range_column) / texture_column;
+  int end_column_in_row = temp_row * texture_column;
+  int temp_column = texture_column - (end_column_in_row - tile);
+  
+  int src_x = temp_column - 1;
+  int src_y = temp_row - 1;
+	
+  return Rectangle{
+    (float)src_x * (float)grid->width,
+      (float)src_y * (float)grid->height,
+      (float) grid->width,
+      (float) grid->height
+      };
+}
+
 Component::SpriteRenderer::SpriteRenderer(Texture2D *_texture){
   texture = _texture;
   src_rect = {0.0f, 0.0f, (float)texture->width, (float)texture->height};
@@ -52,8 +70,9 @@ Component::Animator::Animator(Texture2D *_texture,
 
   frame_width = _frame_width;
   frame_height = _frame_height;
-  column = texture->width / frame_width;
-  row = texture->height / frame_height;
+  texture_column = texture->width / frame_width;
+  texture_row = texture->height / frame_height;
+  grid = new Grid{frame_width, frame_height, texture_column, texture_row};
   
   src_rect = {0.0f, 0.0f, (float)frame_width, (float)frame_height};
 }
@@ -71,25 +90,7 @@ void Component::Animator::PlayAnim(vector<int> anim_frame, int fps){
 
   } // frame counter
 
-  int begin_column = 1;
-  int end_column = column;
-  int range_column = end_column - begin_column;
-   
-  int temp_row = (anim_frame.at(frame_index) +
-		  range_column) / column;
-   
-  int end_column_in_row = temp_row * column;
-      
-  int temp_column = end_column -
-    (end_column_in_row - anim_frame.at(frame_index));
-      
-  float src_x = (temp_column - 1);
-  float src_y = (temp_row - 1);
-
-  src_rect = {src_x * (float)frame_width,
-	      src_y * (float)frame_height,
-	      (float)frame_width,
-	      (float)frame_height};
+  src_rect = _GetSrcRect(anim_frame.at(frame_index));
 }
 
 void Component::Animator::Draw(){
@@ -102,24 +103,6 @@ int Component::Animator::GetFrameWidth(){return frame_width;}
 int Component::Animator::GetFrameHeight(){return frame_height;}
 int Component::Animator::GetColumn(){return column;}
 int Component::Animator::GetRow(){return row;}
-
-Rectangle Component::BaseTilemap::_GetSrcRect(int tile){
-  int begin_column = 1;
-  int range_column = texture_column - begin_column;
-  int temp_row = (tile + range_column) / texture_column;
-  int end_column_in_row = temp_row * texture_column;
-  int temp_column = texture_column - (end_column_in_row - tile);
-  
-  int src_x = temp_column - 1;
-  int src_y = temp_row - 1;
-	
-  return Rectangle{
-    (float)src_x * (float)grid->width,
-      (float)src_y * (float)grid->height,
-      (float) grid->width,
-      (float) grid->height
-      };
-}
 
 Vector2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
   float x0 = node->GetPosition().x - (max_width / 2);

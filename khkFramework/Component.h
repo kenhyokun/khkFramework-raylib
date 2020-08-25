@@ -46,12 +46,15 @@ struct Grid{
   int row = 0;
 };
 
-struct Tile{
-  Transform_node transform;
-  int tile; // tile integer value... you don't say...
-};
-
 namespace Component{
+
+  /*
+    Available component:
+    - SpriteRenderer
+    - Animator
+    - Tilemap
+    - TMXMap
+  */
 
   struct BaseComponent{
     Node* node = NULL; // component owner
@@ -61,6 +64,11 @@ namespace Component{
     }
 
   protected:
+    Grid *grid = NULL;
+    int texture_column = 0;
+    int texture_row = 0;
+
+    Rectangle _GetSrcRect(int tile);
     virtual void OnAttach(){}
   };
 
@@ -97,11 +105,6 @@ namespace Component{
 
   } *animator;
 
-  typedef struct SceneComponent : BaseComponent{
-    map<string, Node*> attached_node;
-    void AttachNode(Node *node);
-  } *scene_component;
-
   struct BaseTilemap : BaseComponent{
     Grid* GetGrid();
     int GetMaxWidth();
@@ -109,15 +112,11 @@ namespace Component{
 
   protected:
     Texture2D *texture;
-    Grid *grid = NULL;
     int max_width = 0;
     int max_height = 0;
-    int texture_column = 0;
-    int texture_row = 0;
 
     int _GetIndex(int column, int row);
     Vector2 _GetTransformRotation(int column, int row); // tile transformation rotation
-    Rectangle _GetSrcRect(int tile);
   };
 
   typedef struct Tilemap : BaseTilemap{
@@ -126,7 +125,6 @@ namespace Component{
     void Draw();
 
     bool IsTiled(int column, int row);
-    Tile* GetTile(int column, int row);
 
   protected:
     int *tile_map;
@@ -150,6 +148,10 @@ namespace Component{
 
   } *tmxmap;
 
+  typedef struct SceneComponent : BaseComponent{
+    map<string, Node*> attached_node;
+    void AttachNode(Node *node);
+  } *scene_component;
 
 }; // component namespace
 
