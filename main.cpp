@@ -92,7 +92,6 @@ struct App : BaseApp{
 			    (float)game_screen_height / 2};
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
-    
 
     cout<<"node1 child size:"<<node1->GetChild().size()<<endl;
     cout<<"node2 child size:"<<node2->GetChild().size()<<endl;
@@ -181,7 +180,7 @@ struct App : BaseApp{
     node5->GetComponent<Component::tilemap>()->Draw();
     // node6->GetComponent<Component::tmxmap>()->Draw(0); // layer index 0
     // node6->GetComponent<Component::tmxmap>()->Draw(1); // layer index 1
-    node6->GetComponent<Component::tmxmap>()->Draw();
+    node6->GetComponent<Component::tmxmap>()->Draw(); // draw all layer
     node7->GetComponent<Component::animator>()->Draw();
 
     EndMode2D();
@@ -189,7 +188,6 @@ struct App : BaseApp{
   }
 
 };
-
 
 
 int main(){
