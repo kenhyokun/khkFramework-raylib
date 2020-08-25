@@ -74,6 +74,7 @@ public:
   template<typename T>
   inline void AddComponent(T component){
     component->node = this;
+    component->Attach();
     component_map<T>.insert(pair<Node*, T>(this, component));
   }
 

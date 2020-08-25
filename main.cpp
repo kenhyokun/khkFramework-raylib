@@ -8,18 +8,17 @@
 #include<BaseApp.h>
 #include<Node.h>
 #include<Component.h>
+#include<B2D.h>
 
 using namespace std;
-
-namespace Component{
-
-}; // component namespace
-
 using namespace Component;
 
 struct App : BaseApp{
 
-  Node *node1, *node2, *node3, *node4, *node5, *node6, *node7;
+  Node *node1, *node2, *node3,
+    *node4, *node5, *node6,
+    *node7, *node8, *node9;
+
   Camera2D camera;
 
   int dir_state = 0;
@@ -46,7 +45,9 @@ struct App : BaseApp{
     node4 = new Node();
     node5 = new Node();
     node6 = new Node();
-    node7 = new Node();
+    node7 = new Node(); // lilwitch test
+    node8 = new Node(); // dynamic rigid body test
+    node9 = new Node(); // static rigid body test
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
     lilwitch = LoadTexture("./resources/images/lilwitch.png");
@@ -72,6 +73,19 @@ struct App : BaseApp{
     node3->SetPosition(Vector2{450.0f, 250.0f});
     node4->SetPosition(Vector2{70.0f, 70.0f});
     node7->SetPosition(Vector2{50.0f, 50.0f});
+    node8->SetPosition(Vector2{50.0f, 50.0f});
+    node9->SetPosition(Vector2{50.0f, 400.0f});
+
+    node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
+    node8->AddComponent<Component::rigid_body>(new RigidBody());
+    // node8->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+
+    node9->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
+    node9->AddComponent<Component::rigid_body>(new RigidBody());
+    node9->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+
+    B2D::Attach(node8);
+    B2D::Attach(node9);
 
     node5->SetPosition(Vector2{
 	(float)game_screen_width * 0.5f,
@@ -139,7 +153,13 @@ struct App : BaseApp{
       break;
     }
 
+    b2Vec2 position = node8->GetComponent<rigid_body>()->GetBody()->GetPosition();
+    cout<<position.x<<", "<<position.y<<endl;
+
     camera.target = node7->GetPosition();
+
+    B2D::Step();
+
   }
 
   float angle = 0.0f;
@@ -169,6 +189,15 @@ struct App : BaseApp{
 		  BLUE,
 		  node4->GetRotation());
 
+    DrawRectangle(node8->GetPosition().x, node8->GetPosition().y,
+		  100.0f, 100.0f,
+		  GRAY,
+		  node8->GetRotation());
+
+    DrawRectangle(node9->GetPosition().x, node9->GetPosition().y,
+		  100.0f, 100.0f,
+		  BLACK,
+		  node9->GetRotation());
 
     if(angle > 360) angle = 0;
     node3->SetRotation(angle);
@@ -193,5 +222,6 @@ struct App : BaseApp{
 int main(){
   App app(800, 450, "My Game");
   app.Run();
+
   return 0;
 }

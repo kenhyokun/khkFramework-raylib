@@ -2,7 +2,7 @@
 # kevinhyokun91@gmail.com
 
 include :=\
-	-Ibox2d/ \
+	-Ibox2d \
 	-Iraylib/ \
 	-Itinyxml2/ \
 	-IkhkFramework/
@@ -10,6 +10,8 @@ include :=\
 lib :=\
 	-Lraylib/ \
 	-lraylib \
+	-Lbox2d/ \
+	-lbox2d \
 	-lGL \
 	-lm \
 	-lpthread \
@@ -21,10 +23,6 @@ src :=\
 	khkFramework/*.cpp
 
 obj :=\
-	box2d/obj/collision/*cpp.o \
-	box2d/obj/common/*cpp.o \
-	box2d/obj/dynamics/*cpp.o \
-	box2d/obj/rope/*cpp.o \
 	tinyxml2/*.o \
 	khkFramework/obj/*.o
 
@@ -37,3 +35,7 @@ run:
 
 obj:
 	make -C khkFramework/obj
+
+objrun:
+	make obj
+	make run

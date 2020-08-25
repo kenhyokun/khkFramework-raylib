@@ -55,6 +55,13 @@ namespace Component{
 
   struct BaseComponent{
     Node* node = NULL; // component owner
+
+    inline void Attach(){
+      OnAttach();
+    }
+
+  protected:
+    virtual void OnAttach(){}
   };
 
   typedef struct SpriteRenderer : BaseComponent{

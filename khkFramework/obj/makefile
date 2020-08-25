@@ -5,6 +5,7 @@ src :=\
 	../*.cpp
 
 include :=\
+	-I../../box2d/ \
 	-I../../raylib/ \
 	-I../../tinyxml2/ \
 	-I../
