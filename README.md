@@ -1,6 +1,10 @@
 # khkFramework-raylib (still rough...)
-Experimental C/C++ 2D game framework with raylib inspired by popular game engine like Ogre3D and Unity3D.</br>
+<p>Experimental C/C++ 2D game framework with raylib inspired by popular game engine like Ogre3D and Unity3D.</p>
 Build and tested on Ubuntu 18.04.
+
+# Features:
+  - Load exported .tmx file from **[Tiled map editor](https://www.mapeditor.org/)** for tile mapping.
+  - box2d (box collision)
 
 # 3rd party library:
   - raylib (https://github.com/raysan5/raylib)
