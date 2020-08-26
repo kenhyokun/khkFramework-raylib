@@ -70,6 +70,7 @@ namespace Component{
     void Step();
 
     void SetBodyType(b2BodyType type);
+    void SetFixedRotation(bool is_fixed = true);
     // void SetFixture(b2FixtureDef fixture_def);
     b2Body* GetBody();
 

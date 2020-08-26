@@ -121,10 +121,11 @@ Vector2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
 
   float x = 0.0f;
   float y = 0.0f;
-  float px = node->GetPosition().x;
-  float py = node->GetPosition().y;
   float tx = x0 + _x;
   float ty = y0 + _y;
+
+  float px = node->GetPosition().x;
+  float py = node->GetPosition().y;
 
   x =
     (tx * cos(Deg2Rad(node->GetRotation())) ) -

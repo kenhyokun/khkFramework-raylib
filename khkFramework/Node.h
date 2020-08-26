@@ -71,10 +71,10 @@ public:
   template<typename T>
     static typename map<Node*, T>::iterator component_map_it;
 
-  Node();
+  Node(string _name = "");
   void AddChild(Node *node);
   void RemoveChild(int index); // remove child by index
-  void ResetChildIndex();
+  void ResetChildIndex(int start_index = 0);
 
   template<typename T>
   inline void AddComponent(T component){

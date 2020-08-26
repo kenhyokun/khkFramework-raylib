@@ -82,7 +82,7 @@ struct App : BaseApp{
     node1->SetPosition(Vector2{300.0f, 55.0f});
     node2->SetPosition(Vector2{450.0f, 55.0f});
     node3->SetPosition(Vector2{450.0f, 250.0f});
-    node4->SetPosition(Vector2{194.0f, 70.0f});
+    node4->SetPosition(Vector2{450.0f, 70.0f});
     node7->SetPosition(Vector2{50.0f, 50.0f});
     node8->SetPosition(Vector2{30.0f, 50.0f});
     node9->SetPosition(Vector2{-50.0f, 400.0f});
@@ -97,10 +97,6 @@ struct App : BaseApp{
 
     node10->AddComponent<Component::circle_collider>(new CircleCollider(50));
     node10->AddComponent<Component::rigid_body>(new RigidBody());
-
-    B2D::Attach(node8);
-    B2D::Attach(node9);
-    B2D::Attach(node10);
 
     node5->SetPosition(Vector2{
 	(float)game_screen_width * 0.5f + 250,
@@ -168,8 +164,8 @@ struct App : BaseApp{
       break;
     }
 
-    b2Vec2 position = node8->GetComponent<rigid_body>()->GetBody()->GetPosition();
-    cout<<position.x<<", "<<position.y<<endl;
+    // b2Vec2 position = node8->GetComponent<rigid_body>()->GetBody()->GetPosition();
+    // cout<<position.x<<", "<<position.y<<endl;
 
     camera.target = node7->GetPosition();
 
@@ -178,6 +174,8 @@ struct App : BaseApp{
   }
 
   float angle = 0.0f;
+  float angle2 = 0.0f;
+
   void OnDraw() override {
     BeginMode2D(camera);
 
@@ -205,11 +203,14 @@ struct App : BaseApp{
 		  node4->GetRotation());
 
 
-    if(angle > 360) angle = 0;
     node3->SetRotation(angle);
     node4->SetRotation(angle, node3->GetPosition());
     node5->SetRotation(angle);
-    node6->SetRotation(angle);
+
+    if(angle2 < 95) angle2 ++;
+    node6->SetRotation(angle2);
+
+    if(angle > 360) angle = 0;
 
     node1->GetComponent<Component::sprite_renderer>()->Draw();
     node5->GetComponent<Component::tilemap>()->Draw();
@@ -236,7 +237,6 @@ struct App : BaseApp{
   }
 
 };
-
 
 int main(){
   App app(800, 450, "My Game");

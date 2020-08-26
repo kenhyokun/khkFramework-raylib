@@ -64,6 +64,8 @@ bool Component::RigidBody::_SetCollider(int state){
       fixture_def.friction = 0.3f;
       fixture = body->CreateFixture(&fixture_def);
 
+      B2D::Attach(node);
+
       return true;
     }
     else{
@@ -84,6 +86,8 @@ bool Component::RigidBody::_SetCollider(int state){
       fixture_def.density = 1.0f;
       fixture_def.friction = 0.3f;
       fixture = body->CreateFixture(&fixture_def);
+
+      B2D::Attach(node);
 
       return true;
 
@@ -107,6 +111,7 @@ void Component::RigidBody::Step(){
 }
 
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}
+void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotation(is_fixed);}
 b2Body* Component::RigidBody::GetBody(){return body;}
 
 void B2D::Attach(Node *node){

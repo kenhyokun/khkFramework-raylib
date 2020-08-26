@@ -25,13 +25,18 @@
 
 #include<Node.h>
 
-Node::Node(){
-  name += to_string(node_count);
-  node_count++;
+Node::Node(string _name){
+  if(_name == ""){
+    name += to_string(node_count);
+    node_count++;
+  }
+  else{
+    name = _name;
+  }
 }
 
-void Node::ResetChildIndex(){
-  for(int i = 0; i < child.size(); i++){
+void Node::ResetChildIndex(int start_index){
+  for(int i = start_index; i < child.size(); i++){
     child.at(i)->index_on_parent = i;
   }
 }
@@ -90,7 +95,7 @@ void Node::AddChild(Node *node){
 
 void Node::RemoveChild(int index){
   child.erase(child.begin() + index);
-  ResetChildIndex();
+  ResetChildIndex(index);
 }
 
 void Node::SetPosition(Vector2 position){
@@ -119,6 +124,8 @@ void Node::SetRotation(float angle){
 
   if(child.size() > 0){
     for(int i = 0; i < child.size(); i++){
+
+
       GetChild(i)->SetRotation(transform.rotation);
 
       // set direction
@@ -135,8 +142,8 @@ void Node::SetRotation(float angle){
 }
 
 void Node::SetRotation(float angle, Vector2 pivot){
-  float da = angle - transform.rotation;
-  _Rotate(da, pivot);
+  float _da = angle - transform.rotation;
+  _Rotate(_da, pivot);
   SetRotation(angle);
 }
 
