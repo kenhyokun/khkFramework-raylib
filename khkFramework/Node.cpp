@@ -142,8 +142,8 @@ void Node::SetTransform(Transform_node _transform){transform = _transform;}
 float Node::GetUpDirection(){return transform.up;}
 float Node::GetRightDirection(){return transform.right;}
 Vector2 Node::GetPosition(){return transform.position;}
-void Node::SetScale(float scale){transform.scale = scale;}
-float Node::GetScale(){return transform.scale;}
+void Node::SetScale(Vector2 _scale){transform.scale = _scale;}
+Vector2 Node::GetScale(){return transform.scale;}
 float Node::GetRotation(){return transform.rotation;}
 Node* Node::GetParent(){return parent;}
 vector<Node*> Node::GetChild(){return child;}

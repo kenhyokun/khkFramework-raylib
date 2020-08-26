@@ -50,10 +50,16 @@ Component::SpriteRenderer::SpriteRenderer(Texture2D *_texture){
 
 void Component::SpriteRenderer::Draw(int state){
   if(state == 0){
-    pivot = {(float)texture->width / 2.0f, (float)texture->height / 2.0f};
+
+    pivot = {((float)texture->width * node->GetScale().x) / 2.0f,
+	     ((float)texture->height * node->GetScale().y) / 2.0f};
+
     src_rect = {0.0f, 0.0f, (float)texture->width, (float)texture->height};
     dst_rect = {node->GetPosition().x, node->GetPosition().y, (float)texture->width, (float)texture->height};
   }
+
+  dst_rect.width *= node->GetScale().x;
+  dst_rect.height *= node->GetScale().y;
 
   DrawTexturePro(*texture,
 		 src_rect,
@@ -94,7 +100,10 @@ void Component::Animator::PlayAnim(vector<int> anim_frame, int fps){
 }
 
 void Component::Animator::Draw(){
-  pivot = {(float)frame_width / 2.0f, (float)frame_height / 2.0f};
+
+  pivot = {((float)frame_width * node->GetScale().x) / 2.0f,
+	   ((float)frame_height * node->GetScale().y) / 2.0f};
+
   dst_rect = {node->GetPosition().x, node->GetPosition().y, (float)frame_width, (float)frame_height};
   SpriteRenderer::Draw(1);
 }

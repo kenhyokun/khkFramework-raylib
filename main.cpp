@@ -13,11 +13,19 @@
 using namespace std;
 using namespace Component;
 
+/*
+  Game loop:
+  - OnInit
+  - OnUpdate
+  - OnDraw
+*/
+
 struct App : BaseApp{
 
   Node *node1, *node2, *node3,
     *node4, *node5, *node6,
-    *node7, *node8, *node9;
+    *node7, *node8, *node9,
+    *node10;
 
   Camera2D camera;
 
@@ -46,8 +54,9 @@ struct App : BaseApp{
     node5 = new Node();
     node6 = new Node();
     node7 = new Node(); // lilwitch test
-    node8 = new Node(); // dynamic rigid body test
-    node9 = new Node(); // static rigid body test
+    node8 = new Node(); // box dynamic rigid body test
+    node9 = new Node(); // box static rigid body test
+    node10 = new Node(); // circle dynamic rigid body test
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
     lilwitch = LoadTexture("./resources/images/lilwitch.png");
@@ -67,6 +76,8 @@ struct App : BaseApp{
     node5->AddComponent<Component::tilemap>(tilemap);
     node6->AddComponent<Component::tmxmap>(tmxmap);
     node7->AddComponent<Component::animator>(animator);
+
+    node1->SetScale(Vector2{2.0f, 2.0f});
 
     node1->SetPosition(Vector2{300.0f, 55.0f});
     node2->SetPosition(Vector2{450.0f, 55.0f});
@@ -157,7 +168,7 @@ struct App : BaseApp{
 
     camera.target = node7->GetPosition();
 
-    B2D::Step();
+    B2D::Step(); // run box2d step simulation
 
   }
 
@@ -198,6 +209,8 @@ struct App : BaseApp{
 		  BLACK,
 		  node9->GetRotation());
 
+    DrawCircle(50, 50, 50, RED);
+
     if(angle > 360) angle = 0;
     node3->SetRotation(angle);
     node4->SetRotation(angle, node3->GetPosition());
@@ -210,6 +223,7 @@ struct App : BaseApp{
     // node6->GetComponent<Component::tmxmap>()->Draw(1); // layer index 1
     node6->GetComponent<Component::tmxmap>()->Draw(); // draw all layer
     node7->GetComponent<Component::animator>()->Draw();
+
 
     EndMode2D();
 

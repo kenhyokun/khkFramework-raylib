@@ -56,6 +56,13 @@ namespace Component{
 
   } *box_collider;
 
+  typedef struct CircleCollider : BaseComponent{
+    b2CircleShape *circle_collision_shape;
+
+    CircleCollider(float radius);
+
+  } *circle_collider;
+
   typedef struct RigidBody : BaseComponent{
 
     static const b2BodyType STATIC = b2_staticBody;

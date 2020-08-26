@@ -37,8 +37,7 @@ using namespace std;
 
 struct Transform_node{
   Vector2 position{0.0f, 0.0f};
-  // Vector2 scale{1.0f, 1.0f};
-  float scale = 1.0f;
+  Vector2 scale{1.0f, 1.0f};
   float rotation = 0.0f;
   float up = 0.0f;
   float right = 90.0f;
@@ -88,10 +87,8 @@ public:
   float GetRightDirection();
   void SetPosition(Vector2 position);
   Vector2 GetPosition();
-  // void SetScale(Vector2 scale);
-  // Vector2 GetScale();
-  void SetScale(float scale);
-  float GetScale();
+  void SetScale(Vector2 scale);
+  Vector2 GetScale();
   void SetRotation(float angle);
   void SetRotation(float angle, Vector2 pivot);
   float GetRotation();
