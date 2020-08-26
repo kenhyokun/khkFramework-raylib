@@ -25,7 +25,10 @@
 
 #include<Node.h>
 
-Node::Node(){}
+Node::Node(){
+  name += to_string(node_count);
+  node_count++;
+}
 
 void Node::ResetChildIndex(){
   for(int i = 0; i < child.size(); i++){

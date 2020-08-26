@@ -46,21 +46,18 @@ namespace Component{
   /*
     Available component:
     - BoxCollider
+    - CircleCollider
     - RigidBody
   */
 
   typedef struct BoxCollider : BaseComponent{
     b2PolygonShape *box_collision_shape;
-
     BoxCollider(float width, float height);
-
   } *box_collider;
 
   typedef struct CircleCollider : BaseComponent{
     b2CircleShape *circle_collision_shape;
-
     CircleCollider(float radius);
-
   } *circle_collider;
 
   typedef struct RigidBody : BaseComponent{
@@ -77,8 +74,11 @@ namespace Component{
     b2Body* GetBody();
 
   protected:
+    b2FixtureDef fixture_def;
     b2Body *body;
     b2Fixture *fixture;
+
+    bool _SetCollider(int state = 0); // search and set collider shape
 
   } *rigid_body; 
 

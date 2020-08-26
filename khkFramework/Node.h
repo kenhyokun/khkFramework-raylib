@@ -43,13 +43,16 @@ struct Transform_node{
   float right = 90.0f;
 };
 
+static int node_count = 1; // for auto node naming
+
 class Node{
   Transform_node transform;
   Node *parent = NULL;
   vector<Node*> child;
 
   template<typename T>
-  static map<Node*, T> component_map;
+    static map<Node*, T> component_map;
+
 
 protected:
   void _SetParent(Node *node);
@@ -64,6 +67,9 @@ public:
   string tag = untagged_node_tag;
   int index_on_parent;
   // Node *root = NULL;
+
+  template<typename T>
+    static typename map<Node*, T>::iterator component_map_it;
 
   Node();
   void AddChild(Node *node);
@@ -102,5 +108,8 @@ public:
 
 template<typename T>
 map<Node*, T> Node::component_map;
+
+template<typename T>
+typename map<Node*, T>::iterator Node::component_map_it;
 
 #endif

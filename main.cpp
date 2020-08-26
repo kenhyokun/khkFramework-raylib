@@ -82,10 +82,11 @@ struct App : BaseApp{
     node1->SetPosition(Vector2{300.0f, 55.0f});
     node2->SetPosition(Vector2{450.0f, 55.0f});
     node3->SetPosition(Vector2{450.0f, 250.0f});
-    node4->SetPosition(Vector2{70.0f, 70.0f});
+    node4->SetPosition(Vector2{194.0f, 70.0f});
     node7->SetPosition(Vector2{50.0f, 50.0f});
-    node8->SetPosition(Vector2{130.0f, 50.0f});
-    node9->SetPosition(Vector2{50.0f, 400.0f});
+    node8->SetPosition(Vector2{30.0f, 50.0f});
+    node9->SetPosition(Vector2{-50.0f, 400.0f});
+    node10->SetPosition(Vector2{-120.0f, -20.0f});
 
     node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node8->AddComponent<Component::rigid_body>(new RigidBody());
@@ -94,15 +95,19 @@ struct App : BaseApp{
     node9->AddComponent<Component::rigid_body>(new RigidBody());
     node9->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
+    node10->AddComponent<Component::circle_collider>(new CircleCollider(50));
+    node10->AddComponent<Component::rigid_body>(new RigidBody());
+
     B2D::Attach(node8);
     B2D::Attach(node9);
+    B2D::Attach(node10);
 
     node5->SetPosition(Vector2{
-	(float)game_screen_width * 0.5f,
+	(float)game_screen_width * 0.5f + 250,
 	(float)game_screen_height * 0.5f});
 
     node6->SetPosition(Vector2{
-	(float)game_screen_width * 0.5f,
+	(float)game_screen_width * 0.5f + 200,
 	(float)game_screen_height * 0.5f});
 
     // node2->SetParent(node1);
@@ -199,17 +204,6 @@ struct App : BaseApp{
 		  BLUE,
 		  node4->GetRotation());
 
-    DrawRectangle(node8->GetPosition().x, node8->GetPosition().y,
-		  100.0f, 100.0f,
-		  GRAY,
-		  node8->GetRotation());
-
-    DrawRectangle(node9->GetPosition().x, node9->GetPosition().y,
-		  100.0f, 100.0f,
-		  BLACK,
-		  node9->GetRotation());
-
-    DrawCircle(50, 50, 50, RED);
 
     if(angle > 360) angle = 0;
     node3->SetRotation(angle);
@@ -222,8 +216,20 @@ struct App : BaseApp{
     // node6->GetComponent<Component::tmxmap>()->Draw(0); // layer index 0
     // node6->GetComponent<Component::tmxmap>()->Draw(1); // layer index 1
     node6->GetComponent<Component::tmxmap>()->Draw(); // draw all layer
-    node7->GetComponent<Component::animator>()->Draw();
 
+    DrawRectangle(node8->GetPosition().x, node8->GetPosition().y,
+		  100.0f, 100.0f,
+		  GRAY,
+		  node8->GetRotation());
+
+    DrawRectangle(node9->GetPosition().x, node9->GetPosition().y,
+		  100.0f, 100.0f,
+		  BLACK,
+		  node9->GetRotation());
+
+    DrawCircle(node10->GetPosition().x, node10->GetPosition().y, 50, RED);
+
+    node7->GetComponent<Component::animator>()->Draw();
 
     EndMode2D();
 

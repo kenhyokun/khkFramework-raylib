@@ -30,28 +30,74 @@ Component::BoxCollider::BoxCollider(float width, float height){
   box_collision_shape->SetAsBox(width * 0.5f, height * 0.5f);
 }
 
+Component::CircleCollider::CircleCollider(float radius){
+  circle_collision_shape = new b2CircleShape();
+  circle_collision_shape->m_radius = radius;
+}
+
 void Component::RigidBody::OnAttach(){
   b2BodyDef body_def;
   body_def.type = DYNAMIC; 
   body_def.position.Set(node->GetPosition().x, node->GetPosition().y);
   body = world.CreateBody(&body_def);
 
-  if(Node::component_map<box_collider>.size() > 0){
-    if(node->GetComponent<box_collider>() == NULL){
-      cout<<"you must add Collider component first"<<endl;
-    }
-    else{
-      cout<<"Collider component found..."<<endl;
-      b2FixtureDef fixture_def;
+  if(!_SetCollider()){
+    cout<<"you must add Collider component first"<<endl;
+  }
+
+}
+
+bool Component::RigidBody::_SetCollider(int state){
+
+  switch(state){
+
+  case 0: // box collider
+
+    Node::component_map_it<box_collider> =
+      Node::component_map<box_collider>.find(node);
+
+    if(Node::component_map_it<box_collider> !=
+       Node::component_map<box_collider>.end()){
+
       fixture_def.shape = node->GetComponent<box_collider>()->box_collision_shape;
       fixture_def.density = 1.0f;
       fixture_def.friction = 0.3f;
       fixture = body->CreateFixture(&fixture_def);
+
+      return true;
     }
-  }
-  else{
-    cout<<"you must add Collider component first"<<endl;
-  }
+    else{
+      _SetCollider(1);
+    }
+
+    break;
+
+  case 1: // circle collider
+
+    Node::component_map_it<circle_collider> =
+      Node::component_map<circle_collider>.find(node);
+
+    if(Node::component_map_it<circle_collider> !=
+       Node::component_map<circle_collider>.end()){
+
+      fixture_def.shape = node->GetComponent<circle_collider>()->circle_collision_shape;
+      fixture_def.density = 1.0f;
+      fixture_def.friction = 0.3f;
+      fixture = body->CreateFixture(&fixture_def);
+
+      return true;
+
+    }
+    else{
+      // _SetCollider(2);
+      return false;
+    }
+
+    break;
+
+    return false;
+
+  } // switch
 
 }
 
