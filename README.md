@@ -5,7 +5,7 @@ Experimental C/C++ 2D game framework with raylib inspired by popular game engine
 
 # Features:
   - Load exported **.tmx** file from **[Tiled map editor](https://www.mapeditor.org/)** for tile mapping. (only orthogonal view for now)
-  - box2d. (only box collision for now)
+  - box2d. (only box and circle collision for now)
 
 # 3rd party library:
   - raylib (https://github.com/raysan5/raylib)
