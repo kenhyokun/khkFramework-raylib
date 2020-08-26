@@ -57,6 +57,7 @@ void Component::RigidBody::OnAttach(){
 
 void Component::RigidBody::Step(){
   node->SetPosition(Vector2{body->GetPosition().x, body->GetPosition().y});
+  node->SetRotation(Rad2Deg(body->GetAngle()));
 }
 
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}

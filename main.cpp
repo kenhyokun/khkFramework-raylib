@@ -73,12 +73,11 @@ struct App : BaseApp{
     node3->SetPosition(Vector2{450.0f, 250.0f});
     node4->SetPosition(Vector2{70.0f, 70.0f});
     node7->SetPosition(Vector2{50.0f, 50.0f});
-    node8->SetPosition(Vector2{50.0f, 50.0f});
+    node8->SetPosition(Vector2{130.0f, 50.0f});
     node9->SetPosition(Vector2{50.0f, 400.0f});
 
     node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node8->AddComponent<Component::rigid_body>(new RigidBody());
-    // node8->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     node9->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node9->AddComponent<Component::rigid_body>(new RigidBody());

@@ -33,7 +33,7 @@ static b2Vec2 gravity(0.0f, 10.0f);
 static b2World world(gravity);
 static float time_step = 1.0f / 60.0f;
 static int32 velocity_iterations = 6;
-static int32 position_iterations = 6;
+static int32 position_iterations = 2;
 
 /*
   Available namespace:
