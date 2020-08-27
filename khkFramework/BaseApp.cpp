@@ -31,18 +31,6 @@ BaseApp::BaseApp(int _window_width, int _window_height, string _title){
   game_screen_width = window_width;
   game_screen_height = window_height;
   title = _title;
-
-  SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
-  InitWindow(window_width, window_height, title.c_str());
-  SetWindowMinSize(min_window_width, min_window_height);
-
-  target = LoadRenderTexture(game_screen_width,
-			     game_screen_height);
-
-  SetTextureFilter(target.texture, FILTER_BILINEAR);
-  SetTargetFPS(target_fps);
-
-  OnInit();
 }
 
 Vector2 BaseApp::ClampValue(Vector2 value, Vector2 min, Vector2 max){
@@ -57,6 +45,20 @@ Vector2 BaseApp::ClampValue(Vector2 value, Vector2 min, Vector2 max){
 void BaseApp::SetGameScreen(int _game_screen_width, int _game_screen_height){
   game_screen_width = _game_screen_width;
   game_screen_height = _game_screen_height;
+}
+
+void BaseApp::Init(){
+  SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
+  InitWindow(window_width, window_height, title.c_str());
+  SetWindowMinSize(min_window_width, min_window_height);
+
+  target = LoadRenderTexture(game_screen_width,
+			     game_screen_height);
+
+  SetTextureFilter(target.texture, FILTER_BILINEAR);
+  SetTargetFPS(target_fps);
+
+  OnInit();
 }
 
 void BaseApp::Update(){

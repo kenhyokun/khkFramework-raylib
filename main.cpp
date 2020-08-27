@@ -20,7 +20,7 @@ using namespace Component;
   - OnDraw
 */
 
-struct App : BaseApp{
+struct App : BaseApp, b2ContactListener{
 
   Node *node1, *node2, *node3,
     *node4, *node5, *node6,
@@ -39,14 +39,11 @@ struct App : BaseApp{
   TMXMap *tmxmap;
 
   App(int _window_width, int _window_height, string _title) : BaseApp(_window_width, _window_height, _title){
-    window_width = _window_width;
-    window_height = _window_height;
-    title = _title;
-
-    OnInit();
   }
 
   void OnInit() override {
+    world.SetContactListener(this);
+
     node1 = new Node();
     node2 = new Node();
     node3 = new Node();
@@ -90,6 +87,7 @@ struct App : BaseApp{
 
     node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node8->AddComponent<Component::rigid_body>(new RigidBody());
+    // node8->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     node9->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node9->AddComponent<Component::rigid_body>(new RigidBody());
@@ -97,6 +95,7 @@ struct App : BaseApp{
 
     node10->AddComponent<Component::circle_collider>(new CircleCollider(50));
     node10->AddComponent<Component::rigid_body>(new RigidBody());
+    // node10->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     node5->SetPosition(Vector2{
 	(float)game_screen_width * 0.5f + 250,
@@ -121,6 +120,11 @@ struct App : BaseApp{
     cout<<"node1 child size:"<<node1->GetChild().size()<<endl;
     cout<<"node2 child size:"<<node2->GetChild().size()<<endl;
     cout<<"node3 child size:"<<node3->GetChild().size()<<endl;
+
+  }
+
+  void BeginContact(b2Contact *contact) override {
+    cout<<"begin contact"<<endl;
   }
 
   void Controller(){
@@ -170,8 +174,9 @@ struct App : BaseApp{
     camera.target = node7->GetPosition();
 
     B2D::Step(); // run box2d step simulation
-
   }
+
+
 
   float angle = 0.0f;
   float angle2 = 0.0f;
@@ -240,6 +245,7 @@ struct App : BaseApp{
 
 int main(){
   App app(800, 450, "My Game");
+  app.Init();
   app.Run();
 
   return 0;

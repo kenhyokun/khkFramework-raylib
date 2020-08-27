@@ -25,16 +25,27 @@
 
 #include<B2D.h>
 
+/*
+  BoxCollider Component
+*/
 Component::BoxCollider::BoxCollider(float width, float height){
   box_collision_shape = new b2PolygonShape();
   box_collision_shape->SetAsBox(width * 0.5f, height * 0.5f);
 }
 
+
+/*
+  CircleCollider Component
+*/
 Component::CircleCollider::CircleCollider(float radius){
   circle_collision_shape = new b2CircleShape();
   circle_collision_shape->m_radius = radius;
 }
 
+
+/*
+  RigidBody Component
+*/
 void Component::RigidBody::OnAttach(){
   b2BodyDef body_def;
   body_def.type = DYNAMIC; 
@@ -114,6 +125,8 @@ void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}
 void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotation(is_fixed);}
 b2Body* Component::RigidBody::GetBody(){return body;}
 
+
+
 void B2D::Attach(Node *node){
   node_list.push_back(node);
 }
@@ -124,4 +137,12 @@ void B2D::Step(){
   for(int i = 0; i < node_list.size(); i++){
     node_list.at(i)->GetComponent<Component::rigid_body>()->Step();
   } 
+
+  for(b2Contact* c = world.GetContactList(); c; c = c->GetNext()){
+    // cout<<"duh... contact..."<<endl;
+    // cout<<c->GetFixtureB()->GetType()<<endl;
+    // cout<<c->GetFixtureB()->GetShape()->m_radius<<endl;
+  }
+
+
 }

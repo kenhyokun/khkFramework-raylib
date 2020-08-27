@@ -50,17 +50,30 @@ namespace Component{
     - RigidBody
   */
 
+
+  /*
+    BoxCollider Component
+  */
   typedef struct BoxCollider : BaseComponent{
     b2PolygonShape *box_collision_shape;
     BoxCollider(float width, float height);
   } *box_collider;
 
+
+  /*
+    CircleCollider Component
+  */
   typedef struct CircleCollider : BaseComponent{
     b2CircleShape *circle_collision_shape;
     CircleCollider(float radius);
   } *circle_collider;
 
+
+  /*
+    RigidBody Component
+  */
   typedef struct RigidBody : BaseComponent{
+
 
     static const b2BodyType STATIC = b2_staticBody;
     static const b2BodyType DYNAMIC = b2_dynamicBody;
@@ -84,6 +97,7 @@ namespace Component{
   } *rigid_body; 
 
 }; // Component namespace
+
 
 namespace B2D{
   static vector<Node*> node_list;

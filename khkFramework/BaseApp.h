@@ -47,6 +47,7 @@ struct BaseApp{
   BaseApp(int _window_width = 800, int _window_height = 450, string _title = "My Game");
   Vector2 ClampValue(Vector2 value, Vector2 min, Vector2 max);
   void SetGameScreen(int _game_screen_width, int _game_screen_height);
+  void Init();
   void Update();
   void Draw();
   void Run();
