@@ -5,12 +5,17 @@ Experimental C/C++ 2D game framework with raylib inspired by popular game engine
 
 # Features:
   - Load exported **.tmx** file from **[Tiled map editor](https://www.mapeditor.org/)** for tile mapping. (only orthogonal view for now)
-  - box2d. (only box and circle collision for now)
+  - box2d physics engine. (only box and circle collision for now)
 
 # 3rd party library:
   - raylib (https://github.com/raysan5/raylib)
   - tinyxml2 (https://github.com/leethomason/tinyxml2)
   - box2d (https://github.com/erincatto/box2d)
+
+# Todo for version 1.0 release
+  - Add sample project.
+  - Add basic collision shape detection (rectangle, circle, point).
+  - Add capsule collider, edge collider and callback funtion with box2d.
 
 <p>
 Kevin Haryo Kuncoro </br>
