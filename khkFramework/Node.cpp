@@ -134,7 +134,9 @@ void Node::SetRotation(float angle){
 			       GetChild(i)->_GetTransform().right + da);
 
       // child transformation rotation
-      GetChild(i)->_Rotate(da, transform.position);
+      if(!GetChild(i)->is_fixed_transform_rotation){
+	GetChild(i)->_Rotate(da, transform.position);
+      }
 
     } // for
   } // if

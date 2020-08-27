@@ -66,6 +66,7 @@ public:
   string name = unamed_node_name;
   string tag = untagged_node_tag;
   int index_on_parent;
+  bool is_fixed_transform_rotation = false;
   // Node *root = NULL;
 
   template<typename T>

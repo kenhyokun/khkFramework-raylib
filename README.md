@@ -1,7 +1,7 @@
 # khkFramework-raylib (still rough...)
 Experimental C/C++ 2D game framework with raylib inspired by popular game engine like **[Ogre3D][1]**, **[libGDX][2]** and Unity3D.
 </br>
-**Build and tested on Ubuntu 18.04.**
+**Note:Build and tested on Ubuntu 18.04.**
 
 # Features:
   - Load exported **.tmx** file from **[Tiled map editor](https://www.mapeditor.org/)** for tile mapping. (only orthogonal view for now)
@@ -12,11 +12,12 @@ Experimental C/C++ 2D game framework with raylib inspired by popular game engine
   - tinyxml2 (https://github.com/leethomason/tinyxml2)
   - box2d (https://github.com/erincatto/box2d)
 
-# Todo for version 1.0 release
+# Todo for version 1.0 release:
   - Add sample project.
   - Add basic collision shape detection (rectangle, circle, point).
-  - Add capsule collider, edge collider and callback funtion with box2d.
+  - Add capsule collider, edge collider and contact callback function with box2d.
 
+#
 <p>
 Kevin Haryo Kuncoro </br>
 kevinhyokun91@gmail.com </br>
