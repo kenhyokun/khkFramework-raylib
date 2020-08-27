@@ -64,14 +64,37 @@ namespace Component{
     }
 
   protected:
+    virtual void OnAttach(){}
+  };
+
+  struct GridBaseComponent{
+    Grid* GetGrid();
+
+  protected:
     Grid *grid = NULL;
     int texture_column = 0;
     int texture_row = 0;
 
     Rectangle _GetSrcRect(int tile);
-    virtual void OnAttach(){}
   };
 
+  struct BaseTilemap : BaseComponent, GridBaseComponent{
+    int GetMaxWidth();
+    int GetMaxHeight();
+
+  protected:
+    Texture2D *texture;
+    int max_width = 0;
+    int max_height = 0;
+
+    int _GetIndex(int column, int row);
+    Vector2 _GetTransformRotation(int column, int row); // tile transformation rotation
+  };
+  
+
+  /*
+    SpriteRenderer Component
+  */
   typedef struct SpriteRenderer : BaseComponent{
     Texture2D *texture = NULL;
 
@@ -84,7 +107,11 @@ namespace Component{
     Rectangle dst_rect;
   } *sprite_renderer;
 
-  typedef struct Animator : SpriteRenderer{
+
+  /*
+    Animator Component
+  */
+  typedef struct Animator : SpriteRenderer, GridBaseComponent{
     int frame_index;
     int frame_counter;
 
@@ -94,33 +121,18 @@ namespace Component{
 
     int GetFrameWidth();
     int GetFrameHeight();
-    int GetColumn();
-    int GetRow();
 
   protected:
     int frame_width;
     int frame_height;
-    int column;
-    int row;
 
   } *animator;
 
-  struct BaseTilemap : BaseComponent{
-    Grid* GetGrid();
-    int GetMaxWidth();
-    int GetMaxHeight();
 
-  protected:
-    Texture2D *texture;
-    int max_width = 0;
-    int max_height = 0;
-
-    int _GetIndex(int column, int row);
-    Vector2 _GetTransformRotation(int column, int row); // tile transformation rotation
-  };
-
+  /*
+    Tilemap Component
+  */
   typedef struct Tilemap : BaseTilemap{
-    // Tilemap(Grid *_grid);
     Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map);
     void Draw();
 
@@ -131,6 +143,10 @@ namespace Component{
 
   } *tilemap;
 
+
+  /*
+    TMXMap Component
+  */
   typedef struct TMXMap : BaseTilemap{
     TMXMap(Texture2D *_texture, string tmx_file_src);
     void Draw(int layer_index);

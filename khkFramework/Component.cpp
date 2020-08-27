@@ -25,7 +25,7 @@
 
 #include<Component.h>
 
-Rectangle Component::BaseComponent::_GetSrcRect(int tile){
+Rectangle Component::GridBaseComponent::_GetSrcRect(int tile){
   int begin_column = 1;
   int range_column = texture_column - begin_column;
   int temp_row = (tile + range_column) / texture_column;
@@ -43,6 +43,47 @@ Rectangle Component::BaseComponent::_GetSrcRect(int tile){
       };
 }
 
+Grid* Component::GridBaseComponent::GetGrid(){return grid;}
+
+Vector2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
+  float x0 = node->GetPosition().x - (max_width / 2);
+  float y0 = node->GetPosition().y - (max_height / 2);
+  float _x = (grid->width * column) + (grid->width / 2);
+  float _y = (grid->height * row) + (grid->height / 2);
+
+  float x = 0.0f;
+  float y = 0.0f;
+  float tx = x0 + _x;
+  float ty = y0 + _y;
+
+  float px = node->GetPosition().x;
+  float py = node->GetPosition().y;
+
+  x =
+    (tx * cos(Deg2Rad(node->GetRotation())) ) -
+    (ty * sin(Deg2Rad(node->GetRotation())) ) -
+    (px * cos(Deg2Rad(node->GetRotation())) ) +
+    (py * sin(Deg2Rad(node->GetRotation())) ) +
+    px; 
+
+  y =
+    (tx * sin(Deg2Rad(node->GetRotation())) ) +
+    (ty * cos(Deg2Rad(node->GetRotation())) ) -
+    (px * sin(Deg2Rad(node->GetRotation())) ) -
+    (py * cos(Deg2Rad(node->GetRotation())) ) +
+    py; 
+
+  return Vector2{x, y};
+}
+
+int Component::BaseTilemap::GetMaxWidth(){return max_width;}
+int Component::BaseTilemap::GetMaxHeight(){return max_height;}
+int Component::BaseTilemap::_GetIndex(int column, int row){return (row * grid->column + column);}
+
+
+/*
+  SpriteRenderer Component
+*/
 Component::SpriteRenderer::SpriteRenderer(Texture2D *_texture){
   texture = _texture;
   src_rect = {0.0f, 0.0f, (float)texture->width, (float)texture->height};
@@ -70,6 +111,10 @@ void Component::SpriteRenderer::Draw(int state){
 
 }
 
+
+/*
+  Animator Component
+*/
 Component::Animator::Animator(Texture2D *_texture,
 		   int _frame_width,
 		   int _frame_height) : SpriteRenderer(_texture){
@@ -110,51 +155,11 @@ void Component::Animator::Draw(){
 
 int Component::Animator::GetFrameWidth(){return frame_width;}
 int Component::Animator::GetFrameHeight(){return frame_height;}
-int Component::Animator::GetColumn(){return column;}
-int Component::Animator::GetRow(){return row;}
 
-Vector2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
-  float x0 = node->GetPosition().x - (max_width / 2);
-  float y0 = node->GetPosition().y - (max_height / 2);
-  float _x = (grid->width * column) + (grid->width / 2);
-  float _y = (grid->height * row) + (grid->height / 2);
 
-  float x = 0.0f;
-  float y = 0.0f;
-  float tx = x0 + _x;
-  float ty = y0 + _y;
-
-  float px = node->GetPosition().x;
-  float py = node->GetPosition().y;
-
-  x =
-    (tx * cos(Deg2Rad(node->GetRotation())) ) -
-    (ty * sin(Deg2Rad(node->GetRotation())) ) -
-    (px * cos(Deg2Rad(node->GetRotation())) ) +
-    (py * sin(Deg2Rad(node->GetRotation())) ) +
-    px; 
-
-  y =
-    (tx * sin(Deg2Rad(node->GetRotation())) ) +
-    (ty * cos(Deg2Rad(node->GetRotation())) ) -
-    (px * sin(Deg2Rad(node->GetRotation())) ) -
-    (py * cos(Deg2Rad(node->GetRotation())) ) +
-    py; 
-
-  return Vector2{x, y};
-}
-
-Grid* Component::BaseTilemap::GetGrid(){return grid;}
-int Component::BaseTilemap::GetMaxWidth(){return max_width;}
-int Component::BaseTilemap::GetMaxHeight(){return max_height;}
-int Component::BaseTilemap::_GetIndex(int column, int row){return (row * grid->column + column);}
-
-// Component::Tilemap::Tilemap(Grid *_grid){
-//   grid = _grid;
-//   max_width = grid->width * grid->column;
-//   max_height = grid->height * grid->row;
-// }
-
+/*
+  Tilemap Component
+*/
 Component::Tilemap::Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map){
   texture = _texture;
   grid = _grid;
@@ -198,6 +203,10 @@ bool Component::Tilemap::IsTiled(int column, int row){
   return false;
 }
 
+
+/*
+  TMXMap Component
+*/
 Component::TMXMap::TMXMap(Texture2D *_texture, string tmx_file_src){
   texture = _texture;
   grid = new Grid();
