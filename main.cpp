@@ -84,7 +84,7 @@ struct App : BaseApp, b2ContactListener{
     node4->SetPosition(Vector2{450.0f, 70.0f});
     node7->SetPosition(Vector2{50.0f, 50.0f});
     node8->SetPosition(Vector2{30.0f, 50.0f});
-    node9->SetPosition(Vector2{-50.0f, 100.0f});
+    node9->SetPosition(Vector2{-50.0f, 180.0f});
     node10->SetPosition(Vector2{-120.0f, -20.0f});
 
     node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
@@ -127,6 +127,12 @@ struct App : BaseApp, b2ContactListener{
 
   void BeginContact(b2Contact* contact) override {
     cout<<"begin contact"<<endl;
+
+    void *user_data = 
+      contact->GetFixtureB()->GetBody()->GetUserData();
+
+    cout<< static_cast<Node*>(user_data)->name<<endl;
+
   }
 
   void Controller(){

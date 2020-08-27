@@ -74,6 +74,7 @@ bool Component::RigidBody::_SetCollider(int state){
       fixture_def.density = 1.0f;
       fixture_def.friction = 0.3f;
       fixture = body->CreateFixture(&fixture_def);
+      body->SetUserData(node);
 
       B2D::Attach(node);
 
@@ -97,6 +98,7 @@ bool Component::RigidBody::_SetCollider(int state){
       fixture_def.density = 1.0f;
       fixture_def.friction = 0.3f;
       fixture = body->CreateFixture(&fixture_def);
+      body->SetUserData(node);
 
       B2D::Attach(node);
 
@@ -141,12 +143,4 @@ void B2D::Step(){
   for(int i = 0; i < node_list.size(); i++){
     node_list.at(i)->GetComponent<Component::rigid_body>()->Step();
   } 
-
-  for(b2Contact* c = world.GetContactList(); c; c = c->GetNext()){
-    // cout<<"duh... contact..."<<endl;
-    // cout<<c->GetFixtureB()->GetType()<<endl;
-    // cout<<c->GetFixtureB()->GetShape()->m_radius<<endl;
-  }
-
-
 }
