@@ -102,6 +102,7 @@ namespace Component{
 namespace B2D{
   static vector<Node*> node_list;
   
+  void SetContactListener(b2ContactListener *contact_listener);
   void Attach(Node *node);
   void Step();
 

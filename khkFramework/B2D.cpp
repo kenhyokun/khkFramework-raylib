@@ -131,6 +131,10 @@ void B2D::Attach(Node *node){
   node_list.push_back(node);
 }
 
+void B2D::SetContactListener(b2ContactListener *contact_listener){
+  world.SetContactListener(contact_listener);
+}
+
 void B2D::Step(){
   world.Step(time_step, velocity_iterations, position_iterations);
 
