@@ -29,6 +29,8 @@
 #include<box2d/box2d.h>
 #include<Component.h>
 
+typedef b2ContactListener ContactListener;
+
 static b2Vec2 gravity(0.0f, 10.0f);
 static b2World world(gravity);
 static float time_step = 1.0f / 60.0f;
@@ -100,10 +102,10 @@ namespace Component{
 
 
 namespace B2D{
-  static vector<Node*> node_list;
+  typedef b2Body Body;
+  typedef b2World World;
   
   void SetContactListener(b2ContactListener *contact_listener);
-  void Attach(Node *node);
   void Step();
 
 }; // B2D namespace

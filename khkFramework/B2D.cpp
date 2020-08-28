@@ -75,9 +75,6 @@ bool Component::RigidBody::_SetCollider(int state){
       fixture_def.friction = 0.3f;
       fixture = body->CreateFixture(&fixture_def);
       body->SetUserData(node);
-
-      B2D::Attach(node);
-
       return true;
     }
     else{
@@ -99,9 +96,6 @@ bool Component::RigidBody::_SetCollider(int state){
       fixture_def.friction = 0.3f;
       fixture = body->CreateFixture(&fixture_def);
       body->SetUserData(node);
-
-      B2D::Attach(node);
-
       return true;
 
     }
@@ -128,11 +122,6 @@ void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotatio
 b2Body* Component::RigidBody::GetBody(){return body;}
 
 
-
-void B2D::Attach(Node *node){
-  node_list.push_back(node);
-}
-
 void B2D::SetContactListener(b2ContactListener *contact_listener){
   world.SetContactListener(contact_listener);
 }
@@ -140,7 +129,8 @@ void B2D::SetContactListener(b2ContactListener *contact_listener){
 void B2D::Step(){
   world.Step(time_step, velocity_iterations, position_iterations);
 
-  for(int i = 0; i < node_list.size(); i++){
-    node_list.at(i)->GetComponent<Component::rigid_body>()->Step();
-  } 
+  for(b2Body* _body = world.GetBodyList(); _body; _body = _body->GetNext()){
+    static_cast<Node*>(_body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
+  }
+
 }

@@ -20,7 +20,7 @@ using namespace Component;
   - OnDraw
 */
 
-struct App : BaseApp, b2ContactListener{
+struct App : BaseApp, ContactListener{
 
   Node *node1, *node2, *node3,
     *node4, *node5, *node6,
