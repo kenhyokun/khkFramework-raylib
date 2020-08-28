@@ -1,4 +1,4 @@
-<img align="left" src="https://github.com/kenhyokun/khkFramework-raylib/blob/unstable/khkFramework-raylib-logo.png" width=444>
+<img align="center" src="https://github.com/kenhyokun/khkFramework-raylib/blob/unstable/khkFramework-raylib-logo.png" width=512>
 
 Experimental C/C++ 2D game framework with **[raylib][1]** inspired by popular game engine like **[Ogre3D][2]**, **[libGDX][3]** and Unity3D.
 </br>
