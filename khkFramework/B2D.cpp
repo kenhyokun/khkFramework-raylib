@@ -46,7 +46,7 @@ Component::CircleCollider::CircleCollider(float radius){
 /*
   RigidBody Component
 */
-void Component::RigidBody::OnAttach(){
+void Component::RigidBody::_OnAttach(){
   b2BodyDef body_def;
   body_def.type = DYNAMIC; 
   body_def.position.Set(node->GetPosition().x, node->GetPosition().y);

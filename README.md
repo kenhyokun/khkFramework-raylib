@@ -1,5 +1,5 @@
 # khkFramework-raylib (still rough...)
-Experimental C/C++ 2D game framework with raylib inspired by popular game engine like **[Ogre3D][1]**, **[libGDX][2]** and Unity3D.
+Experimental C/C++ 2D game framework with **[raylib][1]** inspired by popular game engine like **[Ogre3D][2]**, **[libGDX][3]** and Unity3D.
 </br>
 **Note: Build and tested on Ubuntu 18.04. No cross platform makefile for now.**
 
@@ -26,5 +26,6 @@ kevinhyokun91@gmail.com </br>
 2020 
 </p>
 
-[1]: https://github.com/OGRECave/ogre
-[2]: https://github.com/libgdx/libgdx
+[1]: https://github.com/raysan5/raylib
+[2]: https://github.com/OGRECave/ogre
+[3]: https://github.com/libgdx/libgdx

@@ -81,7 +81,6 @@ namespace Component{
     static const b2BodyType DYNAMIC = b2_dynamicBody;
     static const b2BodyType KINEMATIC = b2_kinematicBody;
 
-    void OnAttach() override;
     void Step();
 
     void SetBodyType(b2BodyType type);
@@ -94,6 +93,7 @@ namespace Component{
     b2Body *body;
     b2Fixture *fixture;
 
+    void _OnAttach() override;
     bool _SetCollider(int state = 0); // search and set collider shape
 
   } *rigid_body; 

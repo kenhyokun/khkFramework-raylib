@@ -60,11 +60,11 @@ namespace Component{
     Node* node = NULL; // component owner
 
     inline void Attach(){
-      OnAttach();
+      _OnAttach();
     }
 
   protected:
-    virtual void OnAttach(){}
+    virtual void _OnAttach(){}
   };
 
   struct GridBaseComponent{
