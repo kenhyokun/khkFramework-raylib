@@ -16,7 +16,8 @@ Experimental C/C++ 2D game framework with raylib inspired by popular game engine
   - Add sample project.
   - Add basic collision shape detection (rectangle, circle, point).
   - Add capsule collider, edge collider and contact callback function with box2d.
-  - Node need to optimised, especially when remove child node.
+  - Node need to optimised, especially when removing child node.
+  - Beta testing
 
 #
 <p>
