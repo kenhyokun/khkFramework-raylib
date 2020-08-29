@@ -12,3 +12,7 @@ include :=\
 
 all:
 	g++ -c $(src) $(include)
+
+b2d:
+	g++ -c ../B2D.cpp $(include)
+

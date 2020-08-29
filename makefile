@@ -8,6 +8,8 @@ include :=\
 	-IkhkFramework/
 
 lib :=\
+	-Ltinyxml2/ \
+	-ltinyxml2 \
 	-Lraylib/ \
 	-lraylib \
 	-Lbox2d/ \
@@ -23,7 +25,6 @@ src :=\
 	khkFramework/*.cpp
 
 obj :=\
-	tinyxml2/*.o \
 	khkFramework/obj/*.o
 
 all:

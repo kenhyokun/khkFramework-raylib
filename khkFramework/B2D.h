@@ -117,6 +117,7 @@ namespace B2D{
   
   void SetContactListener(b2ContactListener *contact_listener);
   void Step();
+  void DebugDraw();
 
 }; // B2D namespace
 

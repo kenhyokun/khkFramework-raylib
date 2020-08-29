@@ -67,6 +67,12 @@ void Component::RigidBody::_OnAttach(){
   if(!_SetCollider()){
     cout<<"you must add Collider component first"<<endl;
   }
+  else{
+    fixture_def.density = 1.0f;
+    fixture_def.friction = 0.3f;
+    fixture = body->CreateFixture(&fixture_def);
+    body->SetUserData(node);
+  }
 
 }
 
@@ -81,12 +87,7 @@ bool Component::RigidBody::_SetCollider(int state){
 
     if(Node::component_map_it<box_collider> !=
        Node::component_map<box_collider>.end()){
-
       fixture_def.shape = node->GetComponent<box_collider>()->box_collision_shape;
-      fixture_def.density = 1.0f;
-      fixture_def.friction = 0.3f;
-      fixture = body->CreateFixture(&fixture_def);
-      body->SetUserData(node);
       return true;
     }
     else{
@@ -102,14 +103,8 @@ bool Component::RigidBody::_SetCollider(int state){
 
     if(Node::component_map_it<circle_collider> !=
        Node::component_map<circle_collider>.end()){
-
       fixture_def.shape = node->GetComponent<circle_collider>()->circle_collision_shape;
-      fixture_def.density = 1.0f;
-      fixture_def.friction = 0.3f;
-      fixture = body->CreateFixture(&fixture_def);
-      body->SetUserData(node);
       return true;
-
     }
     else{
       // _SetCollider(2);
@@ -141,10 +136,16 @@ void B2D::SetContactListener(b2ContactListener *contact_listener){
 }
 
 void B2D::Step(){
-  world.Step(time_step, velocity_iterations, position_iterations);
-
+  world.Step(time_step, velocity_iterations, position_iterations); 
+  
   for(b2Body* _body = world.GetBodyList(); _body; _body = _body->GetNext()){
     static_cast<Node*>(_body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
   }
+}
 
+void B2D::DebugDraw(){
+
+  for(b2Body* _body = world.GetBodyList(); _body; _body = _body->GetNext()){
+    // static_cast<Node*>(_body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
+  }
 }
