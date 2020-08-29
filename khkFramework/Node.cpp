@@ -35,12 +35,6 @@ Node::Node(string _name){
   }
 }
 
-void Node::ResetChildIndex(int start_index){
-  for(int i = start_index; i < child.size(); i++){
-    child.at(i)->index_on_parent = i;
-  }
-}
-
 void Node::_SetParent(Node *node){parent = node;}
 Transform_node Node::_GetTransform(){return transform;}
 void Node::_SetTransformDirection(float up, float right){transform.up = up; transform.right = right;}
@@ -81,21 +75,26 @@ void Node::AddChild(Node *node){
   if(node->GetParent() != this){
 
     if(node->GetParent() != NULL){
-      node->GetParent()->RemoveChild(node->index_on_parent);
+      vector<Node*>::iterator it;
+      it = std::find(node->GetParent()->GetChild()->begin(), node->GetParent()->GetChild()->end(), node);
+
+      node->GetParent()->_RemoveChild(it);
 
     } // != NULL
 
-    node->index_on_parent = child.size();
     node->_SetParent(this);
-    child.push_back(node);
+    child->push_back(node);
 
   } // != this
 
 }
 
+void Node::_RemoveChild(vector<Node*>::iterator it){
+  child->erase(it);
+}
+
 void Node::RemoveChild(int index){
-  child.erase(child.begin() + index);
-  ResetChildIndex(index);
+  child->erase(child->begin() + index);
 }
 
 void Node::SetPosition(Vector2 position){
@@ -104,8 +103,8 @@ void Node::SetPosition(Vector2 position){
 
   transform.position = position;
 
-  if(child.size() > 0){
-    for(int i = 0; i < child.size(); i++){
+  if(child->size() > 0){
+    for(int i = 0; i < child->size(); i++){
       GetChild(i)->SetPosition(Vector2{GetChild(i)->GetPosition().x + dx,
 	    GetChild(i)->GetPosition().y + dy});
 
@@ -122,8 +121,8 @@ void Node::SetRotation(float angle){
   transform.up += da;
   transform.right += da;
 
-  if(child.size() > 0){
-    for(int i = 0; i < child.size(); i++){
+  if(child->size() > 0){
+    for(int i = 0; i < child->size(); i++){
 
 
       GetChild(i)->SetRotation(transform.rotation);
@@ -158,5 +157,5 @@ void Node::SetScale(Vector2 _scale){transform.scale = _scale;}
 Vector2 Node::GetScale(){return transform.scale;}
 float Node::GetRotation(){return transform.rotation;}
 Node* Node::GetParent(){return parent;}
-vector<Node*> Node::GetChild(){return child;}
-Node* Node::GetChild(int index){return child.at(index);}
+vector<Node*>* Node::GetChild(){return child;}
+Node* Node::GetChild(int index){return child->at(index);}

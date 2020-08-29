@@ -107,10 +107,11 @@ struct App : BaseApp, ContactListener{
 	(float)game_screen_width * 0.5f + 200,
 	(float)game_screen_height * 0.5f});
 
-    // node2->SetParent(node1);
+    cout<<"main node1:"<<node1<<endl;
     node1->SetParent(node2);
     node2->SetParent(node3);
-    // node3->AddChild(node1);
+    
+    node3->AddChild(node1);
 
     camera = {0};
     camera.target = node7->GetPosition();
@@ -119,9 +120,9 @@ struct App : BaseApp, ContactListener{
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
 
-    cout<<"node1 child size:"<<node1->GetChild().size()<<endl;
-    cout<<"node2 child size:"<<node2->GetChild().size()<<endl;
-    cout<<"node3 child size:"<<node3->GetChild().size()<<endl;
+    // cout<<"node1 child size:"<<node1->GetChild()->size()<<endl;
+    cout<<"node2 child size:"<<node2->GetChild()->size()<<endl;
+    cout<<"node3 child size:"<<node3->GetChild()->size()<<endl;
 
   }
 
