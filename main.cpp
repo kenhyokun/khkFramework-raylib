@@ -109,7 +109,6 @@ struct App : BaseApp, ContactListener{
 
     node1->SetParent(node2);
     node2->SetParent(node3);
-    
     node3->AddChild(node1);
 
     camera = {0};

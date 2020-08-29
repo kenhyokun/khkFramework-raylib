@@ -77,9 +77,7 @@ namespace Component{
   */
   typedef struct CapsuleCollider : BoxCollider, CircleCollider{
     CapsuleCollider(float height, float radius);
-
   protected:
-    float width;
   } *capsule_collider;
 
 

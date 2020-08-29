@@ -29,6 +29,8 @@
   BoxCollider Component
 */
 Component::BoxCollider::BoxCollider(float width, float height){
+  box_collision_shape = new b2PolygonShape();
+  box_collision_shape->SetAsBox(width * 0.5f, height * 0.5f);
 }
 
 
