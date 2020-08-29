@@ -107,7 +107,6 @@ struct App : BaseApp, ContactListener{
 	(float)game_screen_width * 0.5f + 200,
 	(float)game_screen_height * 0.5f});
 
-    cout<<"main node1:"<<node1<<endl;
     node1->SetParent(node2);
     node2->SetParent(node3);
     

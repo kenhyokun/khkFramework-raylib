@@ -29,8 +29,6 @@
   BoxCollider Component
 */
 Component::BoxCollider::BoxCollider(float width, float height){
-  box_collision_shape = new b2PolygonShape();
-  box_collision_shape->SetAsBox(width * 0.5f, height * 0.5f);
 }
 
 
@@ -42,6 +40,18 @@ Component::CircleCollider::CircleCollider(float radius){
   circle_collision_shape->m_radius = radius;
 }
 
+float Component::CircleCollider::GetRadius(){return circle_collision_shape->m_radius;}
+
+
+/*
+  CapsuleCollider Component
+*/
+Component::CapsuleCollider::CapsuleCollider(float height, float radius) :
+  BoxCollider(radius * 2.0f, height),
+  CircleCollider(radius)
+{
+
+}
 
 /*
   RigidBody Component
@@ -117,6 +127,8 @@ void Component::RigidBody::Step(){
   node->SetRotation(Rad2Deg(body->GetAngle()));
 }
 
+b2Vec2 Component::RigidBody::GetBodyPosition(){return body->GetPosition();}
+float Component::RigidBody::GetBodyRadian(){return body->GetAngle();}
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}
 void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotation(is_fixed);}
 b2Body* Component::RigidBody::GetBody(){return body;}

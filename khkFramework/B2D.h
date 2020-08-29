@@ -68,21 +68,33 @@ namespace Component{
   typedef struct CircleCollider : BaseComponent{
     b2CircleShape *circle_collision_shape;
     CircleCollider(float radius);
+    float GetRadius();
   } *circle_collider;
+
+
+  /*
+    CapsuleCollider Component
+  */
+  typedef struct CapsuleCollider : BoxCollider, CircleCollider{
+    CapsuleCollider(float height, float radius);
+
+  protected:
+    float width;
+  } *capsule_collider;
 
 
   /*
     RigidBody Component
   */
   typedef struct RigidBody : BaseComponent{
-
-
     static const b2BodyType STATIC = b2_staticBody;
     static const b2BodyType DYNAMIC = b2_dynamicBody;
     static const b2BodyType KINEMATIC = b2_kinematicBody;
 
     void Step();
 
+    b2Vec2 GetBodyPosition();
+    float GetBodyRadian();
     void SetBodyType(b2BodyType type);
     void SetFixedRotation(bool is_fixed = true);
     // void SetFixture(b2FixtureDef fixture_def);

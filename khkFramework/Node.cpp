@@ -124,7 +124,6 @@ void Node::SetRotation(float angle){
   if(child->size() > 0){
     for(int i = 0; i < child->size(); i++){
 
-
       GetChild(i)->SetRotation(transform.rotation);
 
       // set direction
