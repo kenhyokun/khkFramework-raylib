@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblibkhkFramework.a  CMakeFiles/libkhkFramework.dir/B2D.o CMakeFiles/libkhkFramework.dir/BaseApp.o CMakeFiles/libkhkFramework.dir/Component.o CMakeFiles/libkhkFramework.dir/Node.o
+/usr/bin/ranlib liblibkhkFramework.a

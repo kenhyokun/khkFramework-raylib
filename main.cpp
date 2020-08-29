@@ -246,6 +246,8 @@ struct App : BaseApp, ContactListener{
 
     EndMode2D();
 
+    B2D::DebugDraw();
+
   }
 
 };

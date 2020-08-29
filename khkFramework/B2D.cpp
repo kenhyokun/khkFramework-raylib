@@ -138,14 +138,14 @@ void B2D::SetContactListener(b2ContactListener *contact_listener){
 void B2D::Step(){
   world.Step(time_step, velocity_iterations, position_iterations); 
   
-  for(b2Body* _body = world.GetBodyList(); _body; _body = _body->GetNext()){
-    static_cast<Node*>(_body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
+  for(b2Body* body = world.GetBodyList(); body; body = body->GetNext()){
+    static_cast<Node*>(body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
   }
 }
 
 void B2D::DebugDraw(){
-
-  for(b2Body* _body = world.GetBodyList(); _body; _body = _body->GetNext()){
-    // static_cast<Node*>(_body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
+  for(b2Body* body = world.GetBodyList(); body; body = body->GetNext()){
+    string name = static_cast<Node*>(body->GetUserData())->name;
+    cout<<name<<" shape type:"<<body->GetFixtureList()->GetShape()->GetType()<<endl;
   }
 }

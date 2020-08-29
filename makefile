@@ -8,6 +8,8 @@ include :=\
 	-IkhkFramework/
 
 lib :=\
+	-LkhkFramework/build/ \
+	-lkhkFramework \
 	-Ltinyxml2/ \
 	-ltinyxml2 \
 	-Lraylib/ \
@@ -28,14 +30,14 @@ obj :=\
 	khkFramework/obj/*.o
 
 all:
-	g++ -o main main.cpp $(obj) $(include) $(lib) 
+	g++ -o main main.cpp $(include) $(lib) 
 
 run:
 	make all
 	./main
 
 obj:
-	make -C khkFramework/obj
+	make -C khkFramework/build
 
 objrun:
 	make obj
