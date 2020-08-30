@@ -176,7 +176,8 @@ bool Component::RigidBody::_SetCollider(int state){
       // body->CreateFixture(collider->box_collision_shape, 1.0f);
       // body->CreateFixture(collider->circle_collision_shape, 1.0f);
 
-      
+      fixture = body->GetFixtureList();
+
       collider_shape = collider->GetColliderShape();
       width = collider->GetWidth();
       height = collider->GetHeight();
@@ -229,29 +230,36 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 
     curr_color.a *= opacity;
 
-    switch(body->GetFixtureList()->GetType()){
+    for(b2Fixture* fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext()){
 
-    case 0: // circle shape
-    DrawCircle(body->GetPosition().x,
-	       body->GetPosition().y,
-	       body->GetFixtureList()->GetShape()->m_radius,
-	       curr_color);     
-    break;
+      // switch(body->GetFixtureList()->GetType()){
+      switch(fixture->GetType()){
+      case 0: // circle shape
+	DrawCircle(body->GetPosition().x,
+		   body->GetPosition().y,
+		   body->GetFixtureList()->GetShape()->m_radius,
+		   curr_color);     
+	break;
 
-    case 1: // edge shape
-      break;
+      case 1: // edge shape
+	break;
 
-    case 2: // rectangle shape
-    DrawRectangle(body->GetPosition().x,
-		  body->GetPosition().y,
-		  node->GetComponent<Component::rigid_body>()->GetSize().x,
-		  node->GetComponent<Component::rigid_body>()->GetSize().y,
-		  curr_color,
-		  Rad2Deg(body->GetAngle()));
-    break;
+      case 2: // rectangle shape
+	DrawRectangle(body->GetPosition().x,
+		      body->GetPosition().y,
+		      node->GetComponent<Component::rigid_body>()->GetSize().x,
+		      node->GetComponent<Component::rigid_body>()->GetSize().y,
+		      curr_color,
+		      Rad2Deg(body->GetAngle()));
+	break;
 
-    } // switch
+      case 4:
+	break;
 
-  } // for
+      } // switch
+
+    } // for fixture
+
+  } // for body
 
 }
