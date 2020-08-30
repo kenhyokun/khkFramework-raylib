@@ -143,9 +143,33 @@ void B2D::Step(){
   }
 }
 
-void B2D::DebugDraw(){
+void B2D::DebugDraw(float opacity){
   for(b2Body* body = world.GetBodyList(); body; body = body->GetNext()){
-    string name = static_cast<Node*>(body->GetUserData())->name;
-    cout<<name<<" shape type:"<<body->GetFixtureList()->GetShape()->GetType()<<endl;
-  }
+    Node *node = static_cast<Node*>(body->GetUserData());
+    cout<<node->name<<" shape type:"<<body->GetFixtureList()->GetShape()->GetType()<<endl;
+
+    switch(body->GetFixtureList()->GetShape()->GetType()){
+
+    case 0: // circle shape
+    DrawCircle(body->GetPosition().x,
+	       body->GetPosition().y,
+	       50,
+	       GREEN);     
+    break;
+
+    case 1: // edge shape
+      break;
+
+    case 2: // rectangle shape
+    DrawRectangle(body->GetPosition().x,
+		  body->GetPosition().y,
+		  100.0f, 100.0f,
+		  GREEN,
+		  Rad2Deg(body->GetAngle()));
+    break;
+
+    } // switch
+
+  } // for
+
 }

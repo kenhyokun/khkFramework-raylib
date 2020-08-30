@@ -229,24 +229,12 @@ struct App : BaseApp, ContactListener{
     // node6->GetComponent<Component::tmxmap>()->Draw(0); // layer index 0
     // node6->GetComponent<Component::tmxmap>()->Draw(1); // layer index 1
     node6->GetComponent<Component::tmxmap>()->Draw(); // draw all layer
-
-    DrawRectangle(node8->GetPosition().x, node8->GetPosition().y,
-		  100.0f, 100.0f,
-		  GRAY,
-		  node8->GetRotation());
-
-    DrawRectangle(node9->GetPosition().x, node9->GetPosition().y,
-		  100.0f, 100.0f,
-		  BLACK,
-		  node9->GetRotation());
-
-    DrawCircle(node10->GetPosition().x, node10->GetPosition().y, 50, RED);
-
     node7->GetComponent<Component::animator>()->Draw();
+
+    B2D::DebugDraw();
 
     EndMode2D();
 
-    B2D::DebugDraw();
 
   }
 
