@@ -25,6 +25,12 @@
 
 #include<B2D.h>
 
+Vector2 Component::ColliderShape::GetSize(){return Vector2{width, height};}
+float Component::ColliderShape::GetRadius(){return radius;}
+float Component::ColliderShape::GetWidth(){return GetSize().x;}
+float Component::ColliderShape::GetHeight(){return GetSize().y;}
+
+
 /*
   BoxCollider Component
 */
@@ -35,28 +41,28 @@ Component::BoxCollider::BoxCollider(float _width, float _height){
   box_collision_shape->SetAsBox(width * 0.5f, height * 0.5f);
 }
 
-Vector2 Component::BoxCollider::GetSize(){return Vector2{width, height};}
-
 
 /*
   CircleCollider Component
 */
-Component::CircleCollider::CircleCollider(float radius){
+Component::CircleCollider::CircleCollider(float _radius){
+  radius = _radius;
   circle_collision_shape = new b2CircleShape();
   circle_collision_shape->m_radius = radius;
 }
 
-float Component::CircleCollider::GetRadius(){return circle_collision_shape->m_radius;}
 
 
 /*
   CapsuleCollider Component
 */
-Component::CapsuleCollider::CapsuleCollider(float height, float radius) :
-  BoxCollider(radius * 2.0f, height),
-  CircleCollider(radius)
-{
-
+Component::CapsuleCollider::CapsuleCollider(float _height, float _radius){
+  height = _height;
+  radius = _radius;
+  circle_collision_shape = new b2CircleShape();
+  circle_collision_shape->m_radius = radius;
+  box_collision_shape = new b2PolygonShape();
+  box_collision_shape->SetAsBox(radius, height * 0.5f);
 }
 
 
@@ -112,7 +118,22 @@ bool Component::RigidBody::_SetCollider(int state){
       return true;
     }
     else{
-      // _SetCollider(2);
+      _SetCollider(2);
+    }
+
+    break;
+
+  case 2: // capsule collider
+
+    Node::component_map_it<capsule_collider> =
+      Node::component_map<capsule_collider>.find(node);
+
+    if(Node::component_map_it<capsule_collider> !=
+       Node::component_map<capsule_collider>.end()){
+      fixture_def.shape = node->GetComponent<capsule_collider>()->circle_collision_shape;
+      return true;
+    }
+    else{
       return false;
     }
 
@@ -148,11 +169,14 @@ void B2D::Step(){
   }
 }
 
-void B2D::DebugDraw(float opacity){
+void B2D::DebugDraw(float opacity , Color color1, Color color2){
+  if(opacity > 1) opacity = 1;
   for(b2Body *body = world.GetBodyList(); body; body = body->GetNext()){
-    Color curr_color = GREEN;
+    Color curr_color = color1;
     Node *node = static_cast<Node*>(body->GetUserData());
     cout<<node->name<<" shape type:"<<body->GetFixtureList()->GetShape()->GetType()<<endl;
+
+    curr_color.a *= opacity;
 
     switch(body->GetFixtureList()->GetType()){
 

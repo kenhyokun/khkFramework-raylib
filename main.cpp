@@ -25,7 +25,7 @@ struct App : BaseApp, ContactListener{
   Node *node1, *node2, *node3,
     *node4, *node5, *node6,
     *node7, *node8, *node9,
-    *node10;
+    *node10, *node11;
 
   Camera2D camera;
 
@@ -56,6 +56,7 @@ struct App : BaseApp, ContactListener{
     node8 = new Node(); // box dynamic rigid body test
     node9 = new Node(); // box static rigid body test
     node10 = new Node(); // circle dynamic rigid body test
+    node11 = new Node(); // capsule dynamic rigid body test
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
     lilwitch = LoadTexture("./resources/images/lilwitch.png");
@@ -86,6 +87,7 @@ struct App : BaseApp, ContactListener{
     node8->SetPosition(Vector2{30.0f, 50.0f});
     node9->SetPosition(Vector2{-50.0f, 180.0f});
     node10->SetPosition(Vector2{-120.0f, -20.0f});
+    node11->SetPosition(Vector2{-120.0f, -90.0f});
 
     node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node8->AddComponent<Component::rigid_body>(new RigidBody());
@@ -98,6 +100,10 @@ struct App : BaseApp, ContactListener{
     node10->AddComponent<Component::circle_collider>(new CircleCollider(50));
     node10->AddComponent<Component::rigid_body>(new RigidBody());
     // node10->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+
+    node11->AddComponent<Component::capsule_collider>(new CapsuleCollider(100, 50));
+    node11->AddComponent<Component::rigid_body>(new RigidBody());
+    // node11->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     node5->SetPosition(Vector2{
 	(float)game_screen_width * 0.5f + 250,
@@ -231,7 +237,7 @@ struct App : BaseApp, ContactListener{
     node6->GetComponent<Component::tmxmap>()->Draw(); // draw all layer
     node7->GetComponent<Component::animator>()->Draw();
 
-    B2D::DebugDraw();
+    B2D::DebugDraw(0.66f);
 
     EndMode2D();
 

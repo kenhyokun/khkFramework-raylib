@@ -49,40 +49,47 @@ namespace Component{
     Available component:
     - BoxCollider
     - CircleCollider
+    - CapsuleCollider
     - RigidBody
   */
+
+  struct ColliderShape : BaseComponent{
+    Vector2 GetSize();
+    float GetWidth();
+    float GetHeight();
+    float GetRadius();
+  protected:
+    float width = 0.0f;
+    float height = 0.0f;
+    float radius = 0.0f;
+  };
 
 
   /*
     BoxCollider Component
   */
-  typedef struct BoxCollider : BaseComponent{
+  typedef struct BoxCollider : ColliderShape{
     b2PolygonShape *box_collision_shape;
     BoxCollider(float _width, float _height);
-    Vector2 GetSize();
-
-  protected:
-    float width;
-    float height;
   } *box_collider;
 
 
   /*
     CircleCollider Component
   */
-  typedef struct CircleCollider : BaseComponent{
+  typedef struct CircleCollider : ColliderShape{
     b2CircleShape *circle_collision_shape;
-    CircleCollider(float radius);
-    float GetRadius();
+    CircleCollider(float _radius);
   } *circle_collider;
 
 
   /*
     CapsuleCollider Component
   */
-  typedef struct CapsuleCollider : BoxCollider, CircleCollider{
+  typedef struct CapsuleCollider : ColliderShape{
     CapsuleCollider(float height, float radius);
-  protected:
+    b2CircleShape *circle_collision_shape;
+    b2PolygonShape *box_collision_shape;
   } *capsule_collider;
 
 
@@ -122,7 +129,7 @@ namespace B2D{
   
   void SetContactListener(b2ContactListener *contact_listener);
   void Step();
-  void DebugDraw(float opacity = 1.0f);
+  void DebugDraw(float opacity = 0.666f, Color color1 = GREEN, Color color2 = RED);
 
 }; // B2D namespace
 
