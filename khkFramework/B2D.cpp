@@ -59,6 +59,7 @@ Component::CapsuleCollider::CapsuleCollider(float height, float radius) :
 
 }
 
+
 /*
   RigidBody Component
 */
@@ -69,7 +70,7 @@ void Component::RigidBody::_OnAttach(){
   body = world.CreateBody(&body_def);
 
   if(!_SetCollider()){
-    cout<<"you must add Collider component first"<<endl;
+    cout<<"you must add collider component at "<<node->name<<" first!"<<endl;
   }
   else{
     fixture_def.density = 1.0f;
@@ -142,13 +143,14 @@ void B2D::SetContactListener(b2ContactListener *contact_listener){
 void B2D::Step(){
   world.Step(time_step, velocity_iterations, position_iterations); 
   
-  for(b2Body* body = world.GetBodyList(); body; body = body->GetNext()){
+  for(b2Body *body = world.GetBodyList(); body; body = body->GetNext()){
     static_cast<Node*>(body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
   }
 }
 
 void B2D::DebugDraw(float opacity){
-  for(b2Body* body = world.GetBodyList(); body; body = body->GetNext()){
+  for(b2Body *body = world.GetBodyList(); body; body = body->GetNext()){
+    Color curr_color = GREEN;
     Node *node = static_cast<Node*>(body->GetUserData());
     cout<<node->name<<" shape type:"<<body->GetFixtureList()->GetShape()->GetType()<<endl;
 
@@ -158,7 +160,7 @@ void B2D::DebugDraw(float opacity){
     DrawCircle(body->GetPosition().x,
 	       body->GetPosition().y,
 	       body->GetFixtureList()->GetShape()->m_radius,
-	       GREEN);     
+	       curr_color);     
     break;
 
     case 1: // edge shape
@@ -169,7 +171,7 @@ void B2D::DebugDraw(float opacity){
 		  body->GetPosition().y,
 		  node->GetComponent<Component::box_collider>()->GetSize().x,
 		  node->GetComponent<Component::box_collider>()->GetSize().y,
-		  GREEN,
+		  curr_color,
 		  Rad2Deg(body->GetAngle()));
     break;
 

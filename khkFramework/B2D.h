@@ -97,7 +97,7 @@ namespace Component{
     void Step();
 
     b2Vec2 GetBodyPosition();
-    float GetBodyRadian();
+    float GetBodyRadian(); // body angle rotation (in radian)
     void SetBodyType(b2BodyType type);
     void SetFixedRotation(bool is_fixed = true);
     // void SetFixture(b2FixtureDef fixture_def);

@@ -32,6 +32,9 @@ obj :=\
 all:
 	g++ -o main main.cpp $(include) $(lib) 
 
+debug:
+	g++ -g -o main main.cpp $(include) $(lib) 
+
 run:
 	make all
 	./main
