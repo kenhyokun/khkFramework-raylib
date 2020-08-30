@@ -43,6 +43,12 @@ static int32 position_iterations = 2;
   - B2D
 */
 
+enum ColliderShape{
+  BOX,
+  CIRCLE,
+  CAPSULE
+};
+
 namespace Component{
 
   /*
@@ -54,11 +60,14 @@ namespace Component{
   */
 
   struct Box2DBaseComponent : BaseComponent{
+
     Vector2 GetSize();
     float GetWidth();
     float GetHeight();
     float GetRadius();
+    ColliderShape GetColliderShape();
   protected:
+    ColliderShape collider_shape;
     float width = 0.0f;
     float height = 0.0f;
     float radius = 0.0f;

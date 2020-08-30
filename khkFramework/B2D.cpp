@@ -29,12 +29,14 @@ Vector2 Component::Box2DBaseComponent::GetSize(){return Vector2{width, height};}
 float Component::Box2DBaseComponent::GetRadius(){return radius;}
 float Component::Box2DBaseComponent::GetWidth(){return GetSize().x;}
 float Component::Box2DBaseComponent::GetHeight(){return GetSize().y;}
+ColliderShape Component::Box2DBaseComponent::GetColliderShape(){return collider_shape;}
 
 
 /*
   BoxCollider Component
 */
 Component::BoxCollider::BoxCollider(float _width, float _height){
+  collider_shape = ColliderShape::BOX;
   width = _width;
   height = _height;
   box_collision_shape = new b2PolygonShape();
@@ -46,18 +48,19 @@ Component::BoxCollider::BoxCollider(float _width, float _height){
   CircleCollider Component
 */
 Component::CircleCollider::CircleCollider(float _radius){
+  collider_shape = ColliderShape::CIRCLE;
   radius = _radius;
   circle_collision_shape = new b2CircleShape();
   circle_collision_shape->m_radius = radius;
 }
 
 
-
 /*
   CapsuleCollider Component
 */
 Component::CapsuleCollider::CapsuleCollider(float _height, float _radius){
-  width = _radius;
+  collider_shape = ColliderShape::CAPSULE;
+  width = _radius * 2;
   height = _height;
   radius = _radius;
   circle_collision_shape = new b2CircleShape();
@@ -80,10 +83,17 @@ void Component::RigidBody::_OnAttach(){
     cout<<"you must add collider component at "<<node->name<<" first!"<<endl;
   }
   else{
-    fixture_def.density = 1.0f;
-    fixture_def.friction = 0.3f;
-    fixture = body->CreateFixture(&fixture_def);
+    if(collider_shape == ColliderShape::BOX ||
+       collider_shape == ColliderShape::CIRCLE){
+      fixture_def.density = 1.0f;
+      fixture_def.friction = 0.3f;
+      fixture = body->CreateFixture(&fixture_def);
+    }
+    else if(collider_shape == ColliderShape::CAPSULE){
+    }
+
     body->SetUserData(node);
+
   }
 
 }
@@ -99,8 +109,9 @@ bool Component::RigidBody::_SetCollider(int state){
 
     if(Node::component_map_it<box_collider> !=
        Node::component_map<box_collider>.end()){
-      fixture_def.shape = node->GetComponent<box_collider>()->box_collision_shape;
       box_collider collider = Node::component_map_it<box_collider>->second;
+      fixture_def.shape = collider->box_collision_shape;
+      collider_shape = collider->GetColliderShape();
       width = collider->GetWidth();
       height = collider->GetHeight();
       radius = collider->GetRadius();
@@ -120,8 +131,9 @@ bool Component::RigidBody::_SetCollider(int state){
 
     if(Node::component_map_it<circle_collider> !=
        Node::component_map<circle_collider>.end()){
-      fixture_def.shape = node->GetComponent<circle_collider>()->circle_collision_shape;
       circle_collider collider = Node::component_map_it<circle_collider>->second;
+      fixture_def.shape = collider->circle_collision_shape;
+      collider_shape = collider->GetColliderShape();
       width = collider->GetWidth();
       height = collider->GetHeight();
       radius = collider->GetRadius();
@@ -141,8 +153,31 @@ bool Component::RigidBody::_SetCollider(int state){
 
     if(Node::component_map_it<capsule_collider> !=
        Node::component_map<capsule_collider>.end()){
-      fixture_def.shape = node->GetComponent<capsule_collider>()->box_collision_shape;
-      capsule_collider collider = Node::component_map_it<capsule_collider>->second;
+
+      capsule_collider collider =
+	Node::component_map_it<capsule_collider>->second;
+
+      b2FixtureDef circle_fixture_def;
+
+      fixture_def.shape = collider->box_collision_shape;
+      circle_fixture_def.shape= collider->circle_collision_shape;
+
+      fixture_def.density = 1.0f;
+      fixture_def.friction = 0.3f;
+
+      circle_fixture_def.density = 1.0f;
+      circle_fixture_def.friction = 0.3f;
+
+      body->CreateFixture(&circle_fixture_def);
+      body->CreateFixture(&fixture_def);
+      body->CreateFixture(&circle_fixture_def);
+
+      // body->CreateFixture(collider->circle_collision_shape, 1.0f);
+      // body->CreateFixture(collider->box_collision_shape, 1.0f);
+      // body->CreateFixture(collider->circle_collision_shape, 1.0f);
+
+      
+      collider_shape = collider->GetColliderShape();
       width = collider->GetWidth();
       height = collider->GetHeight();
       radius = collider->GetRadius();
