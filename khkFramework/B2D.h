@@ -58,7 +58,12 @@ namespace Component{
   */
   typedef struct BoxCollider : BaseComponent{
     b2PolygonShape *box_collision_shape;
-    BoxCollider(float width, float height);
+    BoxCollider(float _width, float _height);
+    Vector2 GetSize();
+
+  protected:
+    float width;
+    float height;
   } *box_collider;
 
 

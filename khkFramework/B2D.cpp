@@ -28,10 +28,14 @@
 /*
   BoxCollider Component
 */
-Component::BoxCollider::BoxCollider(float width, float height){
+Component::BoxCollider::BoxCollider(float _width, float _height){
+  width = _width;
+  height = _height;
   box_collision_shape = new b2PolygonShape();
   box_collision_shape->SetAsBox(width * 0.5f, height * 0.5f);
 }
+
+Vector2 Component::BoxCollider::GetSize(){return Vector2{width, height};}
 
 
 /*
@@ -148,12 +152,12 @@ void B2D::DebugDraw(float opacity){
     Node *node = static_cast<Node*>(body->GetUserData());
     cout<<node->name<<" shape type:"<<body->GetFixtureList()->GetShape()->GetType()<<endl;
 
-    switch(body->GetFixtureList()->GetShape()->GetType()){
+    switch(body->GetFixtureList()->GetType()){
 
     case 0: // circle shape
     DrawCircle(body->GetPosition().x,
 	       body->GetPosition().y,
-	       50,
+	       body->GetFixtureList()->GetShape()->m_radius,
 	       GREEN);     
     break;
 
@@ -163,7 +167,8 @@ void B2D::DebugDraw(float opacity){
     case 2: // rectangle shape
     DrawRectangle(body->GetPosition().x,
 		  body->GetPosition().y,
-		  100.0f, 100.0f,
+		  node->GetComponent<Component::box_collider>()->GetSize().x,
+		  node->GetComponent<Component::box_collider>()->GetSize().y,
 		  GREEN,
 		  Rad2Deg(body->GetAngle()));
     break;
