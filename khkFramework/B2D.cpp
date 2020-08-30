@@ -25,10 +25,10 @@
 
 #include<B2D.h>
 
-Vector2 Component::ColliderShape::GetSize(){return Vector2{width, height};}
-float Component::ColliderShape::GetRadius(){return radius;}
-float Component::ColliderShape::GetWidth(){return GetSize().x;}
-float Component::ColliderShape::GetHeight(){return GetSize().y;}
+Vector2 Component::Box2DBaseComponent::GetSize(){return Vector2{width, height};}
+float Component::Box2DBaseComponent::GetRadius(){return radius;}
+float Component::Box2DBaseComponent::GetWidth(){return GetSize().x;}
+float Component::Box2DBaseComponent::GetHeight(){return GetSize().y;}
 
 
 /*
@@ -57,12 +57,13 @@ Component::CircleCollider::CircleCollider(float _radius){
   CapsuleCollider Component
 */
 Component::CapsuleCollider::CapsuleCollider(float _height, float _radius){
+  width = _radius;
   height = _height;
   radius = _radius;
   circle_collision_shape = new b2CircleShape();
   circle_collision_shape->m_radius = radius;
   box_collision_shape = new b2PolygonShape();
-  box_collision_shape->SetAsBox(radius, height * 0.5f);
+  box_collision_shape->SetAsBox(width, height * 0.5f);
 }
 
 
@@ -99,6 +100,11 @@ bool Component::RigidBody::_SetCollider(int state){
     if(Node::component_map_it<box_collider> !=
        Node::component_map<box_collider>.end()){
       fixture_def.shape = node->GetComponent<box_collider>()->box_collision_shape;
+      box_collider collider = Node::component_map_it<box_collider>->second;
+      width = collider->GetWidth();
+      height = collider->GetHeight();
+      radius = collider->GetRadius();
+      delete collider;
       return true;
     }
     else{
@@ -115,6 +121,11 @@ bool Component::RigidBody::_SetCollider(int state){
     if(Node::component_map_it<circle_collider> !=
        Node::component_map<circle_collider>.end()){
       fixture_def.shape = node->GetComponent<circle_collider>()->circle_collision_shape;
+      circle_collider collider = Node::component_map_it<circle_collider>->second;
+      width = collider->GetWidth();
+      height = collider->GetHeight();
+      radius = collider->GetRadius();
+      delete collider;
       return true;
     }
     else{
@@ -130,7 +141,12 @@ bool Component::RigidBody::_SetCollider(int state){
 
     if(Node::component_map_it<capsule_collider> !=
        Node::component_map<capsule_collider>.end()){
-      fixture_def.shape = node->GetComponent<capsule_collider>()->circle_collision_shape;
+      fixture_def.shape = node->GetComponent<capsule_collider>()->box_collision_shape;
+      capsule_collider collider = Node::component_map_it<capsule_collider>->second;
+      width = collider->GetWidth();
+      height = collider->GetHeight();
+      radius = collider->GetRadius();
+      delete collider;
       return true;
     }
     else{
@@ -193,8 +209,8 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
     case 2: // rectangle shape
     DrawRectangle(body->GetPosition().x,
 		  body->GetPosition().y,
-		  node->GetComponent<Component::box_collider>()->GetSize().x,
-		  node->GetComponent<Component::box_collider>()->GetSize().y,
+		  node->GetComponent<Component::rigid_body>()->GetSize().x,
+		  node->GetComponent<Component::rigid_body>()->GetSize().y,
 		  curr_color,
 		  Rad2Deg(body->GetAngle()));
     break;

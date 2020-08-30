@@ -53,7 +53,7 @@ namespace Component{
     - RigidBody
   */
 
-  struct ColliderShape : BaseComponent{
+  struct Box2DBaseComponent : BaseComponent{
     Vector2 GetSize();
     float GetWidth();
     float GetHeight();
@@ -68,7 +68,7 @@ namespace Component{
   /*
     BoxCollider Component
   */
-  typedef struct BoxCollider : ColliderShape{
+  typedef struct BoxCollider : Box2DBaseComponent{
     b2PolygonShape *box_collision_shape;
     BoxCollider(float _width, float _height);
   } *box_collider;
@@ -77,7 +77,7 @@ namespace Component{
   /*
     CircleCollider Component
   */
-  typedef struct CircleCollider : ColliderShape{
+  typedef struct CircleCollider : Box2DBaseComponent{
     b2CircleShape *circle_collision_shape;
     CircleCollider(float _radius);
   } *circle_collider;
@@ -86,7 +86,7 @@ namespace Component{
   /*
     CapsuleCollider Component
   */
-  typedef struct CapsuleCollider : ColliderShape{
+  typedef struct CapsuleCollider : Box2DBaseComponent{
     CapsuleCollider(float height, float radius);
     b2CircleShape *circle_collision_shape;
     b2PolygonShape *box_collision_shape;
@@ -96,7 +96,7 @@ namespace Component{
   /*
     RigidBody Component
   */
-  typedef struct RigidBody : BaseComponent{
+  typedef struct RigidBody : Box2DBaseComponent{
     static const b2BodyType STATIC = b2_staticBody;
     static const b2BodyType DYNAMIC = b2_dynamicBody;
     static const b2BodyType KINEMATIC = b2_kinematicBody;
