@@ -131,12 +131,12 @@ struct App : BaseApp, ContactListener{
   }
 
   void BeginContact(b2Contact* contact) override {
-    cout<<"begin contact"<<endl;
+    // cout<<"begin contact"<<endl;
 
     void *user_data = 
       contact->GetFixtureB()->GetBody()->GetUserData();
 
-    cout<< static_cast<Node*>(user_data)->name<<endl;
+    // cout<< static_cast<Node*>(user_data)->name<<endl;
 
   }
 

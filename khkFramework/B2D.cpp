@@ -90,6 +90,7 @@ void Component::RigidBody::_OnAttach(){
       fixture = body->CreateFixture(&fixture_def);
     }
     else if(collider_shape == ColliderShape::CAPSULE){
+  
     }
 
     body->SetUserData(node);
@@ -157,31 +158,39 @@ bool Component::RigidBody::_SetCollider(int state){
       capsule_collider collider =
 	Node::component_map_it<capsule_collider>->second;
 
-      b2FixtureDef circle_fixture_def;
-
-      fixture_def.shape = collider->box_collision_shape;
-      circle_fixture_def.shape= collider->circle_collision_shape;
-
-      fixture_def.density = 1.0f;
-      fixture_def.friction = 0.3f;
-
-      circle_fixture_def.density = 1.0f;
-      circle_fixture_def.friction = 0.3f;
-
-      body->CreateFixture(&circle_fixture_def);
-      body->CreateFixture(&fixture_def);
-      body->CreateFixture(&circle_fixture_def);
-
-      // body->CreateFixture(collider->circle_collision_shape, 1.0f);
-      // body->CreateFixture(collider->box_collision_shape, 1.0f);
-      // body->CreateFixture(collider->circle_collision_shape, 1.0f);
-
-      fixture = body->GetFixtureList();
-
       collider_shape = collider->GetColliderShape();
       width = collider->GetWidth();
       height = collider->GetHeight();
       radius = collider->GetRadius();
+
+      // b2FixtureDef circle_fixture_def;
+
+      fixture_def.shape = collider->box_collision_shape;
+      // circle_fixture_def.shape = collider->circle_collision_shape;
+
+      fixture_def.density = 1.0f;
+      fixture_def.friction = 0.3f;
+
+      // circle_fixture_def.density = 1.0f;
+      // circle_fixture_def.friction = 0.3f;
+
+      // body->CreateFixture(&circle_fixture_def);
+      // body->CreateFixture(&fixture_def);
+      // body->CreateFixture(&circle_fixture_def);
+
+      // upper circle
+      collider->circle_collision_shape->m_p = b2Vec2{0, radius};
+      body->CreateFixture(collider->circle_collision_shape, 1.0f);
+      
+      // mid box
+      body->CreateFixture(&fixture_def);
+
+      // bottom circle
+      collider->circle_collision_shape->m_p = b2Vec2{0, -radius};
+      body->CreateFixture(collider->circle_collision_shape, 1.0f);
+
+      fixture = body->GetFixtureList();
+
       delete collider;
       return true;
     }
@@ -226,18 +235,16 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
   for(b2Body *body = world.GetBodyList(); body; body = body->GetNext()){
     Color curr_color = color1;
     Node *node = static_cast<Node*>(body->GetUserData());
-    cout<<node->name<<" shape type:"<<body->GetFixtureList()->GetShape()->GetType()<<endl;
 
     curr_color.a *= opacity;
 
     for(b2Fixture* fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext()){
 
-      // switch(body->GetFixtureList()->GetType()){
       switch(fixture->GetType()){
       case 0: // circle shape
 	DrawCircle(body->GetPosition().x,
 		   body->GetPosition().y,
-		   body->GetFixtureList()->GetShape()->m_radius,
+		   fixture->GetShape()->m_radius,
 		   curr_color);     
 	break;
 
