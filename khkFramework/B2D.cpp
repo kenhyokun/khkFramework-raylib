@@ -88,6 +88,8 @@ void Component::RigidBody::_OnAttach(){
       fixture_def.density = 1.0f;
       fixture_def.friction = 0.3f;
       fixture = body->CreateFixture(&fixture_def);
+      b2Vec2 *_rel_position = new b2Vec2{0, 0};
+      fixture->SetUserData(_rel_position);
     }
     else if(collider_shape == ColliderShape::CAPSULE){
   
@@ -179,17 +181,37 @@ bool Component::RigidBody::_SetCollider(int state){
       // body->CreateFixture(&circle_fixture_def);
 
       // upper circle
-      collider->circle_collision_shape->m_p = b2Vec2{0, radius};
+      collider->circle_collision_shape->m_p = b2Vec2{0, -height / 2};
       body->CreateFixture(collider->circle_collision_shape, 1.0f);
       
       // mid box
       body->CreateFixture(&fixture_def);
 
       // bottom circle
-      collider->circle_collision_shape->m_p = b2Vec2{0, -radius};
+      collider->circle_collision_shape->m_p = b2Vec2{0, height / 2};
       body->CreateFixture(collider->circle_collision_shape, 1.0f);
 
       fixture = body->GetFixtureList();
+
+      int count = 0;
+      for(fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext()){
+	if(fixture->GetType() == 2){
+	  fixture->SetUserData(new b2Vec2{0, 0});
+	  count++;
+	}
+	else{
+	  if(count == 0){
+	    b2Vec2 *_rel_position = new b2Vec2{0, -height / 2};
+	    fixture->SetUserData(_rel_position);
+	    count++;
+	  }
+	  else{
+	    b2Vec2 *_rel_position = new b2Vec2{0, height / 2};
+	    fixture->SetUserData(_rel_position);
+	    count++;
+	  }
+	}
+      }
 
       delete collider;
       return true;
@@ -240,10 +262,18 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 
     for(b2Fixture* fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext()){
 
+      b2Vec2 *rel_position = static_cast<b2Vec2*>(fixture->GetUserData());
+
+      Vector2 draw_position = TransformRotation(body->GetAngle(),
+						Vector2{body->GetPosition().x + rel_position->x, body->GetPosition().y + rel_position->y},
+						Vector2{body->GetPosition().x, body->GetPosition().y}
+						);
+
       switch(fixture->GetType()){
       case 0: // circle shape
-	DrawCircle(body->GetPosition().x,
-		   body->GetPosition().y,
+
+	DrawCircle(draw_position.x,
+		   draw_position.y,
 		   fixture->GetShape()->m_radius,
 		   curr_color);     
 	break;
@@ -252,8 +282,8 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	break;
 
       case 2: // rectangle shape
-	DrawRectangle(body->GetPosition().x,
-		      body->GetPosition().y,
+	DrawRectangle(draw_position.x,
+		      draw_position.y,
 		      node->GetComponent<Component::rigid_body>()->GetSize().x,
 		      node->GetComponent<Component::rigid_body>()->GetSize().y,
 		      curr_color,

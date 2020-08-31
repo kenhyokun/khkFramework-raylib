@@ -50,30 +50,10 @@ Vector2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
   float y0 = node->GetPosition().y - (max_height / 2);
   float _x = (grid->width * column) + (grid->width / 2);
   float _y = (grid->height * row) + (grid->height / 2);
-
-  float x = 0.0f;
-  float y = 0.0f;
   float tx = x0 + _x;
   float ty = y0 + _y;
 
-  float px = node->GetPosition().x;
-  float py = node->GetPosition().y;
-
-  x =
-    (tx * cos(Deg2Rad(node->GetRotation())) ) -
-    (ty * sin(Deg2Rad(node->GetRotation())) ) -
-    (px * cos(Deg2Rad(node->GetRotation())) ) +
-    (py * sin(Deg2Rad(node->GetRotation())) ) +
-    px; 
-
-  y =
-    (tx * sin(Deg2Rad(node->GetRotation())) ) +
-    (ty * cos(Deg2Rad(node->GetRotation())) ) -
-    (px * sin(Deg2Rad(node->GetRotation())) ) -
-    (py * cos(Deg2Rad(node->GetRotation())) ) +
-    py; 
-
-  return Vector2{x, y};
+  return TransformRotation(Deg2Rad(node->GetRotation()), Vector2{tx, ty}, node->GetPosition());
 }
 
 int Component::BaseTilemap::GetMaxWidth(){return max_width;}

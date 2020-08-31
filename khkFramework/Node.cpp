@@ -40,29 +40,7 @@ Transform_node Node::_GetTransform(){return transform;}
 void Node::_SetTransformDirection(float up, float right){transform.up = up; transform.right = right;}
 
 void Node::_Rotate(float angle, Vector2 pivot){
-  float x = 0.0f;
-  float y = 0.0f;
-  float px = pivot.x;
-  float py = pivot.y;
-  float tx = transform.position.x;
-  float ty = transform.position.y;
-
-  x =
-    (tx * cos(Deg2Rad(angle)) ) -
-    (ty * sin(Deg2Rad(angle)) ) -
-    (px * cos(Deg2Rad(angle)) ) +
-    (py * sin(Deg2Rad(angle)) ) +
-    px; 
-
-  y =
-    (tx * sin(Deg2Rad(angle)) ) +
-    (ty * cos(Deg2Rad(angle)) ) -
-    (px * sin(Deg2Rad(angle)) ) -
-    (py * cos(Deg2Rad(angle)) ) +
-    py; 
-
-  SetPosition(Vector2{x, y}); 
-
+  SetPosition(TransformRotation(Deg2Rad(angle), GetPosition(), pivot));
 }
 
 void Node::SetParent(Node *node){

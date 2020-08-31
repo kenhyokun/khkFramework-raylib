@@ -101,7 +101,7 @@ struct App : BaseApp, ContactListener{
     node10->AddComponent<Component::rigid_body>(new RigidBody());
     // node10->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    node11->AddComponent<Component::capsule_collider>(new CapsuleCollider(100, 50));
+    node11->AddComponent<Component::capsule_collider>(new CapsuleCollider(50, 40));
     node11->AddComponent<Component::rigid_body>(new RigidBody());
     // node11->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 

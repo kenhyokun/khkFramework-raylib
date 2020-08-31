@@ -38,4 +38,30 @@ inline float Deg2Rad(float deg){
   return (deg * pi) / 180;
 }
 
+inline Vector2 TransformRotation(float rad_angle, Vector2 position, Vector2 pivot){
+  float x = 0.0f;
+  float y = 0.0f;
+  float px = pivot.x;
+  float py = pivot.y;
+  float tx = position.x;
+  float ty = position.y;
+
+  x =
+    (tx * cos(rad_angle) ) -
+    (ty * sin(rad_angle) ) -
+    (px * cos(rad_angle) ) +
+    (py * sin(rad_angle) ) +
+    px; 
+
+  y =
+    (tx * sin(rad_angle) ) +
+    (ty * cos(rad_angle) ) -
+    (px * sin(rad_angle) ) -
+    (py * cos(rad_angle) ) +
+    py; 
+
+  return Vector2{x, y}; 
+
+}
+
 #endif
