@@ -66,7 +66,7 @@ namespace Component{
   struct FixtureData{
     b2Vec2 rel_position = {0, 0};
     int32 vertice_count = 0;
-    b2Vec2 *vertice = NULL;
+    b2Vec2 *vertice = nullptr; // in body relative position
   };
 
   struct Box2DBaseComponent : BaseComponent{
@@ -123,6 +123,15 @@ namespace Component{
   protected:
     void _OnAttach() override;
   } *polygon_collider;
+
+
+  /*
+    EdgeCollider Component
+  */
+  typedef struct EdgeCollider : Box2DBaseComponent{
+    b2EdgeShape *edge_collision_shape;
+    EdgeCollider(Vector2 start_point, Vector2 end_point);
+  } *edge_collider;
 
 
   /*

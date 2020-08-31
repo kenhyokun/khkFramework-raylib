@@ -60,13 +60,13 @@ Component::CircleCollider::CircleCollider(float _radius){
 */
 Component::CapsuleCollider::CapsuleCollider(float _height, float _radius){
   collider_shape = ColliderShape::CAPSULE;
-  width = _radius * 2;
+  width = _radius * 2; // debug draw width
   height = _height; if(height <= 0) height = 1;
   radius = _radius;
   circle_collision_shape = new b2CircleShape();
   circle_collision_shape->m_radius = radius;
   box_collision_shape = new b2PolygonShape();
-  box_collision_shape->SetAsBox(width, height * 0.5f);
+  box_collision_shape->SetAsBox(radius, height * 0.5f); // use radius as width for box fixture width
 }
 
 
