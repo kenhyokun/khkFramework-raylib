@@ -25,6 +25,8 @@
 
 #include<BaseApp.h>
 
+typedef Vector2 v2;
+
 BaseApp::BaseApp(int _window_width, int _window_height, string _title){
   window_width = _window_width;
   window_height = _window_height;

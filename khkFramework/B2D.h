@@ -46,7 +46,8 @@ static int32 position_iterations = 2;
 enum ColliderShape{
   BOX,
   CIRCLE,
-  CAPSULE
+  CAPSULE,
+  EDGE
 };
 
 namespace Component{
@@ -56,6 +57,7 @@ namespace Component{
     - BoxCollider
     - CircleCollider
     - CapsuleCollider
+    - EdgeCollider
     - RigidBody
   */
 
@@ -96,10 +98,23 @@ namespace Component{
     CapsuleCollider Component
   */
   typedef struct CapsuleCollider : Box2DBaseComponent{
-    CapsuleCollider(float height, float radius);
     b2CircleShape *circle_collision_shape;
     b2PolygonShape *box_collision_shape;
+    CapsuleCollider(float height, float radius);
   } *capsule_collider;
+
+
+  /*
+    EdgeCollider Component
+  */
+  typedef struct EdgeCollider : Box2DBaseComponent{
+    b2PolygonShape *polygon_collision_shape;
+    vector<Vector2> point_list;
+    EdgeCollider(vector<Vector2> _point_list);
+
+  protected:
+    void _OnAttach() override;
+  } *edge_collider;
 
 
   /*

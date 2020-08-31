@@ -61,12 +61,40 @@ Component::CircleCollider::CircleCollider(float _radius){
 Component::CapsuleCollider::CapsuleCollider(float _height, float _radius){
   collider_shape = ColliderShape::CAPSULE;
   width = _radius * 2;
-  height = _height;
+  height = _height; if(height <= 0) height = 1;
   radius = _radius;
   circle_collision_shape = new b2CircleShape();
   circle_collision_shape->m_radius = radius;
   box_collision_shape = new b2PolygonShape();
   box_collision_shape->SetAsBox(width, height * 0.5f);
+}
+
+
+/*
+  EdgeCollider Component
+*/
+Component::EdgeCollider::EdgeCollider(vector<Vector2> _point_list){
+  collider_shape = ColliderShape::EDGE;
+  point_list = _point_list;
+  polygon_collision_shape = new b2PolygonShape();
+
+  // b2Vec2 vertice[point_list.size()];
+  // for(int i = 0; i < point_list.size(); i++){
+  //   vertice[i].Set(point_list.at(i).x, point_list.at(i).y);
+  // }
+
+  // polygon_collision_shape->Set(vertice, point_list.size());
+
+}
+
+void Component::EdgeCollider::_OnAttach(){
+  b2Vec2 vertice[point_list.size()];
+  for(int i = 0; i < point_list.size(); i++){
+    vertice[i].Set(point_list.at(i).x - node->GetPosition().x,
+		   point_list.at(i).y - node->GetPosition().y);
+  }
+
+  polygon_collision_shape->Set(vertice, point_list.size());
 }
 
 
@@ -83,17 +111,28 @@ void Component::RigidBody::_OnAttach(){
     cout<<"you must add collider component at "<<node->name<<" first!"<<endl;
   }
   else{
-    if(collider_shape == ColliderShape::BOX ||
-       collider_shape == ColliderShape::CIRCLE){
+
+    if(collider_shape != ColliderShape::CAPSULE){
+
       fixture_def.density = 1.0f;
       fixture_def.friction = 0.3f;
       fixture = body->CreateFixture(&fixture_def);
       b2Vec2 *_rel_position = new b2Vec2{0, 0};
       fixture->SetUserData(_rel_position);
-    }
-    else if(collider_shape == ColliderShape::CAPSULE){
-  
-    }
+
+    } // collider_shape != capsule
+
+
+    // if(collider_shape == ColliderShape::BOX ||
+    //    collider_shape == ColliderShape::CIRCLE){
+    //   fixture_def.density = 1.0f;
+    //   fixture_def.friction = 0.3f;
+    //   fixture = body->CreateFixture(&fixture_def);
+    //   b2Vec2 *_rel_position = new b2Vec2{0, 0};
+    //   fixture->SetUserData(_rel_position);
+    // }
+    // else if(collider_shape == ColliderShape::EDGE){}
+    // else if(collider_shape == ColliderShape::CAPSULE){}
 
     body->SetUserData(node);
 
@@ -168,17 +207,9 @@ bool Component::RigidBody::_SetCollider(int state){
       // b2FixtureDef circle_fixture_def;
 
       fixture_def.shape = collider->box_collision_shape;
-      // circle_fixture_def.shape = collider->circle_collision_shape;
 
       fixture_def.density = 1.0f;
       fixture_def.friction = 0.3f;
-
-      // circle_fixture_def.density = 1.0f;
-      // circle_fixture_def.friction = 0.3f;
-
-      // body->CreateFixture(&circle_fixture_def);
-      // body->CreateFixture(&fixture_def);
-      // body->CreateFixture(&circle_fixture_def);
 
       // upper circle
       collider->circle_collision_shape->m_p = b2Vec2{0, -height / 2};
@@ -217,9 +248,27 @@ bool Component::RigidBody::_SetCollider(int state){
       return true;
     }
     else{
-      return false;
+      _SetCollider(3);
     }
 
+    break;
+
+  case 3: // edge collider
+
+    Node::component_map_it<edge_collider> =
+      Node::component_map<edge_collider>.find(node);
+
+    if(Node::component_map_it<edge_collider> !=
+       Node::component_map<edge_collider>.end()){
+      edge_collider collider = Node::component_map_it<edge_collider>->second;
+      fixture_def.shape = collider->polygon_collision_shape;
+      collider_shape = collider->GetColliderShape();
+      delete collider;
+      return true;
+    }
+    else{
+      return false;
+    }
     break;
 
     return false;
