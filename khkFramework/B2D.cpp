@@ -103,15 +103,15 @@ void Component::RigidBody::_OnAttach(){
   }
   else{
 
-    if(collider_shape != ColliderShape::CAPSULE){
+    // if(collider_shape != ColliderShape::CAPSULE){
 
-      fixture_def.density = 1.0f;
-      fixture_def.friction = 0.3f;
-      fixture = body->CreateFixture(&fixture_def);
-      b2Vec2 *_rel_position = new b2Vec2{0, 0};
-      fixture->SetUserData(_rel_position);
+    //   fixture_def.density = 1.0f;
+    //   fixture_def.friction = 0.3f;
+    //   fixture = body->CreateFixture(&fixture_def);
+    //   b2Vec2 *_rel_position = new b2Vec2{0, 0};
+    //   fixture->SetUserData(_rel_position);
 
-    } // collider_shape != capsule
+    // } // collider_shape != capsule
 
 
     // if(collider_shape == ColliderShape::BOX ||
@@ -143,7 +143,13 @@ bool Component::RigidBody::_SetCollider(int state){
     if(Node::component_map_it<box_collider> !=
        Node::component_map<box_collider>.end()){
       box_collider collider = Node::component_map_it<box_collider>->second;
-      fixture_def.shape = collider->box_collision_shape;
+
+      cout<<collider->box_collision_shape->m_count<<endl;
+
+      fixture = body->CreateFixture(collider->box_collision_shape, 1.0f);
+      b2Vec2 *_rel_position = new b2Vec2{0, 0};
+      fixture->SetUserData(_rel_position);
+
       collider_shape = collider->GetColliderShape();
       width = collider->GetWidth();
       height = collider->GetHeight();
@@ -165,7 +171,10 @@ bool Component::RigidBody::_SetCollider(int state){
     if(Node::component_map_it<circle_collider> !=
        Node::component_map<circle_collider>.end()){
       circle_collider collider = Node::component_map_it<circle_collider>->second;
-      fixture_def.shape = collider->circle_collision_shape;
+      fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
+      b2Vec2 *_rel_position = new b2Vec2{0, 0};
+      fixture->SetUserData(_rel_position);
+
       collider_shape = collider->GetColliderShape();
       width = collider->GetWidth();
       height = collider->GetHeight();
@@ -195,43 +204,20 @@ bool Component::RigidBody::_SetCollider(int state){
       height = collider->GetHeight();
       radius = collider->GetRadius();
 
-      fixture_def.shape = collider->box_collision_shape;
-
-      fixture_def.density = 1.0f;
-      fixture_def.friction = 0.3f;
-
       // upper circle
       collider->circle_collision_shape->m_p = b2Vec2{0, -height / 2};
-      body->CreateFixture(collider->circle_collision_shape, 1.0f);
-      
+      fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
+      fixture->SetUserData(new b2Vec2{0, -height / 2});
+
       // mid box
-      body->CreateFixture(&fixture_def);
+      fixture = body->CreateFixture(collider->box_collision_shape, 1.0f);
+      fixture->SetUserData(new b2Vec2{0, 0});
 
       // bottom circle
       collider->circle_collision_shape->m_p = b2Vec2{0, height / 2};
-      body->CreateFixture(collider->circle_collision_shape, 1.0f);
+      fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
+      fixture->SetUserData(new b2Vec2{0, height / 2});
 
-      fixture = body->GetFixtureList();
-
-      int count = 0;
-      for(fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext()){
-	if(fixture->GetType() == 2){
-	  fixture->SetUserData(new b2Vec2{0, 0});
-	  count++;
-	}
-	else{
-	  if(count == 0){
-	    b2Vec2 *_rel_position = new b2Vec2{0, -height / 2};
-	    fixture->SetUserData(_rel_position);
-	    count++;
-	  }
-	  else{
-	    b2Vec2 *_rel_position = new b2Vec2{0, height / 2};
-	    fixture->SetUserData(_rel_position);
-	    count++;
-	  }
-	}
-      }
 
       delete collider;
       return true;
@@ -251,8 +237,13 @@ bool Component::RigidBody::_SetCollider(int state){
        Node::component_map<polygon_collider>.end()){
       polygon_collider collider = Node::component_map_it<polygon_collider>->second;
 
-      fixture_def.shape = collider->polygon_collision_shape;
+      cout<<collider->polygon_collision_shape->m_count<<endl;
+
       collider_shape = collider->GetColliderShape();
+      fixture = body->CreateFixture(collider->polygon_collision_shape, 1.0f);
+      b2Vec2 *_rel_position = new b2Vec2{0, 0};
+      fixture->SetUserData(_rel_position);
+
       delete collider;
 
       return true;
@@ -309,6 +300,7 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 						Vector2{body->GetPosition().x, body->GetPosition().y}
 						);
 
+
       switch(fixture->GetType()){
       case 0: // circle shape
 
@@ -319,11 +311,10 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	break;
 
       case 1: // edge shape
-	cout<<"there is a edge collider..."<<endl;
 	break;
 
       case 2: // rectangle shape
-	cout<<"there is a edge collider... in box collider..."<<endl;
+
 	DrawRectangle(draw_position.x,
 		      draw_position.y,
 		      node->GetComponent<Component::rigid_body>()->GetSize().x,

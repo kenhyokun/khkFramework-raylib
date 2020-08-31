@@ -29,6 +29,8 @@
 #include<box2d/box2d.h>
 #include<Component.h>
 
+#define vec2_zero b2Vec2{0, 0}
+
 typedef b2ContactListener ContactListener;
 
 static b2Vec2 gravity(0.0f, 10.0f);
@@ -60,6 +62,12 @@ namespace Component{
     - PolygonCollider
     - RigidBody
   */
+
+  struct FixtureData{
+    b2Vec2 rel_position = {0, 0};
+    int32 vertice_count = 0;
+    b2Vec2 *vertice = NULL;
+  };
 
   struct Box2DBaseComponent : BaseComponent{
 
@@ -131,11 +139,9 @@ namespace Component{
     float GetBodyRadian(); // body angle rotation (in radian)
     void SetBodyType(b2BodyType type);
     void SetFixedRotation(bool is_fixed = true);
-    // void SetFixture(b2FixtureDef fixture_def);
     b2Body* GetBody();
 
   protected:
-    b2FixtureDef fixture_def;
     b2Body *body;
     b2Fixture *fixture;
 
