@@ -71,27 +71,18 @@ Component::CapsuleCollider::CapsuleCollider(float _height, float _radius){
 
 
 /*
-  EdgeCollider Component
+  PolygonCollider Component
 */
-Component::EdgeCollider::EdgeCollider(vector<Vector2> _point_list){
-  collider_shape = ColliderShape::EDGE;
+Component::PolygonCollider::PolygonCollider(vector<Vector2> _point_list){
+  collider_shape = ColliderShape::POLYGON;
   point_list = _point_list;
   polygon_collision_shape = new b2PolygonShape();
-
-  // b2Vec2 vertice[point_list.size()];
-  // for(int i = 0; i < point_list.size(); i++){
-  //   vertice[i].Set(point_list.at(i).x, point_list.at(i).y);
-  // }
-
-  // polygon_collision_shape->Set(vertice, point_list.size());
-
 }
 
-void Component::EdgeCollider::_OnAttach(){
+void Component::PolygonCollider::_OnAttach(){
   b2Vec2 vertice[point_list.size()];
   for(int i = 0; i < point_list.size(); i++){
-    vertice[i].Set(point_list.at(i).x - node->GetPosition().x,
-		   point_list.at(i).y - node->GetPosition().y);
+    vertice[i].Set(point_list.at(i).x, point_list.at(i).y);
   }
 
   polygon_collision_shape->Set(vertice, point_list.size());
@@ -204,8 +195,6 @@ bool Component::RigidBody::_SetCollider(int state){
       height = collider->GetHeight();
       radius = collider->GetRadius();
 
-      // b2FixtureDef circle_fixture_def;
-
       fixture_def.shape = collider->box_collision_shape;
 
       fixture_def.density = 1.0f;
@@ -253,17 +242,19 @@ bool Component::RigidBody::_SetCollider(int state){
 
     break;
 
-  case 3: // edge collider
+  case 3: // polygon collider
 
-    Node::component_map_it<edge_collider> =
-      Node::component_map<edge_collider>.find(node);
+    Node::component_map_it<polygon_collider> =
+      Node::component_map<polygon_collider>.find(node);
 
-    if(Node::component_map_it<edge_collider> !=
-       Node::component_map<edge_collider>.end()){
-      edge_collider collider = Node::component_map_it<edge_collider>->second;
+    if(Node::component_map_it<polygon_collider> !=
+       Node::component_map<polygon_collider>.end()){
+      polygon_collider collider = Node::component_map_it<polygon_collider>->second;
+
       fixture_def.shape = collider->polygon_collision_shape;
       collider_shape = collider->GetColliderShape();
       delete collider;
+
       return true;
     }
     else{
@@ -328,9 +319,11 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	break;
 
       case 1: // edge shape
+	cout<<"there is a edge collider..."<<endl;
 	break;
 
       case 2: // rectangle shape
+	cout<<"there is a edge collider... in box collider..."<<endl;
 	DrawRectangle(draw_position.x,
 		      draw_position.y,
 		      node->GetComponent<Component::rigid_body>()->GetSize().x,

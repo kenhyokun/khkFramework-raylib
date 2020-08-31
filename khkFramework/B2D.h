@@ -47,7 +47,7 @@ enum ColliderShape{
   BOX,
   CIRCLE,
   CAPSULE,
-  EDGE
+  POLYGON
 };
 
 namespace Component{
@@ -57,7 +57,7 @@ namespace Component{
     - BoxCollider
     - CircleCollider
     - CapsuleCollider
-    - EdgeCollider
+    - PolygonCollider
     - RigidBody
   */
 
@@ -105,16 +105,16 @@ namespace Component{
 
 
   /*
-    EdgeCollider Component
+    PolygonCollider Component
   */
-  typedef struct EdgeCollider : Box2DBaseComponent{
+  typedef struct PolygonCollider : Box2DBaseComponent{
     b2PolygonShape *polygon_collision_shape;
     vector<Vector2> point_list;
-    EdgeCollider(vector<Vector2> _point_list);
+    PolygonCollider(vector<Vector2> _point_list);
 
   protected:
     void _OnAttach() override;
-  } *edge_collider;
+  } *polygon_collider;
 
 
   /*
