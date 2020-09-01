@@ -88,8 +88,9 @@ void Component::PolygonCollider::_OnAttach(){
 
     vertice[i].Set(rel_position.x, rel_position.y);
 
-    // point_list.at(i) = rel_position;
+    point_list.at(i) = rel_position;
   }
+
   polygon_collision_shape->Set(vertice, point_list.size());
 
 }
@@ -338,8 +339,8 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 							 Vector2{fixture_position.x, fixture_position.y}
 							 );
 
-	    DrawRectangle(fixture_position.x + vertice_position.x,
-			  fixture_position.y + vertice_position.y,
+	    DrawRectangle(vertice_position.x,
+			  vertice_position.y,
 			  10,
 			  10,
 			  RED,
