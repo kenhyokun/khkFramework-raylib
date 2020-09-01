@@ -30,7 +30,7 @@ obj :=\
 	khkFramework/obj/*.o
 
 all:
-	g++ -o main main.cpp $(include) $(lib) 
+	g++ -o main main.cpp $(include) $(lib)
 
 debug:
 	g++ -g -o main main.cpp $(include) $(lib) 

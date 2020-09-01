@@ -48,7 +48,7 @@ static int node_count = 1; // for auto node naming
 
 class Node{
   Transform_node transform;
-  Node *parent = NULL;
+  Node *parent = nullptr;
   vector<Node*> *child = new vector<Node*>();
 
   template<typename T>
@@ -68,7 +68,6 @@ public:
   string name = unamed_node_name;
   string tag = untagged_node_tag;
   bool is_fixed_transform_rotation = false;
-  // Node *root = NULL;
 
   template<typename T>
     static typename map<Node*, T>::iterator component_map_it;

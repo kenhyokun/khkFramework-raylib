@@ -57,7 +57,7 @@ namespace Component{
   */
 
   struct BaseComponent{
-    Node* node = NULL; // component owner
+    Node* node = nullptr; // component owner
 
     inline void Attach(){
       _OnAttach();
@@ -71,7 +71,7 @@ namespace Component{
     Grid* GetGrid();
 
   protected:
-    Grid *grid = NULL;
+    Grid *grid = nullptr;
     int texture_column = 0;
     int texture_row = 0;
 
@@ -96,7 +96,7 @@ namespace Component{
     SpriteRenderer Component
   */
   typedef struct SpriteRenderer : BaseComponent{
-    Texture2D *texture = NULL;
+    Texture2D *texture = nullptr;
 
     SpriteRenderer(Texture2D *_texture);
     void Draw(int state = 0); // draw texture with center pivot point

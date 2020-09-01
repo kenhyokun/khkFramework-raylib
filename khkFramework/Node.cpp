@@ -52,13 +52,13 @@ void Node::SetParent(Node *node){
 void Node::AddChild(Node *node){
   if(node->GetParent() != this){
 
-    if(node->GetParent() != NULL){
+    if(node->GetParent() != nullptr){
       vector<Node*>::iterator it;
       it = std::find(node->GetParent()->GetChild()->begin(), node->GetParent()->GetChild()->end(), node);
 
       node->GetParent()->_RemoveChild(it);
 
-    } // != NULL
+    } // != nullptr
 
     node->_SetParent(this);
     child->push_back(node);
@@ -125,7 +125,7 @@ void Node::SetRotation(float angle, Vector2 pivot){
   SetRotation(angle);
 }
 
-void Node::ClearParent(){parent = NULL;}
+void Node::ClearParent(){parent = nullptr;}
 void Node::SetTransform(Transform_node _transform){transform = _transform;}
 float Node::GetUpDirection(){return transform.up;}
 float Node::GetRightDirection(){return transform.right;}
