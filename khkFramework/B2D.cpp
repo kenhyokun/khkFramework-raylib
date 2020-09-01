@@ -102,31 +102,7 @@ void Component::RigidBody::_OnAttach(){
     cout<<"you must add collider component at "<<node->name<<" first!"<<endl;
   }
   else{
-
-    // if(collider_shape != ColliderShape::CAPSULE){
-
-    //   fixture_def.density = 1.0f;
-    //   fixture_def.friction = 0.3f;
-    //   fixture = body->CreateFixture(&fixture_def);
-    //   b2Vec2 *_rel_position = new b2Vec2{0, 0};
-    //   fixture->SetUserData(_rel_position);
-
-    // } // collider_shape != capsule
-
-
-    // if(collider_shape == ColliderShape::BOX ||
-    //    collider_shape == ColliderShape::CIRCLE){
-    //   fixture_def.density = 1.0f;
-    //   fixture_def.friction = 0.3f;
-    //   fixture = body->CreateFixture(&fixture_def);
-    //   b2Vec2 *_rel_position = new b2Vec2{0, 0};
-    //   fixture->SetUserData(_rel_position);
-    // }
-    // else if(collider_shape == ColliderShape::EDGE){}
-    // else if(collider_shape == ColliderShape::CAPSULE){}
-
     body->SetUserData(node);
-
   }
 
 }
@@ -142,13 +118,12 @@ bool Component::RigidBody::_SetCollider(int state){
 
     if(Node::component_map_it<box_collider> !=
        Node::component_map<box_collider>.end()){
+
       box_collider collider = Node::component_map_it<box_collider>->second;
-
-      cout<<collider->box_collision_shape->m_count<<endl;
-
       fixture = body->CreateFixture(collider->box_collision_shape, 1.0f);
       b2Vec2 *_rel_position = new b2Vec2{0, 0};
       fixture->SetUserData(_rel_position);
+      fixture->SetUserData(new int32{collider->box_collision_shape->m_count});
 
       collider_shape = collider->GetColliderShape();
       width = collider->GetWidth();
@@ -170,6 +145,7 @@ bool Component::RigidBody::_SetCollider(int state){
 
     if(Node::component_map_it<circle_collider> !=
        Node::component_map<circle_collider>.end()){
+
       circle_collider collider = Node::component_map_it<circle_collider>->second;
       fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
       b2Vec2 *_rel_position = new b2Vec2{0, 0};
@@ -212,6 +188,7 @@ bool Component::RigidBody::_SetCollider(int state){
       // mid box
       fixture = body->CreateFixture(collider->box_collision_shape, 1.0f);
       fixture->SetUserData(new b2Vec2{0, 0});
+      fixture->SetUserData(new int32{collider->box_collision_shape->m_count});
 
       // bottom circle
       collider->circle_collision_shape->m_p = b2Vec2{0, height / 2};
@@ -235,14 +212,12 @@ bool Component::RigidBody::_SetCollider(int state){
 
     if(Node::component_map_it<polygon_collider> !=
        Node::component_map<polygon_collider>.end()){
+
       polygon_collider collider = Node::component_map_it<polygon_collider>->second;
-
-      cout<<collider->polygon_collision_shape->m_count<<endl;
-
       collider_shape = collider->GetColliderShape();
-      fixture = body->CreateFixture(collider->polygon_collision_shape, 1.0f);
       b2Vec2 *_rel_position = new b2Vec2{0, 0};
       fixture->SetUserData(_rel_position);
+      fixture->SetUserData(new int32{collider->polygon_collision_shape->m_count});
 
       delete collider;
 
@@ -295,17 +270,18 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 
       b2Vec2 *rel_position = static_cast<b2Vec2*>(fixture->GetUserData());
 
-      Vector2 draw_position = TransformRotation(body->GetAngle(),
-						Vector2{body->GetPosition().x + rel_position->x, body->GetPosition().y + rel_position->y},
-						Vector2{body->GetPosition().x, body->GetPosition().y}
-						);
+      Vector2 fixture_position = TransformRotation(body->GetAngle(),
+						   Vector2{body->GetPosition().x + rel_position->x, body->GetPosition().y + rel_position->y},
+						   Vector2{body->GetPosition().x, body->GetPosition().y}
+						   );
 
+      int32 * v_count = nullptr; // box or polygon shape vertice count
 
       switch(fixture->GetType()){
       case 0: // circle shape
 
-	DrawCircle(draw_position.x,
-		   draw_position.y,
+	DrawCircle(fixture_position.x,
+		   fixture_position.y,
 		   fixture->GetShape()->m_radius,
 		   curr_color);     
 	break;
@@ -313,14 +289,21 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
       case 1: // edge shape
 	break;
 
-      case 2: // rectangle shape
+      case 2: // box / polygon shape
+	v_count = static_cast<int32*>(fixture->GetUserData());
 
-	DrawRectangle(draw_position.x,
-		      draw_position.y,
-		      node->GetComponent<Component::rigid_body>()->GetSize().x,
-		      node->GetComponent<Component::rigid_body>()->GetSize().y,
-		      curr_color,
-		      Rad2Deg(body->GetAngle()));
+	if(*v_count == 4){ // draw box shape
+	  cout<<*v_count<<endl;
+	  DrawRectangle(fixture_position.x,
+			fixture_position.y,
+			node->GetComponent<Component::rigid_body>()->GetSize().x,
+			node->GetComponent<Component::rigid_body>()->GetSize().y,
+			curr_color,
+			Rad2Deg(body->GetAngle()));
+	}
+	else{ // draw polygon shape
+	}
+
 	break;
 
       case 4:

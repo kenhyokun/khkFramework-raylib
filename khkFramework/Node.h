@@ -30,7 +30,6 @@
 #include<vector>
 #include<map>
 #include<algorithm>
-#include<cmath>
 #include<raylib.h>
 #include<CMath.h>
 

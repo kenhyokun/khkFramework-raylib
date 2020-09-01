@@ -25,8 +25,9 @@
 
 #ifndef CMATH_H
 #define CMATH_H
+// my custom math library 
 
-// Custom Math...
+#include<cmath>
 
 #define pi 3.14159
 

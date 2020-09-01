@@ -63,12 +63,6 @@ namespace Component{
     - RigidBody
   */
 
-  struct FixtureData{
-    b2Vec2 rel_position = {0, 0};
-    int32 vertice_count = 0;
-    b2Vec2 *vertice = nullptr; // in body relative position
-  };
-
   struct Box2DBaseComponent : BaseComponent{
 
     Vector2 GetSize();
