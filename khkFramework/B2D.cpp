@@ -239,7 +239,6 @@ bool Component::RigidBody::_SetCollider(int state){
       _vertice_data->v_count = collider->polygon_collision_shape->m_count;
       _vertice_data->point_list = collider->point_list;
       fixture->SetUserData(_vertice_data);
-
       delete collider;
 
       return true;
@@ -325,6 +324,23 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	}
 	else{ // draw polygon shape
 
+	  // vertice position
+	  for(int i = 0; i < v_count; i++){
+
+	    Vector2 vertice_position = TransformRotation(body->GetAngle(),
+							 Vector2{fixture_position.x + data->point_list.at(i).x, fixture_position.y + data->point_list.at(i).y},
+							 Vector2{fixture_position.x, fixture_position.y}
+							 );
+	    
+	    DrawRectangle(vertice_position.x,
+			  vertice_position.y,
+			  10,
+			  10,
+			  RED,
+			  Rad2Deg(body->GetAngle()));
+	  } // for
+
+	  // fixture position
 	  DrawRectangle(fixture_position.x,
 			fixture_position.y,
 			10,
@@ -332,21 +348,8 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 			BLUE,
 			Rad2Deg(body->GetAngle()));
 
-	  for(int i = 0; i < v_count; i++){
+	} // else
 
-	    Vector2 vertice_position = TransformRotation(body->GetAngle(),
-							 Vector2{fixture_position.x + data->point_list.at(i).x, fixture_position.y + data->point_list.at(i).y},
-							 Vector2{fixture_position.x, fixture_position.y}
-							 );
-
-	    DrawRectangle(vertice_position.x,
-			  vertice_position.y,
-			  10,
-			  10,
-			  RED,
-			  Rad2Deg(body->GetAngle()));
-	  }
-	}
 	break;
       case 4:
 	break;
