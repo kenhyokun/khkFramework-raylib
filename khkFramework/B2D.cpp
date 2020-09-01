@@ -82,9 +82,16 @@ Component::PolygonCollider::PolygonCollider(vector<Vector2> _point_list){
 void Component::PolygonCollider::_OnAttach(){
   b2Vec2 vertice[point_list.size()];
   for(int i = 0; i < point_list.size(); i++){
-    vertice[i].Set(point_list.at(i).x, point_list.at(i).y);
+
+    Vector2 rel_position = Vector2{point_list.at(i).x - node->GetPosition().x,
+				   point_list.at(i).y - node->GetPosition().y };
+
+    vertice[i].Set(rel_position.x, rel_position.y);
+
+    // point_list.at(i) = rel_position;
   }
   polygon_collision_shape->Set(vertice, point_list.size());
+
 }
 
 
@@ -316,7 +323,16 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 			Rad2Deg(body->GetAngle()));
 	}
 	else{ // draw polygon shape
+
+	  DrawRectangle(fixture_position.x,
+			fixture_position.y,
+			10,
+			10,
+			BLUE,
+			Rad2Deg(body->GetAngle()));
+
 	  for(int i = 0; i < v_count; i++){
+
 	    Vector2 vertice_position = TransformRotation(body->GetAngle(),
 							 Vector2{fixture_position.x + data->point_list.at(i).x, fixture_position.y + data->point_list.at(i).y},
 							 Vector2{fixture_position.x, fixture_position.y}

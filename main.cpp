@@ -89,7 +89,8 @@ struct App : BaseApp, ContactListener{
     node9->SetPosition(Vector2{-50.0f, 180.0f});
     node10->SetPosition(Vector2{-120.0f, -20.0f});
     node11->SetPosition(Vector2{-120.0f, -90.0f});
-    node12->SetPosition(Vector2{-120.0f, -90.0f});
+    // node12->SetPosition(Vector2{-120.0f, -90.0f});
+    node12->SetPosition(node9->GetPosition());
 
     node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node8->AddComponent<Component::rigid_body>(new RigidBody());
