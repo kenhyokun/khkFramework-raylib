@@ -32,6 +32,10 @@
 
 using namespace tinyxml2;
 
+inline void log(string log_str){
+  cout<<log_str<<endl;
+}
+
 inline void DrawRectangle(float x, float y, int width, int height, Color color, float rotation = 0.0f){
   DrawRectanglePro(Rectangle{x, y, (float)width, (float)height},
 		   Vector2{width / 2.0f, height / 2.0f},

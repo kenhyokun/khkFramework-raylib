@@ -107,13 +107,14 @@ struct App : BaseApp, ContactListener{
     node11->AddComponent<Component::rigid_body>(new RigidBody());
     // node11->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    // vector<Vector2> vertice{
-    //   Vector2{node9->GetPosition().x , node9->GetPosition().y},
-    // 	Vector2{100, 100},
+    vector<Vector2> vertice{
+      Vector2{node9->GetPosition().x , node9->GetPosition().y},
+    	Vector2{100, 100},
+    	Vector2{50, 100},
 	
-    // };
-    // node12->AddComponent<Component::polygon_collider>(new PolygonCollider(vertice));
-    // node12->AddComponent<Component::rigid_body>(new RigidBody());
+    };
+    node12->AddComponent<Component::polygon_collider>(new PolygonCollider(vertice));
+    node12->AddComponent<Component::rigid_body>(new RigidBody());
     // node12->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     node5->SetPosition(Vector2{

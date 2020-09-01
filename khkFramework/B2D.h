@@ -63,6 +63,11 @@ namespace Component{
     - RigidBody
   */
 
+  typedef struct VerticeData{
+    vector<Vector2> point_list;
+    int32 v_count  =  0;
+  } *vertice_data;
+
   struct Box2DBaseComponent : BaseComponent{
 
     Vector2 GetSize();
