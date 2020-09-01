@@ -121,12 +121,13 @@ bool Component::RigidBody::_SetCollider(int state){
 
       box_collider collider = Node::component_map_it<box_collider>->second;
       fixture = body->CreateFixture(collider->box_collision_shape, 1.0f);
+
       b2Vec2 *_rel_position = new b2Vec2{0, 0};
       fixture->SetUserData(_rel_position);
 
-      vertice_data data = new VerticeData();
-      data->v_count = collider->box_collision_shape->m_count;
-      fixture->SetUserData(data);
+      vertice_data _vertice_data = new VerticeData();
+      _vertice_data->v_count = collider->box_collision_shape->m_count;
+      fixture->SetUserData(_vertice_data);
 
       collider_shape = collider->GetColliderShape();
       width = collider->GetWidth();
@@ -151,6 +152,7 @@ bool Component::RigidBody::_SetCollider(int state){
 
       circle_collider collider = Node::component_map_it<circle_collider>->second;
       fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
+
       b2Vec2 *_rel_position = new b2Vec2{0, 0};
       fixture->SetUserData(_rel_position);
 
@@ -191,10 +193,9 @@ bool Component::RigidBody::_SetCollider(int state){
       // mid box
       fixture = body->CreateFixture(collider->box_collision_shape, 1.0f);
       fixture->SetUserData(new b2Vec2{0, 0});
-
-      vertice_data data = new VerticeData();
-      data->v_count = collider->box_collision_shape->m_count;
-      fixture->SetUserData(data);
+      vertice_data _vertice_data = new VerticeData();
+      _vertice_data->v_count = collider->box_collision_shape->m_count;
+      fixture->SetUserData(_vertice_data);
 
       // bottom circle
       collider->circle_collision_shape->m_p = b2Vec2{0, height / 2};
@@ -222,13 +223,14 @@ bool Component::RigidBody::_SetCollider(int state){
       polygon_collider collider = Node::component_map_it<polygon_collider>->second;
       collider_shape = collider->GetColliderShape();
       fixture = body->CreateFixture(collider->polygon_collision_shape, 1.0f);
+
       b2Vec2 *_rel_position = new b2Vec2{0, 0};
       fixture->SetUserData(_rel_position);
 
-      vertice_data data = new VerticeData();
-      data->v_count = collider->polygon_collision_shape->m_count;
-      data->point_list = collider->point_list;
-      fixture->SetUserData(data);
+      vertice_data _vertice_data = new VerticeData();
+      _vertice_data->v_count = collider->polygon_collision_shape->m_count;
+      _vertice_data->point_list = collider->point_list;
+      fixture->SetUserData(_vertice_data);
 
       delete collider;
 
@@ -286,9 +288,6 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 						   Vector2{body->GetPosition().x, body->GetPosition().y}
 						   );
 
-      // int32 * v_count = nullptr; // box or polygon shape vertice count
-      // vector<Vector2> *point_list = nullptr; // polygon or edge vertice point
-
       int32 v_count = 0;
       Component::vertice_data data = nullptr;
 
@@ -308,8 +307,6 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	data = static_cast<Component::vertice_data>(fixture->GetUserData());
 	v_count = data->v_count;
 
-	log(to_string(v_count));
-
 	if(v_count == 4){ // draw box shape
 	  DrawRectangle(fixture_position.x,
 			fixture_position.y,
@@ -320,10 +317,13 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	}
 	else{ // draw polygon shape
 	  for(int i = 0; i < v_count; i++){
-	    cout<<data->point_list.at(i).x<<endl;
-	    cout<<data->point_list.at(i).y<<endl;
-	    DrawRectangle(fixture_position.x + (i * 10),
-			  fixture_position.y + (i * 10),
+	    Vector2 vertice_position = TransformRotation(body->GetAngle(),
+							 Vector2{fixture_position.x + data->point_list.at(i).x, fixture_position.y + data->point_list.at(i).y},
+							 Vector2{fixture_position.x, fixture_position.y}
+							 );
+
+	    DrawRectangle(fixture_position.x + vertice_position.x,
+			  fixture_position.y + vertice_position.y,
 			  10,
 			  10,
 			  RED,

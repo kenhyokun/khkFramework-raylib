@@ -63,7 +63,7 @@ namespace Component{
     - RigidBody
   */
 
-  typedef struct VerticeData{
+  typedef struct VerticeData{ // fixture vertice data
     vector<Vector2> point_list;
     int32 v_count  =  0;
   } *vertice_data;
