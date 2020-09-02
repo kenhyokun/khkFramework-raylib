@@ -232,7 +232,6 @@ bool Component::RigidBody::_SetCollider(int state){
 
       fixture_data _fixture_data = new FixtureData();
       _fixture_data->v_count = collider->polygon_collision_shape->m_count;
-      // _fixture_data->vertice_list = collider->vertice_list;
       _fixture_data->vertice = collider->vertice;
       fixture->SetUserData(_fixture_data);
 
@@ -313,7 +312,6 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 
       Component::fixture_data data =  static_cast<Component::fixture_data>(fixture->GetUserData());
       b2Vec2 *rel_position = &data->rel_position;
-      int32 v_count = 0;
 
       Vector2 fixture_position = TransformRotation(body->GetAngle(),
 						   Vector2{body->GetPosition().x + rel_position->x, body->GetPosition().y + rel_position->y},
@@ -334,9 +332,8 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	break;
 
       case 2: // box & polygon shape
-	v_count = data->v_count;
 
-	if(v_count == 4){ // draw box shape
+	if(data->v_count == 4){ // draw box shape
 	  DrawRectangle(fixture_position.x,
 			fixture_position.y,
 			data->size.x,
@@ -347,7 +344,7 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	else{ // draw polygon shape
 
 	  // vertice position
-	  for(int i = 0; i < v_count; i++){
+	  for(int i = 0; i < data->v_count; i++){
 
 	    Vector2 vertice_position = TransformRotation(body->GetAngle(),
 							 Vector2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
@@ -376,6 +373,21 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
       case 3: // chain shape
 	// log("heloo...");
 	// cout<<data->v_count<<endl;
+
+	for(int i = 0; i < data->v_count; i++){
+
+	  Vector2 vertice_position = TransformRotation(body->GetAngle(),
+						       Vector2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
+						       Vector2{fixture_position.x, fixture_position.y}
+						       );
+	    
+	  DrawRectangle(vertice_position.x,
+			vertice_position.y,
+			10,
+			10,
+			color2,
+			Rad2Deg(body->GetAngle()));
+	} // for
 	break;
       case 4:
 	break;
