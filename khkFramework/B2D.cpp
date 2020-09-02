@@ -31,7 +31,9 @@ float Component::ShapeColliderBaseComponent::GetRadius(){return radius;}
 float Component::ShapeColliderBaseComponent::GetWidth(){return GetSize().x;}
 float Component::ShapeColliderBaseComponent::GetHeight(){return GetSize().y;}
 int Component::VerticeColliderBaseComponent::GetVerticeCount(){return v_count;}
-void Component::VerticeColliderBaseComponent::_VerticeToRelativePosition(){
+
+void Component::VerticeColliderBaseComponent::_OnAttach(){
+  vertice = new b2Vec2[vertice_list.size()];
   for(int i = 0; i < vertice_list.size(); i++){
 
     Vector2 rel_position = Vector2{vertice_list.at(i).x - node->GetPosition().x,
@@ -40,6 +42,7 @@ void Component::VerticeColliderBaseComponent::_VerticeToRelativePosition(){
     vertice[i].Set(rel_position.x, rel_position.y);
     vertice_list.at(i) = rel_position;
   }
+  vertice_list.clear();
 }
 
 
@@ -92,9 +95,8 @@ Component::PolygonCollider::PolygonCollider(vector<Vector2> _vertice_list){
 }
 
 void Component::PolygonCollider::_OnAttach(){
-  vertice = new b2Vec2[vertice_list.size()];
-  _VerticeToRelativePosition();
-  polygon_collision_shape->Set(vertice, vertice_list.size());
+  Component::VerticeColliderBaseComponent::_OnAttach();
+  polygon_collision_shape->Set(vertice, v_count);
 }
 
 
@@ -104,6 +106,13 @@ void Component::PolygonCollider::_OnAttach(){
 Component::EdgeCollider::EdgeCollider(vector<Vector2> _vertice_list){
   collider_shape = ColliderShape::EDGE; 
   vertice_list = _vertice_list;
+  v_count = _vertice_list.size();
+  chain_collision_shape = new b2ChainShape();
+}
+
+void Component::EdgeCollider::_OnAttach(){
+  Component::VerticeColliderBaseComponent::_OnAttach();
+  chain_collision_shape->CreateChain(vertice, v_count);
 }
 
 
@@ -223,7 +232,37 @@ bool Component::RigidBody::_SetCollider(int state){
 
       fixture_data _fixture_data = new FixtureData();
       _fixture_data->v_count = collider->polygon_collision_shape->m_count;
-      _fixture_data->vertice_list = collider->vertice_list;
+      // _fixture_data->vertice_list = collider->vertice_list;
+      _fixture_data->vertice = collider->vertice;
+      fixture->SetUserData(_fixture_data);
+
+      delete collider;
+      return true;
+    }
+    else{
+      _SetCollider(4);
+    }
+    break;
+
+  case 4: // edge collider
+
+    Node::component_map_it<edge_collider> =
+      Node::component_map<edge_collider>.find(node);
+
+    if(Node::component_map_it<edge_collider> !=
+       Node::component_map<edge_collider>.end()){
+
+      edge_collider collider = Node::component_map_it<edge_collider>->second;
+      fixture = body->CreateFixture(collider->chain_collision_shape, 1.0f);
+
+      for(int i = 0; i < collider->chain_collision_shape->m_count; i ++){
+	cout<<collider->chain_collision_shape->m_vertices[i].x<<", "<<
+	  collider->chain_collision_shape->m_vertices[i].y<<endl;
+      }
+      
+      fixture_data _fixture_data = new FixtureData();
+      _fixture_data->v_count = collider->chain_collision_shape->m_count;
+      _fixture_data->vertice = collider->vertice;
       fixture->SetUserData(_fixture_data);
 
       delete collider;
@@ -298,7 +337,6 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	v_count = data->v_count;
 
 	if(v_count == 4){ // draw box shape
-	  cout<<data->size.x<<", "<<data->size.y<<endl;
 	  DrawRectangle(fixture_position.x,
 			fixture_position.y,
 			data->size.x,
@@ -312,7 +350,7 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	  for(int i = 0; i < v_count; i++){
 
 	    Vector2 vertice_position = TransformRotation(body->GetAngle(),
-							 Vector2{fixture_position.x + data->vertice_list.at(i).x, fixture_position.y + data->vertice_list.at(i).y},
+							 Vector2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
 							 Vector2{fixture_position.x, fixture_position.y}
 							 );
 	    
@@ -334,6 +372,10 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 
 	} // else
 
+	break;
+      case 3: // chain shape
+	// log("heloo...");
+	// cout<<data->v_count<<endl;
 	break;
       case 4:
 	break;

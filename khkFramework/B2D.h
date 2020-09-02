@@ -68,7 +68,7 @@ namespace Component{
   typedef struct FixtureData{
     b2Vec2 rel_position = {0, 0};
     Vector2 size = {0, 0};
-    vector<Vector2> vertice_list;
+    b2Vec2 *vertice;
     int32 v_count = 0;
   } *fixture_data;
 
@@ -92,10 +92,10 @@ namespace Component{
   struct VerticeColliderBaseComponent : ColliderBaseComponent{
     int GetVerticeCount();
     vector<Vector2> vertice_list;
-  protected:
     b2Vec2 *vertice;
-    int v_count;
-    void _VerticeToRelativePosition();
+  protected:
+    int32 v_count;
+    void _OnAttach() override;
   };
 
 
@@ -142,8 +142,10 @@ namespace Component{
     EdgeCollider Component
   */
   typedef struct EdgeCollider : VerticeColliderBaseComponent{
-    b2EdgeShape *edge_collision_shape;
+    b2ChainShape *chain_collision_shape;
     EdgeCollider(vector<Vector2> _vertice_list);
+  protected:
+    void _OnAttach() override;
   } *edge_collider;
 
 

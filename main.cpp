@@ -123,12 +123,14 @@ struct App : BaseApp, ContactListener{
 
     vector<Vector2> edge_vertice{
       Vector2{node7->GetPosition().x , node7->GetPosition().y},
-    	Vector2{100, 100}
+    	Vector2{100, 100},
+    	Vector2{150, 100},
+    	Vector2{250, 100},
 	
     };
-    // node13->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
-    // node13->AddComponent<Component::rigid_body>(new RigidBody());
-    // node12->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+    node13->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
+    node13->AddComponent<Component::rigid_body>(new RigidBody());
+    // node13->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     node5->SetPosition(Vector2{
 	(float)game_screen_width * 0.5f + 250,
