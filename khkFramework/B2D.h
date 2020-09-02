@@ -63,12 +63,14 @@ namespace Component{
     - RigidBody
   */
 
-  typedef struct VerticeData{ // fixture vertice data
+  typedef struct FixtureData{
+    b2Vec2 rel_position = {0, 0};
+    Vector2 size = {0, 0};
     vector<Vector2> point_list;
     int32 v_count  =  0;
-  } *vertice_data;
+  } *fixture_data;
 
-  struct Box2DBaseComponent : BaseComponent{
+  struct ColliderBaseComponent : BaseComponent{
 
     Vector2 GetSize();
     float GetWidth();
@@ -86,7 +88,7 @@ namespace Component{
   /*
     BoxCollider Component
   */
-  typedef struct BoxCollider : Box2DBaseComponent{
+  typedef struct BoxCollider : ColliderBaseComponent{
     b2PolygonShape *box_collision_shape;
     BoxCollider(float _width, float _height);
   } *box_collider;
@@ -95,7 +97,7 @@ namespace Component{
   /*
     CircleCollider Component
   */
-  typedef struct CircleCollider : Box2DBaseComponent{
+  typedef struct CircleCollider : ColliderBaseComponent{
     b2CircleShape *circle_collision_shape;
     CircleCollider(float _radius);
   } *circle_collider;
@@ -104,7 +106,7 @@ namespace Component{
   /*
     CapsuleCollider Component
   */
-  typedef struct CapsuleCollider : Box2DBaseComponent{
+  typedef struct CapsuleCollider : ColliderBaseComponent{
     b2CircleShape *circle_collision_shape;
     b2PolygonShape *box_collision_shape;
     CapsuleCollider(float height, float radius);
@@ -114,7 +116,7 @@ namespace Component{
   /*
     PolygonCollider Component
   */
-  typedef struct PolygonCollider : Box2DBaseComponent{
+  typedef struct PolygonCollider : ColliderBaseComponent{
     b2PolygonShape *polygon_collision_shape;
     vector<Vector2> point_list;
     PolygonCollider(vector<Vector2> _point_list);
@@ -127,7 +129,7 @@ namespace Component{
   /*
     EdgeCollider Component
   */
-  typedef struct EdgeCollider : Box2DBaseComponent{
+  typedef struct EdgeCollider : ColliderBaseComponent{
     b2EdgeShape *edge_collision_shape;
     EdgeCollider(Vector2 start_point, Vector2 end_point);
   } *edge_collider;
@@ -136,7 +138,7 @@ namespace Component{
   /*
     RigidBody Component
   */
-  typedef struct RigidBody : Box2DBaseComponent{
+  typedef struct RigidBody : BaseComponent{
     static const b2BodyType STATIC = b2_staticBody;
     static const b2BodyType DYNAMIC = b2_dynamicBody;
     static const b2BodyType KINEMATIC = b2_kinematicBody;
