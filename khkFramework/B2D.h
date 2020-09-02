@@ -104,7 +104,7 @@ namespace Component{
     BoxCollider Component
   */
   typedef struct BoxCollider : ShapeColliderBaseComponent{
-    b2PolygonShape *box_collision_shape = nullptr;
+    b2PolygonShape *box_shape = nullptr;
     BoxCollider(float _width, float _height);
   } *box_collider;
 
@@ -113,7 +113,7 @@ namespace Component{
     CircleCollider Component
   */
   typedef struct CircleCollider : ShapeColliderBaseComponent{
-    b2CircleShape *circle_collision_shape = nullptr;
+    b2CircleShape *circle_shape = nullptr;
     CircleCollider(float _radius);
   } *circle_collider;
 
@@ -122,8 +122,8 @@ namespace Component{
     CapsuleCollider Component
   */
   typedef struct CapsuleCollider : ShapeColliderBaseComponent{
-    b2CircleShape *circle_collision_shape = nullptr;
-    b2PolygonShape *box_collision_shape = nullptr;
+    b2CircleShape *circle_shape = nullptr;
+    b2PolygonShape *box_shape = nullptr;
     CapsuleCollider(float height, float radius);
   } *capsule_collider;
 
@@ -132,7 +132,7 @@ namespace Component{
     PolygonCollider Component
   */
   typedef struct PolygonCollider : VerticeColliderBaseComponent{
-    b2PolygonShape *polygon_collision_shape = nullptr;
+    b2PolygonShape *polygon_shape = nullptr;
     PolygonCollider(vector<Vector2> _vertice_list);
   protected:
     void _OnAttach() override;
@@ -143,8 +143,8 @@ namespace Component{
     EdgeCollider Component
   */
   typedef struct EdgeCollider : VerticeColliderBaseComponent{
-    b2ChainShape *chain_collision_shape = nullptr;
-    b2EdgeShape *edge_collision_shape = nullptr;
+    b2ChainShape *chain_shape = nullptr;
+    b2EdgeShape *edge_shape = nullptr;
     EdgeCollider(vector<Vector2> _vertice_list);
   protected:
     void _OnAttach() override;

@@ -53,8 +53,8 @@ Component::BoxCollider::BoxCollider(float _width, float _height){
   collider_shape = ColliderShape::BOX;
   width = _width;
   height = _height;
-  box_collision_shape = new b2PolygonShape();
-  box_collision_shape->SetAsBox(width * 0.5f, height * 0.5f);
+  box_shape = new b2PolygonShape();
+  box_shape->SetAsBox(width * 0.5f, height * 0.5f);
 }
 
 
@@ -64,8 +64,8 @@ Component::BoxCollider::BoxCollider(float _width, float _height){
 Component::CircleCollider::CircleCollider(float _radius){
   collider_shape = ColliderShape::CIRCLE;
   radius = _radius;
-  circle_collision_shape = new b2CircleShape();
-  circle_collision_shape->m_radius = radius;
+  circle_shape = new b2CircleShape();
+  circle_shape->m_radius = radius;
 }
 
 
@@ -77,10 +77,10 @@ Component::CapsuleCollider::CapsuleCollider(float _height, float _radius){
   width = _radius * 2; // debug draw width
   height = _height; if(height <= 0) height = 1;
   radius = _radius;
-  circle_collision_shape = new b2CircleShape();
-  circle_collision_shape->m_radius = radius;
-  box_collision_shape = new b2PolygonShape();
-  box_collision_shape->SetAsBox(radius, height * 0.5f); // use radius as width for box fixture width
+  circle_shape = new b2CircleShape();
+  circle_shape->m_radius = radius;
+  box_shape = new b2PolygonShape();
+  box_shape->SetAsBox(radius, height * 0.5f); // use radius as width for box fixture width
 }
 
 
@@ -91,12 +91,12 @@ Component::PolygonCollider::PolygonCollider(vector<Vector2> _vertice_list){
   collider_shape = ColliderShape::POLYGON;
   vertice_list = _vertice_list;
   v_count = vertice_list.size();
-  polygon_collision_shape = new b2PolygonShape();
+  polygon_shape = new b2PolygonShape();
 }
 
 void Component::PolygonCollider::_OnAttach(){
   Component::VerticeColliderBaseComponent::_OnAttach();
-  polygon_collision_shape->Set(vertice, v_count);
+  polygon_shape->Set(vertice, v_count);
 }
 
 
@@ -107,12 +107,18 @@ Component::EdgeCollider::EdgeCollider(vector<Vector2> _vertice_list){
   collider_shape = ColliderShape::EDGE; 
   vertice_list = _vertice_list;
   v_count = _vertice_list.size();
-  chain_collision_shape = new b2ChainShape();
+  chain_shape = new b2ChainShape();
 }
 
 void Component::EdgeCollider::_OnAttach(){
   Component::VerticeColliderBaseComponent::_OnAttach();
-  chain_collision_shape->CreateChain(vertice, v_count);
+
+  if(v_count > 2){ // if v_count > 2 edge collider will create chain shape
+    chain_shape->CreateChain(vertice, v_count);
+  }
+  else{ // if v_count == 2 edge collider will create edge shape
+
+  }
 }
 
 
@@ -145,10 +151,10 @@ bool Component::RigidBody::_SetCollider(int state){
        Node::component_map<box_collider>.end()){
 
       box_collider collider = Node::component_map_it<box_collider>->second;
-      fixture = body->CreateFixture(collider->box_collision_shape, 1.0f);
+      fixture = body->CreateFixture(collider->box_shape, 1.0f);
 
       fixture_data _fixture_data = new FixtureData();
-      _fixture_data->v_count = collider->box_collision_shape->m_count;
+      _fixture_data->v_count = collider->box_shape->m_count;
       _fixture_data->size = collider->GetSize();
       fixture->SetUserData(_fixture_data);
 
@@ -170,7 +176,7 @@ bool Component::RigidBody::_SetCollider(int state){
        Node::component_map<circle_collider>.end()){
 
       circle_collider collider = Node::component_map_it<circle_collider>->second;
-      fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
+      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
       fixture->SetUserData(new FixtureData());
 
       delete collider;
@@ -194,20 +200,20 @@ bool Component::RigidBody::_SetCollider(int state){
 	Node::component_map_it<capsule_collider>->second;
 
       // upper circle
-      collider->circle_collision_shape->m_p = b2v2{0, -collider->GetHeight() / 2};
-      fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
+      collider->circle_shape->m_p = b2v2{0, -collider->GetHeight() / 2};
+      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
       fixture->SetUserData(new FixtureData{b2v2{0, -collider->GetHeight() / 2}});
 
       // mid box
-      fixture = body->CreateFixture(collider->box_collision_shape, 1.0f);
+      fixture = body->CreateFixture(collider->box_shape, 1.0f);
       fixture_data _fixture_data = new FixtureData();
-      _fixture_data->v_count = collider->box_collision_shape->m_count;
+      _fixture_data->v_count = collider->box_shape->m_count;
       _fixture_data->size = collider->GetSize();
       fixture->SetUserData(_fixture_data);
 
       // bottom circle
-      collider->circle_collision_shape->m_p = b2v2{0, collider->GetHeight() / 2};
-      fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
+      collider->circle_shape->m_p = b2v2{0, collider->GetHeight() / 2};
+      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
       fixture->SetUserData(new FixtureData{b2v2{0, collider->GetHeight() / 2}});
 
       delete collider;
@@ -228,10 +234,10 @@ bool Component::RigidBody::_SetCollider(int state){
        Node::component_map<polygon_collider>.end()){
 
       polygon_collider collider = Node::component_map_it<polygon_collider>->second;
-      fixture = body->CreateFixture(collider->polygon_collision_shape, 1.0f);
+      fixture = body->CreateFixture(collider->polygon_shape, 1.0f);
 
       fixture_data _fixture_data = new FixtureData();
-      _fixture_data->v_count = collider->polygon_collision_shape->m_count;
+      _fixture_data->v_count = collider->polygon_shape->m_count;
       _fixture_data->vertice = collider->vertice;
       fixture->SetUserData(_fixture_data);
 
@@ -252,10 +258,10 @@ bool Component::RigidBody::_SetCollider(int state){
        Node::component_map<edge_collider>.end()){
 
       edge_collider collider = Node::component_map_it<edge_collider>->second;
-      fixture = body->CreateFixture(collider->chain_collision_shape, 1.0f);
+      fixture = body->CreateFixture(collider->chain_shape, 1.0f);
       
       fixture_data _fixture_data = new FixtureData();
-      _fixture_data->v_count = collider->chain_collision_shape->m_count;
+      _fixture_data->v_count = collider->chain_shape->m_count;
       _fixture_data->vertice = collider->vertice;
       fixture->SetUserData(_fixture_data);
 
