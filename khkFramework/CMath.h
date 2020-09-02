@@ -27,6 +27,7 @@
 #define CMATH_H
 // my custom math library 
 
+#include<raylib.h>
 #include<cmath>
 
 #define pi 3.14159

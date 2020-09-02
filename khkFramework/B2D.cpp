@@ -342,9 +342,9 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	  for(int i = 0; i < data->v_count; i++){
 
 	    v2 vertice_position = TransformRotation(body->GetAngle(),
-							 v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
-							 v2{fixture_position.x, fixture_position.y}
-							 );
+						    v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
+						    v2{fixture_position.x, fixture_position.y}
+						    );
 	    
 	    DrawRectangle(vertice_position.x,
 			  vertice_position.y,
@@ -370,9 +370,9 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	for(int i = 0; i < data->v_count; i++){
 
 	  v2 vertice_position = TransformRotation(body->GetAngle(),
-						       v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
-						       v2{fixture_position.x, fixture_position.y}
-						       );
+						  v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
+						  v2{fixture_position.x, fixture_position.y}
+						  );
 	    
 	  DrawRectangle(vertice_position.x,
 			vertice_position.y,

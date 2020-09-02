@@ -33,11 +33,15 @@
 #include<raylib.h>
 #include<CMath.h>
 
+#define v2_0  Vector2{0, 0};
+
+typedef Vector2 v2;
+
 using namespace std;
 
 struct Transform_node{
-  Vector2 position{0.0f, 0.0f};
-  Vector2 scale{1.0f, 1.0f};
+  v2 position = v2_0;
+  v2 scale{1.0f, 1.0f};
   float rotation = 0.0f;
   float up = 0.0f;
   float right = 90.0f;

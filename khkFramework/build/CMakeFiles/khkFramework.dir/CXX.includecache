@@ -285,6 +285,8 @@ raylib.h
 -
 
 ..//CMath.h
+raylib.h
+-
 cmath
 -
 

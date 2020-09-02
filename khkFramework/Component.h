@@ -30,10 +30,6 @@
 #include<tinyxml2.h>
 #include<Node.h>
 
-#define v2_0  Vector2{0, 0};
-
-typedef Vector2 v2;
-
 using namespace tinyxml2;
 
 inline void log(string log_str){
