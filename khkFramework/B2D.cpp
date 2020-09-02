@@ -25,11 +25,22 @@
 
 #include<B2D.h>
 
-Vector2 Component::ColliderBaseComponent::GetSize(){return Vector2{width, height};}
-float Component::ColliderBaseComponent::GetRadius(){return radius;}
-float Component::ColliderBaseComponent::GetWidth(){return GetSize().x;}
-float Component::ColliderBaseComponent::GetHeight(){return GetSize().y;}
 ColliderShape Component::ColliderBaseComponent::GetColliderShape(){return collider_shape;}
+Vector2 Component::ShapeColliderBaseComponent::GetSize(){return Vector2{width, height};}
+float Component::ShapeColliderBaseComponent::GetRadius(){return radius;}
+float Component::ShapeColliderBaseComponent::GetWidth(){return GetSize().x;}
+float Component::ShapeColliderBaseComponent::GetHeight(){return GetSize().y;}
+int Component::VerticeColliderBaseComponent::GetVerticeCount(){return v_count;}
+void Component::VerticeColliderBaseComponent::_VerticeToRelativePosition(){
+  for(int i = 0; i < vertice_list.size(); i++){
+
+    Vector2 rel_position = Vector2{vertice_list.at(i).x - node->GetPosition().x,
+				   vertice_list.at(i).y - node->GetPosition().y };
+
+    vertice[i].Set(rel_position.x, rel_position.y);
+    vertice_list.at(i) = rel_position;
+  }
+}
 
 
 /*
@@ -73,23 +84,26 @@ Component::CapsuleCollider::CapsuleCollider(float _height, float _radius){
 /*
   PolygonCollider Component
 */
-Component::PolygonCollider::PolygonCollider(vector<Vector2> _point_list){
+Component::PolygonCollider::PolygonCollider(vector<Vector2> _vertice_list){
   collider_shape = ColliderShape::POLYGON;
-  point_list = _point_list;
+  vertice_list = _vertice_list;
+  v_count = vertice_list.size();
   polygon_collision_shape = new b2PolygonShape();
 }
 
 void Component::PolygonCollider::_OnAttach(){
-  b2Vec2 vertice[point_list.size()];
-  for(int i = 0; i < point_list.size(); i++){
+  vertice = new b2Vec2[vertice_list.size()];
+  _VerticeToRelativePosition();
+  polygon_collision_shape->Set(vertice, vertice_list.size());
+}
 
-    Vector2 rel_position = Vector2{point_list.at(i).x - node->GetPosition().x,
-				   point_list.at(i).y - node->GetPosition().y };
 
-    vertice[i].Set(rel_position.x, rel_position.y);
-    point_list.at(i) = rel_position;
-  }
-  polygon_collision_shape->Set(vertice, point_list.size());
+/*
+  EdgeCollider Component
+*/
+Component::EdgeCollider::EdgeCollider(vector<Vector2> _vertice_list){
+  collider_shape = ColliderShape::EDGE; 
+  vertice_list = _vertice_list;
 }
 
 
@@ -148,7 +162,6 @@ bool Component::RigidBody::_SetCollider(int state){
 
       circle_collider collider = Node::component_map_it<circle_collider>->second;
       fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
-
       fixture->SetUserData(new FixtureData());
 
       delete collider;
@@ -188,7 +201,6 @@ bool Component::RigidBody::_SetCollider(int state){
       fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
       fixture->SetUserData(new FixtureData{b2Vec2{0, collider->GetHeight() / 2}});
 
-
       delete collider;
       return true;
     }
@@ -211,10 +223,10 @@ bool Component::RigidBody::_SetCollider(int state){
 
       fixture_data _fixture_data = new FixtureData();
       _fixture_data->v_count = collider->polygon_collision_shape->m_count;
-      _fixture_data->point_list = collider->point_list;
+      _fixture_data->vertice_list = collider->vertice_list;
       fixture->SetUserData(_fixture_data);
-      delete collider;
 
+      delete collider;
       return true;
     }
     else{
@@ -256,8 +268,6 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
   if(opacity > 1) opacity = 1;
   for(b2Body *body = world.GetBodyList(); body; body = body->GetNext()){
     Color curr_color = color1;
-    Node *node = static_cast<Node*>(body->GetUserData());
-
     curr_color.a *= opacity;
 
     for(b2Fixture* fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext()){
@@ -278,6 +288,7 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 		   fixture_position.y,
 		   fixture->GetShape()->m_radius,
 		   curr_color);     
+
 	break;
 
       case 1: // edge shape
@@ -301,7 +312,7 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	  for(int i = 0; i < v_count; i++){
 
 	    Vector2 vertice_position = TransformRotation(body->GetAngle(),
-							 Vector2{fixture_position.x + data->point_list.at(i).x, fixture_position.y + data->point_list.at(i).y},
+							 Vector2{fixture_position.x + data->vertice_list.at(i).x, fixture_position.y + data->vertice_list.at(i).y},
 							 Vector2{fixture_position.x, fixture_position.y}
 							 );
 	    
@@ -309,7 +320,7 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 			  vertice_position.y,
 			  10,
 			  10,
-			  RED,
+			  color2,
 			  Rad2Deg(body->GetAngle()));
 	  } // for
 
@@ -318,7 +329,7 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 			fixture_position.y,
 			10,
 			10,
-			BLUE,
+			color1,
 			Rad2Deg(body->GetAngle()));
 
 	} // else
@@ -328,8 +339,6 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	break;
 
       } // switch
-
     } // for fixture
-
   } // for body
 }

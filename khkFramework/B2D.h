@@ -49,7 +49,8 @@ enum ColliderShape{
   BOX,
   CIRCLE,
   CAPSULE,
-  POLYGON
+  POLYGON,
+  EDGE
 };
 
 namespace Component{
@@ -60,35 +61,48 @@ namespace Component{
     - CircleCollider
     - CapsuleCollider
     - PolygonCollider
+    - EdgeCollider
     - RigidBody
   */
 
   typedef struct FixtureData{
     b2Vec2 rel_position = {0, 0};
     Vector2 size = {0, 0};
-    vector<Vector2> point_list;
-    int32 v_count  =  0;
+    vector<Vector2> vertice_list;
+    int32 v_count = 0;
   } *fixture_data;
 
   struct ColliderBaseComponent : BaseComponent{
+    ColliderShape GetColliderShape();
+  protected:
+    ColliderShape collider_shape;
+  };
 
+  struct ShapeColliderBaseComponent : ColliderBaseComponent{
     Vector2 GetSize();
     float GetWidth();
     float GetHeight();
     float GetRadius();
-    ColliderShape GetColliderShape();
   protected:
-    ColliderShape collider_shape;
     float width = 0.0f;
     float height = 0.0f;
     float radius = 0.0f;
+  };
+
+  struct VerticeColliderBaseComponent : ColliderBaseComponent{
+    int GetVerticeCount();
+    vector<Vector2> vertice_list;
+  protected:
+    b2Vec2 *vertice;
+    int v_count;
+    void _VerticeToRelativePosition();
   };
 
 
   /*
     BoxCollider Component
   */
-  typedef struct BoxCollider : ColliderBaseComponent{
+  typedef struct BoxCollider : ShapeColliderBaseComponent{
     b2PolygonShape *box_collision_shape;
     BoxCollider(float _width, float _height);
   } *box_collider;
@@ -97,7 +111,7 @@ namespace Component{
   /*
     CircleCollider Component
   */
-  typedef struct CircleCollider : ColliderBaseComponent{
+  typedef struct CircleCollider : ShapeColliderBaseComponent{
     b2CircleShape *circle_collision_shape;
     CircleCollider(float _radius);
   } *circle_collider;
@@ -106,7 +120,7 @@ namespace Component{
   /*
     CapsuleCollider Component
   */
-  typedef struct CapsuleCollider : ColliderBaseComponent{
+  typedef struct CapsuleCollider : ShapeColliderBaseComponent{
     b2CircleShape *circle_collision_shape;
     b2PolygonShape *box_collision_shape;
     CapsuleCollider(float height, float radius);
@@ -116,11 +130,9 @@ namespace Component{
   /*
     PolygonCollider Component
   */
-  typedef struct PolygonCollider : ColliderBaseComponent{
+  typedef struct PolygonCollider : VerticeColliderBaseComponent{
     b2PolygonShape *polygon_collision_shape;
-    vector<Vector2> point_list;
-    PolygonCollider(vector<Vector2> _point_list);
-
+    PolygonCollider(vector<Vector2> _vertice_list);
   protected:
     void _OnAttach() override;
   } *polygon_collider;
@@ -129,9 +141,9 @@ namespace Component{
   /*
     EdgeCollider Component
   */
-  typedef struct EdgeCollider : ColliderBaseComponent{
+  typedef struct EdgeCollider : VerticeColliderBaseComponent{
     b2EdgeShape *edge_collision_shape;
-    EdgeCollider(Vector2 start_point, Vector2 end_point);
+    EdgeCollider(vector<Vector2> _vertice_list);
   } *edge_collider;
 
 

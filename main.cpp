@@ -25,7 +25,8 @@ struct App : BaseApp, ContactListener{
   Node *node1, *node2, *node3,
     *node4, *node5, *node6,
     *node7, *node8, *node9,
-    *node10, *node11, *node12;
+    *node10, *node11, *node12,
+    *node13;
 
   Camera2D camera;
 
@@ -57,7 +58,8 @@ struct App : BaseApp, ContactListener{
     node9 = new Node(); // box static rigid body test
     node10 = new Node(); // circle dynamic rigid body test
     node11 = new Node(); // capsule dynamic rigid body test
-    node12 = new Node(); // edge dynamic rigid body test
+    node12 = new Node(); // polygon dynamic rigid body test
+    node13 = new Node(); // edge dynamic rigid body test
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
     lilwitch = LoadTexture("./resources/images/lilwitch.png");
@@ -91,6 +93,7 @@ struct App : BaseApp, ContactListener{
     node11->SetPosition(Vector2{-120.0f, -90.0f});
     // node12->SetPosition(Vector2{-120.0f, -90.0f});
     node12->SetPosition(node9->GetPosition());
+    node13->SetPosition(node7->GetPosition());
 
     node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node8->AddComponent<Component::rigid_body>(new RigidBody());
@@ -116,6 +119,15 @@ struct App : BaseApp, ContactListener{
     };
     node12->AddComponent<Component::polygon_collider>(new PolygonCollider(vertice));
     node12->AddComponent<Component::rigid_body>(new RigidBody());
+    // node12->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+
+    vector<Vector2> edge_vertice{
+      Vector2{node7->GetPosition().x , node7->GetPosition().y},
+    	Vector2{100, 100}
+	
+    };
+    // node13->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
+    // node13->AddComponent<Component::rigid_body>(new RigidBody());
     // node12->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     node5->SetPosition(Vector2{
