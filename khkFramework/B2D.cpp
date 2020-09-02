@@ -26,18 +26,18 @@
 #include<B2D.h>
 
 ColliderShape Component::ColliderBaseComponent::GetColliderShape(){return collider_shape;}
-Vector2 Component::ShapeColliderBaseComponent::GetSize(){return Vector2{width, height};}
+Vector2 Component::ShapeColliderBaseComponent::GetSize(){return v2{width, height};}
 float Component::ShapeColliderBaseComponent::GetRadius(){return radius;}
 float Component::ShapeColliderBaseComponent::GetWidth(){return GetSize().x;}
 float Component::ShapeColliderBaseComponent::GetHeight(){return GetSize().y;}
 int Component::VerticeColliderBaseComponent::GetVerticeCount(){return v_count;}
 
 void Component::VerticeColliderBaseComponent::_OnAttach(){
-  vertice = new b2Vec2[vertice_list.size()];
+  vertice = new b2v2[vertice_list.size()];
   for(int i = 0; i < vertice_list.size(); i++){
 
-    Vector2 rel_position = Vector2{vertice_list.at(i).x - node->GetPosition().x,
-				   vertice_list.at(i).y - node->GetPosition().y };
+    v2 rel_position = v2{vertice_list.at(i).x - node->GetPosition().x,
+			 vertice_list.at(i).y - node->GetPosition().y };
 
     vertice[i].Set(rel_position.x, rel_position.y);
     vertice_list.at(i) = rel_position;
@@ -194,9 +194,9 @@ bool Component::RigidBody::_SetCollider(int state){
 	Node::component_map_it<capsule_collider>->second;
 
       // upper circle
-      collider->circle_collision_shape->m_p = b2Vec2{0, -collider->GetHeight() / 2};
+      collider->circle_collision_shape->m_p = b2v2{0, -collider->GetHeight() / 2};
       fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
-      fixture->SetUserData(new FixtureData{b2Vec2{0, -collider->GetHeight() / 2}});
+      fixture->SetUserData(new FixtureData{b2v2{0, -collider->GetHeight() / 2}});
 
       // mid box
       fixture = body->CreateFixture(collider->box_collision_shape, 1.0f);
@@ -206,9 +206,9 @@ bool Component::RigidBody::_SetCollider(int state){
       fixture->SetUserData(_fixture_data);
 
       // bottom circle
-      collider->circle_collision_shape->m_p = b2Vec2{0, collider->GetHeight() / 2};
+      collider->circle_collision_shape->m_p = b2v2{0, collider->GetHeight() / 2};
       fixture = body->CreateFixture(collider->circle_collision_shape, 1.0f);
-      fixture->SetUserData(new FixtureData{b2Vec2{0, collider->GetHeight() / 2}});
+      fixture->SetUserData(new FixtureData{b2v2{0, collider->GetHeight() / 2}});
 
       delete collider;
       return true;
@@ -253,11 +253,6 @@ bool Component::RigidBody::_SetCollider(int state){
 
       edge_collider collider = Node::component_map_it<edge_collider>->second;
       fixture = body->CreateFixture(collider->chain_collision_shape, 1.0f);
-
-      for(int i = 0; i < collider->chain_collision_shape->m_count; i ++){
-	cout<<collider->chain_collision_shape->m_vertices[i].x<<", "<<
-	  collider->chain_collision_shape->m_vertices[i].y<<endl;
-      }
       
       fixture_data _fixture_data = new FixtureData();
       _fixture_data->v_count = collider->chain_collision_shape->m_count;
@@ -279,7 +274,7 @@ bool Component::RigidBody::_SetCollider(int state){
 }
 
 void Component::RigidBody::Step(){
-  node->SetPosition(Vector2{body->GetPosition().x, body->GetPosition().y});
+  node->SetPosition(v2{body->GetPosition().x, body->GetPosition().y});
   node->SetRotation(Rad2Deg(body->GetAngle()));
 }
 
@@ -311,11 +306,11 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
     for(b2Fixture* fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext()){
 
       Component::fixture_data data =  static_cast<Component::fixture_data>(fixture->GetUserData());
-      b2Vec2 *rel_position = &data->rel_position;
+      b2v2 *rel_position = &data->rel_position;
 
-      Vector2 fixture_position = TransformRotation(body->GetAngle(),
-						   Vector2{body->GetPosition().x + rel_position->x, body->GetPosition().y + rel_position->y},
-						   Vector2{body->GetPosition().x, body->GetPosition().y}
+      v2 fixture_position = TransformRotation(body->GetAngle(),
+						   v2{body->GetPosition().x + rel_position->x, body->GetPosition().y + rel_position->y},
+						   v2{body->GetPosition().x, body->GetPosition().y}
 						   );
 
       switch(fixture->GetType()){
@@ -346,9 +341,9 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	  // vertice position
 	  for(int i = 0; i < data->v_count; i++){
 
-	    Vector2 vertice_position = TransformRotation(body->GetAngle(),
-							 Vector2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
-							 Vector2{fixture_position.x, fixture_position.y}
+	    v2 vertice_position = TransformRotation(body->GetAngle(),
+							 v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
+							 v2{fixture_position.x, fixture_position.y}
 							 );
 	    
 	    DrawRectangle(vertice_position.x,
@@ -371,14 +366,12 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 
 	break;
       case 3: // chain shape
-	// log("heloo...");
-	// cout<<data->v_count<<endl;
 
 	for(int i = 0; i < data->v_count; i++){
 
-	  Vector2 vertice_position = TransformRotation(body->GetAngle(),
-						       Vector2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
-						       Vector2{fixture_position.x, fixture_position.y}
+	  v2 vertice_position = TransformRotation(body->GetAngle(),
+						       v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
+						       v2{fixture_position.x, fixture_position.y}
 						       );
 	    
 	  DrawRectangle(vertice_position.x,

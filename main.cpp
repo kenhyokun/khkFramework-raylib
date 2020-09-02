@@ -59,7 +59,7 @@ struct App : BaseApp, ContactListener{
     node10 = new Node(); // circle dynamic rigid body test
     node11 = new Node(); // capsule dynamic rigid body test
     node12 = new Node(); // polygon dynamic rigid body test
-    node13 = new Node(); // edge dynamic rigid body test
+    node13 = new Node(); // edge rigid body test
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
     lilwitch = LoadTexture("./resources/images/lilwitch.png");
@@ -93,7 +93,7 @@ struct App : BaseApp, ContactListener{
     node11->SetPosition(Vector2{-120.0f, -90.0f});
     // node12->SetPosition(Vector2{-120.0f, -90.0f});
     node12->SetPosition(node9->GetPosition());
-    node13->SetPosition(node7->GetPosition());
+    node13->SetPosition(Vector2{50, -250});
 
     node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node8->AddComponent<Component::rigid_body>(new RigidBody());
@@ -122,10 +122,10 @@ struct App : BaseApp, ContactListener{
     // node12->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     vector<Vector2> edge_vertice{
-      Vector2{node7->GetPosition().x , node7->GetPosition().y},
-    	Vector2{100, 100},
-    	Vector2{150, 100},
-    	Vector2{250, 100},
+      Vector2{node13->GetPosition().x , node13->GetPosition().y},
+    	Vector2{node13->GetPosition().x + 20, node13->GetPosition().y + 20},
+	  Vector2{node13->GetPosition().x - 20, node13->GetPosition().y + 20},
+	    Vector2{node13->GetPosition().x + 20, node13->GetPosition().y + 50}
 	
     };
     node13->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
@@ -264,7 +264,7 @@ struct App : BaseApp, ContactListener{
     node6->GetComponent<Component::tmxmap>()->Draw(); // draw all layer
     node7->GetComponent<Component::animator>()->Draw();
 
-    B2D::DebugDraw(0.66f);
+    B2D::DebugDraw();
 
     EndMode2D();
 

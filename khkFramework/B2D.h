@@ -29,9 +29,10 @@
 #include<box2d/box2d.h>
 #include<Component.h>
 
-#define vec2_zero b2Vec2{0, 0}
+#define b2v2_0 b2Vec2{0, 0}
 
 typedef b2ContactListener ContactListener;
+typedef b2Vec2 b2v2;
 
 static b2Vec2 gravity(0.0f, 10.0f);
 static b2World world(gravity);
@@ -66,9 +67,9 @@ namespace Component{
   */
 
   typedef struct FixtureData{
-    b2Vec2 rel_position = {0, 0};
-    Vector2 size = {0, 0};
-    b2Vec2 *vertice;
+    b2Vec2 rel_position = b2v2_0;
+    Vector2 size = v2_0;
+    b2Vec2 *vertice = nullptr;
     int32 v_count = 0;
   } *fixture_data;
 
@@ -103,7 +104,7 @@ namespace Component{
     BoxCollider Component
   */
   typedef struct BoxCollider : ShapeColliderBaseComponent{
-    b2PolygonShape *box_collision_shape;
+    b2PolygonShape *box_collision_shape = nullptr;
     BoxCollider(float _width, float _height);
   } *box_collider;
 
@@ -112,7 +113,7 @@ namespace Component{
     CircleCollider Component
   */
   typedef struct CircleCollider : ShapeColliderBaseComponent{
-    b2CircleShape *circle_collision_shape;
+    b2CircleShape *circle_collision_shape = nullptr;
     CircleCollider(float _radius);
   } *circle_collider;
 
@@ -121,8 +122,8 @@ namespace Component{
     CapsuleCollider Component
   */
   typedef struct CapsuleCollider : ShapeColliderBaseComponent{
-    b2CircleShape *circle_collision_shape;
-    b2PolygonShape *box_collision_shape;
+    b2CircleShape *circle_collision_shape = nullptr;
+    b2PolygonShape *box_collision_shape = nullptr;
     CapsuleCollider(float height, float radius);
   } *capsule_collider;
 
@@ -131,7 +132,7 @@ namespace Component{
     PolygonCollider Component
   */
   typedef struct PolygonCollider : VerticeColliderBaseComponent{
-    b2PolygonShape *polygon_collision_shape;
+    b2PolygonShape *polygon_collision_shape = nullptr;
     PolygonCollider(vector<Vector2> _vertice_list);
   protected:
     void _OnAttach() override;
@@ -142,7 +143,8 @@ namespace Component{
     EdgeCollider Component
   */
   typedef struct EdgeCollider : VerticeColliderBaseComponent{
-    b2ChainShape *chain_collision_shape;
+    b2ChainShape *chain_collision_shape = nullptr;
+    b2EdgeShape *edge_collision_shape = nullptr;
     EdgeCollider(vector<Vector2> _vertice_list);
   protected:
     void _OnAttach() override;
@@ -166,8 +168,8 @@ namespace Component{
     b2Body* GetBody();
 
   protected:
-    b2Body *body;
-    b2Fixture *fixture;
+    b2Body *body = nullptr;
+    b2Fixture *fixture = nullptr;
 
     void _OnAttach() override;
     bool _SetCollider(int state = 0); // search and set collider shape

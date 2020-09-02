@@ -1,13 +1,13 @@
 # Kevin Haryo Kuncoro
 # kevinhyokun91@gmail.com
 
-include :=\
+INCLUDE :=\
 	-Ibox2d \
 	-Iraylib/ \
 	-Itinyxml2/ \
 	-IkhkFramework/
 
-lib :=\
+LIB :=\
 	-LkhkFramework/build/ \
 	-lkhkFramework \
 	-Ltinyxml2/ \
@@ -23,25 +23,22 @@ lib :=\
 	-lrt \
 	-lX11
 
-src :=\
+SRC :=\
 	khkFramework/*.cpp
 
-obj :=\
-	khkFramework/obj/*.o
-
 all:
-	g++ -o main main.cpp $(include) $(lib)
+	g++ -o main main.cpp $(INCLUDE) $(LIB)
 
 debug:
-	g++ -g -o main main.cpp $(include) $(lib) 
+	g++ -g -o main main.cpp $(INCLUDE) $(LIB)
 
 run:
 	make all
 	./main
 
-obj:
+lib:
 	make -C khkFramework/build
 
-objrun:
-	make obj
+librun:
+	make lib 
 	make run
