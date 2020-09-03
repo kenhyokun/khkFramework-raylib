@@ -27,7 +27,9 @@
 #define M_RAYLIB
 #include<raylib.h>
 
-#define v2_0  Vector2{0, 0};
+#define v2_0  Vector2{0, 0}
+#define v2_half  Vector2{0.5f, 0.5f} // I don't know why this feels like necessary
+#define v2_1  Vector2{1.0f, 1.0f}
 typedef Vector2 v2;
 
 #endif

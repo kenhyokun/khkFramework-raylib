@@ -27,7 +27,7 @@
 #define BASEAPP_H
 
 #include<iostream>
-#include<raylib.h>
+#include<m_raylib.h>
 
 using namespace std;
 
@@ -40,12 +40,12 @@ struct BaseApp{
   int game_screen_height = window_height;
   int min_window_width = 320;
   int min_window_height = 240;
-  Vector2 mouse, virtual_mouse;
+  v2 mouse, virtual_mouse;
   float scale = 0.0f;
   RenderTexture2D target;
 
   BaseApp(int _window_width = 800, int _window_height = 450, string _title = "My Game");
-  Vector2 ClampValue(Vector2 value, Vector2 min, Vector2 max);
+  v2 ClampValue(v2 value, v2 min, v2 max);
   void SetGameScreen(int _game_screen_width, int _game_screen_height);
   void Init();
   void Update();

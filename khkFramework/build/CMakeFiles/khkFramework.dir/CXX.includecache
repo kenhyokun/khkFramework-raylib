@@ -281,7 +281,7 @@ Component.h
 ..//BaseApp.h
 iostream
 -
-raylib.h
+m_raylib.h
 -
 
 ..//CMath.h
@@ -291,8 +291,6 @@ cmath
 -
 
 ..//Component.h
-raylib.h
--
 tinyxml2.h
 -
 Node.h

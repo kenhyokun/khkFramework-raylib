@@ -37,7 +37,7 @@ using namespace std;
 
 struct Transform_node{
   v2 position = v2_0;
-  v2 scale{1.0f, 1.0f};
+  v2 scale = v2_1;
   float rotation = 0.0f;
   float up = 0.0f;
   float right = 90.0f;

@@ -26,7 +26,6 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include<raylib.h>
 #include<tinyxml2.h>
 #include<Node.h>
 

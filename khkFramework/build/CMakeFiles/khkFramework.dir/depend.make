@@ -47,6 +47,7 @@ CMakeFiles/khkFramework.dir/B2D.o: ../B2D.cpp
 
 CMakeFiles/khkFramework.dir/BaseApp.o: ../../raylib/raylib.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.h
+CMakeFiles/khkFramework.dir/BaseApp.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.cpp
 
 CMakeFiles/khkFramework.dir/Component.o: ../../raylib/raylib.h

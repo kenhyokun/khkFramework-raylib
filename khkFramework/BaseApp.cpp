@@ -25,8 +25,6 @@
 
 #include<BaseApp.h>
 
-typedef Vector2 v2;
-
 BaseApp::BaseApp(int _window_width, int _window_height, string _title){
   window_width = _window_width;
   window_height = _window_height;
@@ -35,8 +33,8 @@ BaseApp::BaseApp(int _window_width, int _window_height, string _title){
   title = _title;
 }
 
-Vector2 BaseApp::ClampValue(Vector2 value, Vector2 min, Vector2 max){
-  Vector2 result = value;
+v2 BaseApp::ClampValue(v2 value, v2 min, v2 max){
+  v2 result = value;
   result.x = (result.x > max.x) ? max.x : result.x;
   result.x = (result.x < max.x) ? min.x : result.x;
   result.y = (result.y > max.y) ? max.y : result.y;
@@ -71,8 +69,8 @@ void BaseApp::Update(){
   virtual_mouse.y = (mouse.y - (GetScreenHeight() - (game_screen_height * scale) ) * 0.5f) / scale;
 
   virtual_mouse = ClampValue(virtual_mouse,
-			     (Vector2){0, 0},
-			     (Vector2){(float)game_screen_width, (float)game_screen_height});
+			     (v2){0, 0},
+			     (v2){(float)game_screen_width, (float)game_screen_height});
   // update mouse
 
   // update window/screen scale
@@ -103,7 +101,7 @@ void BaseApp::Draw(){
 		     (float)game_screen_width * scale,
 		     (float)game_screen_height * scale
 		     },
-		 (Vector2){0, 0},
+		 (v2){0, 0},
 		 0.0f,
 		 WHITE
 		 );
