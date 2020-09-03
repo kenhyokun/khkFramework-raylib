@@ -123,13 +123,13 @@ struct App : BaseApp, ContactListener{
     // node12->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     //  using 4 vertice to create edge collider with box2d chain shape
-    // vector<v2> edge_vertice{
-    //   v2{node13->GetPosition().x , node13->GetPosition().y},
-    // 	v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20},
-    // 	  v2{node13->GetPosition().x - 20, node13->GetPosition().y + 20},
-    // 	    v2{node13->GetPosition().x + 20, node13->GetPosition().y + 50}
+    vector<v2> edge_vertice{
+      v2{node13->GetPosition().x , node13->GetPosition().y},
+    	v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20},
+    	  v2{node13->GetPosition().x - 20, node13->GetPosition().y + 20},
+    	    v2{node13->GetPosition().x + 20, node13->GetPosition().y + 50}
 	
-    // };
+    };
 
     //  using 2 vertice to create edge collider with box2d edge shape
     // vector<v2> edge_vertice{
@@ -137,9 +137,9 @@ struct App : BaseApp, ContactListener{
     // 	v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20}
     // };
 
-    // node13->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
+    node13->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
     
-    node13->AddComponent<Component::edge_collider>(new EdgeCollider(v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20}));
+    // node13->AddComponent<Component::edge_collider>(new EdgeCollider(v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20}));
     node13->AddComponent<Component::rigid_body>(new RigidBody());
     // node13->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 

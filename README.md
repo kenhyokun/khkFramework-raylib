@@ -9,9 +9,9 @@ Experimental C/C++ 2D game framework with **[raylib][1]** inspired by popular ga
   - box2d physics engine. (only box, circle, capsule, polygon, and edge collision for now)
 
 # 3rd party library:
-  - raylib (https://github.com/raysan5/raylib)
+  - raylib v3.0.0 (https://github.com/raysan5/raylib)
+  - box2d v2.4.0 (https://github.com/erincatto/box2d)
   - tinyxml2 (https://github.com/leethomason/tinyxml2)
-  - box2d (https://github.com/erincatto/box2d)
 
 # Todo for version 1.0 release:
   - Add sample project.

@@ -120,7 +120,7 @@ void Component::EdgeCollider::_OnAttach(){
   Component::VerticeColliderBaseComponent::_OnAttach();
 
   if(v_count > 2){ // create chain shape
-    chain_shape->CreateChain(vertice, v_count);
+    chain_shape->CreateChain(vertice, v_count, vertice[0], vertice[v_count - 1]);
   }
   else{ // create edge shape
     edge_shape = new b2EdgeShape();
@@ -130,7 +130,7 @@ void Component::EdgeCollider::_OnAttach(){
       v_count++;
     }
 
-    edge_shape->Set(vertice[0], vertice[1]);
+    edge_shape->SetTwoSided(vertice[0], vertice[1]);
   } // else
   vertice_list.clear();
 }
@@ -335,96 +335,98 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
       b2v2 *rel_position = &data->rel_position;
 
       v2 fixture_position = TransformRotation(body->GetAngle(),
-						   v2{body->GetPosition().x + rel_position->x, body->GetPosition().y + rel_position->y},
-						   v2{body->GetPosition().x, body->GetPosition().y}
-						   );
+					      v2{body->GetPosition().x + rel_position->x, body->GetPosition().y + rel_position->y},
+					      v2{body->GetPosition().x, body->GetPosition().y}
+					      );
 
-      switch(fixture->GetType()){
-      case 0: // circle shape
+       switch(fixture->GetType()){
+       case 0: // circle shape
 
-	DrawCircle(fixture_position.x,
-		   fixture_position.y,
-		   fixture->GetShape()->m_radius,
-		   curr_color);     
+   	DrawCircle(fixture_position.x,
+   		   fixture_position.y,
+   		   fixture->GetShape()->m_radius,
+   		   curr_color);     
 
-	break;
+   	break;
 
-      case 1: // edge shape
+       case 1: // edge shape
 
-	for(int i = 0; i < data->v_count; i++){
+   	for(int i = 0; i < data->v_count; i++){
 
-	  v2 vertice_position = TransformRotation(body->GetAngle(),
-						  v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
-						  v2{fixture_position.x, fixture_position.y}
-						  );
+   	  v2 vertice_position = TransformRotation(body->GetAngle(),
+   						  v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
+   						  v2{fixture_position.x, fixture_position.y}
+   						  );
 	    
-	  DrawRectangle(vertice_position.x,
-			vertice_position.y,
-			10,
-			10,
-			color2,
-			Rad2Deg(body->GetAngle()));
-	} // for
-	break;
+   	  DrawRectangle(vertice_position.x,
+   			vertice_position.y,
+   			10,
+   			10,
+   			color2,
+   			Rad2Deg(body->GetAngle()));
+   	} // for
+   	break;
 
-      case 2: // box & polygon shape
+       case 2: // box & polygon shape
 
-	if(data->v_count == 4){ // draw box shape
-	  DrawRectangle(fixture_position.x,
-			fixture_position.y,
-			data->size.x,
-			data->size.y,
-			curr_color,
-			Rad2Deg(body->GetAngle()));
-	}
-	else{ // draw polygon shape
+   	if(data->v_count == 4){ // draw box shape
+   	  DrawRectangle(fixture_position.x,
+   			fixture_position.y,
+   			data->size.x,
+   			data->size.y,
+   			curr_color,
+   			Rad2Deg(body->GetAngle()));
+   	}
+   	else{ // draw polygon shape
 
-	  // vertice position
-	  for(int i = 0; i < data->v_count; i++){
+   	  // vertice position
+   	  for(int i = 0; i < data->v_count; i++){
 
-	    v2 vertice_position = TransformRotation(body->GetAngle(),
-						    v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
-						    v2{fixture_position.x, fixture_position.y}
-						    );
+   	    v2 vertice_position = TransformRotation(body->GetAngle(),
+   						    v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
+   						    v2{fixture_position.x, fixture_position.y}
+   						    );
 	    
-	    DrawRectangle(vertice_position.x,
-			  vertice_position.y,
-			  10,
-			  10,
-			  color2,
-			  Rad2Deg(body->GetAngle()));
-	  } // for
+   	    DrawRectangle(vertice_position.x,
+   			  vertice_position.y,
+   			  10,
+   			  10,
+   			  color2,
+   			  Rad2Deg(body->GetAngle()));
+   	  } // for
 
-	  // fixture position
-	  DrawRectangle(fixture_position.x,
-			fixture_position.y,
-			10,
-			10,
-			color1,
-			Rad2Deg(body->GetAngle()));
 
-	} // else
+   	} // else
 
-	break;
-      case 3: // chain shape
+   	break;
+       case 3: // chain shape
 
-	for(int i = 0; i < data->v_count; i++){
+   	for(int i = 0; i < data->v_count; i++){
 
-	  v2 vertice_position = TransformRotation(body->GetAngle(),
-						  v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
-						  v2{fixture_position.x, fixture_position.y}
-						  );
+   	  v2 vertice_position = TransformRotation(body->GetAngle(),
+   						  v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
+   						  v2{fixture_position.x, fixture_position.y}
+   						  );
 	    
-	  DrawRectangle(vertice_position.x,
-			vertice_position.y,
-			10,
-			10,
-			color2,
-			Rad2Deg(body->GetAngle()));
-	} // for
-	break;
+   	  DrawRectangle(vertice_position.x,
+   			vertice_position.y,
+   			10,
+   			10,
+   			color2,
+   			Rad2Deg(body->GetAngle()));
+   	} // for
+   	break;
 
-      } // switch
-    } // for fixture
-  } // for body
+       } // switch
+
+   	  // fixture position
+   	  DrawRectangle(fixture_position.x,
+   			fixture_position.y,
+   			10,
+   			10,
+   			color2,
+   			Rad2Deg(body->GetAngle()));
+
+     } // for fixture
+   } // for body
 }
