@@ -30,12 +30,8 @@
 #include<vector>
 #include<map>
 #include<algorithm>
-#include<raylib.h>
+#include<m_raylib.h>
 #include<CMath.h>
-
-#define v2_0  Vector2{0, 0};
-
-typedef Vector2 v2;
 
 using namespace std;
 
@@ -62,7 +58,7 @@ protected:
   void _SetParent(Node *node);
   Transform_node _GetTransform();
   void _SetTransformDirection(float up, float right);
-  void _Rotate(float angle, Vector2 pivot); // transformation rotation
+  void _Rotate(float angle, v2 pivot); // transformation rotation
   void _RemoveChild(vector<Node*>::iterator it);
 
 public:
@@ -94,12 +90,12 @@ public:
   void SetTransform(Transform_node _transform);
   float GetUpDirection();
   float GetRightDirection();
-  void SetPosition(Vector2 position);
-  Vector2 GetPosition();
-  void SetScale(Vector2 scale);
-  Vector2 GetScale();
+  void SetPosition(v2 position);
+  v2 GetPosition();
+  void SetScale(v2 scale);
+  v2 GetScale();
   void SetRotation(float angle);
-  void SetRotation(float angle, Vector2 pivot);
+  void SetRotation(float angle, v2 pivot);
   float GetRotation();
   void SetParent(Node *node);
   Node* GetParent();

@@ -39,7 +39,7 @@ void Node::_SetParent(Node *node){parent = node;}
 Transform_node Node::_GetTransform(){return transform;}
 void Node::_SetTransformDirection(float up, float right){transform.up = up; transform.right = right;}
 
-void Node::_Rotate(float angle, Vector2 pivot){
+void Node::_Rotate(float angle, v2 pivot){
   SetPosition(TransformRotation(Deg2Rad(angle), GetPosition(), pivot));
 }
 
@@ -75,7 +75,7 @@ void Node::RemoveChild(int index){
   child->erase(child->begin() + index);
 }
 
-void Node::SetPosition(Vector2 position){
+void Node::SetPosition(v2 position){
   float dx = position.x - GetPosition().x;
   float dy = position.y - GetPosition().y;
 
@@ -83,7 +83,7 @@ void Node::SetPosition(Vector2 position){
 
   if(child->size() > 0){
     for(int i = 0; i < child->size(); i++){
-      GetChild(i)->SetPosition(Vector2{GetChild(i)->GetPosition().x + dx,
+      GetChild(i)->SetPosition(v2{GetChild(i)->GetPosition().x + dx,
 	    GetChild(i)->GetPosition().y + dy});
 
     } // for
@@ -119,7 +119,7 @@ void Node::SetRotation(float angle){
 
 }
 
-void Node::SetRotation(float angle, Vector2 pivot){
+void Node::SetRotation(float angle, v2 pivot){
   float _da = angle - transform.rotation;
   _Rotate(_da, pivot);
   SetRotation(angle);
@@ -129,9 +129,9 @@ void Node::ClearParent(){parent = nullptr;}
 void Node::SetTransform(Transform_node _transform){transform = _transform;}
 float Node::GetUpDirection(){return transform.up;}
 float Node::GetRightDirection(){return transform.right;}
-Vector2 Node::GetPosition(){return transform.position;}
-void Node::SetScale(Vector2 _scale){transform.scale = _scale;}
-Vector2 Node::GetScale(){return transform.scale;}
+v2 Node::GetPosition(){return transform.position;}
+void Node::SetScale(v2 _scale){transform.scale = _scale;}
+v2 Node::GetScale(){return transform.scale;}
 float Node::GetRotation(){return transform.rotation;}
 Node* Node::GetParent(){return parent;}
 vector<Node*>* Node::GetChild(){return child;}

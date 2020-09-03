@@ -38,7 +38,7 @@ inline void log(string log_str){
 
 inline void DrawRectangle(float x, float y, int width, int height, Color color, float rotation = 0.0f){
   DrawRectanglePro(Rectangle{x, y, (float)width, (float)height},
-		   Vector2{width / 2.0f, height / 2.0f},
+		   v2{width / 2.0f, height / 2.0f},
 		   rotation,
 		   color);
 }
@@ -92,7 +92,7 @@ namespace Component{
     int max_height = 0;
 
     int _GetIndex(int column, int row);
-    Vector2 _GetTransformRotation(int column, int row); // tile transformation rotation
+    v2 _GetTransformRotation(int column, int row); // tile transformation rotation
   };
   
 
@@ -106,7 +106,7 @@ namespace Component{
     void Draw(int state = 0); // draw texture with center pivot point
 
   protected:
-    Vector2 pivot;
+    v2 pivot;
     Rectangle src_rect;
     Rectangle dst_rect;
   } *sprite_renderer;

@@ -23,47 +23,11 @@
   kevinhyokun91@gmail.com
 */
 
-#ifndef CMATH_H
-#define CMATH_H
-// my custom math library 
+#ifndef M_RAYLIB
+#define M_RAYLIB
+#include<raylib.h>
 
-#include<m_raylib.h>
-#include<cmath>
-
-#define pi 3.14159
-
-inline float Rad2Deg(float rad){
-  return (180.0 / pi) * rad;
-}
-  
-inline float Deg2Rad(float deg){
-  return (deg * pi) / 180;
-}
-
-inline v2 TransformRotation(float rad_angle, v2 position, v2 pivot){
-  float x = 0.0f;
-  float y = 0.0f;
-  float px = pivot.x;
-  float py = pivot.y;
-  float tx = position.x;
-  float ty = position.y;
-
-  x =
-    (tx * cos(rad_angle)) -
-    (ty * sin(rad_angle)) -
-    (px * cos(rad_angle)) +
-    (py * sin(rad_angle)) +
-    px; 
-
-  y =
-    (tx * sin(rad_angle) ) +
-    (ty * cos(rad_angle) ) -
-    (px * sin(rad_angle) ) -
-    (py * cos(rad_angle) ) +
-    py; 
-
-  return v2{x, y}; 
-
-}
+#define v2_0  Vector2{0, 0};
+typedef Vector2 v2;
 
 #endif

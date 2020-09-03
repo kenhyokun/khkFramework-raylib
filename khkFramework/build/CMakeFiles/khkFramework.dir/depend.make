@@ -42,6 +42,7 @@ CMakeFiles/khkFramework.dir/B2D.o: ../B2D.h
 CMakeFiles/khkFramework.dir/B2D.o: ../CMath.h
 CMakeFiles/khkFramework.dir/B2D.o: ../Component.h
 CMakeFiles/khkFramework.dir/B2D.o: ../Node.h
+CMakeFiles/khkFramework.dir/B2D.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/B2D.o: ../B2D.cpp
 
 CMakeFiles/khkFramework.dir/BaseApp.o: ../../raylib/raylib.h
@@ -53,10 +54,12 @@ CMakeFiles/khkFramework.dir/Component.o: ../../tinyxml2/tinyxml2.h
 CMakeFiles/khkFramework.dir/Component.o: ../CMath.h
 CMakeFiles/khkFramework.dir/Component.o: ../Component.h
 CMakeFiles/khkFramework.dir/Component.o: ../Node.h
+CMakeFiles/khkFramework.dir/Component.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/Component.o: ../Component.cpp
 
 CMakeFiles/khkFramework.dir/Node.o: ../../raylib/raylib.h
 CMakeFiles/khkFramework.dir/Node.o: ../CMath.h
 CMakeFiles/khkFramework.dir/Node.o: ../Node.h
+CMakeFiles/khkFramework.dir/Node.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/Node.o: ../Node.cpp
 

@@ -45,7 +45,7 @@ Rectangle Component::GridBaseComponent::_GetSrcRect(int tile){
 
 Grid* Component::GridBaseComponent::GetGrid(){return grid;}
 
-Vector2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
+v2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
   float x0 = node->GetPosition().x - (max_width / 2);
   float y0 = node->GetPosition().y - (max_height / 2);
   float _x = (grid->width * column) + (grid->width / 2);
@@ -53,7 +53,7 @@ Vector2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
   float tx = x0 + _x;
   float ty = y0 + _y;
 
-  return TransformRotation(Deg2Rad(node->GetRotation()), Vector2{tx, ty}, node->GetPosition());
+  return TransformRotation(Deg2Rad(node->GetRotation()), v2{tx, ty}, node->GetPosition());
 }
 
 int Component::BaseTilemap::GetMaxWidth(){return max_width;}
@@ -157,7 +157,7 @@ void Component::Tilemap::Draw(){
       int tile = tile_map[_GetIndex(j, i)];
 
       Rectangle src_rect = _GetSrcRect(tile);
-      Vector2 transform_rotation = _GetTransformRotation(j, i);
+      v2 transform_rotation = _GetTransformRotation(j, i);
 
       Rectangle dst_rect = {transform_rotation.x,
 			    transform_rotation.y,
@@ -167,7 +167,7 @@ void Component::Tilemap::Draw(){
       DrawTexturePro(*texture,
 		     src_rect,
 		     dst_rect,
-		     Vector2{(float)grid->width * 0.5f, (float)grid->height * 0.5f},
+		     v2{(float)grid->width * 0.5f, (float)grid->height * 0.5f},
 		     node->GetRotation(),
 		     WHITE);
 
@@ -271,7 +271,7 @@ void Component::TMXMap::Draw(int layer_index){
       if(tile != 0){
 
 	Rectangle src_rect = _GetSrcRect(tile);
-	Vector2 transform_rotation = _GetTransformRotation(j, i);
+	v2 transform_rotation = _GetTransformRotation(j, i);
 
 	Rectangle dst_rect = {transform_rotation.x,
 			      transform_rotation.y,
@@ -281,7 +281,7 @@ void Component::TMXMap::Draw(int layer_index){
 	DrawTexturePro(*texture,
 		       src_rect,
 		       dst_rect,
-		       Vector2{(float)grid->width * 0.5f, (float)grid->height * 0.5f},
+		       v2{(float)grid->width * 0.5f, (float)grid->height * 0.5f},
 		       node->GetRotation(),
 		       WHITE);
 

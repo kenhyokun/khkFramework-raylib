@@ -81,20 +81,20 @@ struct App : BaseApp, ContactListener{
     node6->AddComponent<Component::tmxmap>(tmxmap);
     node7->AddComponent<Component::animator>(animator);
 
-    node1->SetScale(Vector2{2.0f, 2.0f});
+    node1->SetScale(v2{2.0f, 2.0f});
 
-    node1->SetPosition(Vector2{300.0f, 55.0f});
-    node2->SetPosition(Vector2{450.0f, 55.0f});
-    node3->SetPosition(Vector2{450.0f, 250.0f});
-    node4->SetPosition(Vector2{450.0f, 70.0f});
-    node7->SetPosition(Vector2{50.0f, 50.0f});
-    node8->SetPosition(Vector2{30.0f, 50.0f});
-    node9->SetPosition(Vector2{-50.0f, 180.0f});
-    node10->SetPosition(Vector2{-120.0f, -20.0f});
-    node11->SetPosition(Vector2{-120.0f, -90.0f});
-    // node12->SetPosition(Vector2{-120.0f, -90.0f});
+    node1->SetPosition(v2{300.0f, 55.0f});
+    node2->SetPosition(v2{450.0f, 55.0f});
+    node3->SetPosition(v2{450.0f, 250.0f});
+    node4->SetPosition(v2{450.0f, 70.0f});
+    node7->SetPosition(v2{50.0f, 50.0f});
+    node8->SetPosition(v2{30.0f, 50.0f});
+    node9->SetPosition(v2{-50.0f, 180.0f});
+    node10->SetPosition(v2{-120.0f, -20.0f});
+    node11->SetPosition(v2{-120.0f, -90.0f});
+    // node12->SetPosition(v2{-120.0f, -90.0f});
     node12->SetPosition(node9->GetPosition());
-    node13->SetPosition(Vector2{50, -250});
+    node13->SetPosition(v2{50, -250});
 
     node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node8->AddComponent<Component::rigid_body>(new RigidBody());
@@ -112,32 +112,32 @@ struct App : BaseApp, ContactListener{
     node11->AddComponent<Component::rigid_body>(new RigidBody());
     // node11->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    vector<Vector2> vertice{
-      Vector2{node9->GetPosition().x , node9->GetPosition().y},
-    	Vector2{100, 100},
-    	Vector2{50, 100},
+    vector<v2> vertice{
+      v2{node9->GetPosition().x , node9->GetPosition().y},
+    	v2{100, 100},
+    	v2{50, 100},
 	
     };
     node12->AddComponent<Component::polygon_collider>(new PolygonCollider(vertice));
     node12->AddComponent<Component::rigid_body>(new RigidBody());
     // node12->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    vector<Vector2> edge_vertice{
-      Vector2{node13->GetPosition().x , node13->GetPosition().y},
-    	Vector2{node13->GetPosition().x + 20, node13->GetPosition().y + 20},
-	  Vector2{node13->GetPosition().x - 20, node13->GetPosition().y + 20},
-	    Vector2{node13->GetPosition().x + 20, node13->GetPosition().y + 50}
+    vector<v2> edge_vertice{
+      v2{node13->GetPosition().x , node13->GetPosition().y},
+    	v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20},
+	  v2{node13->GetPosition().x - 20, node13->GetPosition().y + 20},
+	    v2{node13->GetPosition().x + 20, node13->GetPosition().y + 50}
 	
     };
     node13->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
     node13->AddComponent<Component::rigid_body>(new RigidBody());
     // node13->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    node5->SetPosition(Vector2{
+    node5->SetPosition(v2{
 	(float)game_screen_width * 0.5f + 250,
 	(float)game_screen_height * 0.5f});
 
-    node6->SetPosition(Vector2{
+    node6->SetPosition(v2{
 	(float)game_screen_width * 0.5f + 200,
 	(float)game_screen_height * 0.5f});
 
@@ -147,7 +147,7 @@ struct App : BaseApp, ContactListener{
 
     camera = {0};
     camera.target = node7->GetPosition();
-    camera.offset = Vector2{(float)game_screen_width / 2,
+    camera.offset = v2{(float)game_screen_width / 2,
 			    (float)game_screen_height / 2};
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
@@ -171,24 +171,24 @@ struct App : BaseApp, ContactListener{
   void Controller(){
     float move_speed = 2.0f;
     if(IsKeyDown(KEY_W)){
-      node7->SetPosition(Vector2{node7->GetPosition().x,
+      node7->SetPosition(v2{node7->GetPosition().x,
 	    node7->GetPosition().y - move_speed});
     }
 
     if(IsKeyDown(KEY_S)){
-      node7->SetPosition(Vector2{node7->GetPosition().x,
+      node7->SetPosition(v2{node7->GetPosition().x,
 	    node7->GetPosition().y + move_speed});
     }
 
     if(IsKeyDown(KEY_D)){
       dir_state = 0;
-      node7->SetPosition(Vector2{node7->GetPosition().x + move_speed,
+      node7->SetPosition(v2{node7->GetPosition().x + move_speed,
 	    node7->GetPosition().y});
     }
 
     if(IsKeyDown(KEY_A)){
       dir_state = 1;
-      node7->SetPosition(Vector2{node7->GetPosition().x - move_speed,
+      node7->SetPosition(v2{node7->GetPosition().x - move_speed,
 	    node7->GetPosition().y});
     }
 
@@ -197,8 +197,8 @@ struct App : BaseApp, ContactListener{
   void OnUpdate() override {
     Controller();
 
-    node3->SetPosition(Vector2{node3->GetPosition().x, node3->GetPosition().y + 0.3f});
-    node5->SetPosition(Vector2{node5->GetPosition().x, node5->GetPosition().y + 0.3f});
+    node3->SetPosition(v2{node3->GetPosition().x, node3->GetPosition().y + 0.3f});
+    node5->SetPosition(v2{node5->GetPosition().x, node5->GetPosition().y + 0.3f});
 
     switch(dir_state){
     case 0:
