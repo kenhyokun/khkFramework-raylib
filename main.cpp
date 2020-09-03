@@ -71,7 +71,8 @@ struct App : BaseApp, ContactListener{
 			       4,4,4,
 			       3,2,1};
 
-    tilemap = new Tilemap(&tile, new Grid{48, 48, 3, 3}, tile_map);
+    Grid grid{48, 48, 3, 3};
+    tilemap = new Tilemap(&tile, &grid, tile_map);
     tmxmap = new TMXMap(&tile, "./resources/tmx/map1.tmx");
     tmxmap->PrintMapAttribute();
 

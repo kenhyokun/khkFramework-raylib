@@ -29,12 +29,12 @@
 #include<box2d/box2d.h>
 #include<Component.h>
 
-#define b2v2_0 b2Vec2{0, 0}
+#define b2v2_0 b2v2{0, 0}
 
 typedef b2ContactListener ContactListener;
 typedef b2Vec2 b2v2;
 
-static b2Vec2 gravity(0.0f, 10.0f);
+static b2v2 gravity(0.0f, 10.0f);
 static b2World world(gravity);
 static float time_step = 1.0f / 60.0f;
 static int32 velocity_iterations = 6;
@@ -67,10 +67,10 @@ namespace Component{
   */
 
   typedef struct FixtureData{
-    b2Vec2 rel_position = b2v2_0;
-    Vector2 size = v2_0;
-    b2Vec2 *vertice = nullptr;
-    int32 v_count = 0;
+    b2v2 rel_position = b2v2_0;
+    v2 size = v2_0;
+    b2v2 *vertice = nullptr;
+    int32 v_count = 0; // vertice count
   } *fixture_data;
 
   struct ColliderBaseComponent : BaseComponent{
@@ -80,7 +80,7 @@ namespace Component{
   };
 
   struct ShapeColliderBaseComponent : ColliderBaseComponent{
-    Vector2 GetSize();
+    v2 GetSize();
     float GetWidth();
     float GetHeight();
     float GetRadius();
@@ -92,10 +92,10 @@ namespace Component{
 
   struct VerticeColliderBaseComponent : ColliderBaseComponent{
     int GetVerticeCount();
-    vector<Vector2> vertice_list;
-    b2Vec2 *vertice;
+    vector<v2> vertice_list;
+    b2v2 *vertice;
   protected:
-    int32 v_count;
+    int32 v_count; // vertice count
     void _OnAttach() override;
   };
 
@@ -133,7 +133,7 @@ namespace Component{
   */
   typedef struct PolygonCollider : VerticeColliderBaseComponent{
     b2PolygonShape *polygon_shape = nullptr;
-    PolygonCollider(vector<Vector2> _vertice_list);
+    PolygonCollider(vector<v2> _vertice_list);
   protected:
     void _OnAttach() override;
   } *polygon_collider;
@@ -145,7 +145,8 @@ namespace Component{
   typedef struct EdgeCollider : VerticeColliderBaseComponent{
     b2ChainShape *chain_shape = nullptr;
     b2EdgeShape *edge_shape = nullptr;
-    EdgeCollider(vector<Vector2> _vertice_list);
+    EdgeCollider(v2 _vertice);
+    EdgeCollider(vector<v2> _vertice_list);
   protected:
     void _OnAttach() override;
   } *edge_collider;
@@ -161,7 +162,7 @@ namespace Component{
 
     void Step();
 
-    b2Vec2 GetBodyPosition();
+    b2v2 GetBodyPosition();
     float GetBodyRadian(); // body angle rotation (in radian)
     void SetBodyType(b2BodyType type);
     void SetFixedRotation(bool is_fixed = true);

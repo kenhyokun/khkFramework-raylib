@@ -26,7 +26,7 @@
 #include<B2D.h>
 
 ColliderShape Component::ColliderBaseComponent::GetColliderShape(){return collider_shape;}
-Vector2 Component::ShapeColliderBaseComponent::GetSize(){return v2{width, height};}
+v2 Component::ShapeColliderBaseComponent::GetSize(){return v2{width, height};}
 float Component::ShapeColliderBaseComponent::GetRadius(){return radius;}
 float Component::ShapeColliderBaseComponent::GetWidth(){return GetSize().x;}
 float Component::ShapeColliderBaseComponent::GetHeight(){return GetSize().y;}
@@ -42,7 +42,6 @@ void Component::VerticeColliderBaseComponent::_OnAttach(){
     vertice[i].Set(rel_position.x, rel_position.y);
     vertice_list.at(i) = rel_position;
   }
-  vertice_list.clear();
 }
 
 
@@ -87,7 +86,7 @@ Component::CapsuleCollider::CapsuleCollider(float _height, float _radius){
 /*
   PolygonCollider Component
 */
-Component::PolygonCollider::PolygonCollider(vector<Vector2> _vertice_list){
+Component::PolygonCollider::PolygonCollider(vector<v2> _vertice_list){
   collider_shape = ColliderShape::POLYGON;
   vertice_list = _vertice_list;
   v_count = vertice_list.size();
@@ -97,13 +96,14 @@ Component::PolygonCollider::PolygonCollider(vector<Vector2> _vertice_list){
 void Component::PolygonCollider::_OnAttach(){
   Component::VerticeColliderBaseComponent::_OnAttach();
   polygon_shape->Set(vertice, v_count);
+  vertice_list.clear();
 }
 
 
 /*
   EdgeCollider Component
 */
-Component::EdgeCollider::EdgeCollider(vector<Vector2> _vertice_list){
+Component::EdgeCollider::EdgeCollider(vector<v2> _vertice_list){
   collider_shape = ColliderShape::EDGE; 
   vertice_list = _vertice_list;
   v_count = _vertice_list.size();
@@ -119,6 +119,7 @@ void Component::EdgeCollider::_OnAttach(){
   else{ // if v_count == 2 edge collider will create edge shape
 
   }
+  vertice_list.clear();
 }
 
 
@@ -284,7 +285,7 @@ void Component::RigidBody::Step(){
   node->SetRotation(Rad2Deg(body->GetAngle()));
 }
 
-b2Vec2 Component::RigidBody::GetBodyPosition(){return body->GetPosition();}
+b2v2 Component::RigidBody::GetBodyPosition(){return body->GetPosition();}
 float Component::RigidBody::GetBodyRadian(){return body->GetAngle();}
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}
 void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotation(is_fixed);}
