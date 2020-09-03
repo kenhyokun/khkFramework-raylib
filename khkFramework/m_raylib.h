@@ -25,11 +25,25 @@
 
 #ifndef M_RAYLIB
 #define M_RAYLIB
+#include<iostream>
 #include<raylib.h>
+
+using namespace std;
 
 #define v2_0  Vector2{0, 0}
 #define v2_half  Vector2{0.5f, 0.5f} // I don't know why this feels like necessary
 #define v2_1  Vector2{1.0f, 1.0f}
 typedef Vector2 v2;
+
+inline void log(string log_str){
+  cout<<log_str<<endl;
+}
+
+inline void DrawRectangle(float x, float y, int width, int height, Color color, float rotation = 0.0f){
+  DrawRectanglePro(Rectangle{x, y, (float)width, (float)height},
+		   v2{width * 0.5f, height * 0.5f},
+		   rotation,
+		   color);
+}
 
 #endif

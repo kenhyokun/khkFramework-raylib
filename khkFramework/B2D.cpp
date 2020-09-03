@@ -143,7 +143,7 @@ void Component::RigidBody::_OnAttach(){
   b2BodyDef body_def;
   body_def.type = DYNAMIC; 
   body_def.position.Set(node->GetPosition().x, node->GetPosition().y);
-  body = world.CreateBody(&body_def);
+  body = world->CreateBody(&body_def);
 
   if(_SetCollider()){
     body->SetUserData(node);
@@ -312,20 +312,20 @@ b2Body* Component::RigidBody::GetBody(){return body;}
 
 
 void B2D::SetContactListener(b2ContactListener *contact_listener){
-  world.SetContactListener(contact_listener);
+  world->SetContactListener(contact_listener);
 }
 
 void B2D::Step(){
-  world.Step(time_step, velocity_iterations, position_iterations); 
+  world->Step(time_step, velocity_iterations, position_iterations); 
   
-  for(b2Body *body = world.GetBodyList(); body; body = body->GetNext()){
+  for(b2Body *body = world->GetBodyList(); body; body = body->GetNext()){
     static_cast<Node*>(body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
   }
 }
 
 void B2D::DebugDraw(float opacity , Color color1, Color color2){
   if(opacity > 1) opacity = 1;
-  for(b2Body *body = world.GetBodyList(); body; body = body->GetNext()){
+  for(b2Body *body = world->GetBodyList(); body; body = body->GetNext()){
     Color curr_color = color1;
     curr_color.a *= opacity;
 

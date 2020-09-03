@@ -275,6 +275,8 @@ assert.h
 ..//B2D.h
 m_box2d.h
 -
+DebugDraw.h
+-
 Component.h
 -
 
@@ -294,6 +296,12 @@ cmath
 tinyxml2.h
 -
 Node.h
+-
+
+..//DebugDraw.h
+m_raylib.h
+-
+m_box2d.h
 -
 
 ..//Node.h
@@ -317,6 +325,8 @@ Component.h
 -
 
 ..//m_raylib.h
+iostream
+-
 raylib.h
 -
 
@@ -330,6 +340,10 @@ BaseApp.h
 
 /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
 Component.h
+-
+
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/DebugDraw.cpp
+DebugDraw.h
 -
 
 /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp

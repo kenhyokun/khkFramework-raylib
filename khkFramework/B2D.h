@@ -28,10 +28,11 @@
 
 // #include<box2d/box2d.h>
 #include<m_box2d.h>
+#include<DebugDraw.h>
 #include<Component.h>
 
 static b2v2 gravity(0.0f, 10.0f);
-static b2World world(gravity);
+static b2World *world = new b2World(gravity);
 static float time_step = 1.0f / 60.0f;
 static int32 velocity_iterations = 6;
 static int32 position_iterations = 2;

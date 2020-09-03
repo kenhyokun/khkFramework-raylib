@@ -45,8 +45,10 @@ struct App : BaseApp, ContactListener{
 
   void OnInit() override {
 
+    DebugDraw debug_draw;
+    world->SetDebugDraw(&debug_draw);
     B2D::SetContactListener(this);
-
+    
     node1 = new Node();
     node2 = new Node();
     node3 = new Node();
@@ -276,6 +278,7 @@ struct App : BaseApp, ContactListener{
     node7->GetComponent<Component::animator>()->Draw();
 
     // B2D::DebugDraw();
+    world->DebugDraw();
 
     EndMode2D();
 

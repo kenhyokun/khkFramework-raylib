@@ -169,6 +169,21 @@ Component.s:
 .PHONY : Component.s
 
 # target to build an object file
+DebugDraw.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/DebugDraw.o
+.PHONY : DebugDraw.o
+
+# target to preprocess a source file
+DebugDraw.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/DebugDraw.i
+.PHONY : DebugDraw.i
+
+# target to generate assembly for a file
+DebugDraw.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/DebugDraw.s
+.PHONY : DebugDraw.s
+
+# target to build an object file
 Node.o:
 	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/Node.o
 .PHONY : Node.o
@@ -201,6 +216,9 @@ help:
 	@echo "... Component.o"
 	@echo "... Component.i"
 	@echo "... Component.s"
+	@echo "... DebugDraw.o"
+	@echo "... DebugDraw.i"
+	@echo "... DebugDraw.s"
 	@echo "... Node.o"
 	@echo "... Node.i"
 	@echo "... Node.s"
