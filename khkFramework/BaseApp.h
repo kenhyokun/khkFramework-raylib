@@ -44,7 +44,10 @@ struct BaseApp{
   float scale = 0.0f;
   RenderTexture2D target;
 
-  BaseApp(int _window_width = 800, int _window_height = 450, string _title = "My Game");
+  BaseApp(int _window_width = 800,
+	  int _window_height = 450,
+	  string _title = "My Game");
+
   v2 ClampValue(v2 value, v2 min, v2 max);
   void SetGameScreen(int _game_screen_width, int _game_screen_height);
   void Init();

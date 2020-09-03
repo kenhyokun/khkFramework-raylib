@@ -35,7 +35,7 @@
 
 using namespace std;
 
-struct Transform_node{
+struct m_transform{
   v2 position = v2_0;
   v2 scale = v2_1;
   float rotation = 0.0f;
@@ -46,7 +46,7 @@ struct Transform_node{
 static int node_count = 1; // for auto node naming
 
 class Node{
-  Transform_node transform;
+  m_transform transform;
   Node *parent = nullptr;
   vector<Node*> *child = new vector<Node*>();
 
@@ -56,7 +56,7 @@ class Node{
 
 protected:
   void _SetParent(Node *node);
-  Transform_node _GetTransform();
+  m_transform _GetTransform();
   void _SetTransformDirection(float up, float right);
   void _Rotate(float angle, v2 pivot); // transformation rotation
   void _RemoveChild(vector<Node*>::iterator it);
@@ -87,7 +87,7 @@ public:
     return component_map<T>.at(this);
   }
 
-  void SetTransform(Transform_node _transform);
+  void SetTransform(m_transform _transform);
   float GetUpDirection();
   float GetRightDirection();
   void SetPosition(v2 position);

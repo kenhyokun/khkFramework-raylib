@@ -30,7 +30,7 @@ v2 Component::ShapeColliderBaseComponent::GetSize(){return v2{width, height};}
 float Component::ShapeColliderBaseComponent::GetRadius(){return radius;}
 float Component::ShapeColliderBaseComponent::GetWidth(){return GetSize().x;}
 float Component::ShapeColliderBaseComponent::GetHeight(){return GetSize().y;}
-int Component::VerticeColliderBaseComponent::GetVerticeCount(){return v_count;}
+int32 Component::VerticeColliderBaseComponent::GetVerticeCount(){return v_count;}
 
 void Component::VerticeColliderBaseComponent::_OnAttach(){
   vertice = new b2v2[vertice_list.size()];
@@ -110,15 +110,28 @@ Component::EdgeCollider::EdgeCollider(vector<v2> _vertice_list){
   chain_shape = new b2ChainShape();
 }
 
+Component::EdgeCollider::EdgeCollider(v2 _vertice){
+  collider_shape = ColliderShape::EDGE; 
+  vertice_list.push_back(_vertice);
+  v_count = vertice_list.size();
+}
+
 void Component::EdgeCollider::_OnAttach(){
   Component::VerticeColliderBaseComponent::_OnAttach();
 
-  if(v_count > 2){ // if v_count > 2 edge collider will create chain shape
+  if(v_count > 2){ // create chain shape
     chain_shape->CreateChain(vertice, v_count);
   }
-  else{ // if v_count == 2 edge collider will create edge shape
+  else{ // create edge shape
+    edge_shape = new b2EdgeShape();
 
-  }
+    if(v_count < 2){
+      vertice[1] = b2v2_0;
+      v_count++;
+    }
+
+    edge_shape->Set(vertice[0], vertice[1]);
+  } // else
   vertice_list.clear();
 }
 
@@ -259,10 +272,16 @@ bool Component::RigidBody::_SetCollider(int state){
        Node::component_map<edge_collider>.end()){
 
       edge_collider collider = Node::component_map_it<edge_collider>->second;
-      fixture = body->CreateFixture(collider->chain_shape, 1.0f);
-      
+
       fixture_data _fixture_data = new FixtureData();
-      _fixture_data->v_count = collider->chain_shape->m_count;
+      if(collider->GetVerticeCount() > 2){
+      fixture = body->CreateFixture(collider->chain_shape, 1.0f);
+	_fixture_data->v_count = collider->chain_shape->m_count;
+      }
+      else{
+      fixture = body->CreateFixture(collider->edge_shape, 1.0f);
+	_fixture_data->v_count = collider->GetVerticeCount();
+      }
       _fixture_data->vertice = collider->vertice;
       fixture->SetUserData(_fixture_data);
 
@@ -331,6 +350,21 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 	break;
 
       case 1: // edge shape
+
+	for(int i = 0; i < data->v_count; i++){
+
+	  v2 vertice_position = TransformRotation(body->GetAngle(),
+						  v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
+						  v2{fixture_position.x, fixture_position.y}
+						  );
+	    
+	  DrawRectangle(vertice_position.x,
+			vertice_position.y,
+			10,
+			10,
+			color2,
+			Rad2Deg(body->GetAngle()));
+	} // for
 	break;
 
       case 2: // box & polygon shape
@@ -388,8 +422,6 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
 			color2,
 			Rad2Deg(body->GetAngle()));
 	} // for
-	break;
-      case 4:
 	break;
 
       } // switch

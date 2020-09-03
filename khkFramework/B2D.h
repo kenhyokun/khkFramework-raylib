@@ -91,7 +91,7 @@ namespace Component{
   };
 
   struct VerticeColliderBaseComponent : ColliderBaseComponent{
-    int GetVerticeCount();
+    int32 GetVerticeCount();
     vector<v2> vertice_list;
     b2v2 *vertice;
   protected:
