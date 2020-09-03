@@ -273,7 +273,7 @@ assert.h
 -
 
 ..//B2D.h
-box2d/box2d.h
+m_box2d.h
 -
 Component.h
 -
@@ -308,6 +308,12 @@ algorithm
 m_raylib.h
 -
 CMath.h
+-
+
+..//m_box2d.h
+box2d/box2d.h
+-
+Component.h
 -
 
 ..//m_raylib.h

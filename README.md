@@ -13,7 +13,7 @@ Experimental C/C++ 2D game framework with **[raylib][1]** inspired by popular ga
   - box2d v2.4.0 (https://github.com/erincatto/box2d)
   - tinyxml2 (https://github.com/leethomason/tinyxml2)
 
-# Todo for version 1.0 release:
+# Todo for version 1.0.0 release:
   - Add sample project.
   - Add basic collision shape detection (rectangle, circle, point).
   - Add capsule collider, edge collider and contact callback function with box2d.

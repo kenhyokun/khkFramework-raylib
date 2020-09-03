@@ -42,6 +42,7 @@ CMakeFiles/khkFramework.dir/B2D.o: ../B2D.h
 CMakeFiles/khkFramework.dir/B2D.o: ../CMath.h
 CMakeFiles/khkFramework.dir/B2D.o: ../Component.h
 CMakeFiles/khkFramework.dir/B2D.o: ../Node.h
+CMakeFiles/khkFramework.dir/B2D.o: ../m_box2d.h
 CMakeFiles/khkFramework.dir/B2D.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/B2D.o: ../B2D.cpp
 

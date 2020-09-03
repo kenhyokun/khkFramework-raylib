@@ -26,13 +26,9 @@
 #ifndef B2D_H
 #define B2D_H
 
-#include<box2d/box2d.h>
+// #include<box2d/box2d.h>
+#include<m_box2d.h>
 #include<Component.h>
-
-#define b2v2_0 b2v2{0, 0}
-
-typedef b2ContactListener ContactListener;
-typedef b2Vec2 b2v2;
 
 static b2v2 gravity(0.0f, 10.0f);
 static b2World world(gravity);

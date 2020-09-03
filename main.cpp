@@ -137,9 +137,9 @@ struct App : BaseApp, ContactListener{
     // 	v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20}
     // };
 
-    node13->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
+    // node13->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
     
-    // node13->AddComponent<Component::edge_collider>(new EdgeCollider(v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20}));
+    node13->AddComponent<Component::edge_collider>(new EdgeCollider(v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20}));
     node13->AddComponent<Component::rigid_body>(new RigidBody());
     // node13->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
@@ -275,7 +275,7 @@ struct App : BaseApp, ContactListener{
     node6->GetComponent<Component::tmxmap>()->Draw(); // draw all layer
     node7->GetComponent<Component::animator>()->Draw();
 
-    B2D::DebugDraw();
+    // B2D::DebugDraw();
 
     EndMode2D();
 
