@@ -28,8 +28,8 @@
 DebugDraw::DebugDraw(){
   log("debug draw was created...");
 }
-void DebugDraw::Create(){}
-void DebugDraw::Destroy(){}
+void DebugDraw::Create(){log("1");}
+void DebugDraw::Destroy(){log("2");}
 void DebugDraw::DrawPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color){
   log("there is a polygon shape");
 }

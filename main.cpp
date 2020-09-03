@@ -45,9 +45,11 @@ struct App : BaseApp, ContactListener{
 
   void OnInit() override {
 
-    DebugDraw debug_draw;
-    world->SetDebugDraw(&debug_draw);
     B2D::SetContactListener(this);
+
+    DebugDraw debug_draw;
+    debug_draw.SetFlags(b2Draw::e_shapeBit);
+    world->SetDebugDraw(&debug_draw);
     
     node1 = new Node();
     node2 = new Node();
