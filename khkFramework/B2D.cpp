@@ -145,7 +145,7 @@ void Component::RigidBody::_OnAttach(){
   body_def.position.Set(node->GetPosition().x, node->GetPosition().y);
   body = world->CreateBody(&body_def);
 
-  if(_SetCollider()){
+  if(_IsGetCollider()){
     body->SetUserData(node);
   }
   else{
@@ -153,7 +153,7 @@ void Component::RigidBody::_OnAttach(){
   }
 }
 
-bool Component::RigidBody::_SetCollider(int state){
+bool Component::RigidBody::_IsGetCollider(int state){
   switch(state){
 
   case 0: // box collider
@@ -167,16 +167,16 @@ bool Component::RigidBody::_SetCollider(int state){
       box_collider collider = Node::component_map_it<box_collider>->second;
       fixture = body->CreateFixture(collider->box_shape, 1.0f);
 
-      fixture_data _fixture_data = new FixtureData();
-      _fixture_data->v_count = collider->box_shape->m_count;
-      _fixture_data->size = collider->GetSize();
-      fixture->SetUserData(_fixture_data);
+      // fixture_data _fixture_data = new FixtureData();
+      // _fixture_data->v_count = collider->box_shape->m_count;
+      // _fixture_data->size = collider->GetSize();
+      // fixture->SetUserData(_fixture_data);
 
       delete collider;
       return true;
     }
     else{
-      _SetCollider(1);
+      _IsGetCollider(1);
     }
 
     break;
@@ -191,13 +191,13 @@ bool Component::RigidBody::_SetCollider(int state){
 
       circle_collider collider = Node::component_map_it<circle_collider>->second;
       fixture = body->CreateFixture(collider->circle_shape, 1.0f);
-      fixture->SetUserData(new FixtureData());
+      // fixture->SetUserData(new FixtureData());
 
       delete collider;
       return true;
     }
     else{
-      _SetCollider(2);
+      _IsGetCollider(2);
     }
 
     break;
@@ -216,25 +216,25 @@ bool Component::RigidBody::_SetCollider(int state){
       // upper circle
       collider->circle_shape->m_p = b2v2{0, -collider->GetHeight() / 2};
       fixture = body->CreateFixture(collider->circle_shape, 1.0f);
-      fixture->SetUserData(new FixtureData{b2v2{0, -collider->GetHeight() / 2}});
+      // fixture->SetUserData(new FixtureData{b2v2{0, -collider->GetHeight() / 2}});
 
       // mid box
       fixture = body->CreateFixture(collider->box_shape, 1.0f);
-      fixture_data _fixture_data = new FixtureData();
-      _fixture_data->v_count = collider->box_shape->m_count;
-      _fixture_data->size = collider->GetSize();
-      fixture->SetUserData(_fixture_data);
+      // fixture_data _fixture_data = new FixtureData();
+      // _fixture_data->v_count = collider->box_shape->m_count;
+      // _fixture_data->size = collider->GetSize();
+      // fixture->SetUserData(_fixture_data);
 
       // bottom circle
       collider->circle_shape->m_p = b2v2{0, collider->GetHeight() / 2};
       fixture = body->CreateFixture(collider->circle_shape, 1.0f);
-      fixture->SetUserData(new FixtureData{b2v2{0, collider->GetHeight() / 2}});
+      // fixture->SetUserData(new FixtureData{b2v2{0, collider->GetHeight() / 2}});
 
       delete collider;
       return true;
     }
     else{
-      _SetCollider(3);
+      _IsGetCollider(3);
     }
 
     break;
@@ -250,16 +250,16 @@ bool Component::RigidBody::_SetCollider(int state){
       polygon_collider collider = Node::component_map_it<polygon_collider>->second;
       fixture = body->CreateFixture(collider->polygon_shape, 1.0f);
 
-      fixture_data _fixture_data = new FixtureData();
-      _fixture_data->v_count = collider->polygon_shape->m_count;
-      _fixture_data->vertice = collider->vertice;
-      fixture->SetUserData(_fixture_data);
+      // fixture_data _fixture_data = new FixtureData();
+      // _fixture_data->v_count = collider->polygon_shape->m_count;
+      // _fixture_data->vertice = collider->vertice;
+      // fixture->SetUserData(_fixture_data);
 
       delete collider;
       return true;
     }
     else{
-      _SetCollider(4);
+      _IsGetCollider(4);
     }
     break;
 
@@ -273,17 +273,17 @@ bool Component::RigidBody::_SetCollider(int state){
 
       edge_collider collider = Node::component_map_it<edge_collider>->second;
 
-      fixture_data _fixture_data = new FixtureData();
+      // fixture_data _fixture_data = new FixtureData();
       if(collider->GetVerticeCount() > 2){
       fixture = body->CreateFixture(collider->chain_shape, 1.0f);
-	_fixture_data->v_count = collider->chain_shape->m_count;
+      // _fixture_data->v_count = collider->chain_shape->m_count;
       }
       else{
       fixture = body->CreateFixture(collider->edge_shape, 1.0f);
-	_fixture_data->v_count = collider->GetVerticeCount();
+      // _fixture_data->v_count = collider->GetVerticeCount();
       }
-      _fixture_data->vertice = collider->vertice;
-      fixture->SetUserData(_fixture_data);
+      // _fixture_data->vertice = collider->vertice;
+      // fixture->SetUserData(_fixture_data);
 
       delete collider;
       return true;
@@ -312,7 +312,6 @@ b2Body* Component::RigidBody::GetBody(){return body;}
 
 
 
-B2D_DebugDraw debug_draw;
 void B2D::Init(ContactListener *contact_listener){
   if(contact_listener != nullptr){
     world->SetContactListener(contact_listener);
@@ -322,10 +321,7 @@ void B2D::Init(ContactListener *contact_listener){
 }
 
 void B2D::Step(){
-
   world->Step(time_step, velocity_iterations, position_iterations); 
-  debug_draw.SetFlags(b2Draw::e_shapeBit);
-  world->DebugDraw();
 
   for(b2Body *body = world->GetBodyList(); body; body = body->GetNext()){
     static_cast<Node*>(body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
@@ -334,94 +330,6 @@ void B2D::Step(){
 }
 
 void B2D::DebugDraw(float opacity , Color color1, Color color2){
-  if(opacity > 1) opacity = 1;
-  for(b2Body *body = world->GetBodyList(); body; body = body->GetNext()){
-    Color curr_color = color1;
-    curr_color.a *= opacity;
-
-    for(b2Fixture* fixture = body->GetFixtureList(); fixture; fixture = fixture->GetNext()){
-
-      Component::fixture_data data =  static_cast<Component::fixture_data>(fixture->GetUserData());
-      b2v2 *rel_position = &data->rel_position;
-
-      v2 fixture_position = TransformRotation(body->GetAngle(),
-					      v2{body->GetPosition().x + rel_position->x, body->GetPosition().y + rel_position->y},
-					      v2{body->GetPosition().x, body->GetPosition().y}
-					      );
-
-       switch(fixture->GetType()){
-       case 0: // circle shape
-
-   	DrawCircle(fixture_position.x,
-   		   fixture_position.y,
-   		   fixture->GetShape()->m_radius,
-   		   curr_color);     
-
-   	break;
-
-       case 1: // edge shape
-
-   	for(int i = 0; i < data->v_count; i++){
-
-   	  v2 vertice_position = TransformRotation(body->GetAngle(),
-   						  v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
-   						  v2{fixture_position.x, fixture_position.y}
-   						  );
-	    
-	  DrawVertice(v2{vertice_position.x, vertice_position.y},
-		      body->GetAngle());
-   	  
-   	} // for
-   	break;
-
-       case 2: // box & polygon shape
-
-   	if(data->v_count == 4){ // draw box shape
-   	  DrawRectangle(fixture_position.x,
-   			fixture_position.y,
-   			data->size.x,
-   			data->size.y,
-   			curr_color,
-   			Rad2Deg(body->GetAngle()));
-   	}
-   	else{ // draw polygon shape
-
-   	  for(int i = 0; i < data->v_count; i++){
-
-   	    v2 vertice_position = TransformRotation(body->GetAngle(),
-   						    v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
-   						    v2{fixture_position.x, fixture_position.y}
-   						    );
-	    
-	    DrawVertice(v2{vertice_position.x, vertice_position.y},
-			body->GetAngle());
-
-   	  } // for
-
-   	} // else
-
-   	break;
-       case 3: // chain shape
-
-   	for(int i = 0; i < data->v_count; i++){
-
-   	  v2 vertice_position = TransformRotation(body->GetAngle(),
-   						  v2{fixture_position.x + data->vertice[i].x, fixture_position.y + data->vertice[i].y},
-   						  v2{fixture_position.x, fixture_position.y}
-   						  );
-	    
-	  DrawVertice(v2{vertice_position.x, vertice_position.y},
-		      body->GetAngle());
-
-   	} // for
-   	break;
-
-       } // switch
-
-       // fixture position
-       DrawVertice(v2{fixture_position.x, fixture_position.y},
-		   body->GetAngle());
-
-     } // for fixture
-   } // for body
+  debug_draw.SetFlags(b2Draw::e_shapeBit);
+  world->DebugDraw();
 }

@@ -35,7 +35,7 @@ static b2World *world = new b2World(gravity);
 static float time_step = 1.0f / 60.0f;
 static int32 velocity_iterations = 6;
 static int32 position_iterations = 2;
-
+static B2D_DebugDraw debug_draw;
 
 /*
   Available namespace:
@@ -170,7 +170,7 @@ namespace Component{
     b2Fixture *fixture = nullptr;
 
     void _OnAttach() override;
-    bool _SetCollider(int state = 0); // search and set collider shape
+    bool _IsGetCollider(int state = 0); // search and set collider shape
 
   } *rigid_body; 
 
