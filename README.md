@@ -4,16 +4,20 @@ Experimental C/C++ 2D game framework with **[raylib][1]** inspired by popular ga
 </br>
 **Note: Build and tested on Ubuntu 18.04. No cross platform makefile for now.**
 
+Current progress:
+</br>
+<img align="center" src="https://github.com/kenhyokun/khkFramework-raylib-/blob/master/github_resources/curr_progress.gif" width=712>
+
 # Features:
   - Load exported **.tmx** file from **[Tiled map editor](https://www.mapeditor.org/)** for tile mapping. (only orthogonal view for now)
   - box2d physics engine. (only box, circle, capsule, polygon, and edge collision for now)
 
 # 3rd party library:
-  - raylib v3.0.0 (https://github.com/raysan5/raylib)
-  - box2d v2.4.0 (https://github.com/erincatto/box2d)
+  - raylib (https://github.com/raysan5/raylib)
   - tinyxml2 (https://github.com/leethomason/tinyxml2)
+  - box2d (https://github.com/erincatto/box2d)
 
-# Todo for version 1.0.0 release:
+# Todo for version 1.0 release:
   - Add sample project.
   - Add basic collision shape detection (rectangle, circle, point).
   - Add capsule collider, edge collider and contact callback function with box2d.

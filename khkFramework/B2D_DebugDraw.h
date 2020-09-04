@@ -28,7 +28,6 @@
 
 #include<m_box2d.h>
 #include<m_raylib.h>
-#include<CMath.h>
 
 class B2D_DebugDraw : public b2Draw{
  public:
