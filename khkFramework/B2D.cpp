@@ -312,24 +312,25 @@ b2Body* Component::RigidBody::GetBody(){return body;}
 
 
 
+B2D_DebugDraw debug_draw;
 void B2D::Init(ContactListener *contact_listener){
   if(contact_listener != nullptr){
     world->SetContactListener(contact_listener);
   }
 
-  B2D_DebugDraw debug_draw;
   world->SetDebugDraw(&debug_draw);
 }
 
 void B2D::Step(){
 
   world->Step(time_step, velocity_iterations, position_iterations); 
-  
+  debug_draw.SetFlags(b2Draw::e_shapeBit);
+  world->DebugDraw();
+
   for(b2Body *body = world->GetBodyList(); body; body = body->GetNext()){
     static_cast<Node*>(body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
   }
 
-  world->DebugDraw();
 }
 
 void B2D::DebugDraw(float opacity , Color color1, Color color2){
@@ -367,12 +368,9 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
    						  v2{fixture_position.x, fixture_position.y}
    						  );
 	    
-   	  DrawRectangle(vertice_position.x,
-   			vertice_position.y,
-   			10,
-   			10,
-   			color2,
-   			Rad2Deg(body->GetAngle()));
+	  DrawVertice(v2{vertice_position.x, vertice_position.y},
+		      body->GetAngle());
+   	  
    	} // for
    	break;
 
@@ -388,7 +386,6 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
    	}
    	else{ // draw polygon shape
 
-   	  // vertice position
    	  for(int i = 0; i < data->v_count; i++){
 
    	    v2 vertice_position = TransformRotation(body->GetAngle(),
@@ -396,14 +393,10 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
    						    v2{fixture_position.x, fixture_position.y}
    						    );
 	    
-   	    DrawRectangle(vertice_position.x,
-   			  vertice_position.y,
-   			  10,
-   			  10,
-   			  color2,
-   			  Rad2Deg(body->GetAngle()));
-   	  } // for
+	    DrawVertice(v2{vertice_position.x, vertice_position.y},
+			body->GetAngle());
 
+   	  } // for
 
    	} // else
 
@@ -417,24 +410,17 @@ void B2D::DebugDraw(float opacity , Color color1, Color color2){
    						  v2{fixture_position.x, fixture_position.y}
    						  );
 	    
-   	  DrawRectangle(vertice_position.x,
-   			vertice_position.y,
-   			10,
-   			10,
-   			color2,
-   			Rad2Deg(body->GetAngle()));
+	  DrawVertice(v2{vertice_position.x, vertice_position.y},
+		      body->GetAngle());
+
    	} // for
    	break;
 
        } // switch
 
-   	  // fixture position
-   	  DrawRectangle(fixture_position.x,
-   			fixture_position.y,
-   			10,
-   			10,
-   			color2,
-   			Rad2Deg(body->GetAngle()));
+       // fixture position
+       DrawVertice(v2{fixture_position.x, fixture_position.y},
+		   body->GetAngle());
 
      } // for fixture
    } // for body

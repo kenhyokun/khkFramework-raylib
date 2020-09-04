@@ -43,6 +43,10 @@ struct App : BaseApp, ContactListener{
   App(int _window_width, int _window_height, string _title) :
     BaseApp(_window_width, _window_height, _title){}
 
+  ~App(){
+    delete world;
+  }
+
   void OnInit() override {
 
     B2D::Init(this);
@@ -275,7 +279,7 @@ struct App : BaseApp, ContactListener{
     node6->GetComponent<Component::tmxmap>()->Draw(); // draw all layer
     node7->GetComponent<Component::animator>()->Draw();
 
-    // B2D::DebugDraw();
+    B2D::DebugDraw();
 
     EndMode2D();
 

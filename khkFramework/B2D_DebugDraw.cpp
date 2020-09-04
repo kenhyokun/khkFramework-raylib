@@ -26,13 +26,17 @@
 #include<B2D_DebugDraw.h>
 
 B2D_DebugDraw::B2D_DebugDraw(){
-   m_drawFlags = e_shapeBit;
+  m_drawFlags = e_shapeBit;
+  // m_drawFlags = e_jointBit;
+  // m_drawFlags = e_aabbBit;
+  // m_drawFlags = e_pairBit;
+  // m_drawFlags = e_centerOfMassBit;
 }
 
-void B2D_DebugDraw::DrawPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color){cout<<"hello world"<<endl;}
-void B2D_DebugDraw::DrawSolidPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color){cout<<"hello world"<<endl;}
-void B2D_DebugDraw::DrawCircle(const b2v2& center, float radius, const b2Color& color){cout<<"hello world"<<endl;}
-void B2D_DebugDraw::DrawSolidCircle(const b2v2& center, float radius, const b2v2& axis, const b2Color& color){cout<<"hello world"<<endl;}
-void B2D_DebugDraw::DrawSegment(const b2v2& p1, const b2v2& p2, const b2Color& color){cout<<"hello world"<<endl;}
-void B2D_DebugDraw::DrawTransform(const b2Transform& xf){cout<<"hello world"<<endl;}
-void B2D_DebugDraw::DrawPoint(const b2v2& p, float size, const b2Color& color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawPolygon(const b2v2 *vertices, int32 vertexCount, const b2Color &color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawSolidPolygon(const b2v2 *vertices, int32 vertexCount, const b2Color &color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawCircle(const b2v2 &center, float radius, const b2Color &color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawSolidCircle(const b2v2 &center, float radius, const b2v2 &axis, const b2Color& color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawSegment(const b2v2 &p1, const b2v2 &p2, const b2Color &color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawTransform(const b2Transform &xf){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawPoint(const b2v2 &p, float size, const b2Color &color){cout<<"hello world"<<endl;}

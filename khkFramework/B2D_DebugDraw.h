@@ -26,25 +26,35 @@
 #ifndef B2D_DEBUG_DRAW_H
 #define B2D_DEBUG_DRAW_H
 
-#include<m_raylib.h>
 #include<m_box2d.h>
+#include<m_raylib.h>
+#include<CMath.h>
 
 class B2D_DebugDraw : public b2Draw{
  public:
   B2D_DebugDraw();
-  void DrawPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color) override;
-  void DrawSolidPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color) override;
-  void DrawCircle(const b2v2& center, float radius, const b2Color& color) override;
-  void DrawSolidCircle(const b2v2& center, float radius, const b2v2& axis, const b2Color& color) override;
-  void DrawSegment(const b2v2& p1, const b2v2& p2, const b2Color& color) override;
-  void DrawTransform(const b2Transform& xf) override;
-  void DrawPoint(const b2v2& p, float size, const b2Color& color) override;
+  void DrawPolygon(const b2v2 *vertices, int32 vertexCount, const b2Color &color) override;
+  void DrawSolidPolygon(const b2v2 *vertices, int32 vertexCount, const b2Color &color) override;
+  void DrawCircle(const b2v2 &center, float radius, const b2Color &color) override;
+  void DrawSolidCircle(const b2v2 &center, float radius, const b2v2 &axis, const b2Color &color) override;
+  void DrawSegment(const b2v2 &p1, const b2v2 &p2, const b2Color &color) override;
+  void DrawTransform(const b2Transform &xf) override;
+  void DrawPoint(const b2v2 &p, float size, const b2Color &color) override;
 };
 
-struct m_debug_draw{
-  void DrawVertice();
-  void DrawPolygon();
-  void DrawCircle();
-};
+// struct m_debug_draw{
+  inline void DrawVertice(v2 position, float angle){
+
+    DrawRectangle(position.x,
+		  position.y,
+		  10,
+		  10,
+		  RED,
+		  Rad2Deg(angle));
+  }
+
+// inline void DrawPolygon(){}
+// inline void DrawCircle(){}
+// };
 
 #endif
