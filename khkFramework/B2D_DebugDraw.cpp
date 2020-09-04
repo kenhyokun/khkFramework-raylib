@@ -38,12 +38,15 @@ void B2D_DebugDraw::DrawPolygon(const b2v2 *vertices, int32 v_count, const b2Col
 }
 
 void B2D_DebugDraw::DrawSolidPolygon(const b2v2 *vertices, int32 v_count, const b2Color &color){
-  cout<<"hello world solid polygon"<<endl;
 
-  for(int i = 0; i < v_count; i++){
+  b2v2 p1 = vertices[v_count - 1];
+  for (int32 i = 0; i < v_count; i++){
+    b2v2 p2 = vertices[i];
+    DrawSegment(p1, p2, b2Color{0, 0, 0, 1});
+    p1 = p2;
+
     DrawPoint(vertices[i], 10, b2Color{0, 0, 0, 1});
   }
-
 }
 
 void B2D_DebugDraw::DrawCircle(const b2v2 &center, float radius, const b2Color &color){
@@ -51,12 +54,12 @@ void B2D_DebugDraw::DrawCircle(const b2v2 &center, float radius, const b2Color &
 }
 
 void B2D_DebugDraw::DrawSolidCircle(const b2v2 &center, float radius, const b2v2 &axis, const b2Color& color){
-  cout<<"hello world solid circle"<<endl;
+  DrawCircleLines(center.x, center.y, radius, GREEN);
   DrawPoint(center, 10, b2Color{0, 0, 0, 1});
 }
 
 void B2D_DebugDraw::DrawSegment(const b2v2 &p1, const b2v2 &p2, const b2Color &color){
-  cout<<"hello world segment"<<endl;
+  DrawLine(p1.x, p1.y, p2.x, p2.y, GREEN);   
 }
 
 void B2D_DebugDraw::DrawTransform(const b2Transform &xf){
@@ -64,6 +67,5 @@ void B2D_DebugDraw::DrawTransform(const b2Transform &xf){
 }
 
 void B2D_DebugDraw::DrawPoint(const b2v2 &p, float size, const b2Color &color){
-  cout<<"hello world point"<<endl;
-  DrawRectangle(p.x, p.y, size, size, RED, 0);
+  mDrawCircle(p.x, p.y, 5, RED);
 }

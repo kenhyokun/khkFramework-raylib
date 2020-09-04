@@ -167,8 +167,6 @@ namespace Component{
 
   protected:
     b2Body *body = nullptr;
-    b2Fixture *fixture = nullptr;
-
     void _OnAttach() override;
     bool _IsGetCollider(int state = 0); // search and set collider shape
 

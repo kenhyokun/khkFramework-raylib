@@ -39,6 +39,10 @@ inline void log(string log_str){
   cout<<log_str<<endl;
 }
 
+inline void mDrawCircle(float x, float y, float r, Color color){
+  DrawCircle(x, y, r, color);
+}
+
 inline void DrawRectangle(float x, float y, int width, int height, Color color, float rotation = 0.0f){
   DrawRectanglePro(Rectangle{x, y, (float)width, (float)height},
 		   v2{width * 0.5f, height * 0.5f},

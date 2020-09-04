@@ -165,12 +165,7 @@ bool Component::RigidBody::_IsGetCollider(int state){
        Node::component_map<box_collider>.end()){
 
       box_collider collider = Node::component_map_it<box_collider>->second;
-      fixture = body->CreateFixture(collider->box_shape, 1.0f);
-
-      // fixture_data _fixture_data = new FixtureData();
-      // _fixture_data->v_count = collider->box_shape->m_count;
-      // _fixture_data->size = collider->GetSize();
-      // fixture->SetUserData(_fixture_data);
+      body->CreateFixture(collider->box_shape, 1.0f);
 
       delete collider;
       return true;
@@ -190,8 +185,7 @@ bool Component::RigidBody::_IsGetCollider(int state){
        Node::component_map<circle_collider>.end()){
 
       circle_collider collider = Node::component_map_it<circle_collider>->second;
-      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
-      // fixture->SetUserData(new FixtureData());
+      body->CreateFixture(collider->circle_shape, 1.0f);
 
       delete collider;
       return true;
@@ -215,20 +209,14 @@ bool Component::RigidBody::_IsGetCollider(int state){
 
       // upper circle
       collider->circle_shape->m_p = b2v2{0, -collider->GetHeight() / 2};
-      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
-      // fixture->SetUserData(new FixtureData{b2v2{0, -collider->GetHeight() / 2}});
+      body->CreateFixture(collider->circle_shape, 1.0f);
 
       // mid box
-      fixture = body->CreateFixture(collider->box_shape, 1.0f);
-      // fixture_data _fixture_data = new FixtureData();
-      // _fixture_data->v_count = collider->box_shape->m_count;
-      // _fixture_data->size = collider->GetSize();
-      // fixture->SetUserData(_fixture_data);
+      body->CreateFixture(collider->box_shape, 1.0f);
 
       // bottom circle
       collider->circle_shape->m_p = b2v2{0, collider->GetHeight() / 2};
-      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
-      // fixture->SetUserData(new FixtureData{b2v2{0, collider->GetHeight() / 2}});
+      body->CreateFixture(collider->circle_shape, 1.0f);
 
       delete collider;
       return true;
@@ -248,12 +236,7 @@ bool Component::RigidBody::_IsGetCollider(int state){
        Node::component_map<polygon_collider>.end()){
 
       polygon_collider collider = Node::component_map_it<polygon_collider>->second;
-      fixture = body->CreateFixture(collider->polygon_shape, 1.0f);
-
-      // fixture_data _fixture_data = new FixtureData();
-      // _fixture_data->v_count = collider->polygon_shape->m_count;
-      // _fixture_data->vertice = collider->vertice;
-      // fixture->SetUserData(_fixture_data);
+      body->CreateFixture(collider->polygon_shape, 1.0f);
 
       delete collider;
       return true;
@@ -273,17 +256,12 @@ bool Component::RigidBody::_IsGetCollider(int state){
 
       edge_collider collider = Node::component_map_it<edge_collider>->second;
 
-      // fixture_data _fixture_data = new FixtureData();
       if(collider->GetVerticeCount() > 2){
-      fixture = body->CreateFixture(collider->chain_shape, 1.0f);
-      // _fixture_data->v_count = collider->chain_shape->m_count;
+	body->CreateFixture(collider->chain_shape, 1.0f);
       }
       else{
-      fixture = body->CreateFixture(collider->edge_shape, 1.0f);
-      // _fixture_data->v_count = collider->GetVerticeCount();
+	body->CreateFixture(collider->edge_shape, 1.0f);
       }
-      // _fixture_data->vertice = collider->vertice;
-      // fixture->SetUserData(_fixture_data);
 
       delete collider;
       return true;
