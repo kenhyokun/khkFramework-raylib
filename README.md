@@ -1,4 +1,4 @@
-<img align="center" src="https://github.com/kenhyokun/khkFramework-raylib/blob/master/khkFramework-raylib-logo.png" width=512>
+<img align="center" src="https://github.com/kenhyokun/khkFramework-raylib/blob/master/github_resources/logo/khkFramework-raylib-logo.png" width=512>
 
 Experimental C/C++ 2D game framework with **[raylib][1]** inspired by popular game engine like **[Ogre3D][2]**, **[libGDX][3]** and Unity3D.
 </br>
@@ -13,11 +13,11 @@ Current progress:
   - box2d physics engine. (only box, circle, capsule, polygon, and edge collision for now)
 
 # 3rd party library:
-  - raylib (https://github.com/raysan5/raylib)
-  - tinyxml2 (https://github.com/leethomason/tinyxml2)
-  - box2d (https://github.com/erincatto/box2d)
+  - raylib v3.0.0 (https://github.com/raysan5/raylib)
+  - box2d v2.4.0 (https://github.com/erincatto/box2d)
+  - tinyxml2 (https://github.com/leethomason/tinyxml2) 
 
-# Todo for version 1.0 release:
+# Todo for version 1.0.0 release:
   - Add sample project.
   - Add basic collision shape detection (rectangle, circle, point).
   - Add capsule collider, edge collider and contact callback function with box2d.
