@@ -139,6 +139,21 @@ B2D.s:
 .PHONY : B2D.s
 
 # target to build an object file
+B2D_DebugDraw.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
+.PHONY : B2D_DebugDraw.o
+
+# target to preprocess a source file
+B2D_DebugDraw.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/B2D_DebugDraw.i
+.PHONY : B2D_DebugDraw.i
+
+# target to generate assembly for a file
+B2D_DebugDraw.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/B2D_DebugDraw.s
+.PHONY : B2D_DebugDraw.s
+
+# target to build an object file
 BaseApp.o:
 	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/BaseApp.o
 .PHONY : BaseApp.o
@@ -169,21 +184,6 @@ Component.s:
 .PHONY : Component.s
 
 # target to build an object file
-DebugDraw.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/DebugDraw.o
-.PHONY : DebugDraw.o
-
-# target to preprocess a source file
-DebugDraw.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/DebugDraw.i
-.PHONY : DebugDraw.i
-
-# target to generate assembly for a file
-DebugDraw.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/DebugDraw.s
-.PHONY : DebugDraw.s
-
-# target to build an object file
 Node.o:
 	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/Node.o
 .PHONY : Node.o
@@ -210,15 +210,15 @@ help:
 	@echo "... B2D.o"
 	@echo "... B2D.i"
 	@echo "... B2D.s"
+	@echo "... B2D_DebugDraw.o"
+	@echo "... B2D_DebugDraw.i"
+	@echo "... B2D_DebugDraw.s"
 	@echo "... BaseApp.o"
 	@echo "... BaseApp.i"
 	@echo "... BaseApp.s"
 	@echo "... Component.o"
 	@echo "... Component.i"
 	@echo "... Component.s"
-	@echo "... DebugDraw.o"
-	@echo "... DebugDraw.i"
-	@echo "... DebugDraw.s"
 	@echo "... Node.o"
 	@echo "... Node.i"
 	@echo "... Node.s"

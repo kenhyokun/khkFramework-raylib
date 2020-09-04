@@ -23,18 +23,15 @@
   kevinhyokun91@gmail.com
 */
 
-#ifndef DEBUG_DRAW_H
-#define DEBUG_DRAW_H
+#ifndef B2D_DEBUG_DRAW_H
+#define B2D_DEBUG_DRAW_H
 
 #include<m_raylib.h>
 #include<m_box2d.h>
 
-class DebugDraw : public b2Draw{
+class B2D_DebugDraw : public b2Draw{
  public:
-  DebugDraw();
-  ~DebugDraw();
-  void Create();
-  void Destroy();
+  B2D_DebugDraw();
   void DrawPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color) override;
   void DrawSolidPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color) override;
   void DrawCircle(const b2v2& center, float radius, const b2Color& color) override;
@@ -42,7 +39,12 @@ class DebugDraw : public b2Draw{
   void DrawSegment(const b2v2& p1, const b2v2& p2, const b2Color& color) override;
   void DrawTransform(const b2Transform& xf) override;
   void DrawPoint(const b2v2& p, float size, const b2Color& color) override;
-  void Flush();
+};
+
+struct m_debug_draw{
+  void DrawVertice();
+  void DrawPolygon();
+  void DrawCircle();
 };
 
 #endif

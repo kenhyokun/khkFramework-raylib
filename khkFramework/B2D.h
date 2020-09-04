@@ -26,16 +26,16 @@
 #ifndef B2D_H
 #define B2D_H
 
-// #include<box2d/box2d.h>
 #include<m_box2d.h>
-#include<DebugDraw.h>
 #include<Component.h>
+#include<B2D_DebugDraw.h>
 
 static b2v2 gravity(0.0f, 10.0f);
 static b2World *world = new b2World(gravity);
 static float time_step = 1.0f / 60.0f;
 static int32 velocity_iterations = 6;
 static int32 position_iterations = 2;
+
 
 /*
   Available namespace:
@@ -180,8 +180,8 @@ namespace Component{
 namespace B2D{
   typedef b2Body Body;
   typedef b2World World;
-  
-  void SetContactListener(b2ContactListener *contact_listener);
+
+  void Init(ContactListener *contact_listener = nullptr);
   void Step();
   void DebugDraw(float opacity = 0.666f, Color color1 = GREEN, Color color2 = RED);
 

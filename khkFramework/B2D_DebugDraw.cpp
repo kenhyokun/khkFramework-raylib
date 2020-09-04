@@ -23,27 +23,16 @@
   kevinhyokun91@gmail.com
 */
 
-#include<DebugDraw.h>
+#include<B2D_DebugDraw.h>
 
-DebugDraw::DebugDraw(){
-  log("debug draw was created...");
+B2D_DebugDraw::B2D_DebugDraw(){
+   m_drawFlags = e_shapeBit;
 }
-void DebugDraw::Create(){log("1");}
-void DebugDraw::Destroy(){log("2");}
-void DebugDraw::DrawPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color){
-  log("there is a polygon shape");
-}
-void DebugDraw::DrawSolidPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color){
-  log("there is a polygon shape");
-}
-void DebugDraw::DrawCircle(const b2v2& center, float radius, const b2Color& color){
-  log("there is a circle shape");
-}
-void DebugDraw::DrawSolidCircle(const b2v2& center, float radius, const b2v2& axis, const b2Color& color){
-  log("there is a circle shape");
-}
-void DebugDraw::DrawSegment(const b2v2& p1, const b2v2& p2, const b2Color& color){}
-void DebugDraw::DrawTransform(const b2Transform& xf){}
-void DebugDraw::DrawPoint(const b2v2& p, float size, const b2Color& color){} 
-void DebugDraw::Flush(){}
-DebugDraw::~DebugDraw(){}
+
+void B2D_DebugDraw::DrawPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawSolidPolygon(const b2v2* vertices, int32 vertexCount, const b2Color& color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawCircle(const b2v2& center, float radius, const b2Color& color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawSolidCircle(const b2v2& center, float radius, const b2v2& axis, const b2Color& color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawSegment(const b2v2& p1, const b2v2& p2, const b2Color& color){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawTransform(const b2Transform& xf){cout<<"hello world"<<endl;}
+void B2D_DebugDraw::DrawPoint(const b2v2& p, float size, const b2Color& color){cout<<"hello world"<<endl;}

@@ -81,9 +81,33 @@ CMakeFiles/khkFramework.dir/B2D.o.provides: CMakeFiles/khkFramework.dir/B2D.o.re
 CMakeFiles/khkFramework.dir/B2D.o.provides.build: CMakeFiles/khkFramework.dir/B2D.o
 
 
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: CMakeFiles/khkFramework.dir/flags.make
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../B2D_DebugDraw.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/khkFramework.dir/B2D_DebugDraw.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/B2D_DebugDraw.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp
+
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/B2D_DebugDraw.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp > CMakeFiles/khkFramework.dir/B2D_DebugDraw.i
+
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/B2D_DebugDraw.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp -o CMakeFiles/khkFramework.dir/B2D_DebugDraw.s
+
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.requires:
+
+.PHONY : CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.requires
+
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.provides: CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.requires
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.provides.build
+.PHONY : CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.provides
+
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.provides.build: CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
+
+
 CMakeFiles/khkFramework.dir/BaseApp.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/khkFramework.dir/BaseApp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/khkFramework.dir/BaseApp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/BaseApp.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp
 
 CMakeFiles/khkFramework.dir/BaseApp.i: cmake_force
@@ -107,7 +131,7 @@ CMakeFiles/khkFramework.dir/BaseApp.o.provides.build: CMakeFiles/khkFramework.di
 
 CMakeFiles/khkFramework.dir/Component.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/Component.o: ../Component.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/khkFramework.dir/Component.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/khkFramework.dir/Component.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/Component.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
 
 CMakeFiles/khkFramework.dir/Component.i: cmake_force
@@ -127,30 +151,6 @@ CMakeFiles/khkFramework.dir/Component.o.provides: CMakeFiles/khkFramework.dir/Co
 .PHONY : CMakeFiles/khkFramework.dir/Component.o.provides
 
 CMakeFiles/khkFramework.dir/Component.o.provides.build: CMakeFiles/khkFramework.dir/Component.o
-
-
-CMakeFiles/khkFramework.dir/DebugDraw.o: CMakeFiles/khkFramework.dir/flags.make
-CMakeFiles/khkFramework.dir/DebugDraw.o: ../DebugDraw.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/khkFramework.dir/DebugDraw.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/DebugDraw.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/DebugDraw.cpp
-
-CMakeFiles/khkFramework.dir/DebugDraw.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/DebugDraw.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/DebugDraw.cpp > CMakeFiles/khkFramework.dir/DebugDraw.i
-
-CMakeFiles/khkFramework.dir/DebugDraw.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/DebugDraw.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/DebugDraw.cpp -o CMakeFiles/khkFramework.dir/DebugDraw.s
-
-CMakeFiles/khkFramework.dir/DebugDraw.o.requires:
-
-.PHONY : CMakeFiles/khkFramework.dir/DebugDraw.o.requires
-
-CMakeFiles/khkFramework.dir/DebugDraw.o.provides: CMakeFiles/khkFramework.dir/DebugDraw.o.requires
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/DebugDraw.o.provides.build
-.PHONY : CMakeFiles/khkFramework.dir/DebugDraw.o.provides
-
-CMakeFiles/khkFramework.dir/DebugDraw.o.provides.build: CMakeFiles/khkFramework.dir/DebugDraw.o
 
 
 CMakeFiles/khkFramework.dir/Node.o: CMakeFiles/khkFramework.dir/flags.make
@@ -180,18 +180,18 @@ CMakeFiles/khkFramework.dir/Node.o.provides.build: CMakeFiles/khkFramework.dir/N
 # Object files for target khkFramework
 khkFramework_OBJECTS = \
 "CMakeFiles/khkFramework.dir/B2D.o" \
+"CMakeFiles/khkFramework.dir/B2D_DebugDraw.o" \
 "CMakeFiles/khkFramework.dir/BaseApp.o" \
 "CMakeFiles/khkFramework.dir/Component.o" \
-"CMakeFiles/khkFramework.dir/DebugDraw.o" \
 "CMakeFiles/khkFramework.dir/Node.o"
 
 # External object files for target khkFramework
 khkFramework_EXTERNAL_OBJECTS =
 
 libkhkFramework.a: CMakeFiles/khkFramework.dir/B2D.o
+libkhkFramework.a: CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/BaseApp.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/Component.o
-libkhkFramework.a: CMakeFiles/khkFramework.dir/DebugDraw.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/Node.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/build.make
 libkhkFramework.a: CMakeFiles/khkFramework.dir/link.txt
@@ -205,9 +205,9 @@ CMakeFiles/khkFramework.dir/build: libkhkFramework.a
 .PHONY : CMakeFiles/khkFramework.dir/build
 
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/B2D.o.requires
+CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.requires
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/BaseApp.o.requires
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/Component.o.requires
-CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/DebugDraw.o.requires
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/Node.o.requires
 
 .PHONY : CMakeFiles/khkFramework.dir/requires

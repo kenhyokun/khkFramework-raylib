@@ -40,27 +40,14 @@ CMakeFiles/khkFramework.dir/B2D.o
  ../../raylib/raylib.h
  ../../tinyxml2/tinyxml2.h
  ..//B2D.h
+ ..//B2D_DebugDraw.h
  ..//CMath.h
  ..//Component.h
- ..//DebugDraw.h
  ..//Node.h
  ..//m_box2d.h
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D.cpp
-CMakeFiles/khkFramework.dir/BaseApp.o
- ../../raylib/raylib.h
- ..//BaseApp.h
- ..//m_raylib.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp
-CMakeFiles/khkFramework.dir/Component.o
- ../../raylib/raylib.h
- ../../tinyxml2/tinyxml2.h
- ..//CMath.h
- ..//Component.h
- ..//Node.h
- ..//m_raylib.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
-CMakeFiles/khkFramework.dir/DebugDraw.o
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
  ../../box2d/box2d/b2_block_allocator.h
  ../../box2d/box2d/b2_body.h
  ../../box2d/box2d/b2_broad_phase.h
@@ -98,13 +85,26 @@ CMakeFiles/khkFramework.dir/DebugDraw.o
  ../../box2d/box2d/box2d.h
  ../../raylib/raylib.h
  ../../tinyxml2/tinyxml2.h
+ ..//B2D_DebugDraw.h
  ..//CMath.h
  ..//Component.h
- ..//DebugDraw.h
  ..//Node.h
  ..//m_box2d.h
  ..//m_raylib.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/DebugDraw.cpp
+ /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp
+CMakeFiles/khkFramework.dir/BaseApp.o
+ ../../raylib/raylib.h
+ ..//BaseApp.h
+ ..//m_raylib.h
+ /home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp
+CMakeFiles/khkFramework.dir/Component.o
+ ../../raylib/raylib.h
+ ../../tinyxml2/tinyxml2.h
+ ..//CMath.h
+ ..//Component.h
+ ..//Node.h
+ ..//m_raylib.h
+ /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
 CMakeFiles/khkFramework.dir/Node.o
  ../../raylib/raylib.h
  ..//CMath.h
