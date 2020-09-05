@@ -39,7 +39,7 @@ inline void log(string log_str){
   cout<<log_str<<endl;
 }
 
-inline void mDrawCircle(float x, float y, float r, Color color){
+inline void rlDrawCircle(float x, float y, float r, Color color){
   DrawCircle(x, y, r, color);
 }
 

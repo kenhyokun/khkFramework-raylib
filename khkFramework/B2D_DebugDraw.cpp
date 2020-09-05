@@ -38,7 +38,6 @@ void B2D_DebugDraw::DrawPolygon(const b2v2 *vertices, int32 v_count, const b2Col
 }
 
 void B2D_DebugDraw::DrawSolidPolygon(const b2v2 *vertices, int32 v_count, const b2Color &color){
-
   b2v2 p1 = vertices[v_count - 1];
   for (int32 i = 0; i < v_count; i++){
     b2v2 p2 = vertices[i];
@@ -67,5 +66,5 @@ void B2D_DebugDraw::DrawTransform(const b2Transform &xf){
 }
 
 void B2D_DebugDraw::DrawPoint(const b2v2 &p, float size, const b2Color &color){
-  mDrawCircle(p.x, p.y, 5, RED);
+  rlDrawCircle(p.x, p.y, 5, RED);
 }

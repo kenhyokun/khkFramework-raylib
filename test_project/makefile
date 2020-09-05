@@ -2,19 +2,19 @@
 # kevinhyokun91@gmail.com
 
 INCLUDE :=\
-	-Ibox2d \
-	-Iraylib/ \
-	-Itinyxml2/ \
-	-IkhkFramework/
+	-I../third_party/box2d \
+	-I../third_party/raylib \
+	-I../third_party/tinyxml2 \
+	-I../khkFramework
 
 LIB :=\
-	-LkhkFramework/build/ \
+	-L../khkFramework/build \
+	-L../third_party/tinyxml2 \
+	-L../third_party/raylib \
+	-L../third_party/box2d \
 	-lkhkFramework \
-	-Ltinyxml2/ \
 	-ltinyxml2 \
-	-Lraylib/ \
 	-lraylib \
-	-Lbox2d/ \
 	-lbox2d \
 	-lGL \
 	-lm \
@@ -22,9 +22,6 @@ LIB :=\
 	-ldl \
 	-lrt \
 	-lX11
-
-SRC :=\
-	khkFramework/*.cpp
 
 all:
 	g++ -o main main.cpp $(INCLUDE) $(LIB)
@@ -37,7 +34,7 @@ run:
 	./main
 
 lib:
-	make -C khkFramework/build
+	make -C ../khkFramework/build
 
 librun:
 	make lib 
