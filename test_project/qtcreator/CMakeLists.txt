@@ -1,7 +1,7 @@
 # Kevin Haryo Kuncoro
 # kevinhyokun91@gmail.com
 
-# don't forget to copy resources forlder into build folder!
+# don't forget to copy resources forlder into build folder to avoid crash because missing asset!
 
 cmake_minimum_required(VERSION 2.8)
 
