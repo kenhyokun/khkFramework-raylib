@@ -22,10 +22,8 @@ using namespace Component;
 
 struct App : BaseApp, ContactListener{
 
-  Node *node1, *node2, *node3,
-    *node4, *node5, *node6,
-    *node7, *node8, *node9,
-    *node10, *node11, *node12,
+  Node *player, *dynamic_box, *static_box,
+    *dynamic_circle, *dynamic_capsule, *dynamic_polygon,
     *node13;
 
   Camera2D camera;
@@ -51,12 +49,12 @@ struct App : BaseApp, ContactListener{
 
     B2D::Init(this);
 
-    node7 = new Node(); // lilwitch test
-    node8 = new Node(); // box dynamic rigid body test
-    node9 = new Node(); // box static rigid body test
-    node10 = new Node(); // circle dynamic rigid body test
-    node11 = new Node(); // capsule dynamic rigid body test
-    node12 = new Node(); // polygon dynamic rigid body test
+    player = new Node(); // lilwitch test
+    dynamic_box = new Node(); // box dynamic rigid body test
+    static_box = new Node(); // box static rigid body test
+    dynamic_circle = new Node(); // circle dynamic rigid body test
+    dynamic_capsule = new Node(); // capsule dynamic rigid body test
+    dynamic_polygon = new Node(); // polygon dynamic rigid body test
     node13 = new Node(); // edge rigid body test
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
@@ -65,42 +63,42 @@ struct App : BaseApp, ContactListener{
     sprite_renderer = new SpriteRenderer(&dia_red);
     animator = new Animator(&lilwitch, 78, 87);
 
-    node7->SetPosition(v2{50.0f, 50.0f});
-    node8->SetPosition(v2{30.0f, 50.0f});
-    node9->SetPosition(v2{-50.0f, 180.0f});
-    node10->SetPosition(v2{-120.0f, -20.0f});
-    node11->SetPosition(v2{-120.0f, -90.0f});
-    // node12->SetPosition(v2{-120.0f, -90.0f});
-    node12->SetPosition(node9->GetPosition());
+    player->SetPosition(v2{50.0f, 50.0f});
+    dynamic_box->SetPosition(v2{30.0f, 50.0f});
+    static_box->SetPosition(v2{-50.0f, 180.0f});
+    dynamic_circle->SetPosition(v2{-120.0f, -20.0f});
+    dynamic_capsule->SetPosition(v2{-120.0f, -90.0f});
+    // dynamic_polygon->SetPosition(v2{-120.0f, -90.0f});
+    dynamic_polygon->SetPosition(static_box->GetPosition());
     node13->SetPosition(v2{50, -250});
 
-    node7->AddComponent<Component::animator>(animator);
+    player->AddComponent<Component::animator>(animator);
 
-    node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
-    node8->AddComponent<Component::rigid_body>(new RigidBody());
-    // node8->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+    dynamic_box->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
+    dynamic_box->AddComponent<Component::rigid_body>(new RigidBody());
+    // dynamic_box->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    node9->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
-    node9->AddComponent<Component::rigid_body>(new RigidBody());
-    node9->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+    static_box->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
+    static_box->AddComponent<Component::rigid_body>(new RigidBody());
+    static_box->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    node10->AddComponent<Component::circle_collider>(new CircleCollider(50));
-    node10->AddComponent<Component::rigid_body>(new RigidBody());
-    // node10->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+    dynamic_circle->AddComponent<Component::circle_collider>(new CircleCollider(50));
+    dynamic_circle->AddComponent<Component::rigid_body>(new RigidBody());
+    // dynamic_circle->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    node11->AddComponent<Component::capsule_collider>(new CapsuleCollider(50, 50));
-    node11->AddComponent<Component::rigid_body>(new RigidBody());
-    // node11->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+    dynamic_capsule->AddComponent<Component::capsule_collider>(new CapsuleCollider(50, 50));
+    dynamic_capsule->AddComponent<Component::rigid_body>(new RigidBody());
+    // dynamic_capsule->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     vector<v2> polygon_vertice{
-      v2{node9->GetPosition().x , node9->GetPosition().y},
+      v2{static_box->GetPosition().x , static_box->GetPosition().y},
     	v2{100, 100},
     	v2{50, 100},
 	
     };
-    node12->AddComponent<Component::polygon_collider>(new PolygonCollider(polygon_vertice));
-    node12->AddComponent<Component::rigid_body>(new RigidBody());
-    // node12->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+    dynamic_polygon->AddComponent<Component::polygon_collider>(new PolygonCollider(polygon_vertice));
+    dynamic_polygon->AddComponent<Component::rigid_body>(new RigidBody());
+    // dynamic_polygon->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     //  using 4 vertice to create edge collider with box2d chain shape
     vector<v2> edge_vertice{
@@ -124,7 +122,7 @@ struct App : BaseApp, ContactListener{
     // node13->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     camera = {0};
-    camera.target = node7->GetPosition();
+    camera.target = player->GetPosition();
     camera.offset = v2{(float)game_screen_width / 2,
 		       (float)game_screen_height / 2};
     camera.rotation = 0.0f;
@@ -143,25 +141,25 @@ struct App : BaseApp, ContactListener{
   void Controller(){
     float move_speed = 2.0f;
     if(IsKeyDown(KEY_W)){
-      node7->SetPosition(v2{node7->GetPosition().x,
-	    node7->GetPosition().y - move_speed});
+      player->SetPosition(v2{player->GetPosition().x,
+	    player->GetPosition().y - move_speed});
     }
 
     if(IsKeyDown(KEY_S)){
-      node7->SetPosition(v2{node7->GetPosition().x,
-	    node7->GetPosition().y + move_speed});
+      player->SetPosition(v2{player->GetPosition().x,
+	    player->GetPosition().y + move_speed});
     }
 
     if(IsKeyDown(KEY_D)){
       dir_state = 0;
-      node7->SetPosition(v2{node7->GetPosition().x + move_speed,
-	    node7->GetPosition().y});
+      player->SetPosition(v2{player->GetPosition().x + move_speed,
+	    player->GetPosition().y});
     }
 
     if(IsKeyDown(KEY_A)){
       dir_state = 1;
-      node7->SetPosition(v2{node7->GetPosition().x - move_speed,
-	    node7->GetPosition().y});
+      player->SetPosition(v2{player->GetPosition().x - move_speed,
+	    player->GetPosition().y});
     }
 
   }
@@ -171,14 +169,14 @@ struct App : BaseApp, ContactListener{
 
     switch(dir_state){
     case 0:
-      node7->GetComponent<Component::animator>()->PlayAnim(vector<int>{1, 2, 3, 4}, 5);
+      player->GetComponent<Component::animator>()->PlayAnim(vector<int>{1, 2, 3, 4}, 5);
       break;
     case 1:
-      node7->GetComponent<Component::animator>()->PlayAnim(vector<int>{5, 6, 7, 8}, 5);
+      player->GetComponent<Component::animator>()->PlayAnim(vector<int>{5, 6, 7, 8}, 5);
       break;
     }
 
-    camera.target = node7->GetPosition();
+    camera.target = player->GetPosition();
 
     B2D::Step(); // run box2d step simulation
   }
@@ -189,7 +187,7 @@ struct App : BaseApp, ContactListener{
 
     DrawText("my first raylib window", 190, 200, 20, LIGHTGRAY);
 
-    node7->GetComponent<Component::animator>()->Draw();
+    player->GetComponent<Component::animator>()->Draw();
 
     B2D::DebugDraw();
 
