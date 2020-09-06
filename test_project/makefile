@@ -23,11 +23,13 @@ LIB :=\
 	-lrt \
 	-lX11
 
+CURR_PROJECT := contact_callback.cpp
+
 all:
-	g++ -o main main.cpp $(INCLUDE) $(LIB)
+	g++ -o main $(CURR_PROJECT) $(INCLUDE) $(LIB)
 
 debug:
-	g++ -g -o main main.cpp $(INCLUDE) $(LIB)
+	g++ -g -o main $(CURR_PROJECT) $(INCLUDE) $(LIB)
 
 run:
 	make all
