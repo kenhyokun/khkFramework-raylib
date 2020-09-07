@@ -159,9 +159,10 @@ namespace Component{
 
     RigidBody(float _mass = 1.0f);
     void Step();
-    void ApplyForceToCenter(const b2v2 &force, bool awake);
-    void ApplyLinearImpulseToCenter(const b2v2 &impulse, bool awake);
+    void ApplyForceToCenter(const v2 &force, bool awake);
+    void ApplyLinearImpulseToCenter(const v2 &impulse, bool awake);
 
+    void SetPosition(v2 position);
     void SetMass(float mass);
     b2v2 GetBodyPosition();
     float GetBodyRadian(); // body angle rotation (in radian)

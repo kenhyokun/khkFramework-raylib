@@ -143,12 +143,17 @@ Component::RigidBody::RigidBody(float _mass){
   mass = _mass;
 }
 
-void Component::RigidBody::ApplyForceToCenter(const b2v2 &force, bool awake){
-  body->ApplyForceToCenter(force, awake);
+void Component::RigidBody::Step(){
+  node->SetPosition(v2{body->GetPosition().x, body->GetPosition().y});
+  node->SetRotation(Rad2Deg(body->GetAngle()));
 }
 
-void Component::RigidBody::ApplyLinearImpulseToCenter(const b2v2 &impulse, bool awake){
-  body->ApplyLinearImpulseToCenter(impulse, awake);
+void Component::RigidBody::ApplyForceToCenter(const v2 &force, bool awake){
+  body->ApplyForceToCenter(b2v2{force.x, force.y}, awake);
+}
+
+void Component::RigidBody::ApplyLinearImpulseToCenter(const v2 &impulse, bool awake){
+  body->ApplyLinearImpulseToCenter(b2v2{impulse.x, impulse.y}, awake);
 }
 
 void Component::RigidBody::_OnAttach(){
@@ -290,9 +295,8 @@ bool Component::RigidBody::_IsGetCollider(int state){
 
 }
 
-void Component::RigidBody::Step(){
-  node->SetPosition(v2{body->GetPosition().x, body->GetPosition().y});
-  node->SetRotation(Rad2Deg(body->GetAngle()));
+void Component::RigidBody::SetPosition(v2 position){
+  body->SetTransform(b2v2{position.x, position.y}, body->GetAngle());
 }
 
 void Component::RigidBody::SetMass(float mass){
@@ -305,7 +309,6 @@ float Component::RigidBody::GetBodyRadian(){return body->GetAngle();}
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}
 void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotation(is_fixed);}
 b2Body* Component::RigidBody::GetBody(){return body;}
-
 
 
 void B2D::Init(ContactListener *contact_listener){

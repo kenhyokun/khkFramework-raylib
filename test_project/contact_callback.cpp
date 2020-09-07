@@ -124,7 +124,7 @@ struct App : BaseApp, ContactListener{
     edge_ground->AddComponent<Component::rigid_body>(new RigidBody());
     edge_ground->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    dynamic_circle->GetComponent<Component::rigid_body>()->SetMass(2.0f);
+    dynamic_circle->GetComponent<Component::rigid_body>()->SetMass(4.0f);
     player->GetComponent<Component::rigid_body>()->SetMass(2.5f);
 
 
@@ -160,7 +160,7 @@ struct App : BaseApp, ContactListener{
 
     if(IsKeyDown(KEY_D)){
       dir_state = 0;
-      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(b2v2{h_force, 0}, true);
+      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(v2{h_force, 0}, true);
 
       // player->SetPosition(v2{player->GetPosition().x + move_speed,
       // 	    player->GetPosition().y});
@@ -168,14 +168,14 @@ struct App : BaseApp, ContactListener{
 
     if(IsKeyDown(KEY_A)){
       dir_state = 1;
-      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(b2v2{-h_force, 0}, true);
+      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(v2{-h_force, 0}, true);
 
       // player->SetPosition(v2{player->GetPosition().x - move_speed,
       // 	    player->GetPosition().y});
     }
 
     if(IsKeyDown(KEY_SPACE)){
-      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(b2v2{0, -100}, true);
+      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(v2{0, -100}, true);
     }
 
   }
@@ -191,6 +191,9 @@ struct App : BaseApp, ContactListener{
       player->GetComponent<Component::animator>()->PlayAnim(vector<int>{5, 6, 7, 8}, 5);
       break;
     }
+
+    // moving static box
+    // static_box->GetComponent<Component::rigid_body>()->SetPosition(v2{static_box->GetPosition().x + 0.2f, static_box->GetPosition().y});
 
     camera.target = player->GetPosition();
 
