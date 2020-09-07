@@ -139,8 +139,8 @@ void Component::EdgeCollider::_OnAttach(){
 /*
   RigidBody Component
 */
-Component::RigidBody::RigidBody(float _mass){
-  mass = _mass;
+Component::RigidBody::RigidBody(float _density){
+  density = _density * density_unit;
 }
 
 void Component::RigidBody::Step(){
@@ -176,7 +176,6 @@ void Component::RigidBody::_OnAttach(){
 
   if(_IsGetCollider()){
     body->SetUserData(node);
-    SetMass(mass);
   }
   else{
     cout<<"you must add collider component at "<<node->name<<" first!"<<endl;
@@ -195,7 +194,7 @@ bool Component::RigidBody::_IsGetCollider(int state){
        Node::component_map<box_collider>.end()){
 
       box_collider collider = Node::component_map_it<box_collider>->second;
-      fixture = body->CreateFixture(collider->box_shape, 1.0f);
+      fixture = body->CreateFixture(collider->box_shape, density);
 
       delete collider;
       return true;
@@ -215,7 +214,7 @@ bool Component::RigidBody::_IsGetCollider(int state){
        Node::component_map<circle_collider>.end()){
 
       circle_collider collider = Node::component_map_it<circle_collider>->second;
-      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
+      fixture = body->CreateFixture(collider->circle_shape, density);
 
       delete collider;
       return true;
@@ -239,14 +238,14 @@ bool Component::RigidBody::_IsGetCollider(int state){
 
       // upper circle
       collider->circle_shape->m_p = b2v2{0, -collider->GetHeight() / 2};
-      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
+      fixture = body->CreateFixture(collider->circle_shape, density);
 
       // mid box
-      fixture = body->CreateFixture(collider->box_shape, 1.0f);
+      fixture = body->CreateFixture(collider->box_shape, density);
 
       // bottom circle
       collider->circle_shape->m_p = b2v2{0, collider->GetHeight() / 2};
-      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
+      fixture = body->CreateFixture(collider->circle_shape, density);
 
       delete collider;
       return true;
@@ -266,7 +265,7 @@ bool Component::RigidBody::_IsGetCollider(int state){
        Node::component_map<polygon_collider>.end()){
 
       polygon_collider collider = Node::component_map_it<polygon_collider>->second;
-      fixture = body->CreateFixture(collider->polygon_shape, 1.0f);
+      fixture = body->CreateFixture(collider->polygon_shape, density);
 
       delete collider;
       return true;
@@ -287,10 +286,10 @@ bool Component::RigidBody::_IsGetCollider(int state){
       edge_collider collider = Node::component_map_it<edge_collider>->second;
 
       if(collider->GetVerticeCount() > 2){
-	fixture = body->CreateFixture(collider->chain_shape, 1.0f);
+	fixture = body->CreateFixture(collider->chain_shape, density);
       }
       else{
-	fixture = body->CreateFixture(collider->edge_shape, 1.0f);
+	fixture = body->CreateFixture(collider->edge_shape, density);
       }
 
       delete collider;
@@ -316,8 +315,17 @@ void Component::RigidBody::SetMass(float mass){
   body->SetMassData(&mass_data);
 }
 
+void Component::RigidBody::SetAlwaysAwake(bool is_awake){
+  if(is_awake){
+    body->SetSleepingAllowed(false);
+  }
+  else{
+    body->SetSleepingAllowed(true);
+  }
+}
+
 void Component::RigidBody::SetFriction(float friction){fixture->SetFriction(friction);}
-void Component::RigidBody::SetDensity(float density){fixture->SetDensity(density);}
+void Component::RigidBody::SetDensity(float _density){fixture->SetDensity(_density * density_unit);}
 b2v2 Component::RigidBody::GetBodyPosition(){return body->GetPosition();}
 float Component::RigidBody::GetBodyRadian(){return body->GetAngle();}
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}

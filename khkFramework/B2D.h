@@ -157,7 +157,7 @@ namespace Component{
     static const b2BodyType DYNAMIC = b2_dynamicBody;
     static const b2BodyType KINEMATIC = b2_kinematicBody;
 
-    RigidBody(float _mass = 1.0f);
+    RigidBody(float _density = 1.0f);
     void Step();
     void ApplyForce(const v2 &force, bool awake = true);
     void ApplyForce(const v2 &force, const v2 &point, bool awake = true);
@@ -167,7 +167,8 @@ namespace Component{
     void SetPosition(v2 position);
     void SetMass(float mass);
     void SetFriction(float friction);
-    void SetDensity(float density);
+    void SetDensity(float _density);
+    void SetAlwaysAwake(bool is_awake = true);
     b2v2 GetBodyPosition();
     float GetBodyRadian(); // body angle rotation (in radian)
     void SetBodyType(b2BodyType type);
@@ -175,7 +176,7 @@ namespace Component{
     b2Body* GetBody();
 
   protected:
-    float mass;
+    float density;
     b2Fixture *fixture;
     b2Body *body = nullptr;
     void _OnAttach() override;

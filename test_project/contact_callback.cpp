@@ -127,8 +127,21 @@ struct App : BaseApp, ContactListener{
     edge_ground->AddComponent<Component::rigid_body>(new RigidBody());
     edge_ground->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    dynamic_circle->GetComponent<Component::rigid_body>()->SetMass(4.0f);
+    float density = 1.0f;
+    dynamic_box->GetComponent<Component::rigid_body>()->SetDensity(density);
+    dynamic_polygon->GetComponent<Component::rigid_body>()->SetDensity(density);
+    dynamic_circle->GetComponent<Component::rigid_body>()->SetDensity(density);
+    dynamic_capsule->GetComponent<Component::rigid_body>()->SetDensity(density);
+
+    // float mass = 0.0f;
+    // dynamic_box->GetComponent<Component::rigid_body>()->SetMass(mass);
+    // dynamic_polygon->GetComponent<Component::rigid_body>()->SetMass(mass);
+    // dynamic_circle->GetComponent<Component::rigid_body>()->SetMass(mass);
+    // dynamic_capsule->GetComponent<Component::rigid_body>()->SetMass(mass);
+
     player->GetComponent<Component::rigid_body>()->SetMass(2.5f);
+    // player->GetComponent<Component::rigid_body>()->GetBody()->SetAwake(true);
+    player->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
     // dynamic_polygon->GetComponent<Component::rigid_body>()->SetFriction(10);
 
 
