@@ -157,8 +157,12 @@ namespace Component{
     static const b2BodyType DYNAMIC = b2_dynamicBody;
     static const b2BodyType KINEMATIC = b2_kinematicBody;
 
+    RigidBody(float _mass = 1.0f);
     void Step();
+    void ApplyForceToCenter(const b2v2 &force, bool awake);
+    void ApplyLinearImpulseToCenter(const b2v2 &impulse, bool awake);
 
+    void SetMass(float mass);
     b2v2 GetBodyPosition();
     float GetBodyRadian(); // body angle rotation (in radian)
     void SetBodyType(b2BodyType type);
@@ -166,6 +170,7 @@ namespace Component{
     b2Body* GetBody();
 
   protected:
+    float mass;
     b2Body *body = nullptr;
     void _OnAttach() override;
     bool _IsGetCollider(int state = 0); // search and set collider shape

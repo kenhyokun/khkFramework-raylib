@@ -139,6 +139,18 @@ void Component::EdgeCollider::_OnAttach(){
 /*
   RigidBody Component
 */
+Component::RigidBody::RigidBody(float _mass){
+  mass = _mass;
+}
+
+void Component::RigidBody::ApplyForceToCenter(const b2v2 &force, bool awake){
+  body->ApplyForceToCenter(force, awake);
+}
+
+void Component::RigidBody::ApplyLinearImpulseToCenter(const b2v2 &impulse, bool awake){
+  body->ApplyLinearImpulseToCenter(impulse, awake);
+}
+
 void Component::RigidBody::_OnAttach(){
   b2BodyDef body_def;
   body_def.type = DYNAMIC; 
@@ -280,6 +292,11 @@ bool Component::RigidBody::_IsGetCollider(int state){
 void Component::RigidBody::Step(){
   node->SetPosition(v2{body->GetPosition().x, body->GetPosition().y});
   node->SetRotation(Rad2Deg(body->GetAngle()));
+}
+
+void Component::RigidBody::SetMass(float mass){
+  b2MassData mass_data{mass, body->GetWorldCenter()};
+  body->SetMassData(&mass_data);
 }
 
 b2v2 Component::RigidBody::GetBodyPosition(){return body->GetPosition();}
