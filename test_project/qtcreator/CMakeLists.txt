@@ -6,7 +6,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 # set project files
-file(GLOB curr_project_file "../basic.cpp")
+file(GLOB curr_project_file "../main.cpp")
 file(GLOB khkFramework_project_file "../../khkFramework/*.cpp")
 file(GLOB khkFramework_project_header "../../khkFramework/*.h")
 file(GLOB raylib_project_header "../../third_party/raylib/*.h")
