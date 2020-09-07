@@ -30,7 +30,8 @@
 #include<Component.h>
 
 #define b2v2_0 b2v2{0, 0}
-typedef b2ContactListener ContactListener;
 typedef b2Vec2 b2v2;
+typedef b2ContactListener ContactListener;
+typedef b2Fixture Fixture;
 
 #endif

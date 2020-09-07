@@ -148,12 +148,24 @@ void Component::RigidBody::Step(){
   node->SetRotation(Rad2Deg(body->GetAngle()));
 }
 
-void Component::RigidBody::ApplyForceToCenter(const v2 &force, bool awake){
+void Component::RigidBody::ApplyForce(const v2 &force, bool awake){
   body->ApplyForceToCenter(b2v2{force.x, force.y}, awake);
 }
 
-void Component::RigidBody::ApplyLinearImpulseToCenter(const v2 &impulse, bool awake){
+void Component::RigidBody::ApplyForce(const v2 &force, const v2 &point, bool awake){
+  body->ApplyForce(b2v2{force.x, force.y},
+		   b2v2{point.x, point.y},
+		   awake);
+}
+
+void Component::RigidBody::ApplyLinearImpulse(const v2 &impulse, bool awake){
   body->ApplyLinearImpulseToCenter(b2v2{impulse.x, impulse.y}, awake);
+}
+
+void Component::RigidBody::ApplyLinearImpulse(const v2 &impulse, const v2 &point, bool awake){
+  body->ApplyLinearImpulse(b2v2{impulse.x, impulse.y},
+			   b2v2{point.x, point.y},
+			   awake);
 }
 
 void Component::RigidBody::_OnAttach(){
@@ -183,7 +195,7 @@ bool Component::RigidBody::_IsGetCollider(int state){
        Node::component_map<box_collider>.end()){
 
       box_collider collider = Node::component_map_it<box_collider>->second;
-      body->CreateFixture(collider->box_shape, 1.0f);
+      fixture = body->CreateFixture(collider->box_shape, 1.0f);
 
       delete collider;
       return true;
@@ -203,7 +215,7 @@ bool Component::RigidBody::_IsGetCollider(int state){
        Node::component_map<circle_collider>.end()){
 
       circle_collider collider = Node::component_map_it<circle_collider>->second;
-      body->CreateFixture(collider->circle_shape, 1.0f);
+      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
 
       delete collider;
       return true;
@@ -227,14 +239,14 @@ bool Component::RigidBody::_IsGetCollider(int state){
 
       // upper circle
       collider->circle_shape->m_p = b2v2{0, -collider->GetHeight() / 2};
-      body->CreateFixture(collider->circle_shape, 1.0f);
+      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
 
       // mid box
-      body->CreateFixture(collider->box_shape, 1.0f);
+      fixture = body->CreateFixture(collider->box_shape, 1.0f);
 
       // bottom circle
       collider->circle_shape->m_p = b2v2{0, collider->GetHeight() / 2};
-      body->CreateFixture(collider->circle_shape, 1.0f);
+      fixture = body->CreateFixture(collider->circle_shape, 1.0f);
 
       delete collider;
       return true;
@@ -254,7 +266,7 @@ bool Component::RigidBody::_IsGetCollider(int state){
        Node::component_map<polygon_collider>.end()){
 
       polygon_collider collider = Node::component_map_it<polygon_collider>->second;
-      body->CreateFixture(collider->polygon_shape, 1.0f);
+      fixture = body->CreateFixture(collider->polygon_shape, 1.0f);
 
       delete collider;
       return true;
@@ -275,10 +287,10 @@ bool Component::RigidBody::_IsGetCollider(int state){
       edge_collider collider = Node::component_map_it<edge_collider>->second;
 
       if(collider->GetVerticeCount() > 2){
-	body->CreateFixture(collider->chain_shape, 1.0f);
+	fixture = body->CreateFixture(collider->chain_shape, 1.0f);
       }
       else{
-	body->CreateFixture(collider->edge_shape, 1.0f);
+	fixture = body->CreateFixture(collider->edge_shape, 1.0f);
       }
 
       delete collider;
@@ -304,6 +316,8 @@ void Component::RigidBody::SetMass(float mass){
   body->SetMassData(&mass_data);
 }
 
+void Component::RigidBody::SetFriction(float friction){fixture->SetFriction(friction);}
+void Component::RigidBody::SetDensity(float density){fixture->SetDensity(density);}
 b2v2 Component::RigidBody::GetBodyPosition(){return body->GetPosition();}
 float Component::RigidBody::GetBodyRadian(){return body->GetAngle();}
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}

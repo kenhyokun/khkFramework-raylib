@@ -159,11 +159,15 @@ namespace Component{
 
     RigidBody(float _mass = 1.0f);
     void Step();
-    void ApplyForceToCenter(const v2 &force, bool awake);
-    void ApplyLinearImpulseToCenter(const v2 &impulse, bool awake);
+    void ApplyForce(const v2 &force, bool awake = true);
+    void ApplyForce(const v2 &force, const v2 &point, bool awake = true);
+    void ApplyLinearImpulse(const v2 &impulse, bool awake = true);
+    void ApplyLinearImpulse(const v2 &impulse, const v2 &point, bool awake = true);
 
     void SetPosition(v2 position);
     void SetMass(float mass);
+    void SetFriction(float friction);
+    void SetDensity(float density);
     b2v2 GetBodyPosition();
     float GetBodyRadian(); // body angle rotation (in radian)
     void SetBodyType(b2BodyType type);
@@ -172,6 +176,7 @@ namespace Component{
 
   protected:
     float mass;
+    b2Fixture *fixture;
     b2Body *body = nullptr;
     void _OnAttach() override;
     bool _IsGetCollider(int state = 0); // search and set collider shape

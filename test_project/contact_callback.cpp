@@ -61,13 +61,13 @@ struct App : BaseApp, ContactListener{
 
     B2D::Init(this);
 
-    player = new Node(); // lilwitch test
-    dynamic_box = new Node(); // box dynamic rigid body test
-    static_box = new Node(); // box static rigid body test
-    dynamic_circle = new Node(); // circle dynamic rigid body test
-    dynamic_capsule = new Node(); // capsule dynamic rigid body test
-    dynamic_polygon = new Node(); // polygon dynamic rigid body test
-    edge_ground = new Node(); // edge rigid body test
+    player = new Node("player"); // lilwitch test
+    dynamic_box = new Node("dynamic box"); // box dynamic rigid body test
+    static_box = new Node("static box"); // box static rigid body test
+    dynamic_circle = new Node("dynamic circle"); // circle dynamic rigid body test
+    dynamic_capsule = new Node("dynamic capsule"); // capsule dynamic rigid body test
+    dynamic_polygon = new Node("dynamic polygon"); // polygon dynamic rigid body test
+    edge_ground = new Node("edge ground"); // edge rigid body test
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
     lilwitch = LoadTexture("./resources/images/lilwitch.png");
@@ -86,6 +86,9 @@ struct App : BaseApp, ContactListener{
     player->AddComponent<Component::animator>(animator);
     player->AddComponent<Component::capsule_collider>(new CapsuleCollider(20, 30));
     player->AddComponent<Component::rigid_body>(new RigidBody);
+
+    // kinematic test
+    player->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::KINEMATIC);
 
     dynamic_box->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     dynamic_box->AddComponent<Component::rigid_body>(new RigidBody());
@@ -126,6 +129,7 @@ struct App : BaseApp, ContactListener{
 
     dynamic_circle->GetComponent<Component::rigid_body>()->SetMass(4.0f);
     player->GetComponent<Component::rigid_body>()->SetMass(2.5f);
+    // dynamic_polygon->GetComponent<Component::rigid_body>()->SetFriction(10);
 
 
     camera = {0};
@@ -139,9 +143,12 @@ struct App : BaseApp, ContactListener{
 
   void BeginContact(b2Contact* contact) override {
     // cout<<"begin contact"<<endl;
-    void *user_data = 
-      contact->GetFixtureB()->GetBody()->GetUserData();
-    // cout<< static_cast<Node*>(user_data)->name<<endl;
+    Fixture *fixture_a = contact->GetFixtureA();
+    Fixture *fixture_b = contact->GetFixtureB();
+
+    void *user_data_a = fixture_a->GetBody()->GetUserData();
+    void *user_data_b = fixture_b->GetBody()->GetUserData();
+    cout<< static_cast<Node*>(user_data_b)->name<<" => "<<static_cast<Node*>(user_data_a)->name<<endl;
 
   }
 
@@ -149,33 +156,44 @@ struct App : BaseApp, ContactListener{
     float move_speed = 2.0f;
     float h_force = 85;
     if(IsKeyDown(KEY_W)){
-      player->SetPosition(v2{player->GetPosition().x,
+      // kinematic movement
+      player->GetComponent<Component::rigid_body>()->SetPosition(v2{player->GetPosition().x,
 	    player->GetPosition().y - move_speed});
     }
 
     if(IsKeyDown(KEY_S)){
-      player->SetPosition(v2{player->GetPosition().x,
+      // kinematic movement
+      player->GetComponent<Component::rigid_body>()->SetPosition(v2{player->GetPosition().x,
 	    player->GetPosition().y + move_speed});
     }
 
     if(IsKeyDown(KEY_D)){
       dir_state = 0;
-      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(v2{h_force, 0}, true);
 
-      // player->SetPosition(v2{player->GetPosition().x + move_speed,
-      // 	    player->GetPosition().y});
+      // apply force to dynamic rigid body
+      // player->GetComponent<Component::rigid_body>()->ApplyForce(v2{h_force, 0}, true);
+
+      // kinematic movement test
+      player->GetComponent<Component::rigid_body>()->SetPosition(v2{player->GetPosition().x + move_speed,
+      	    player->GetPosition().y});
+
     }
 
     if(IsKeyDown(KEY_A)){
       dir_state = 1;
-      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(v2{-h_force, 0}, true);
 
-      // player->SetPosition(v2{player->GetPosition().x - move_speed,
-      // 	    player->GetPosition().y});
+      // apply force to dynamic rigid body
+      // player->GetComponent<Component::rigid_body>()->ApplyForce(v2{-h_force, 0}, true);
+
+
+      // kinematic movement test
+      player->GetComponent<Component::rigid_body>()->SetPosition(v2{player->GetPosition().x - move_speed,
+      	    player->GetPosition().y});
+
     }
 
     if(IsKeyDown(KEY_SPACE)){
-      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(v2{0, -100}, true);
+      player->GetComponent<Component::rigid_body>()->ApplyForce(v2{0, -100}, true);
     }
 
   }
