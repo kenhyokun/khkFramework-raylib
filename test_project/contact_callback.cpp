@@ -20,11 +20,23 @@ using namespace Component;
   - OnDraw
 */
 
+/*
+TODO [kevin]:
+ - add more function on rigid body
+ - contact listener test
+ - platfomer test (what is this ghost vertice thingy...)
+ - resource manager maybe...
+*/
+
 struct App : BaseApp, ContactListener{
 
-  Node *player, *dynamic_box, *static_box,
-    *dynamic_circle, *dynamic_capsule, *dynamic_polygon,
-    *node13;
+  Node *player;
+  Node *dynamic_box;
+  Node *static_box;
+  Node *dynamic_circle;
+  Node *dynamic_capsule;
+  Node *dynamic_polygon;
+  Node *edge_ground;
 
   Camera2D camera;
 
@@ -55,7 +67,7 @@ struct App : BaseApp, ContactListener{
     dynamic_circle = new Node(); // circle dynamic rigid body test
     dynamic_capsule = new Node(); // capsule dynamic rigid body test
     dynamic_polygon = new Node(); // polygon dynamic rigid body test
-    node13 = new Node(); // edge rigid body test
+    edge_ground = new Node(); // edge rigid body test
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
     lilwitch = LoadTexture("./resources/images/lilwitch.png");
@@ -68,15 +80,13 @@ struct App : BaseApp, ContactListener{
     static_box->SetPosition(v2{-50.0f, 180.0f});
     dynamic_circle->SetPosition(v2{-120.0f, -20.0f});
     dynamic_capsule->SetPosition(v2{-120.0f, -90.0f});
-    // dynamic_polygon->SetPosition(v2{-120.0f, -90.0f});
     dynamic_polygon->SetPosition(static_box->GetPosition());
-    node13->SetPosition(v2{50, -250});
+    edge_ground->SetPosition(v2{-450, 450});
 
     player->AddComponent<Component::animator>(animator);
 
     dynamic_box->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     dynamic_box->AddComponent<Component::rigid_body>(new RigidBody());
-    // dynamic_box->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     static_box->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     static_box->AddComponent<Component::rigid_body>(new RigidBody());
@@ -84,11 +94,9 @@ struct App : BaseApp, ContactListener{
 
     dynamic_circle->AddComponent<Component::circle_collider>(new CircleCollider(50));
     dynamic_circle->AddComponent<Component::rigid_body>(new RigidBody());
-    // dynamic_circle->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     dynamic_capsule->AddComponent<Component::capsule_collider>(new CapsuleCollider(50, 50));
     dynamic_capsule->AddComponent<Component::rigid_body>(new RigidBody());
-    // dynamic_capsule->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     vector<v2> polygon_vertice{
       v2{static_box->GetPosition().x , static_box->GetPosition().y},
@@ -98,28 +106,22 @@ struct App : BaseApp, ContactListener{
     };
     dynamic_polygon->AddComponent<Component::polygon_collider>(new PolygonCollider(polygon_vertice));
     dynamic_polygon->AddComponent<Component::rigid_body>(new RigidBody());
-    // dynamic_polygon->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
     //  using 4 vertice to create edge collider with box2d chain shape
     vector<v2> edge_vertice{
-      v2{node13->GetPosition().x , node13->GetPosition().y},
-    	v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20},
-    	  v2{node13->GetPosition().x - 20, node13->GetPosition().y + 20},
-    	    v2{node13->GetPosition().x + 20, node13->GetPosition().y + 50}
+      v2{edge_ground->GetPosition().x , edge_ground->GetPosition().y},
+    	v2{edge_ground->GetPosition().x + 250, edge_ground->GetPosition().y},
+    	  v2{edge_ground->GetPosition().x + 500, edge_ground->GetPosition().y - 100},
+    	  v2{edge_ground->GetPosition().x + 750, edge_ground->GetPosition().y - 100},
+    	    v2{edge_ground->GetPosition().x + 1000, edge_ground->GetPosition().y}
 	
     };
 
-    //  using 2 vertice to create edge collider with box2d edge shape
-    // vector<v2> edge_vertice{
-    //   v2{node13->GetPosition().x , node13->GetPosition().y},
-    // 	v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20}
-    // };
+    edge_ground->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
 
-    // node13->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
-    
-    node13->AddComponent<Component::edge_collider>(new EdgeCollider(v2{node13->GetPosition().x + 20, node13->GetPosition().y + 20}));
-    node13->AddComponent<Component::rigid_body>(new RigidBody());
-    // node13->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+    v2 vertice = {edge_ground->GetPosition().x + 1000, edge_ground->GetPosition().y};
+    edge_ground->AddComponent<Component::edge_collider>(new EdgeCollider(vertice));
+    edge_ground->AddComponent<Component::rigid_body>(new RigidBody());
 
     camera = {0};
     camera.target = player->GetPosition();
