@@ -80,10 +80,12 @@ struct App : BaseApp, ContactListener{
     static_box->SetPosition(v2{-50.0f, 180.0f});
     dynamic_circle->SetPosition(v2{-120.0f, -20.0f});
     dynamic_capsule->SetPosition(v2{-120.0f, -90.0f});
-    dynamic_polygon->SetPosition(static_box->GetPosition());
+    dynamic_polygon->SetPosition(v2{static_box->GetPosition().x, 0});
     edge_ground->SetPosition(v2{-450, 450});
 
     player->AddComponent<Component::animator>(animator);
+    player->AddComponent<Component::capsule_collider>(new CapsuleCollider(20, 30));
+    player->AddComponent<Component::rigid_body>(new RigidBody);
 
     dynamic_box->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     dynamic_box->AddComponent<Component::rigid_body>(new RigidBody());
@@ -99,10 +101,9 @@ struct App : BaseApp, ContactListener{
     dynamic_capsule->AddComponent<Component::rigid_body>(new RigidBody());
 
     vector<v2> polygon_vertice{
-      v2{static_box->GetPosition().x , static_box->GetPosition().y},
-    	v2{100, 100},
-    	v2{50, 100},
-	
+      v2{dynamic_polygon->GetPosition().x , dynamic_polygon->GetPosition().y},
+      v2{dynamic_polygon->GetPosition().x - 100 , dynamic_polygon->GetPosition().y},
+      v2{dynamic_polygon->GetPosition().x , dynamic_polygon->GetPosition().y - 100},
     };
     dynamic_polygon->AddComponent<Component::polygon_collider>(new PolygonCollider(polygon_vertice));
     dynamic_polygon->AddComponent<Component::rigid_body>(new RigidBody());
@@ -112,16 +113,20 @@ struct App : BaseApp, ContactListener{
       v2{edge_ground->GetPosition().x , edge_ground->GetPosition().y},
     	v2{edge_ground->GetPosition().x + 250, edge_ground->GetPosition().y},
     	  v2{edge_ground->GetPosition().x + 500, edge_ground->GetPosition().y - 100},
-    	  v2{edge_ground->GetPosition().x + 750, edge_ground->GetPosition().y - 100},
-    	    v2{edge_ground->GetPosition().x + 1000, edge_ground->GetPosition().y}
-	
+	    v2{edge_ground->GetPosition().x + 750, edge_ground->GetPosition().y - 100},
+	      v2{edge_ground->GetPosition().x + 1000, edge_ground->GetPosition().y}
     };
 
     edge_ground->AddComponent<Component::edge_collider>(new EdgeCollider(edge_vertice));
 
     v2 vertice = {edge_ground->GetPosition().x + 1000, edge_ground->GetPosition().y};
-    edge_ground->AddComponent<Component::edge_collider>(new EdgeCollider(vertice));
+    // edge_ground->AddComponent<Component::edge_collider>(new EdgeCollider(vertice));
     edge_ground->AddComponent<Component::rigid_body>(new RigidBody());
+    edge_ground->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+
+    dynamic_circle->GetComponent<Component::rigid_body>()->SetMass(2.0f);
+    player->GetComponent<Component::rigid_body>()->SetMass(2.5f);
+
 
     camera = {0};
     camera.target = player->GetPosition();
@@ -142,6 +147,7 @@ struct App : BaseApp, ContactListener{
 
   void Controller(){
     float move_speed = 2.0f;
+    float h_force = 85;
     if(IsKeyDown(KEY_W)){
       player->SetPosition(v2{player->GetPosition().x,
 	    player->GetPosition().y - move_speed});
@@ -154,14 +160,22 @@ struct App : BaseApp, ContactListener{
 
     if(IsKeyDown(KEY_D)){
       dir_state = 0;
-      player->SetPosition(v2{player->GetPosition().x + move_speed,
-	    player->GetPosition().y});
+      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(b2v2{h_force, 0}, true);
+
+      // player->SetPosition(v2{player->GetPosition().x + move_speed,
+      // 	    player->GetPosition().y});
     }
 
     if(IsKeyDown(KEY_A)){
       dir_state = 1;
-      player->SetPosition(v2{player->GetPosition().x - move_speed,
-	    player->GetPosition().y});
+      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(b2v2{-h_force, 0}, true);
+
+      // player->SetPosition(v2{player->GetPosition().x - move_speed,
+      // 	    player->GetPosition().y});
+    }
+
+    if(IsKeyDown(KEY_SPACE)){
+      player->GetComponent<Component::rigid_body>()->ApplyForceToCenter(b2v2{0, -100}, true);
     }
 
   }
