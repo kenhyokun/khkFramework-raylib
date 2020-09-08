@@ -330,10 +330,11 @@ void Component::RigidBody::SetAlwaysAwake(bool is_awake){
 
 void Component::RigidBody::SetDensity(float _density){
   fixture->SetDensity(_density);
-  // body->ResetMassData();
+  body->ResetMassData();
 }
 
 void Component::RigidBody::SetAwake(bool is_awake){body->SetAwake(is_awake);}
+void Component::RigidBody::SetEnabled(bool is_enable){body->SetEnabled(is_enable);}
 void Component::RigidBody::SetFriction(float friction){fixture->SetFriction(friction);}
 void Component::RigidBody::SetRestitution(float restitution){fixture->SetRestitution(restitution);}
 v2 Component::RigidBody::GetBodyPosition(){return v2{body->GetPosition().x, body->GetPosition().y};}

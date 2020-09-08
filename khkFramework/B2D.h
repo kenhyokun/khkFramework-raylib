@@ -30,7 +30,7 @@
 #include<Component.h>
 #include<B2D_DebugDraw.h>
 
-static b2v2 gravity(0.0f, 10.0f);
+static b2v2 gravity(0.0f, 70.0f);
 static b2World *world = new b2World(gravity);
 static float time_step = 1.0f / 60.0f;
 static int32 velocity_iterations = 6;
@@ -171,6 +171,7 @@ namespace Component{
     void SetRestitution(float restitution);
     void SetAlwaysAwake(bool is_awake = true);
     void SetAwake(bool is_awake);
+    void SetEnabled(bool is_enable = true);
     v2 GetBodyPosition();
     v2 GetLinearVelocity();
 

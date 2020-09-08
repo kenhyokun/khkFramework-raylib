@@ -76,10 +76,11 @@ public:
   void RemoveChild(int index); // remove child by index
 
   template<typename T>
-  inline void AddComponent(T component){
+  inline T AddComponent(T component){
     component->node = this;
     component->Attach();
     component_map<T>.insert(pair<Node*, T>(this, component));
+    return component_map<T>.at(this);
   }
 
   template<typename T>

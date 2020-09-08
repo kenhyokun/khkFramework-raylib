@@ -96,8 +96,8 @@ struct App : BaseApp, ContactListener{
     static_box->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     static_box->AddComponent<Component::rigid_body>(new RigidBody());
     static_box->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
-    static_box->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::KINEMATIC);
-    static_box->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
+    // static_box->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::KINEMATIC);
+    // static_box->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
 
     dynamic_circle->AddComponent<Component::circle_collider>(new CircleCollider(50));
     dynamic_circle->AddComponent<Component::rigid_body>(new RigidBody());
@@ -129,7 +129,7 @@ struct App : BaseApp, ContactListener{
     edge_ground->AddComponent<Component::rigid_body>(new RigidBody());
     edge_ground->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    float density = 2.0f;
+    float density = 3000.0f;
     dynamic_box->GetComponent<Component::rigid_body>()->SetDensity(density);
     dynamic_polygon->GetComponent<Component::rigid_body>()->SetDensity(density);
     dynamic_circle->GetComponent<Component::rigid_body>()->SetDensity(density);
@@ -141,13 +141,13 @@ struct App : BaseApp, ContactListener{
     dynamic_circle->GetComponent<Component::rigid_body>()->SetRestitution(restitution);
     dynamic_capsule->GetComponent<Component::rigid_body>()->SetRestitution(restitution);
     
-    // float mass = 2.0f;
+    // float mass = 10.0f;
     // dynamic_box->GetComponent<Component::rigid_body>()->SetMass(mass);
     // dynamic_polygon->GetComponent<Component::rigid_body>()->SetMass(mass);
     // dynamic_circle->GetComponent<Component::rigid_body>()->SetMass(mass);
     // dynamic_capsule->GetComponent<Component::rigid_body>()->SetMass(mass);
 
-    player->GetComponent<Component::rigid_body>()->SetMass(2.5f);
+    // player->GetComponent<Component::rigid_body>()->SetMass(2.5f);
     // player->GetComponent<Component::rigid_body>()->GetBody()->SetAwake(true);
     player->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
     // dynamic_polygon->GetComponent<Component::rigid_body>()->SetFriction(10);
@@ -174,7 +174,7 @@ struct App : BaseApp, ContactListener{
   }
 
   void Controller(){
-    float move_speed = 70.0f;
+    float move_speed = 100.0f;
     float h_force = 85;
     if(IsKeyDown(KEY_W)){
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, -move_speed});
