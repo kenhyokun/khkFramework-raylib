@@ -315,7 +315,7 @@ void Component::RigidBody::SetLinearVelocity(v2 velocity){
 }
 
 void Component::RigidBody::SetMass(float mass){
-  b2MassData mass_data{mass, body->GetWorldCenter()};
+  b2MassData mass_data{mass, body->GetLocalCenter(), body->GetInertia()};
   body->SetMassData(&mass_data);
 }
 
