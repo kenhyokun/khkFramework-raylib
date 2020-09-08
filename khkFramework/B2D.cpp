@@ -140,7 +140,7 @@ void Component::EdgeCollider::_OnAttach(){
   RigidBody Component
 */
 Component::RigidBody::RigidBody(float _density){
-  density = _density * density_unit;
+  density = _density;
 }
 
 void Component::RigidBody::Step(){
@@ -310,6 +310,10 @@ void Component::RigidBody::SetPosition(v2 position){
   body->SetTransform(b2v2{position.x, position.y}, body->GetAngle());
 }
 
+void Component::RigidBody::SetLinearVelocity(v2 velocity){
+  body->SetLinearVelocity(b2v2{velocity.x, velocity.y});
+}
+
 void Component::RigidBody::SetMass(float mass){
   b2MassData mass_data{mass, body->GetWorldCenter()};
   body->SetMassData(&mass_data);
@@ -324,9 +328,16 @@ void Component::RigidBody::SetAlwaysAwake(bool is_awake){
   }
 }
 
+void Component::RigidBody::SetDensity(float _density){
+  fixture->SetDensity(_density);
+  // body->ResetMassData();
+}
+
+void Component::RigidBody::SetAwake(bool is_awake){body->SetAwake(is_awake);}
 void Component::RigidBody::SetFriction(float friction){fixture->SetFriction(friction);}
-void Component::RigidBody::SetDensity(float _density){fixture->SetDensity(_density * density_unit);}
-b2v2 Component::RigidBody::GetBodyPosition(){return body->GetPosition();}
+void Component::RigidBody::SetRestitution(float restitution){fixture->SetRestitution(restitution);}
+v2 Component::RigidBody::GetBodyPosition(){return v2{body->GetPosition().x, body->GetPosition().y};}
+v2 Component::RigidBody::GetLinearVelocity(){return v2{body->GetLinearVelocity().x, body->GetLinearVelocity().y};}
 float Component::RigidBody::GetBodyRadian(){return body->GetAngle();}
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}
 void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotation(is_fixed);}

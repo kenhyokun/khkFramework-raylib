@@ -163,13 +163,17 @@ namespace Component{
     void ApplyForce(const v2 &force, const v2 &point, bool awake = true);
     void ApplyLinearImpulse(const v2 &impulse, bool awake = true);
     void ApplyLinearImpulse(const v2 &impulse, const v2 &point, bool awake = true);
-
+    void SetLinearVelocity(v2 velocity);
     void SetPosition(v2 position);
     void SetMass(float mass);
-    void SetFriction(float friction);
     void SetDensity(float _density);
+    void SetFriction(float friction);
+    void SetRestitution(float restitution);
     void SetAlwaysAwake(bool is_awake = true);
-    b2v2 GetBodyPosition();
+    void SetAwake(bool is_awake);
+    v2 GetBodyPosition();
+    v2 GetLinearVelocity();
+
     float GetBodyRadian(); // body angle rotation (in radian)
     void SetBodyType(b2BodyType type);
     void SetFixedRotation(bool is_fixed = true);

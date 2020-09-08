@@ -30,7 +30,6 @@
 #include<Component.h>
 
 #define b2v2_0 b2v2{0, 0}
-#define density_unit 1.0f 
 typedef b2Vec2 b2v2;
 typedef b2ContactListener ContactListener;
 typedef b2Fixture Fixture;
