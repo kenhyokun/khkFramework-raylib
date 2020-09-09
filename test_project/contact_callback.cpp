@@ -59,7 +59,8 @@ struct App : BaseApp, ContactListener{
 
   void OnInit() override {
 
-    B2D::Init(this);
+    B2D::Init(v2{0, 10});
+    B2D::SetContactListener(this);
 
     player = new Node("player"); // lilwitch test
     dynamic_box = new Node("dynamic box"); // box dynamic rigid body test
@@ -129,7 +130,7 @@ struct App : BaseApp, ContactListener{
     edge_ground->AddComponent<Component::rigid_body>(new RigidBody());
     edge_ground->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
 
-    float density = 0.2f;
+    float density = 1.0f;
     dynamic_box->GetComponent<Component::rigid_body>()->SetDensity(density);
     dynamic_polygon->GetComponent<Component::rigid_body>()->SetDensity(density);
     dynamic_circle->GetComponent<Component::rigid_body>()->SetDensity(density);
@@ -141,7 +142,7 @@ struct App : BaseApp, ContactListener{
     dynamic_circle->GetComponent<Component::rigid_body>()->SetRestitution(restitution);
     dynamic_capsule->GetComponent<Component::rigid_body>()->SetRestitution(restitution);
     
-    float mass = 0.3f;
+    float mass = 0.1f;
     dynamic_box->GetComponent<Component::rigid_body>()->SetMass(mass);
     dynamic_polygon->GetComponent<Component::rigid_body>()->SetMass(mass);
     dynamic_circle->GetComponent<Component::rigid_body>()->SetMass(mass);
@@ -153,7 +154,7 @@ struct App : BaseApp, ContactListener{
     // dynamic_capsule->GetComponent<Component::rigid_body>()->SetFixedRotation(false);
 
     player->GetComponent<Component::rigid_body>()->SetDensity(1.0f);
-    player->GetComponent<Component::rigid_body>()->SetMass(1);
+    player->GetComponent<Component::rigid_body>()->SetMass(0.1f);
     // player->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
 
     camera = {0};
@@ -178,7 +179,7 @@ struct App : BaseApp, ContactListener{
 
   void Controller(){
     float move_speed = 100.0f;
-    float h_force = 150;
+    float h_force = 75;
     if(IsKeyDown(KEY_W)){
       // player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, -move_speed});
     }

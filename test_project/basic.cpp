@@ -49,7 +49,8 @@ struct App : BaseApp, ContactListener{
 
   void OnInit() override {
 
-    B2D::Init(this);
+    B2D::Init(v2{0, 10});
+    B2D::SetContactListener(this);
 
     node1 = new Node();
     node2 = new Node();

@@ -168,6 +168,14 @@ void Component::RigidBody::ApplyLinearImpulse(const v2 &impulse, const v2 &point
 			   awake);
 }
 
+void Component::RigidBody::ApplyAngularImpulse(float impulse, bool awake){
+  body->ApplyAngularImpulse(impulse, awake);
+}
+
+void Component::RigidBody::ApplyTorque(float torque, bool awake){
+  body->ApplyTorque(torque, awake);
+}
+
 void Component::RigidBody::_OnAttach(){
   b2BodyDef body_def;
   body_def.type = DYNAMIC; 
@@ -337,6 +345,7 @@ void Component::RigidBody::SetAwake(bool is_awake){body->SetAwake(is_awake);}
 void Component::RigidBody::SetEnabled(bool is_enable){body->SetEnabled(is_enable);}
 void Component::RigidBody::SetFriction(float friction){fixture->SetFriction(friction);}
 void Component::RigidBody::SetRestitution(float restitution){fixture->SetRestitution(restitution);}
+void Component::RigidBody::SetAngularDamping(float angular_damping){body->SetAngularDamping(angular_damping);}
 v2 Component::RigidBody::GetBodyPosition(){return v2{body->GetPosition().x, body->GetPosition().y};}
 v2 Component::RigidBody::GetLinearVelocity(){return v2{body->GetLinearVelocity().x, body->GetLinearVelocity().y};}
 float Component::RigidBody::GetBodyRadian(){return body->GetAngle();}
@@ -345,12 +354,13 @@ void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotatio
 b2Body* Component::RigidBody::GetBody(){return body;}
 
 
-void B2D::Init(ContactListener *contact_listener){
-  if(contact_listener != nullptr){
-    world->SetContactListener(contact_listener);
-  }
-
+void B2D::Init(v2 gravity){
+  world = new b2World(b2v2{gravity.x, gravity.y});
   world->SetDebugDraw(&debug_draw);
+}
+
+void B2D::SetContactListener(ContactListener *contact_listener){
+  world->SetContactListener(contact_listener);
 }
 
 void B2D::Step(){
@@ -359,7 +369,6 @@ void B2D::Step(){
   for(b2Body *body = world->GetBodyList(); body; body = body->GetNext()){
     static_cast<Node*>(body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
   }
-
 }
 
 void B2D::DebugDraw(float opacity , Color color1, Color color2){

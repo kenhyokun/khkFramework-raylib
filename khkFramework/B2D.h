@@ -30,8 +30,7 @@
 #include<Component.h>
 #include<B2D_DebugDraw.h>
 
-static b2v2 gravity(0.0f, 10.0f);
-static b2World *world = new b2World(gravity);
+static b2World *world;
 static float time_step = 1.0f / 60.0f;
 static int32 velocity_iterations = 6;
 static int32 position_iterations = 2;
@@ -163,12 +162,15 @@ namespace Component{
     void ApplyForce(const v2 &force, const v2 &point, bool awake = true);
     void ApplyLinearImpulse(const v2 &impulse, bool awake = true);
     void ApplyLinearImpulse(const v2 &impulse, const v2 &point, bool awake = true);
+    void ApplyAngularImpulse(float impulse, bool awake = true);
+    void ApplyTorque(float torque, bool awake = true);
     void SetLinearVelocity(v2 velocity);
     void SetPosition(v2 position);
     void SetMass(float mass);
     void SetDensity(float _density);
     void SetFriction(float friction);
     void SetRestitution(float restitution);
+    void SetAngularDamping(float angular_damping);
     void SetAlwaysAwake(bool is_awake = true);
     void SetAwake(bool is_awake);
     void SetEnabled(bool is_enable = true);
@@ -196,7 +198,8 @@ namespace B2D{
   typedef b2Body Body;
   typedef b2World World;
 
-  void Init(ContactListener *contact_listener = nullptr);
+  void Init(v2 gravity);
+  void SetContactListener(ContactListener *contact_listener = nullptr);
   void Step();
   void DebugDraw(float opacity = 0.666f, Color color1 = GREEN, Color color2 = RED);
 
