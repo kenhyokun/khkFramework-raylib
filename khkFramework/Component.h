@@ -50,6 +50,7 @@ namespace Component{
 
   struct BaseComponent{
     Node* node = nullptr; // component owner
+    bool is_enable = true;
 
     inline void Attach(){
       _OnAttach();
@@ -57,6 +58,10 @@ namespace Component{
 
   protected:
     virtual void _OnAttach(){}
+  };
+
+  struct DrawableBaseComponent{
+    int sorting_order;
   };
 
   struct GridBaseComponent{
