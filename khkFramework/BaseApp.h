@@ -50,7 +50,7 @@ struct BaseApp{
 
   v2 ClampValue(v2 value, v2 min, v2 max);
   void SetGameScreen(int _game_screen_width, int _game_screen_height);
-  void Init();
+  void Init(int texture_filter_mode = 0);
   void Update();
   void Draw();
   void Run();

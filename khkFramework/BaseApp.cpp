@@ -47,7 +47,7 @@ void BaseApp::SetGameScreen(int _game_screen_width, int _game_screen_height){
   game_screen_height = _game_screen_height;
 }
 
-void BaseApp::Init(){
+void BaseApp::Init(int texture_filter_mode){
   SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
   InitWindow(window_width, window_height, title.c_str());
   SetWindowMinSize(min_window_width, min_window_height);
@@ -55,7 +55,7 @@ void BaseApp::Init(){
   target = LoadRenderTexture(game_screen_width,
 			     game_screen_height);
 
-  SetTextureFilter(target.texture, FILTER_BILINEAR);
+  SetTextureFilter(target.texture, texture_filter_mode);
   SetTargetFPS(target_fps);
 
   OnInit();
