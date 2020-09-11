@@ -94,6 +94,8 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../B2D_DebugDraw.cpp
 
 CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.h
+CMakeFiles/khkFramework.dir/BaseApp.o: ../CMath.h
+CMakeFiles/khkFramework.dir/BaseApp.o: ../Node.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.cpp
 

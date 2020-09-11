@@ -48,6 +48,7 @@ void BaseApp::SetGameScreen(int _game_screen_width, int _game_screen_height){
 }
 
 void BaseApp::Init(int texture_filter_mode){
+  // init app
   SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
   InitWindow(window_width, window_height, title.c_str());
   SetWindowMinSize(min_window_width, min_window_height);
@@ -58,6 +59,11 @@ void BaseApp::Init(int texture_filter_mode){
   SetTextureFilter(target.texture, texture_filter_mode);
   SetTargetFPS(target_fps);
 
+  // init camera
+  camera = new CCamera();
+  camera->Init(game_screen_width / 2, game_screen_height / 2);
+
+  // overiding init 
   OnInit();
 }
 
@@ -71,12 +77,15 @@ void BaseApp::Update(){
   virtual_mouse = ClampValue(virtual_mouse,
 			     (v2){0, 0},
 			     (v2){(float)game_screen_width, (float)game_screen_height});
-  // update mouse
 
   // update window/screen scale
   scale = min((float)GetScreenWidth() / game_screen_width,
 	      (float)GetScreenHeight() / game_screen_height);
 
+  // update camera
+  camera->Follow();
+
+  // overiding update
   OnUpdate();
 }
 
@@ -88,7 +97,12 @@ void BaseApp::Draw(){
   BeginTextureMode(target); // --- draw to target texture
 
   ClearBackground(RAYWHITE);
+
+  BeginMode2D(camera->camera);
   OnDraw(); 
+  EndMode2D();
+
+  OnDrawGUI();
 
   EndTextureMode(); // ---
 
@@ -122,3 +136,4 @@ void BaseApp::Run(){
 void BaseApp::OnInit(){}
 void BaseApp::OnUpdate(){}
 void BaseApp::OnDraw(){}
+void BaseApp::OnDrawGUI(){}

@@ -28,8 +28,30 @@
 
 #include<iostream>
 #include<m_raylib.h>
+#include<Node.h>
 
 using namespace std;
+
+struct CCamera{
+  Camera2D camera;
+  Node *target =  nullptr;
+
+  inline void Init(int offset_x, int offset_y){
+    camera = {0};
+    camera.offset = v2{(float)offset_x, (float)offset_y};
+    camera.rotation = 0.0f;
+    camera.zoom = 1.0f;
+  }
+
+  inline void AttachTo(Node *node){target = node;}
+
+  inline void Follow(){
+    if(target != nullptr){
+      camera.target = target->GetPosition();
+    }
+  }
+
+};
 
 struct BaseApp{
   int target_fps = 60;
@@ -43,6 +65,8 @@ struct BaseApp{
   v2 mouse, virtual_mouse;
   float scale = 0.0f;
   RenderTexture2D target;
+
+  CCamera *camera;
 
   BaseApp(int _window_width = 800,
 	  int _window_height = 450,
@@ -58,6 +82,7 @@ struct BaseApp{
   virtual void OnInit();
   virtual void OnUpdate();
   virtual void OnDraw();
+  virtual void OnDrawGUI();
 
 };
 

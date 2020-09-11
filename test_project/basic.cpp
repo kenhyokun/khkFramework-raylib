@@ -28,8 +28,6 @@ struct App : BaseApp, ContactListener{
     *node10, *node11, *node12,
     *node13;
 
-  Camera2D camera;
-
   int dir_state = 0;
 
   //component
@@ -101,6 +99,8 @@ struct App : BaseApp, ContactListener{
     node12->SetPosition(node9->GetPosition());
     node13->SetPosition(v2{50, -250});
 
+    camera->AttachTo(node7);
+
     node8->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     node8->AddComponent<Component::rigid_body>(new RigidBody());
     // node8->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
@@ -159,13 +159,6 @@ struct App : BaseApp, ContactListener{
     node1->SetParent(node2);
     node2->SetParent(node3);
     node3->AddChild(node1);
-
-    camera = {0};
-    camera.target = node7->GetPosition();
-    camera.offset = v2{(float)game_screen_width / 2,
-		       (float)game_screen_height / 2};
-    camera.rotation = 0.0f;
-    camera.zoom = 1.0f;
 
     // cout<<"node1 child size:"<<node1->GetChild()->size()<<endl;
     cout<<"node2 child size:"<<node2->GetChild()->size()<<endl;
@@ -227,8 +220,6 @@ struct App : BaseApp, ContactListener{
     // b2Vec2 position = node8->GetComponent<rigid_body>()->GetBody()->GetPosition();
     // cout<<position.x<<", "<<position.y<<endl;
 
-    camera.target = node7->GetPosition();
-
     B2D::Step(); // run box2d step simulation
   }
 
@@ -238,8 +229,6 @@ struct App : BaseApp, ContactListener{
   float angle2 = 0.0f;
 
   void OnDraw() override {
-    BeginMode2D(camera);
-
     angle += 0.7f;
     DrawText("my first raylib window", 190, 200, 20, LIGHTGRAY);
 
@@ -281,9 +270,6 @@ struct App : BaseApp, ContactListener{
     node7->GetComponent<Component::animator>()->Draw();
 
     B2D::DebugDraw();
-
-    EndMode2D();
-
 
   }
 

@@ -348,6 +348,8 @@ void Component::RigidBody::SetRestitution(float restitution){fixture->SetRestitu
 void Component::RigidBody::SetAngularDamping(float angular_damping){body->SetAngularDamping(angular_damping);}
 v2 Component::RigidBody::GetBodyPosition(){return v2{body->GetPosition().x, body->GetPosition().y};}
 v2 Component::RigidBody::GetLinearVelocity(){return v2{body->GetLinearVelocity().x, body->GetLinearVelocity().y};}
+float Component::RigidBody::GetAngularVelocity(){return body->GetAngularVelocity();}
+float Component::RigidBody::GetAngularDamping(){return body->GetAngularDamping();}
 float Component::RigidBody::GetBodyRadian(){return body->GetAngle();}
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}
 void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotation(is_fixed);}

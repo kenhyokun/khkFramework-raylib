@@ -38,7 +38,6 @@ struct App : BaseApp, ContactListener{
   Node *dynamic_polygon;
   Node *edge_ground;
 
-  Camera2D camera;
 
   int dir_state = 0;
 
@@ -83,6 +82,8 @@ struct App : BaseApp, ContactListener{
     dynamic_capsule->SetPosition(v2{-120.0f, -90.0f});
     dynamic_polygon->SetPosition(v2{static_box->GetPosition().x, 0});
     edge_ground->SetPosition(v2{-450, 450});
+
+    camera->AttachTo(player);
 
     player->AddComponent<Component::animator>(animator);
     player->AddComponent<Component::capsule_collider>(new CapsuleCollider(20, 30));
@@ -150,16 +151,9 @@ struct App : BaseApp, ContactListener{
 
     player->GetComponent<Component::rigid_body>()->SetDensity(10.0f);
     player->GetComponent<Component::rigid_body>()->SetMass(10.0f);
-    // player->GetComponent<Component::rigid_body>()->SetFixedRotation();
-    player->GetComponent<Component::rigid_body>()->SetAngularDamping(100.0f);
+    player->GetComponent<Component::rigid_body>()->SetFixedRotation();
+    // player->GetComponent<Component::rigid_body>()->SetAngularDamping(100.0f); 
     // player->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
-
-    camera = {0};
-    camera.target = player->GetPosition();
-    camera.offset = v2{(float)game_screen_width / 2,
-		       (float)game_screen_height / 2};
-    camera.rotation = 0.0f;
-    camera.zoom = 1.0f;
 
   }
 
@@ -170,51 +164,51 @@ struct App : BaseApp, ContactListener{
 
     void *user_data_a = fixture_a->GetBody()->GetUserData();
     void *user_data_b = fixture_b->GetBody()->GetUserData();
-    cout<< static_cast<Node*>(user_data_b)->name<<" => "<<static_cast<Node*>(user_data_a)->name<<endl;
 
+    // cout<< static_cast<Node*>(user_data_b)->name<<" => "<<static_cast<Node*>(user_data_a)->name<<endl;
   }
 
   void Controller(){
     float move_speed = 100.0f;
     float h_force = 10000;
+    float v_force = 195555;
     if(IsKeyDown(KEY_W)){
-      // player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, -move_speed});
+      player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, -move_speed});
     }
 
     if(IsKeyDown(KEY_S)){
-      // player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, move_speed});
+      player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, move_speed});
     }
 
     if(!IsKeyDown(KEY_W) && !IsKeyDown(KEY_S)){
-      // player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, 0});
+      player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, 0});
     }
 
     if(IsKeyDown(KEY_D)){
       dir_state = 0;
 
       // apply force to dynamic rigid body
-      player->GetComponent<Component::rigid_body>()->ApplyForce(v2{h_force, 0}, true);
+      // player->GetComponent<Component::rigid_body>()->ApplyForce(v2{h_force, 0}, true);
 
-      // kinematic movement test
-      // player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{move_speed, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
+      // set linear velocity to dynamic or kinematic body
+      player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{move_speed, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
     }
 
     if(IsKeyDown(KEY_A)){
       dir_state = 1;
 
       // apply force to dynamic rigid body
-      player->GetComponent<Component::rigid_body>()->ApplyForce(v2{-h_force, 0}, true);
+      // player->GetComponent<Component::rigid_body>()->ApplyForce(v2{-h_force, 0}, true);
 
-      // kinematic movement test
-      // player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{-move_speed, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
+      // set linear velocity to dynamic or kinematic body
+      player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{-move_speed, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
     }
 
     if(!IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)){
-      // player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{0, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
+      player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{0, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
     }
 
     if(IsKeyDown(KEY_SPACE)){
-      // player->GetComponent<Component::rigid_body>()->ApplyForce(v2{0, -100}, true);
     }
 
   }
@@ -234,23 +228,14 @@ struct App : BaseApp, ContactListener{
     // moving static box
     static_box->GetComponent<Component::rigid_body>()->SetPosition(v2{static_box->GetPosition().x + 0.2f, static_box->GetPosition().y});
 
-    camera.target = player->GetPosition();
-
     B2D::Step(); // run box2d step simulation
   }
 
 
   void OnDraw() override {
-    BeginMode2D(camera);
-
     DrawText("my first raylib window", 190, 200, 20, LIGHTGRAY);
-
     player->GetComponent<Component::animator>()->Draw();
-
     B2D::DebugDraw();
-
-    EndMode2D();
-
   }
 
 };
