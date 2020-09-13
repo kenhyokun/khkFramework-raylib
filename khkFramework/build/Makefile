@@ -184,6 +184,21 @@ Component.s:
 .PHONY : Component.s
 
 # target to build an object file
+File.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/File.o
+.PHONY : File.o
+
+# target to preprocess a source file
+File.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/File.i
+.PHONY : File.i
+
+# target to generate assembly for a file
+File.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/File.s
+.PHONY : File.s
+
+# target to build an object file
 Node.o:
 	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/Node.o
 .PHONY : Node.o
@@ -219,6 +234,9 @@ help:
 	@echo "... Component.o"
 	@echo "... Component.i"
 	@echo "... Component.s"
+	@echo "... File.o"
+	@echo "... File.i"
+	@echo "... File.s"
 	@echo "... Node.o"
 	@echo "... Node.i"
 	@echo "... Node.s"

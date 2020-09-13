@@ -113,6 +113,11 @@ CMakeFiles/khkFramework.dir/Component.o
  ..//Node.h
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
+CMakeFiles/khkFramework.dir/File.o
+ ../../third_party/confini/confini.h
+ ../../third_party/tinyxml2/tinyxml2.h
+ ..//File.h
+ /home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp
 CMakeFiles/khkFramework.dir/Node.o
  ../../third_party/raylib/raylib.h
  ..//CMath.h

@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/khkFramework.dir/B2D_DebugDraw.o"
   "CMakeFiles/khkFramework.dir/BaseApp.o"
   "CMakeFiles/khkFramework.dir/Component.o"
+  "CMakeFiles/khkFramework.dir/File.o"
   "CMakeFiles/khkFramework.dir/Node.o"
   "libkhkFramework.pdb"
   "libkhkFramework.a"

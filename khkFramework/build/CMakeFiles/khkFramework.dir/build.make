@@ -153,9 +153,33 @@ CMakeFiles/khkFramework.dir/Component.o.provides: CMakeFiles/khkFramework.dir/Co
 CMakeFiles/khkFramework.dir/Component.o.provides.build: CMakeFiles/khkFramework.dir/Component.o
 
 
+CMakeFiles/khkFramework.dir/File.o: CMakeFiles/khkFramework.dir/flags.make
+CMakeFiles/khkFramework.dir/File.o: ../File.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/khkFramework.dir/File.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/File.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp
+
+CMakeFiles/khkFramework.dir/File.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/File.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp > CMakeFiles/khkFramework.dir/File.i
+
+CMakeFiles/khkFramework.dir/File.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/File.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp -o CMakeFiles/khkFramework.dir/File.s
+
+CMakeFiles/khkFramework.dir/File.o.requires:
+
+.PHONY : CMakeFiles/khkFramework.dir/File.o.requires
+
+CMakeFiles/khkFramework.dir/File.o.provides: CMakeFiles/khkFramework.dir/File.o.requires
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/File.o.provides.build
+.PHONY : CMakeFiles/khkFramework.dir/File.o.provides
+
+CMakeFiles/khkFramework.dir/File.o.provides.build: CMakeFiles/khkFramework.dir/File.o
+
+
 CMakeFiles/khkFramework.dir/Node.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/Node.o: ../Node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/khkFramework.dir/Node.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/khkFramework.dir/Node.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/Node.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp
 
 CMakeFiles/khkFramework.dir/Node.i: cmake_force
@@ -183,6 +207,7 @@ khkFramework_OBJECTS = \
 "CMakeFiles/khkFramework.dir/B2D_DebugDraw.o" \
 "CMakeFiles/khkFramework.dir/BaseApp.o" \
 "CMakeFiles/khkFramework.dir/Component.o" \
+"CMakeFiles/khkFramework.dir/File.o" \
 "CMakeFiles/khkFramework.dir/Node.o"
 
 # External object files for target khkFramework
@@ -192,10 +217,11 @@ libkhkFramework.a: CMakeFiles/khkFramework.dir/B2D.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/BaseApp.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/Component.o
+libkhkFramework.a: CMakeFiles/khkFramework.dir/File.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/Node.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/build.make
 libkhkFramework.a: CMakeFiles/khkFramework.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX static library libkhkFramework.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX static library libkhkFramework.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/khkFramework.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/khkFramework.dir/link.txt --verbose=$(VERBOSE)
 
@@ -208,6 +234,7 @@ CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/B2D.o.requires
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.requires
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/BaseApp.o.requires
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/Component.o.requires
+CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/File.o.requires
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/Node.o.requires
 
 .PHONY : CMakeFiles/khkFramework.dir/requires

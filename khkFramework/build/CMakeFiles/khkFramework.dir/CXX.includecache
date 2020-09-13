@@ -315,6 +315,10 @@ File.h
 -
 
 ..//File.h
+iostream
+-
+map
+-
 tinyxml2.h
 -
 confini.h
@@ -360,6 +364,10 @@ BaseApp.h
 
 /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
 Component.h
+-
+
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp
+File.h
 -
 
 /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp

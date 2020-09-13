@@ -23,30 +23,34 @@
   kevinhyokun91@gmail.com
 */
 
-#ifndef FILE_H
-#define FILE_H
+#include<File.h>
 
-#include<iostream>
-#include<map>
-#include<tinyxml2.h>
-#include<confini.h>
+map<string, string> ConfigFile::value_map;
 
-using namespace std;
-using namespace tinyxml2;
+int ConfigFile::LoadFile(string file_src){
+  return load_ini_path(file_src.c_str(),
+		       INI_DEFAULT_FORMAT,
+		       NULL,
+		       _DefCallback,
+		       NULL);
+}
 
-typedef XMLDocument XMLFile;
+int ConfigFile::LoadFile(string file_src, const IniDispHandler callback){
+  return load_ini_path(file_src.c_str(),
+		       INI_DEFAULT_FORMAT,
+		       NULL,
+		       callback,
+		       NULL);
+}
 
-struct ConfigFile{
+string ConfigFile::GetValue(string data){
+  return value_map.at(data);
+}
 
-  int LoadFile(string file_src);
-  int LoadFile(string file_src, const IniDispHandler callback);
-  string GetValue(string data);
+int ConfigFile::_DefCallback(IniDispatch *dispatch, void *v_null){
+  if(dispatch->type == INI_KEY){
+    value_map.insert(pair<string, string>(dispatch->data, dispatch->value));
+  }
+  return 0;
+}
 
-protected:
-  static map<string, string> value_map;
-  static int _DefCallback(IniDispatch *dispatch, void *v_null);
-
-};
-
-
-#endif

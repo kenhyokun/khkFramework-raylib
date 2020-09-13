@@ -190,11 +190,11 @@ bool Component::Tilemap::IsTiled(int column, int row){
 Component::TMXMap::TMXMap(Texture2D *_texture, string tmx_file_src){
   texture = _texture;
   grid = new Grid();
-  XMLDocument xml_document;
+  XMLFile xml_file;
    
-  if(xml_document.LoadFile(tmx_file_src.c_str()) == XML_SUCCESS){
+  if(xml_file.LoadFile(tmx_file_src.c_str()) == XML_SUCCESS){
 
-    XMLNode *root = xml_document.FirstChild();
+    XMLNode *root = xml_file.FirstChild();
     XMLElement *map = root->NextSibling()->ToElement();
   
     // map attribute //
@@ -254,7 +254,7 @@ Component::TMXMap::TMXMap(Texture2D *_texture, string tmx_file_src){
     
   }
   else{
-    xml_document.PrintError();
+    xml_file.PrintError();
   }
 
   texture_column = texture->width / grid->width;

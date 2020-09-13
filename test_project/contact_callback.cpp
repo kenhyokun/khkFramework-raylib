@@ -9,6 +9,8 @@
 #include<Node.h>
 #include<Component.h>
 #include<B2D.h>
+#include<File.h>
+#include<KeyButton.h>
 
 using namespace std;
 using namespace Component;
@@ -27,6 +29,8 @@ TODO [kevin]:
  - platfomer test (what is this ghost vertice thingy...)
  - resource manager maybe...
 */
+
+static map<string, Key*> key_map;
 
 struct App : BaseApp, ContactListener{
 
@@ -49,6 +53,7 @@ struct App : BaseApp, ContactListener{
   TMXMap *tmxmap;
 
 
+
   App(int _window_width, int _window_height, string _title) :
     BaseApp(_window_width, _window_height, _title){}
 
@@ -56,10 +61,48 @@ struct App : BaseApp, ContactListener{
     delete world;
   }
 
+  static int SettingCallback(IniDispatch *dispatch, void *v_null){
+#define is_section(SECTION) (ini_array_match(SECTION, dispatch->append_to, '.', dispatch->format)) 
+
+    if(dispatch->type == INI_KEY){
+      if(is_section("keyboard_controller")){
+
+	string str = dispatch->value;
+	Key* key = new Key();
+
+	if(str.length() > 1){
+	  key->key_code = Key::GetFunctionKeyCode(str);
+	} 
+	else{
+	  int ascii_key_code = (int)dispatch->value[0];
+	  key->key_code = ascii_key_code;
+	}
+
+	key_map.insert(pair<string, Key*>(dispatch->data, key));
+
+	cout<<key->key_code<<endl;
+
+      }
+    }
+
+    return 0;
+
+#undef is_section
+
+  }
+
   void OnInit() override {
 
     B2D::Init(v2{0, 1000});
     B2D::SetContactListener(this);
+
+    ConfigFile conf_file;
+    if(conf_file.LoadFile("settings.cfg", SettingCallback) == 0){
+      log("found settings.cfg file");
+    }
+    else{
+      log("settings.cfg file not found");
+    }
 
     player = new Node("player"); // lilwitch test
     dynamic_box = new Node("dynamic box"); // box dynamic rigid body test
@@ -172,19 +215,19 @@ struct App : BaseApp, ContactListener{
     float move_speed = 100.0f;
     float h_force = 10000;
     float v_force = 195555;
-    if(IsKeyDown(KEY_W)){
+    if(key_map.at("up")->IsDown()){
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, -move_speed});
     }
 
-    if(IsKeyDown(KEY_S)){
+    if(key_map.at("down")->IsDown()){
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, move_speed});
     }
 
-    if(!IsKeyDown(KEY_W) && !IsKeyDown(KEY_S)){
+    if(!key_map.at("up")->IsDown() && !key_map.at("down")->IsDown()){
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, 0});
     }
 
-    if(IsKeyDown(KEY_D)){
+    if(key_map.at("right")->IsDown()){
       dir_state = 0;
 
       // apply force to dynamic rigid body
@@ -194,7 +237,7 @@ struct App : BaseApp, ContactListener{
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{move_speed, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
     }
 
-    if(IsKeyDown(KEY_A)){
+    if(key_map.at("left")->IsDown()){
       dir_state = 1;
 
       // apply force to dynamic rigid body
@@ -204,7 +247,7 @@ struct App : BaseApp, ContactListener{
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{-move_speed, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
     }
 
-    if(!IsKeyDown(KEY_A) && !IsKeyDown(KEY_D)){
+    if(!key_map.at("right")->IsDown() && !key_map.at("left")->IsDown()){
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{0, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
     }
 
