@@ -26,14 +26,12 @@
 #ifndef COMPONENT_H
 #define COMPONENT_H
 
-#include<tinyxml2.h>
 #include<Node.h>
-
-using namespace tinyxml2;
+#include<File.h>
 
 struct Grid{
-  int width = 0; // grid width / tile width
-  int height = 0; // grid height / tile height
+  int width = 0;
+  int height = 0;
   int column = 0;
   int row = 0;
 };

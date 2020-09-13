@@ -37,12 +37,14 @@ CMakeFiles/khkFramework.dir/B2D.o
  ../../third_party/box2d/box2d/b2_world.h
  ../../third_party/box2d/box2d/b2_world_callbacks.h
  ../../third_party/box2d/box2d/box2d.h
+ ../../third_party/confini/confini.h
  ../../third_party/raylib/raylib.h
  ../../third_party/tinyxml2/tinyxml2.h
  ..//B2D.h
  ..//B2D_DebugDraw.h
  ..//CMath.h
  ..//Component.h
+ ..//File.h
  ..//Node.h
  ..//m_box2d.h
  ..//m_raylib.h
@@ -83,11 +85,13 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
  ../../third_party/box2d/box2d/b2_world.h
  ../../third_party/box2d/box2d/b2_world_callbacks.h
  ../../third_party/box2d/box2d/box2d.h
+ ../../third_party/confini/confini.h
  ../../third_party/raylib/raylib.h
  ../../third_party/tinyxml2/tinyxml2.h
  ..//B2D_DebugDraw.h
  ..//CMath.h
  ..//Component.h
+ ..//File.h
  ..//Node.h
  ..//m_box2d.h
  ..//m_raylib.h
@@ -100,10 +104,12 @@ CMakeFiles/khkFramework.dir/BaseApp.o
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp
 CMakeFiles/khkFramework.dir/Component.o
+ ../../third_party/confini/confini.h
  ../../third_party/raylib/raylib.h
  ../../third_party/tinyxml2/tinyxml2.h
  ..//CMath.h
  ..//Component.h
+ ..//File.h
  ..//Node.h
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp

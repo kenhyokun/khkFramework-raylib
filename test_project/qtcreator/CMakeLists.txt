@@ -12,12 +12,14 @@ file(GLOB khkFramework_project_header "../../khkFramework/*.h")
 file(GLOB raylib_project_header "../../third_party/raylib/*.h")
 file(GLOB box2d_project_header "../../third_party/box2d/box2d/*.h")
 file(GLOB tinyxml2_project_header "../../third_party/tinyxml2/*.h")
+file(GLOB confini_project_header "../../third_party/confini/*.h")
 
 # set include dir
 include_directories("../../khkFramework/")
 include_directories("../../third_party/box2d/")
 include_directories("../../third_party/raylib/")
 include_directories("../../third_party/tinyxml2/")
+include_directories("../../third_party/confini/")
 
 # set output name
 set(project_name "main")
@@ -34,6 +36,7 @@ find_library(lx11 X11)
 find_library(lraylib NAMES "raylib" PATHS "../../third_party/raylib/" NO_DEFAULT_PATH)
 find_library(lbox2d NAMES "box2d" PATHS "../../third_party/box2d/" NO_DEFAULT_PATH)
 find_library(ltinyxml2 NAMES "tinyxml2" PATHS "../../third_party/tinyxml2/" NO_DEFAULT_PATH)
+find_library(lconfini NAMES "confini" PATHS "../../third_party/confini/" NO_DEFAULT_PATH)
 find_library(lkhkFramework NAMES "khkFramework" PATHS "../../khkFramework/build/" NO_DEFAULT_PATH)
 
 add_executable(${project_name} 
@@ -43,12 +46,14 @@ add_executable(${project_name}
 	${raylib_project_header}
 	${box2d_project_header}
 	${tinyxml2_project_header}
+	${confini_project_header}
 	)
 
 target_link_libraries(${project_name} 
 	${lraylib}
 	${lbox2d}
 	${ltinyxml2}
+	${lconfini}
 	${lkhkFramework}
 	${lgl}
 	${lpthread}

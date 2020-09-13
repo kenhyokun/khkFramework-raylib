@@ -236,6 +236,14 @@ b2_weld_joint.h
 b2_wheel_joint.h
 ../../third_party/box2d/box2d/b2_wheel_joint.h
 
+../../third_party/confini/confini.h
+stdio.h
+-
+stdbool.h
+-
+stdint.h
+-
+
 ../../third_party/raylib/raylib.h
 stdarg.h
 -
@@ -301,9 +309,15 @@ cmath
 -
 
 ..//Component.h
+Node.h
+-
+File.h
+-
+
+..//File.h
 tinyxml2.h
 -
-Node.h
+confini.h
 -
 
 ..//Node.h

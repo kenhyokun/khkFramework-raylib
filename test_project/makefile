@@ -5,15 +5,18 @@ INCLUDE :=\
 	-I../third_party/box2d \
 	-I../third_party/raylib \
 	-I../third_party/tinyxml2 \
+	-I../third_party/confini \
 	-I../khkFramework
 
 LIB :=\
 	-L../khkFramework/build \
 	-L../third_party/tinyxml2 \
+	-L../third_party/confini \
 	-L../third_party/raylib \
 	-L../third_party/box2d \
 	-lkhkFramework \
 	-ltinyxml2 \
+	-lconfini \
 	-lraylib \
 	-lbox2d \
 	-lGL \

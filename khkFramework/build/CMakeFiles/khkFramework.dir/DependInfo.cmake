@@ -18,6 +18,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../../third_party/box2d"
   "../../third_party/raylib"
   "../../third_party/tinyxml2"
+  "../../third_party/confini"
   )
 
 # Targets to which this target links.

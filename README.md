@@ -13,9 +13,13 @@ Current progress:
   - box2d physics engine. (only box, circle, capsule, polygon, and edge collision for now)
 
 # Third party library:
-  - raylib v3.0.0 (https://github.com/raysan5/raylib)
-  - box2d v2.4.0 (https://github.com/erincatto/box2d)
-  - tinyxml2 (https://github.com/leethomason/tinyxml2) 
+  - Core / graphics engine:
+    - raylib v3.0.0 (https://github.com/raysan5/raylib)
+  - Physics engine:
+    - box2d v2.4.0 (https://github.com/erincatto/box2d)
+  - File parser:
+    - tinyxml2 (https://github.com/leethomason/tinyxml2) 
+    - libconfini v1.14.1 (https://github.com/madmurphy/libconfini/)
 
 # Todo for version 1.0.0 release:
   - Add sample project.
