@@ -29,6 +29,7 @@
 #include<iostream>
 #include<m_raylib.h>
 #include<Node.h>
+#include<KeyButton.h>
 
 using namespace std;
 
@@ -67,6 +68,7 @@ struct BaseApp{
   RenderTexture2D target;
 
   CCamera *camera;
+  static map<string, Key*> key_map;
 
   BaseApp(int _window_width = 800,
 	  int _window_height = 450,
@@ -74,6 +76,8 @@ struct BaseApp{
 
   v2 ClampValue(v2 value, v2 min, v2 max);
   void SetGameScreen(int _game_screen_width, int _game_screen_height);
+  static void AddKeyButton(string action_name, int key_code);
+  static Key* GetKeyButton(string action_name);
   void Init(int texture_filter_mode = 0);
   void Update();
   void Draw();

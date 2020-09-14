@@ -25,6 +25,8 @@
 
 #include<BaseApp.h>
 
+map<string, Key*> BaseApp::key_map;
+
 BaseApp::BaseApp(int _window_width, int _window_height, string _title){
   window_width = _window_width;
   window_height = _window_height;
@@ -45,6 +47,10 @@ v2 BaseApp::ClampValue(v2 value, v2 min, v2 max){
 void BaseApp::SetGameScreen(int _game_screen_width, int _game_screen_height){
   game_screen_width = _game_screen_width;
   game_screen_height = _game_screen_height;
+}
+
+void BaseApp::AddKeyButton(string action_name, int key_code){
+  key_map.insert(pair<string, Key*>(action_name, new Key{key_code}));
 }
 
 void BaseApp::Init(int texture_filter_mode){
@@ -132,6 +138,8 @@ void BaseApp::Run(){
   UnloadRenderTexture(target);
   CloseWindow();
 }
+
+Key* BaseApp::GetKeyButton(string action_name){return key_map.at(action_name);}
 
 void BaseApp::OnInit(){}
 void BaseApp::OnUpdate(){}

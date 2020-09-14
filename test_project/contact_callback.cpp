@@ -30,7 +30,6 @@ TODO [kevin]:
  - resource manager maybe...
 */
 
-static map<string, Key*> key_map;
 
 struct App : BaseApp, ContactListener{
 
@@ -68,19 +67,18 @@ struct App : BaseApp, ContactListener{
       if(is_section("keyboard_controller")){
 
 	string str = dispatch->value;
-	Key* key = new Key();
+	int key_code = 0;
 
 	if(str.length() > 1){
-	  key->key_code = Key::GetFunctionKeyCode(str);
+	  key_code = Key::GetFunctionKeyCode(str); 
 	} 
 	else{
-	  int ascii_key_code = (int)dispatch->value[0];
-	  key->key_code = ascii_key_code;
+	  key_code = (int)dispatch->value[0];
 	}
 
-	key_map.insert(pair<string, Key*>(dispatch->data, key));
+	AddKeyButton(dispatch->data, key_code);
 
-	cout<<key->key_code<<endl;
+	cout<<GetKeyButton(dispatch->data)->key_code<<endl;
 
       }
     }
@@ -215,19 +213,19 @@ struct App : BaseApp, ContactListener{
     float move_speed = 100.0f;
     float h_force = 10000;
     float v_force = 195555;
-    if(key_map.at("up")->IsDown()){
+    if(GetKeyButton("up")->IsDown()){
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, -move_speed});
     }
 
-    if(key_map.at("down")->IsDown()){
+    if(GetKeyButton("down")->IsDown()){
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, move_speed});
     }
 
-    if(!key_map.at("up")->IsDown() && !key_map.at("down")->IsDown()){
+    if(!GetKeyButton("up")->IsDown() && !GetKeyButton("down")->IsDown()){
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x, 0});
     }
 
-    if(key_map.at("right")->IsDown()){
+    if(GetKeyButton("right")->IsDown()){
       dir_state = 0;
 
       // apply force to dynamic rigid body
@@ -237,7 +235,7 @@ struct App : BaseApp, ContactListener{
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{move_speed, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
     }
 
-    if(key_map.at("left")->IsDown()){
+    if(GetKeyButton("left")->IsDown()){
       dir_state = 1;
 
       // apply force to dynamic rigid body
@@ -247,7 +245,7 @@ struct App : BaseApp, ContactListener{
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{-move_speed, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
     }
 
-    if(!key_map.at("right")->IsDown() && !key_map.at("left")->IsDown()){
+    if(!GetKeyButton("right")->IsDown() && !GetKeyButton("left")->IsDown()){
       player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{0, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
     }
 

@@ -301,6 +301,8 @@ m_raylib.h
 -
 Node.h
 -
+KeyButton.h
+-
 
 ..//CMath.h
 m_raylib.h
@@ -322,6 +324,10 @@ map
 tinyxml2.h
 -
 confini.h
+-
+
+..//KeyButton.h
+m_raylib.h
 -
 
 ..//Node.h
