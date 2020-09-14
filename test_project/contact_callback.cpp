@@ -9,8 +9,6 @@
 #include<Node.h>
 #include<Component.h>
 #include<B2D.h>
-#include<File.h>
-#include<KeyButton.h>
 
 using namespace std;
 using namespace Component;
@@ -41,7 +39,6 @@ struct App : BaseApp, ContactListener{
   Node *dynamic_polygon;
   Node *edge_ground;
 
-
   int dir_state = 0;
 
   //component
@@ -51,8 +48,6 @@ struct App : BaseApp, ContactListener{
   Tilemap *tilemap;
   TMXMap *tmxmap;
 
-
-
   App(int _window_width, int _window_height, string _title) :
     BaseApp(_window_width, _window_height, _title){}
 
@@ -60,47 +55,10 @@ struct App : BaseApp, ContactListener{
     delete world;
   }
 
-  static int SettingCallback(IniDispatch *dispatch, void *v_null){
-#define is_section(SECTION) (ini_array_match(SECTION, dispatch->append_to, '.', dispatch->format)) 
-
-    if(dispatch->type == INI_KEY){
-      if(is_section("keyboard_controller")){
-
-	string str = dispatch->value;
-	int key_code = 0;
-
-	if(str.length() > 1){
-	  key_code = Key::GetFunctionKeyCode(str); 
-	} 
-	else{
-	  key_code = (int)dispatch->value[0];
-	}
-
-	AddKeyButton(dispatch->data, key_code);
-
-	cout<<GetKeyButton(dispatch->data)->key_code<<endl;
-
-      }
-    }
-
-    return 0;
-
-#undef is_section
-
-  }
-
   void OnInit() override {
 
     B2D::Init(v2{0, 1000});
     B2D::SetContactListener(this);
-
-    ConfigFile conf_file;
-    if(conf_file.LoadFile("settings.cfg", SettingCallback) == 0){
-      log("found settings.cfg file");
-    }
-    else{
-      log("settings.cfg file not found");
-    }
 
     player = new Node("player"); // lilwitch test
     dynamic_box = new Node("dynamic box"); // box dynamic rigid body test

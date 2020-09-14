@@ -53,6 +53,35 @@ void BaseApp::AddKeyButton(string action_name, int key_code){
   key_map.insert(pair<string, Key*>(action_name, new Key{key_code}));
 }
 
+int BaseApp::SettingCallback(IniDispatch *dispatch, void *v_null){
+#define is_section(SECTION) (ini_array_match(SECTION, dispatch->append_to, '.', dispatch->format)) 
+
+  if(dispatch->type == INI_KEY){
+    if(is_section("keyboard_controller")){
+
+      string str = dispatch->value;
+      int key_code = 0;
+
+      if(str.length() > 1){
+	key_code = Key::GetFunctionKeyCode(str); 
+      } 
+      else{
+	key_code = (int)dispatch->value[0];
+      }
+
+      AddKeyButton(dispatch->data, key_code);
+
+      // cout<<GetKeyButton(dispatch->data)->key_code<<endl;
+
+    }
+  }
+
+  return 0;
+
+#undef is_section
+
+}
+
 void BaseApp::Init(int texture_filter_mode){
   // init app
   SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
@@ -68,6 +97,14 @@ void BaseApp::Init(int texture_filter_mode){
   // init camera
   camera = new CCamera();
   camera->Init(game_screen_width / 2, game_screen_height / 2);
+
+  ConfigFile conf_file;
+  if(conf_file.LoadFile("settings.cfg", SettingCallback) == 0){
+    log("Found settings.cfg file");
+  }
+  else{
+    log("settings.cfg file not found");
+  }
 
   // overiding init 
   OnInit();

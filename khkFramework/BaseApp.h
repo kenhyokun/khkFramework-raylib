@@ -29,6 +29,7 @@
 #include<iostream>
 #include<m_raylib.h>
 #include<Node.h>
+#include<File.h>
 #include<KeyButton.h>
 
 using namespace std;
@@ -78,6 +79,7 @@ struct BaseApp{
   void SetGameScreen(int _game_screen_width, int _game_screen_height);
   static void AddKeyButton(string action_name, int key_code);
   static Key* GetKeyButton(string action_name);
+  static int SettingCallback(IniDispatch *dispatch, void *v_null);
   void Init(int texture_filter_mode = 0);
   void Update();
   void Draw();

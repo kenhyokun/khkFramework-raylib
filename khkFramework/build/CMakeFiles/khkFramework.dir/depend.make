@@ -96,9 +96,12 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../m_box2d.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../B2D_DebugDraw.cpp
 
+CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/confini/confini.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/raylib/raylib.h
+CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/tinyxml2/tinyxml2.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../CMath.h
+CMakeFiles/khkFramework.dir/BaseApp.o: ../File.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../KeyButton.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../Node.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../m_raylib.h
