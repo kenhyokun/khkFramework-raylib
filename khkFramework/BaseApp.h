@@ -46,7 +46,7 @@ struct CCamera{
   }
 
   inline void AttachTo(Node *node){target = node;}
-
+  inline void Detach(){target = nullptr;}
   inline void Follow(){
     if(target != nullptr){
       camera.target = target->GetPosition();

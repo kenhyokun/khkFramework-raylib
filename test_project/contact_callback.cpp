@@ -10,6 +10,7 @@
 #include<Component.h>
 #include<B2D.h>
 #include<File.h>
+#include<TextureAtlas.h>
 
 using namespace std;
 using namespace Component;
@@ -63,6 +64,10 @@ struct App : BaseApp, ContactListener{
 
     JSONFile tes;
     tes.LoadFile("tes.json");
+    float _pi = tes.json["pi"];
+    cout<<_pi<<endl;
+
+    TextureAtlas texture_atlas("test2.atlas");
 
     player = new Node("player"); // lilwitch test
     dynamic_box = new Node("dynamic box"); // box dynamic rigid body test
