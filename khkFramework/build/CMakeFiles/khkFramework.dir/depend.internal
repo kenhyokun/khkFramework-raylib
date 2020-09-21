@@ -38,6 +38,7 @@ CMakeFiles/khkFramework.dir/B2D.o
  ../../third_party/box2d/box2d/b2_world_callbacks.h
  ../../third_party/box2d/box2d/box2d.h
  ../../third_party/confini/confini.h
+ ../../third_party/json/json.hpp
  ../../third_party/raylib/raylib.h
  ../../third_party/tinyxml2/tinyxml2.h
  ..//B2D.h
@@ -45,6 +46,7 @@ CMakeFiles/khkFramework.dir/B2D.o
  ..//CMath.h
  ..//Component.h
  ..//File.h
+ ..//JSON.h
  ..//Node.h
  ..//m_box2d.h
  ..//m_raylib.h
@@ -86,41 +88,49 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
  ../../third_party/box2d/box2d/b2_world_callbacks.h
  ../../third_party/box2d/box2d/box2d.h
  ../../third_party/confini/confini.h
+ ../../third_party/json/json.hpp
  ../../third_party/raylib/raylib.h
  ../../third_party/tinyxml2/tinyxml2.h
  ..//B2D_DebugDraw.h
  ..//CMath.h
  ..//Component.h
  ..//File.h
+ ..//JSON.h
  ..//Node.h
  ..//m_box2d.h
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp
 CMakeFiles/khkFramework.dir/BaseApp.o
  ../../third_party/confini/confini.h
+ ../../third_party/json/json.hpp
  ../../third_party/raylib/raylib.h
  ../../third_party/tinyxml2/tinyxml2.h
  ..//BaseApp.h
  ..//CMath.h
  ..//File.h
+ ..//JSON.h
  ..//KeyButton.h
  ..//Node.h
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp
 CMakeFiles/khkFramework.dir/Component.o
  ../../third_party/confini/confini.h
+ ../../third_party/json/json.hpp
  ../../third_party/raylib/raylib.h
  ../../third_party/tinyxml2/tinyxml2.h
  ..//CMath.h
  ..//Component.h
  ..//File.h
+ ..//JSON.h
  ..//Node.h
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
 CMakeFiles/khkFramework.dir/File.o
  ../../third_party/confini/confini.h
+ ../../third_party/json/json.hpp
  ../../third_party/tinyxml2/tinyxml2.h
  ..//File.h
+ ..//JSON.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp
 CMakeFiles/khkFramework.dir/Node.o
  ../../third_party/raylib/raylib.h

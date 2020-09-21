@@ -32,7 +32,6 @@ struct Key{
   int key_code;
 
   static int GetFunctionKeyCode(string key_sym){
-
     if(key_sym == "SPACE") return KEY_SPACE;
     if(key_sym == "ESCAPE") return KEY_ESCAPE;
     if(key_sym == "ENTER") return KEY_ENTER;

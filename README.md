@@ -20,6 +20,7 @@ Current progress:
   - File parser:
     - tinyxml2 (https://github.com/leethomason/tinyxml2) 
     - libconfini v1.14.1 (https://github.com/madmurphy/libconfini/)
+    - json (https://github.com/nlohmann/json)
 
 # Todo for version 1.0.0 release:
   - Add sample project.

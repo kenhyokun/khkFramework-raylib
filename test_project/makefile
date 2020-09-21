@@ -6,6 +6,7 @@ INCLUDE :=\
 	-I../third_party/raylib \
 	-I../third_party/tinyxml2 \
 	-I../third_party/confini \
+	-I../third_party/json \
 	-I../khkFramework
 
 LIB :=\

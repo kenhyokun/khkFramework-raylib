@@ -13,6 +13,7 @@ file(GLOB raylib_project_header "../../third_party/raylib/*.h")
 file(GLOB box2d_project_header "../../third_party/box2d/box2d/*.h")
 file(GLOB tinyxml2_project_header "../../third_party/tinyxml2/*.h")
 file(GLOB confini_project_header "../../third_party/confini/*.h")
+file(GLOB json_project_header "../../third_party/json/*.hpp")
 
 # set include dir
 include_directories("../../khkFramework/")
@@ -20,6 +21,7 @@ include_directories("../../third_party/box2d/")
 include_directories("../../third_party/raylib/")
 include_directories("../../third_party/tinyxml2/")
 include_directories("../../third_party/confini/")
+include_directories("../../third_party/json/")
 
 # set output name
 set(project_name "main")
@@ -47,6 +49,7 @@ add_executable(${project_name}
 	${box2d_project_header}
 	${tinyxml2_project_header}
 	${confini_project_header}
+	${json_project_header}
 	)
 
 target_link_libraries(${project_name} 

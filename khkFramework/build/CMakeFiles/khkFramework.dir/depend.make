@@ -37,6 +37,7 @@ CMakeFiles/khkFramework.dir/B2D.o: ../../third_party/box2d/box2d/b2_world.h
 CMakeFiles/khkFramework.dir/B2D.o: ../../third_party/box2d/box2d/b2_world_callbacks.h
 CMakeFiles/khkFramework.dir/B2D.o: ../../third_party/box2d/box2d/box2d.h
 CMakeFiles/khkFramework.dir/B2D.o: ../../third_party/confini/confini.h
+CMakeFiles/khkFramework.dir/B2D.o: ../../third_party/json/json.hpp
 CMakeFiles/khkFramework.dir/B2D.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/B2D.o: ../../third_party/tinyxml2/tinyxml2.h
 CMakeFiles/khkFramework.dir/B2D.o: ../B2D.h
@@ -44,6 +45,7 @@ CMakeFiles/khkFramework.dir/B2D.o: ../B2D_DebugDraw.h
 CMakeFiles/khkFramework.dir/B2D.o: ../CMath.h
 CMakeFiles/khkFramework.dir/B2D.o: ../Component.h
 CMakeFiles/khkFramework.dir/B2D.o: ../File.h
+CMakeFiles/khkFramework.dir/B2D.o: ../JSON.h
 CMakeFiles/khkFramework.dir/B2D.o: ../Node.h
 CMakeFiles/khkFramework.dir/B2D.o: ../m_box2d.h
 CMakeFiles/khkFramework.dir/B2D.o: ../m_raylib.h
@@ -85,41 +87,49 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/box2d/box2d/b2_wo
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/box2d/box2d/b2_world_callbacks.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/box2d/box2d/box2d.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/confini/confini.h
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/json/json.hpp
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/tinyxml2/tinyxml2.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../B2D_DebugDraw.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../CMath.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../Component.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../File.h
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../JSON.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../Node.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../m_box2d.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../B2D_DebugDraw.cpp
 
 CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/confini/confini.h
+CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/json/json.hpp
 CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/tinyxml2/tinyxml2.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../CMath.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../File.h
+CMakeFiles/khkFramework.dir/BaseApp.o: ../JSON.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../KeyButton.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../Node.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.cpp
 
 CMakeFiles/khkFramework.dir/Component.o: ../../third_party/confini/confini.h
+CMakeFiles/khkFramework.dir/Component.o: ../../third_party/json/json.hpp
 CMakeFiles/khkFramework.dir/Component.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/Component.o: ../../third_party/tinyxml2/tinyxml2.h
 CMakeFiles/khkFramework.dir/Component.o: ../CMath.h
 CMakeFiles/khkFramework.dir/Component.o: ../Component.h
 CMakeFiles/khkFramework.dir/Component.o: ../File.h
+CMakeFiles/khkFramework.dir/Component.o: ../JSON.h
 CMakeFiles/khkFramework.dir/Component.o: ../Node.h
 CMakeFiles/khkFramework.dir/Component.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/Component.o: ../Component.cpp
 
 CMakeFiles/khkFramework.dir/File.o: ../../third_party/confini/confini.h
+CMakeFiles/khkFramework.dir/File.o: ../../third_party/json/json.hpp
 CMakeFiles/khkFramework.dir/File.o: ../../third_party/tinyxml2/tinyxml2.h
 CMakeFiles/khkFramework.dir/File.o: ../File.h
+CMakeFiles/khkFramework.dir/File.o: ../JSON.h
 CMakeFiles/khkFramework.dir/File.o: ../File.cpp
 
 CMakeFiles/khkFramework.dir/Node.o: ../../third_party/raylib/raylib.h

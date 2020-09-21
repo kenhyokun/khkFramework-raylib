@@ -98,8 +98,8 @@ void BaseApp::Init(int texture_filter_mode){
   camera = new CCamera();
   camera->Init(game_screen_width / 2, game_screen_height / 2);
 
-  ConfigFile conf_file;
-  if(conf_file.LoadFile("settings.cfg", SettingCallback) == 0){
+  ConfigFile setting_conf_file;
+  if(setting_conf_file.LoadFile("settings.cfg", SettingCallback) == 0){
     log("Found settings.cfg file");
   }
   else{

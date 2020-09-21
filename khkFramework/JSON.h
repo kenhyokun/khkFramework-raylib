@@ -23,46 +23,10 @@
   kevinhyokun91@gmail.com
 */
 
-#include<File.h>
+#ifndef M_JSON_H
+#define M_JSON_H
 
+#include<json.hpp>
+using JSON = nlohmann::json;
 
-/*
- Config file
-*/
-map<string, string> ConfigFile::value_map;
-
-int ConfigFile::LoadFile(string file_src){
-  return load_ini_path(file_src.c_str(),
-		       INI_DEFAULT_FORMAT,
-		       NULL,
-		       _DefCallback,
-		       NULL);
-}
-
-int ConfigFile::LoadFile(string file_src, const IniDispHandler callback){
-  return load_ini_path(file_src.c_str(),
-		       INI_DEFAULT_FORMAT,
-		       NULL,
-		       callback,
-		       NULL);
-}
-
-string ConfigFile::GetValue(string data){
-  return value_map.at(data);
-}
-
-int ConfigFile::_DefCallback(IniDispatch *dispatch, void *v_null){
-  if(dispatch->type == INI_KEY){
-    value_map.insert(pair<string, string>(dispatch->data, dispatch->value));
-  }
-  return 0;
-}
-
-
-/*
-  JSON file
-*/
-void JSONFile::LoadFile(string file_src){
-  ifstream file(file_src);
-  file >> json;
-}
+#endif

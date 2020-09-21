@@ -27,9 +27,11 @@
 #define FILE_H
 
 #include<iostream>
+#include<fstream>
 #include<map>
 #include<tinyxml2.h>
 #include<confini.h>
+#include<JSON.h>
 
 using namespace std;
 using namespace tinyxml2;
@@ -45,6 +47,15 @@ struct ConfigFile{
 protected:
   static map<string, string> value_map;
   static int _DefCallback(IniDispatch *dispatch, void *v_null);
+
+};
+
+struct JSONFile{
+  JSON json;
+  void LoadFile(string file_src);
+
+protected:
+  string temp_str;
 
 };
 

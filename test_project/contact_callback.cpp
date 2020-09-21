@@ -9,6 +9,7 @@
 #include<Node.h>
 #include<Component.h>
 #include<B2D.h>
+#include<File.h>
 
 using namespace std;
 using namespace Component;
@@ -59,6 +60,9 @@ struct App : BaseApp, ContactListener{
 
     B2D::Init(v2{0, 1000});
     B2D::SetContactListener(this);
+
+    JSONFile tes;
+    tes.LoadFile("tes.json");
 
     player = new Node("player"); // lilwitch test
     dynamic_box = new Node("dynamic box"); // box dynamic rigid body test
