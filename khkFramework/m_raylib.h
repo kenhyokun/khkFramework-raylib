@@ -30,10 +30,16 @@
 
 using namespace std;
 
-#define v2_0  Vector2{0, 0}
+#define v2_0  Vector2{0.0f, 0.0f}
 #define v2_half  Vector2{0.5f, 0.5f} // I don't know why this feels like necessary
 #define v2_1  Vector2{1.0f, 1.0f}
 typedef Vector2 v2;
+
+struct v2i{
+  int x,y;
+};
+
+#define v2i_0 v2i{0, 0}
 
 inline void log(string log_str){
   cout<<log_str<<endl;

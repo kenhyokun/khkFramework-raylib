@@ -30,6 +30,7 @@
 #include<algorithm>
 #include<iostream>
 #include<fstream>
+#include<sstream>
 #include<string>
 #include<cctype>
 #include<vector>
@@ -39,9 +40,10 @@ using namespace std;
 
 struct AtlasRegion{
   bool is_rotate;
-  v2 offset;
-  v2 original_size;
-  Rectangle rect;
+  v2i xy;
+  v2i size; // size after texture packing
+  v2i orig; // original size
+  v2i offset;
   int index;
 };
 
@@ -69,9 +71,9 @@ struct TextureAtlas{
     line_list.clear();
   }
 
-  Rectangle FindRegion(string name);
   Texture2D CreateTexture(string name);
 
+  inline AtlasRegion GetRegion(string name){return region_map.at(name);}
   inline string* GetValue(string attribute_name){return attribute_map.at(attribute_name);}
 
 protected:
@@ -135,6 +137,7 @@ protected:
   }
 
   string section;
+  AtlasRegion atlas_region;
   inline void _ReadSequence(){
 	
     switch(status){
@@ -150,7 +153,6 @@ protected:
 	    string value;
 	    string *num_of_value = new string[2];
 	    _CreateValuePair(line_list.at(line_index), &attribute, &value);
-	    cout<<line_index<<" "<<attribute<<" >> "<<value<<endl;
 	    _GetNumOfValue(value, num_of_value);
 	    _InsertAttribute(attribute, num_of_value);
 	  }
@@ -164,9 +166,7 @@ protected:
       break;
 
     case GET_SECTION:
-      cout<<line_index<<" ";
       section = line_list.at(line_index);
-      cout<<"["<<section<<"]"<<endl;
 
       region_attribute_index = line_index + 1;
 
@@ -177,18 +177,51 @@ protected:
 	string value;
 	string *num_of_value = new string[2];
 	_CreateValuePair(line_list.at(region_attribute_index), &attribute, &value);
-	cout<<region_attribute_index<<" "<<attribute<<" >> "<<value<<endl;
+	_GetNumOfValue(value, num_of_value);
+
+	if(attribute == "rotate"){
+
+	  istringstream(value) >>
+	    std::boolalpha >>
+	    atlas_region.is_rotate;
+
+	}
+	else if(attribute == "xy"){
+	  atlas_region.xy = v2i{stoi(num_of_value[0]),
+				stoi(num_of_value[1])};
+	}
+	else if(attribute == "size"){
+	  atlas_region.size = v2i{stoi(num_of_value[0]),
+				  stoi(num_of_value[1])};
+	}
+	else if(attribute == "orig"){
+	  atlas_region.orig = v2i{stoi(num_of_value[0]),
+				  stoi(num_of_value[1])};
+	}
+	else if(attribute == "offset"){
+	  atlas_region.offset = v2i{stoi(num_of_value[0]),
+				    stoi(num_of_value[1])};
+	}
+	else if(attribute == "index"){
+	  atlas_region.index = stoi(value);
+
+	  if(stoi(value) > -1){
+	    section.append("_" + value);
+	  }
+
+	}
 	
 	region_attribute_index++;
       }
 
+      _InsertRegion(section, atlas_region);
+
       line_index = region_attribute_index;
 
       if(line_index < line_list.size() - 1){
-       	cout<<"next section ["<<line_list.at(line_index)<<"]"<<endl;
+	// brrrr....
       }
       else{
-       	cout<<"[EOF]"<<endl;
        	status = GET_EOF;
       } 
 
