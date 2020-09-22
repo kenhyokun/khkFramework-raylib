@@ -58,6 +58,7 @@ struct TextureAtlas{
 	line_list.push_back(line);
       }
       file.close();
+      line_list.push_back("[EOF]" + line);
     }
     else{
       cout<<"Unable to open "<<file_src<<" file!"<<endl;
@@ -86,6 +87,8 @@ protected:
   vector<string> line_list;
   map<string, string*> attribute_map; // texture atlas attribute value pair
   map<string, AtlasRegion> region_map;
+  int line_index = 0;
+  int region_attribute_index;
 
   inline void _CreateValuePair(string line, string *attribute, string *value){
     size_t colon_index = line.find(":");
@@ -124,27 +127,78 @@ protected:
     return false;
   }
 
+  inline bool _IsEOF(string line){
+    if(_IsHas(line, "[EOF]")){
+      return true;
+    }
+    return false;
+  }
+
+  string section;
   inline void _ReadSequence(){
 	
     switch(status){
     case GET_STARTED:
-      for(int i = 0; i < line_list.size(); i++){
-	if(_IsHas(line_list.at(i), ".png")){
-	  _InsertAttribute("texture file", &line_list.at(i));
-	}
-	else{
-	  string attribute;
-	  string value;
-	  string *num_of_value = new string[2];
-	  _CreateValuePair(line_list.at(i), &attribute, &value);
-	  _GetNumOfValue(value, num_of_value);
-	  _InsertAttribute(attribute, num_of_value);
-	}
+
+      while(!_IsSection(line_list.at(line_index))){
+
+	  if(_IsHas(line_list.at(line_index), ".png")){
+	    _InsertAttribute("texture file", &line_list.at(line_index));
+	  }
+	  else{
+	    string attribute;
+	    string value;
+	    string *num_of_value = new string[2];
+	    _CreateValuePair(line_list.at(line_index), &attribute, &value);
+	    cout<<line_index<<" "<<attribute<<" >> "<<value<<endl;
+	    _GetNumOfValue(value, num_of_value);
+	    _InsertAttribute(attribute, num_of_value);
+	  }
+
+	  line_index++;
       }
+
+      status = GET_SECTION;
+      _ReadSequence();
+
       break;
 
     case GET_SECTION:
+      cout<<line_index<<" ";
+      section = line_list.at(line_index);
+      cout<<"["<<section<<"]"<<endl;
+
+      region_attribute_index = line_index + 1;
+
+      while(!_IsSection(line_list.at(region_attribute_index)) &&
+	    !_IsEOF(line_list.at(region_attribute_index))){
+
+	string attribute;
+	string value;
+	string *num_of_value = new string[2];
+	_CreateValuePair(line_list.at(region_attribute_index), &attribute, &value);
+	cout<<region_attribute_index<<" "<<attribute<<" >> "<<value<<endl;
+	
+	region_attribute_index++;
+      }
+
+      line_index = region_attribute_index;
+
+      if(line_index < line_list.size() - 1){
+       	cout<<"next section ["<<line_list.at(line_index)<<"]"<<endl;
+      }
+      else{
+       	cout<<"[EOF]"<<endl;
+       	status = GET_EOF;
+      } 
+
+      _ReadSequence();
+
       break;
+
+    case GET_EOF:
+      break;
+
     }
   }
 
