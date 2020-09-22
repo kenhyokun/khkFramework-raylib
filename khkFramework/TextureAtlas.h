@@ -47,8 +47,6 @@ struct AtlasRegion{
 
 struct TextureAtlas{
 
-  string texture_file_name;
-
   inline TextureAtlas(string file_src){
 
     // load atlas file
@@ -73,6 +71,8 @@ struct TextureAtlas{
   Rectangle FindRegion(string name);
   Texture2D CreateTexture(string name);
 
+  inline string* GetValue(string attribute_name){return attribute_map.at(attribute_name);}
+
 protected:
 
   enum Status{
@@ -84,7 +84,7 @@ protected:
   Status status = GET_STARTED;
   
   vector<string> line_list;
-  map<string, string*> value_pair_map; // texture atlas attribute value pair
+  map<string, string*> attribute_map; // texture atlas attribute value pair
   map<string, AtlasRegion> region_map;
 
   inline void _CreateValuePair(string line, string *attribute, string *value){
@@ -93,16 +93,18 @@ protected:
     *value = line.substr(colon_index + 1, line.length());
   }
 
-  inline string* _GetNumOfValue(string value){
-    string* num_of_value = nullptr; 
+  inline void _GetNumOfValue(string value, string *num_of_value, int last_index = 0){
     size_t comma_index = value.find(",");
     if(comma_index != string::npos){
-      *num_of_value = "null";
+      num_of_value[last_index] = value.substr(0, comma_index);
+      value.erase(0, comma_index + 1);
+
+      _GetNumOfValue(value, num_of_value, last_index + 1);
+
     }
     else{
-      num_of_value = &value;
+      num_of_value[last_index] = value;
     }
-    return num_of_value; 
   }
 
   inline bool _IsHas(string line, string sub_str){
@@ -128,14 +130,15 @@ protected:
     case GET_STARTED:
       for(int i = 0; i < line_list.size(); i++){
 	if(_IsHas(line_list.at(i), ".png")){
-	  texture_file_name = line_list.at(i);
-	  cout<<"get >> texture file name:"<<texture_file_name<<endl;
+	  _InsertAttribute("texture file", &line_list.at(i));
 	}
 	else{
 	  string attribute;
 	  string value;
+	  string *num_of_value = new string[2];
 	  _CreateValuePair(line_list.at(i), &attribute, &value);
-	  cout<<"get >> "<<attribute<<" >> "<<value<<endl;
+	  _GetNumOfValue(value, num_of_value);
+	  _InsertAttribute(attribute, num_of_value);
 	}
       }
       break;
@@ -145,8 +148,12 @@ protected:
     }
   }
 
-  inline void _Insert(string name, AtlasRegion atlas_region){
+  inline void _InsertRegion(string name, AtlasRegion atlas_region){
     region_map.insert(pair<string, AtlasRegion>(name, atlas_region));
+  }
+
+  inline void _InsertAttribute(string name, string *value){
+    attribute_map.insert(pair<string, string*>(name, value));
   }
 
 };
