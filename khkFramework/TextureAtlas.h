@@ -49,9 +49,11 @@ struct AtlasRegion{
 
 struct TextureAtlas{
 
-  TextureAtlas(string file_src);
+  TextureAtlas(string file_src, string img_src = "nun");
   Texture2D CreateTexture(string name);
+  void UnloadBufferImage();
 
+  v2i GetImageSize();
   AtlasRegion GetRegion(string name);
   string* GetValue(string attribute_name);
 
@@ -63,6 +65,7 @@ protected:
     GET_EOF
   };
 
+  Image buffer_image;
   Status status = GET_STARTED;
   vector<string> line_list;
   map<string, string*> attribute_map; // texture atlas attribute value pair

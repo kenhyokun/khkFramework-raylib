@@ -50,6 +50,9 @@ struct App : BaseApp, ContactListener{
   Tilemap *tilemap;
   TMXMap *tmxmap;
 
+  Image buffer_image;
+  Texture2D buffer_texture;
+
   App(int _window_width, int _window_height, string _title) :
     BaseApp(_window_width, _window_height, _title){}
 
@@ -67,12 +70,18 @@ struct App : BaseApp, ContactListener{
     float _pi = tes.json["pi"];
     cout<<_pi<<endl;
 
-    TextureAtlas texture_atlas("test2.atlas");
+    TextureAtlas texture_atlas("test2.atlas", "./resources/images/test2.png");
     cout<<texture_atlas.GetRegion("run_1").xy.x<<endl;
     cout<<texture_atlas.GetRegion("run_1").xy.y<<endl;
     cout<<texture_atlas.GetRegion("run_1").size.x<<endl;
     cout<<texture_atlas.GetRegion("run_1").size.y<<endl;
     cout<<texture_atlas.GetRegion("run_1").is_rotate<<endl;
+
+    // buffer_texture = texture_atlas.CreateTexture("card_back");
+    // buffer_texture = texture_atlas.CreateTexture("dia_red");
+    buffer_texture = texture_atlas.CreateTexture("run_1");
+
+    texture_atlas.UnloadBufferImage(); // memory management thingy...
 
     player = new Node("player"); // lilwitch test
     dynamic_box = new Node("dynamic box"); // box dynamic rigid body test
@@ -247,6 +256,7 @@ struct App : BaseApp, ContactListener{
 
   void OnDraw() override {
     DrawText("my first raylib window", 190, 200, 20, LIGHTGRAY);
+    DrawTexture(buffer_texture, 0, 0, WHITE);
     player->GetComponent<Component::animator>()->Draw();
     B2D::DebugDraw();
   }
