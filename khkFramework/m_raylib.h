@@ -39,6 +39,10 @@ struct v2i{
   int x,y;
 };
 
+struct Rectanglei{
+  int x, y, width, height;
+};
+
 #define v2i_0 v2i{0, 0}
 
 inline void log(string log_str){

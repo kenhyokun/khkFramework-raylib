@@ -58,22 +58,14 @@ Texture2D TextureAtlas::CreateTexture(string name){
   AtlasRegion atlas_region = GetRegion(name);
   Image temp_image {0};
 
-  if(!atlas_region.is_rotate){
-    temp_image = ImageFromImage(buffer_image,
-				Rectangle{atlas_region.xy.x,
-				    atlas_region.xy.y,
-				    atlas_region.size.x,
-				    atlas_region.size.y
-				    });
-  }
-  else{
-    temp_image = ImageFromImage(buffer_image,
-				Rectangle{atlas_region.xy.x,
-				    atlas_region.xy.y,
-				    atlas_region.size.y,
-				    atlas_region.size.x
-				    });
-
+  temp_image = ImageFromImage(buffer_image,
+			      Rectangle{(float)atlas_region.xy.x,
+				  (float)atlas_region.xy.y,
+				  (float)atlas_region.size.x,
+				  (float)atlas_region.size.y
+				  });
+  
+  if(atlas_region.is_rotate){
     ImageRotateCW(&temp_image);
   }
 
@@ -184,8 +176,14 @@ void TextureAtlas::_ReadSequence(){
 			      stoi(num_of_value[1])};
       }
       else if(attribute == "size"){
-	atlas_region.size = v2i{stoi(num_of_value[0]),
-				stoi(num_of_value[1])};
+	if(!atlas_region.is_rotate){
+	  atlas_region.size = v2i{stoi(num_of_value[0]),
+				  stoi(num_of_value[1])};
+	}
+	else{
+	  atlas_region.size = v2i{stoi(num_of_value[1]),
+				  stoi(num_of_value[0])};
+	}
       }
       else if(attribute == "orig"){
 	atlas_region.orig = v2i{stoi(num_of_value[0]),
