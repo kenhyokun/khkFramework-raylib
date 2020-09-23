@@ -5,6 +5,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/khkFramework.dir/Component.o"
   "CMakeFiles/khkFramework.dir/File.o"
   "CMakeFiles/khkFramework.dir/Node.o"
+  "CMakeFiles/khkFramework.dir/TextureAtlas.o"
   "libkhkFramework.pdb"
   "libkhkFramework.a"
 )

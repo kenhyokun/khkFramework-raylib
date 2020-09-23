@@ -49,32 +49,11 @@ struct AtlasRegion{
 
 struct TextureAtlas{
 
-  inline TextureAtlas(string file_src){
-
-    // load atlas file
-    ifstream file(file_src);
-    string line;
-    if(file.is_open()){
-      while(getline(file, line)){
-	line.erase(remove_if(line.begin(), line.end(), ::isspace), line.end()); // trim line
-	line_list.push_back(line);
-      }
-      file.close();
-      line_list.push_back("[EOF]" + line);
-    }
-    else{
-      cout<<"Unable to open "<<file_src<<" file!"<<endl;
-    }
-
-    _ReadSequence();
-
-    line_list.clear();
-  }
-
+  TextureAtlas(string file_src);
   Texture2D CreateTexture(string name);
 
-  inline AtlasRegion GetRegion(string name){return region_map.at(name);}
-  inline string* GetValue(string attribute_name){return attribute_map.at(attribute_name);}
+  AtlasRegion GetRegion(string name);
+  string* GetValue(string attribute_name);
 
 protected:
 
@@ -85,163 +64,22 @@ protected:
   };
 
   Status status = GET_STARTED;
-  
   vector<string> line_list;
   map<string, string*> attribute_map; // texture atlas attribute value pair
   map<string, AtlasRegion> region_map;
   int line_index = 0;
   int region_attribute_index;
-
-  inline void _CreateValuePair(string line, string *attribute, string *value){
-    size_t colon_index = line.find(":");
-    *attribute = line.substr(0, colon_index);
-    *value = line.substr(colon_index + 1, line.length());
-  }
-
-  inline void _GetNumOfValue(string value, string *num_of_value, int last_index = 0){
-    size_t comma_index = value.find(",");
-    if(comma_index != string::npos){
-      num_of_value[last_index] = value.substr(0, comma_index);
-      value.erase(0, comma_index + 1);
-
-      _GetNumOfValue(value, num_of_value, last_index + 1);
-
-    }
-    else{
-      num_of_value[last_index] = value;
-    }
-  }
-
-  inline bool _IsHas(string line, string sub_str){
-    size_t found = line.find(sub_str);
-    if(found != string::npos){
-      return true;
-    }
-    return false;
-  }
-
-  inline bool _IsSection(string line){
-    if(!_IsHas(line, ":") &&
-       !_IsHas(line, ",") &&
-       !_IsHas(line, ".png")){
-      return true;
-    }
-    return false;
-  }
-
-  inline bool _IsEOF(string line){
-    if(_IsHas(line, "[EOF]")){
-      return true;
-    }
-    return false;
-  }
-
   string section;
   AtlasRegion atlas_region;
-  inline void _ReadSequence(){
-	
-    switch(status){
-    case GET_STARTED:
 
-      while(!_IsSection(line_list.at(line_index))){
-
-	  if(_IsHas(line_list.at(line_index), ".png")){
-	    _InsertAttribute("texture file", &line_list.at(line_index));
-	  }
-	  else{
-	    string attribute;
-	    string value;
-	    string *num_of_value = new string[2];
-	    _CreateValuePair(line_list.at(line_index), &attribute, &value);
-	    _GetNumOfValue(value, num_of_value);
-	    _InsertAttribute(attribute, num_of_value);
-	  }
-
-	  line_index++;
-      }
-
-      status = GET_SECTION;
-      _ReadSequence();
-
-      break;
-
-    case GET_SECTION:
-      section = line_list.at(line_index);
-
-      region_attribute_index = line_index + 1;
-
-      while(!_IsSection(line_list.at(region_attribute_index)) &&
-	    !_IsEOF(line_list.at(region_attribute_index))){
-
-	string attribute;
-	string value;
-	string *num_of_value = new string[2];
-	_CreateValuePair(line_list.at(region_attribute_index), &attribute, &value);
-	_GetNumOfValue(value, num_of_value);
-
-	if(attribute == "rotate"){
-
-	  istringstream(value) >>
-	    std::boolalpha >>
-	    atlas_region.is_rotate;
-
-	}
-	else if(attribute == "xy"){
-	  atlas_region.xy = v2i{stoi(num_of_value[0]),
-				stoi(num_of_value[1])};
-	}
-	else if(attribute == "size"){
-	  atlas_region.size = v2i{stoi(num_of_value[0]),
-				  stoi(num_of_value[1])};
-	}
-	else if(attribute == "orig"){
-	  atlas_region.orig = v2i{stoi(num_of_value[0]),
-				  stoi(num_of_value[1])};
-	}
-	else if(attribute == "offset"){
-	  atlas_region.offset = v2i{stoi(num_of_value[0]),
-				    stoi(num_of_value[1])};
-	}
-	else if(attribute == "index"){
-	  atlas_region.index = stoi(value);
-
-	  if(stoi(value) > -1){
-	    section.append("_" + value);
-	  }
-
-	}
-	
-	region_attribute_index++;
-      }
-
-      _InsertRegion(section, atlas_region);
-
-      line_index = region_attribute_index;
-
-      if(line_index < line_list.size() - 1){
-	// brrrr....
-      }
-      else{
-       	status = GET_EOF;
-      } 
-
-      _ReadSequence();
-
-      break;
-
-    case GET_EOF:
-      break;
-
-    }
-  }
-
-  inline void _InsertRegion(string name, AtlasRegion atlas_region){
-    region_map.insert(pair<string, AtlasRegion>(name, atlas_region));
-  }
-
-  inline void _InsertAttribute(string name, string *value){
-    attribute_map.insert(pair<string, string*>(name, value));
-  }
+  void _CreateValuePair(string line, string *attribute, string *value);
+  void _GetNumOfValue(string value, string *num_of_value, int last_index = 0);
+  bool _IsHas(string line, string sub_str);
+  bool _IsSection(string line);
+  bool _IsEOF(string line);
+  void _ReadSequence();
+  void _InsertRegion(string name, AtlasRegion atlas_region);
+  void _InsertAttribute(string name, string *value);
 
 };
 

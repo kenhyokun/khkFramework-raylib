@@ -138,3 +138,8 @@ CMakeFiles/khkFramework.dir/Node.o: ../Node.h
 CMakeFiles/khkFramework.dir/Node.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/Node.o: ../Node.cpp
 
+CMakeFiles/khkFramework.dir/TextureAtlas.o: ../../third_party/raylib/raylib.h
+CMakeFiles/khkFramework.dir/TextureAtlas.o: ../TextureAtlas.h
+CMakeFiles/khkFramework.dir/TextureAtlas.o: ../m_raylib.h
+CMakeFiles/khkFramework.dir/TextureAtlas.o: ../TextureAtlas.cpp
+

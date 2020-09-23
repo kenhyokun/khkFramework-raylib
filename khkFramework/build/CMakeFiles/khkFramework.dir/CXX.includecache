@@ -678,6 +678,26 @@ m_raylib.h
 CMath.h
 -
 
+..//TextureAtlas.h
+m_raylib.h
+-
+algorithm
+-
+iostream
+-
+fstream
+-
+sstream
+-
+string
+-
+cctype
+-
+vector
+-
+map
+-
+
 ..//m_box2d.h
 box2d/box2d.h
 -
@@ -712,5 +732,9 @@ File.h
 
 /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp
 Node.h
+-
+
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/TextureAtlas.cpp
+TextureAtlas.h
 -
 

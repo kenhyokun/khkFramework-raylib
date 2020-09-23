@@ -213,6 +213,21 @@ Node.s:
 	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/Node.s
 .PHONY : Node.s
 
+# target to build an object file
+TextureAtlas.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/TextureAtlas.o
+.PHONY : TextureAtlas.o
+
+# target to preprocess a source file
+TextureAtlas.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/TextureAtlas.i
+.PHONY : TextureAtlas.i
+
+# target to generate assembly for a file
+TextureAtlas.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/TextureAtlas.s
+.PHONY : TextureAtlas.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -240,6 +255,9 @@ help:
 	@echo "... Node.o"
 	@echo "... Node.i"
 	@echo "... Node.s"
+	@echo "... TextureAtlas.o"
+	@echo "... TextureAtlas.i"
+	@echo "... TextureAtlas.s"
 .PHONY : help
 
 

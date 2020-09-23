@@ -68,11 +68,11 @@ struct App : BaseApp, ContactListener{
     cout<<_pi<<endl;
 
     TextureAtlas texture_atlas("test2.atlas");
-    cout<<texture_atlas.GetRegion("card_back").xy.x<<endl;
-    cout<<texture_atlas.GetRegion("card_back").xy.y<<endl;
-    cout<<texture_atlas.GetRegion("card_back").size.x<<endl;
-    cout<<texture_atlas.GetRegion("card_back").size.y<<endl;
-    cout<<texture_atlas.GetRegion("card_back").is_rotate<<endl;
+    cout<<texture_atlas.GetRegion("run_1").xy.x<<endl;
+    cout<<texture_atlas.GetRegion("run_1").xy.y<<endl;
+    cout<<texture_atlas.GetRegion("run_1").size.x<<endl;
+    cout<<texture_atlas.GetRegion("run_1").size.y<<endl;
+    cout<<texture_atlas.GetRegion("run_1").is_rotate<<endl;
 
     player = new Node("player"); // lilwitch test
     dynamic_box = new Node("dynamic box"); // box dynamic rigid body test
