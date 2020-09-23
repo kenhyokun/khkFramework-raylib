@@ -1,0 +1,54 @@
+teest.png
+size: 1024,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+card_back1
+  rotate: true
+  xy: 2, 2
+  size: 118, 176
+  orig: 118, 176
+  offset: 0, 0
+  index: -1
+dia_red
+  rotate: false
+  xy: 583, 57
+  size: 62, 63
+  orig: 62, 63
+  offset: 0, 0
+  index: -1
+run
+  rotate: false
+  xy: 278, 33
+  size: 75, 87
+  orig: 78, 87
+  offset: 3, 0
+  index: 4
+run
+  rotate: false
+  xy: 355, 33
+  size: 75, 87
+  orig: 78, 87
+  offset: 3, 0
+  index: 2
+run
+  rotate: false
+  xy: 432, 41
+  size: 74, 79
+  orig: 78, 87
+  offset: 0, 0
+  index: 1
+run
+  rotate: false
+  xy: 508, 41
+  size: 73, 79
+  orig: 78, 87
+  offset: 1, 0
+  index: 3
+tile
+  rotate: false
+  xy: 180, 24
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1

@@ -56,13 +56,26 @@ void TextureAtlas::UnloadBufferImage(){UnloadImage(buffer_image);}
 
 Texture2D TextureAtlas::CreateTexture(string name){
   AtlasRegion atlas_region = GetRegion(name);
+  Image temp_image {0};
 
-  Image temp_image = ImageFromImage(buffer_image,
-				    Rectangle{atlas_region.xy.x,
-					atlas_region.xy.y,
-					atlas_region.size.x,
-					atlas_region.size.y
-					});
+  if(!atlas_region.is_rotate){
+    temp_image = ImageFromImage(buffer_image,
+				Rectangle{atlas_region.xy.x,
+				    atlas_region.xy.y,
+				    atlas_region.size.x,
+				    atlas_region.size.y
+				    });
+  }
+  else{
+    temp_image = ImageFromImage(buffer_image,
+				Rectangle{atlas_region.xy.x,
+				    atlas_region.xy.y,
+				    atlas_region.size.y,
+				    atlas_region.size.x
+				    });
+
+    ImageRotateCW(&temp_image);
+  }
 
   return LoadTextureFromImage(temp_image);
 }

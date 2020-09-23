@@ -70,16 +70,16 @@ struct App : BaseApp, ContactListener{
     float _pi = tes.json["pi"];
     cout<<_pi<<endl;
 
-    TextureAtlas texture_atlas("test2.atlas", "./resources/images/test2.png");
+    TextureAtlas texture_atlas("teest.atlas", "./resources/images/teest.png");
     cout<<texture_atlas.GetRegion("run_1").xy.x<<endl;
     cout<<texture_atlas.GetRegion("run_1").xy.y<<endl;
     cout<<texture_atlas.GetRegion("run_1").size.x<<endl;
     cout<<texture_atlas.GetRegion("run_1").size.y<<endl;
     cout<<texture_atlas.GetRegion("run_1").is_rotate<<endl;
 
-    // buffer_texture = texture_atlas.CreateTexture("card_back");
+    buffer_texture = texture_atlas.CreateTexture("card_back1");
     // buffer_texture = texture_atlas.CreateTexture("dia_red");
-    buffer_texture = texture_atlas.CreateTexture("run_1");
+    // buffer_texture = texture_atlas.CreateTexture("run_1");
 
     texture_atlas.UnloadBufferImage(); // memory management thingy...
 
