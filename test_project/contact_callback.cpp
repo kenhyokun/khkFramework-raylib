@@ -81,6 +81,8 @@ struct App : BaseApp, ContactListener{
     // buffer_texture = texture_atlas.CreateTexture("dia_red");
     // buffer_texture = texture_atlas.CreateTexture("run_1");
 
+    AtlasAnimator *atlas_animator = new AtlasAnimator(&texture_atlas);
+
     texture_atlas.UnloadBufferImage(); // memory management thingy...
 
     player = new Node("player"); // lilwitch test

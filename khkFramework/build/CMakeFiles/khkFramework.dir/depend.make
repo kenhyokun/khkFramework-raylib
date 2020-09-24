@@ -47,6 +47,7 @@ CMakeFiles/khkFramework.dir/B2D.o: ../Component.h
 CMakeFiles/khkFramework.dir/B2D.o: ../File.h
 CMakeFiles/khkFramework.dir/B2D.o: ../JSON.h
 CMakeFiles/khkFramework.dir/B2D.o: ../Node.h
+CMakeFiles/khkFramework.dir/B2D.o: ../TextureAtlas.h
 CMakeFiles/khkFramework.dir/B2D.o: ../m_box2d.h
 CMakeFiles/khkFramework.dir/B2D.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/B2D.o: ../B2D.cpp
@@ -96,6 +97,7 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../Component.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../File.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../JSON.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../Node.h
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../TextureAtlas.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../m_box2d.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../B2D_DebugDraw.cpp
@@ -122,6 +124,7 @@ CMakeFiles/khkFramework.dir/Component.o: ../Component.h
 CMakeFiles/khkFramework.dir/Component.o: ../File.h
 CMakeFiles/khkFramework.dir/Component.o: ../JSON.h
 CMakeFiles/khkFramework.dir/Component.o: ../Node.h
+CMakeFiles/khkFramework.dir/Component.o: ../TextureAtlas.h
 CMakeFiles/khkFramework.dir/Component.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/Component.o: ../Component.cpp
 

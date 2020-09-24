@@ -31,6 +31,7 @@
 #include<iostream>
 #include<fstream>
 #include<sstream>
+#include<cstdlib>
 #include<string>
 #include<cctype>
 #include<vector>
@@ -49,13 +50,14 @@ struct AtlasRegion{
 
 struct TextureAtlas{
 
-  TextureAtlas(string file_src, string img_src = "nun");
+  TextureAtlas(string file_src, string img_src = "nan");
   Texture2D CreateTexture(string name);
   void UnloadBufferImage();
 
   v2i GetImageSize();
   AtlasRegion GetRegion(string name);
   string* GetValue(string attribute_name);
+  map<string, AtlasRegion>* GetRegionMap();
 
 protected:
 

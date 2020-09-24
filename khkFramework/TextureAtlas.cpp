@@ -28,7 +28,7 @@
 TextureAtlas::TextureAtlas(string file_src, string img_src){
 
   // load image
-  if(img_src !="nun"){
+  if(img_src != "nan"){
     buffer_image = LoadImage(img_src.c_str());
   }
   
@@ -228,3 +228,4 @@ void TextureAtlas::_ReadSequence(){
 v2i TextureAtlas::GetImageSize(){return v2i{stoi(GetValue("size")[0]), stoi(GetValue("size")[1])};}
 AtlasRegion TextureAtlas::GetRegion(string name){return region_map.at(name);}
 string* TextureAtlas::GetValue(string attribute_name){return attribute_map.at(attribute_name);}
+map<string, AtlasRegion>* TextureAtlas::GetRegionMap(){return &region_map;}

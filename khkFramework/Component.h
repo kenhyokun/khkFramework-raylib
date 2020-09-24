@@ -28,6 +28,7 @@
 
 #include<Node.h>
 #include<File.h>
+#include<TextureAtlas.h>
 
 struct Grid{
   int width = 0;
@@ -59,7 +60,8 @@ namespace Component{
   };
 
   struct DrawableBaseComponent{
-    int sorting_order;
+    int sorting_order = 0;
+    bool is_visible = true;
   };
 
   struct GridBaseComponent{
@@ -85,7 +87,7 @@ namespace Component{
     int _GetIndex(int column, int row);
     v2 _GetTransformRotation(int column, int row); // tile transformation rotation
   };
-  
+
 
   /*
     SpriteRenderer Component
@@ -107,9 +109,6 @@ namespace Component{
     Animator Component
   */
   typedef struct Animator : SpriteRenderer, GridBaseComponent{
-    int frame_index;
-    int frame_counter;
-
     Animator(Texture2D *_texture, int _frame_width, int _frame_height);
     void PlayAnim(vector<int> anim_frame, int fps);
     void Draw();
@@ -118,10 +117,42 @@ namespace Component{
     int GetFrameHeight();
 
   protected:
+    int frame_index;
+    int frame_counter;
     int frame_width;
     int frame_height;
 
   } *animator;
+
+
+
+  /*
+    AtlasAnimator Component
+  */
+  typedef struct AtlasAnimator : BaseComponent{
+    AtlasAnimator(TextureAtlas *_texture_atlas);
+    void PlayAnim(string anim_name, int total_frame, int fps);
+    void Draw();
+
+  protected:
+
+    map<string, vector<Texture2D>> anim_frame;
+    int map_index = 0;
+    string curr_posible_anim_name = "nan";
+    string last_posible_anim_name = "nan";
+    vector<Texture2D> frame_list;
+
+    bool _IsPosibleAnimName(string region_map_name, string *posible_anim_name, int *index);
+    void _CreateAnimFrame();
+  
+    TextureAtlas *texture_atlas = nullptr;
+    int frame_counter;
+    int frame_index = 1;
+    Texture2D curr_texture;
+    Rectangle src_rect;
+    Rectangle dst_rect;
+    
+  } *atlas_animator;
 
 
   /*

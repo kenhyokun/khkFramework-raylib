@@ -641,6 +641,8 @@ Node.h
 -
 File.h
 -
+TextureAtlas.h
+-
 
 ..//File.h
 iostream
@@ -688,6 +690,8 @@ iostream
 fstream
 -
 sstream
+-
+cstdlib
 -
 string
 -

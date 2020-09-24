@@ -48,6 +48,7 @@ CMakeFiles/khkFramework.dir/B2D.o
  ..//File.h
  ..//JSON.h
  ..//Node.h
+ ..//TextureAtlas.h
  ..//m_box2d.h
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D.cpp
@@ -97,6 +98,7 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
  ..//File.h
  ..//JSON.h
  ..//Node.h
+ ..//TextureAtlas.h
  ..//m_box2d.h
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp
@@ -123,6 +125,7 @@ CMakeFiles/khkFramework.dir/Component.o
  ..//File.h
  ..//JSON.h
  ..//Node.h
+ ..//TextureAtlas.h
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
 CMakeFiles/khkFramework.dir/File.o
