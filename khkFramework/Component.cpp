@@ -146,8 +146,10 @@ int Component::Animator::GetFrameHeight(){return frame_height;}
 */
 Component::AtlasAnimator::AtlasAnimator(TextureAtlas *_texture_atlas){
   texture_atlas = _texture_atlas;
-  cout<<"region map size from atlas animator:"<<texture_atlas->GetRegionMap()->size()<<endl;
   _CreateAnimFrame();
+
+  cout<<"anim_frame:"<<anim_frame.at("run_right").size()<<endl;
+
 }
 
 void Component::AtlasAnimator::PlayAnim(string _anim_name, int fps){
@@ -173,7 +175,7 @@ void Component::AtlasAnimator::PlayAnim(string _anim_name, int fps){
 
   // draw position
   v2 position = {node->GetPosition().x,
-   		 node->GetPosition().y };
+    		 node->GetPosition().y };
 
   src_rect = {0, 0,
   	      (float)size.x,
@@ -214,6 +216,7 @@ void Component::AtlasAnimator::_CreateAnimFrame(){
     const auto &next = std::next(it, map_index);
     
     if(_IsPosibleAnimName(next->first, &posible_anim_name, &index)){ 
+      cout<<posible_anim_name<<" >> "<<index<<endl;
       if(last_posible_anim_name == "nan"){
 	frame_list.push_back(texture_atlas->CreateTexture(posible_anim_name +"_"+ to_string(index)));
 	last_posible_anim_name = posible_anim_name;
@@ -226,6 +229,8 @@ void Component::AtlasAnimator::_CreateAnimFrame(){
 	  anim_frame.insert(pair<string, vector<Texture2D>>(posible_anim_name, frame_list));
 	  frame_list.clear();
 	  last_posible_anim_name = posible_anim_name;
+	  
+	  frame_list.push_back(texture_atlas->CreateTexture(last_posible_anim_name + "_" + to_string(index)));
 	}
       }
     }
@@ -240,6 +245,7 @@ void Component::AtlasAnimator::_CreateAnimFrame(){
       cout<<"last posible name:"<<last_posible_anim_name<<endl;
       cout<<"anim frame size:"<<anim_frame.size()<<endl;
       cout<<"frame list size:"<<anim_frame.at(last_posible_anim_name).size()<<endl;
+      cout<<"frame list size:"<<anim_frame.at("run_right").size()<<endl;
       frame_list.clear();
     }
 

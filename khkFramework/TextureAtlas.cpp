@@ -49,6 +49,7 @@ TextureAtlas::TextureAtlas(string file_src, string img_src){
 
   _ReadSequence();
 
+  //// print region map
   for(const auto &region : *GetRegionMap()){
     cout<<region.first<<endl;
   }
@@ -105,7 +106,9 @@ bool TextureAtlas::_IsHas(string line, string sub_str){
 }
 
 bool TextureAtlas::_IsSection(string line){
-  if(!_IsHas(line, ":") &&
+  if(line != "" &&
+     line != "\n" &&
+     !_IsHas(line, ":") &&
      !_IsHas(line, ",") &&
      !_IsHas(line, ".png")){
     return true;
@@ -144,7 +147,11 @@ void TextureAtlas::_ReadSequence(){
 	string *num_of_value = new string[2];
 	_CreateValuePair(line_list.at(line_index), &attribute, &value);
 	_GetNumOfValue(value, num_of_value);
-	_InsertAttribute(attribute, num_of_value);
+
+	if(line_list.at(line_index) != "" && line_list.at(line_index) != "\n"){
+	  _InsertAttribute(attribute, num_of_value);
+	}
+
       }
 
       line_index++;
@@ -209,7 +216,11 @@ void TextureAtlas::_ReadSequence(){
       region_attribute_index++;
     }
 
-    _InsertRegion(section, atlas_region);
+    if(section != ""){
+      cout<<"section:"<<section<<endl;
+      _InsertRegion(section, atlas_region);
+    }
+    
     line_index = region_attribute_index;
 
     if(line_index < line_list.size() - 1){

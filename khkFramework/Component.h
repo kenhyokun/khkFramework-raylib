@@ -125,7 +125,6 @@ namespace Component{
   } *animator;
 
 
-
   /*
     AtlasAnimator Component
   */

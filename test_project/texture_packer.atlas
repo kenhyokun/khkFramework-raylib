@@ -1,0 +1,83 @@
+
+texture_packer.png
+size: 1024,128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+card_back1
+  rotate: true
+  xy: 2, 2
+  size: 118, 176
+  orig: 118, 176
+  offset: 0, 0
+  index: -1
+dia_red
+  rotate: false
+  xy: 918, 57
+  size: 62, 63
+  orig: 62, 63
+  offset: 0, 0
+  index: -1
+run_left
+  rotate: false
+  xy: 598, 33
+  size: 78, 87
+  orig: 78, 87
+  offset: 0, 0
+  index: 1
+run_left
+  rotate: false
+  xy: 678, 33
+  size: 78, 87
+  orig: 78, 87
+  offset: 0, 0
+  index: 2
+run_left
+  rotate: false
+  xy: 758, 33
+  size: 78, 87
+  orig: 78, 87
+  offset: 0, 0
+  index: 3
+run_left
+  rotate: false
+  xy: 838, 33
+  size: 78, 87
+  orig: 78, 87
+  offset: 0, 0
+  index: 4
+run_right
+  rotate: false
+  xy: 278, 33
+  size: 78, 87
+  orig: 78, 87
+  offset: 0, 0
+  index: 1
+run_right
+  rotate: false
+  xy: 358, 33
+  size: 78, 87
+  orig: 78, 87
+  offset: 0, 0
+  index: 2
+run_right
+  rotate: false
+  xy: 438, 33
+  size: 78, 87
+  orig: 78, 87
+  offset: 0, 0
+  index: 3
+run_right
+  rotate: false
+  xy: 518, 33
+  size: 78, 87
+  orig: 78, 87
+  offset: 0, 0
+  index: 4
+tile
+  rotate: false
+  xy: 180, 24
+  size: 96, 96
+  orig: 96, 96
+  offset: 0, 0
+  index: -1

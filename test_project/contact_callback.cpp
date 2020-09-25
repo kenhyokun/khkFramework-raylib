@@ -76,12 +76,18 @@ struct App : BaseApp, ContactListener{
 
     atlas_animator_node = new Node("atlas animator");
 
-    texture_atlas = new TextureAtlas("teest.atlas", "./resources/images/teest.png");
-    cout<<texture_atlas->GetRegion("run_1").xy.x<<endl;
-    cout<<texture_atlas->GetRegion("run_1").xy.y<<endl;
-    cout<<texture_atlas->GetRegion("run_1").size.x<<endl;
-    cout<<texture_atlas->GetRegion("run_1").size.y<<endl;
-    cout<<texture_atlas->GetRegion("run_1").is_rotate<<endl;
+    texture_atlas = new TextureAtlas("texture_packer.atlas",
+				     "./resources/images/texture_packer.png");
+    cout<<texture_atlas->GetRegion("run_left_1").xy.x<<endl;
+    cout<<texture_atlas->GetRegion("run_left_1").xy.y<<endl;
+    cout<<texture_atlas->GetRegion("run_left_1").size.x<<endl;
+    cout<<texture_atlas->GetRegion("run_left_1").size.y<<endl;
+    cout<<texture_atlas->GetRegion("run_left_1").is_rotate<<endl;
+    cout<<texture_atlas->GetRegion("card_back1").xy.x<<endl;
+    cout<<texture_atlas->GetRegion("card_back1").xy.y<<endl;
+    cout<<texture_atlas->GetRegion("card_back1").size.x<<endl;
+    cout<<texture_atlas->GetRegion("card_back1").size.y<<endl;
+    cout<<texture_atlas->GetRegion("card_back1").is_rotate<<endl;
 
     buffer_texture = texture_atlas->CreateTexture("card_back1");
     // buffer_texture = texture_atlas.CreateTexture("dia_red");
@@ -260,7 +266,7 @@ struct App : BaseApp, ContactListener{
     // moving static box
     static_box->GetComponent<Component::rigid_body>()->SetPosition(v2{static_box->GetPosition().x + 0.2f, static_box->GetPosition().y});
 
-    atlas_animator_node->GetComponent<Component::atlas_animator>()->PlayAnim("run", 5);
+    atlas_animator_node->GetComponent<Component::atlas_animator>()->PlayAnim("run_right", 5);
 
     B2D::Step(); // run box2d step simulation
   }
