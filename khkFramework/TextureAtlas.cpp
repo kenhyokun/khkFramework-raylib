@@ -49,6 +49,10 @@ TextureAtlas::TextureAtlas(string file_src, string img_src){
 
   _ReadSequence();
 
+  for(const auto &region : *GetRegionMap()){
+    cout<<region.first<<endl;
+  }
+
   line_list.clear();
 }
 
@@ -227,5 +231,6 @@ void TextureAtlas::_ReadSequence(){
 
 v2i TextureAtlas::GetImageSize(){return v2i{stoi(GetValue("size")[0]), stoi(GetValue("size")[1])};}
 AtlasRegion TextureAtlas::GetRegion(string name){return region_map.at(name);}
+AtlasRegion* TextureAtlas::GetRegionPtr(string name){return &region_map.at(name);}
 string* TextureAtlas::GetValue(string attribute_name){return attribute_map.at(attribute_name);}
 map<string, AtlasRegion>* TextureAtlas::GetRegionMap(){return &region_map;}

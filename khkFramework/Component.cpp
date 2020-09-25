@@ -146,25 +146,25 @@ int Component::Animator::GetFrameHeight(){return frame_height;}
 */
 Component::AtlasAnimator::AtlasAnimator(TextureAtlas *_texture_atlas){
   texture_atlas = _texture_atlas;
+  cout<<"region map size from atlas animator:"<<texture_atlas->GetRegionMap()->size()<<endl;
   _CreateAnimFrame();
 }
 
-void Component::AtlasAnimator::PlayAnim(string anim_name, int total_frame, int fps){
+void Component::AtlasAnimator::PlayAnim(string _anim_name, int fps){
   frame_counter++;
+  anim_name = _anim_name;
 
   if(frame_counter >= (60 / fps)){
     frame_counter = 0;
     frame_index++;
 
-    if(frame_index > total_frame){
+    if(frame_index > anim_frame.at(anim_name).size()){
       frame_index = 1;
     }
+    
   }
 
-  curr_texture =
-    texture_atlas->CreateTexture(anim_name + "_" + to_string(frame_index));
-
-  AtlasRegion atlas_region =
+  AtlasRegion atlas_region = 
     texture_atlas->GetRegion(anim_name + "_" + to_string(frame_index));
 
   v2i size = atlas_region.size;
@@ -172,21 +172,28 @@ void Component::AtlasAnimator::PlayAnim(string anim_name, int total_frame, int f
   v2i offset = atlas_region.offset;
 
   // draw position
-  v2 position = {node->GetPosition().x + offset.x,
-		 node->GetPosition().y + offset.y};
+  v2 position = {node->GetPosition().x,
+   		 node->GetPosition().y };
 
   src_rect = {0, 0,
-	      (float)size.x,
-	      (float)size.y};
+  	      (float)size.x,
+  	      (float)size.y};
 
   dst_rect = {position.x,
-	      position.y,
-	      (float)origin_size.x,
-	      (float)origin_size.y};
+  	      position.y,
+  	      (float)size.x,
+  	      (float)size.y};
 
 }
 
-void Component::AtlasAnimator::Draw(){}
+void Component::AtlasAnimator::Draw(){
+  DrawTexturePro(anim_frame.at(anim_name).at(frame_index - 1),
+		 src_rect,
+		 dst_rect,
+		 pivot,
+		 node->GetRotation(),
+		 WHITE);
+}
 
 bool Component::AtlasAnimator::_IsPosibleAnimName(string region_map_name, string *posible_anim_name, int *index){
   if(isdigit(region_map_name[region_map_name.length() - 1]) &&
@@ -229,13 +236,15 @@ void Component::AtlasAnimator::_CreateAnimFrame(){
       _CreateAnimFrame();
     }
     else{
-      anim_frame.insert(pair<string, vector<Texture2D>>(posible_anim_name, frame_list));
+      anim_frame.insert(pair<string, vector<Texture2D>>(last_posible_anim_name, frame_list));
+      cout<<"last posible name:"<<last_posible_anim_name<<endl;
       cout<<"anim frame size:"<<anim_frame.size()<<endl;
-      cout<<"frame list size:"<<anim_frame.at(posible_anim_name).size()<<endl;
+      cout<<"frame list size:"<<anim_frame.at(last_posible_anim_name).size()<<endl;
       frame_list.clear();
     }
 
 }
+
 
 /*
   Tilemap Component

@@ -131,14 +131,13 @@ namespace Component{
   */
   typedef struct AtlasAnimator : BaseComponent{
     AtlasAnimator(TextureAtlas *_texture_atlas);
-    void PlayAnim(string anim_name, int total_frame, int fps);
+    void PlayAnim(string _anim_name, int fps);
     void Draw();
 
   protected:
 
     map<string, vector<Texture2D>> anim_frame;
     int map_index = 0;
-    string curr_posible_anim_name = "nan";
     string last_posible_anim_name = "nan";
     vector<Texture2D> frame_list;
 
@@ -148,7 +147,9 @@ namespace Component{
     TextureAtlas *texture_atlas = nullptr;
     int frame_counter;
     int frame_index = 1;
+    string anim_name;
     Texture2D curr_texture;
+    v2 pivot {0.0f, 0.0f};
     Rectangle src_rect;
     Rectangle dst_rect;
     

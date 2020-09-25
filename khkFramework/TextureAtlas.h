@@ -56,6 +56,7 @@ struct TextureAtlas{
 
   v2i GetImageSize();
   AtlasRegion GetRegion(string name);
+  AtlasRegion* GetRegionPtr(string name);
   string* GetValue(string attribute_name);
   map<string, AtlasRegion>* GetRegionMap();
 
@@ -72,6 +73,7 @@ protected:
   vector<string> line_list;
   map<string, string*> attribute_map; // texture atlas attribute value pair
   map<string, AtlasRegion> region_map;
+  map<string, AtlasRegion*> ptr_region_map;
   int line_index = 0;
   int region_attribute_index;
   string section;

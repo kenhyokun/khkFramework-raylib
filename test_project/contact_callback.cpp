@@ -40,6 +40,7 @@ struct App : BaseApp, ContactListener{
   Node *dynamic_capsule;
   Node *dynamic_polygon;
   Node *edge_ground;
+  Node *atlas_animator_node;
 
   int dir_state = 0;
 
@@ -52,6 +53,9 @@ struct App : BaseApp, ContactListener{
 
   Image buffer_image;
   Texture2D buffer_texture;
+
+  AtlasAnimator *atlas_animator;
+  TextureAtlas *texture_atlas;
 
   App(int _window_width, int _window_height, string _title) :
     BaseApp(_window_width, _window_height, _title){}
@@ -70,20 +74,24 @@ struct App : BaseApp, ContactListener{
     float _pi = tes.json["pi"];
     cout<<_pi<<endl;
 
-    TextureAtlas texture_atlas("teest.atlas", "./resources/images/teest.png");
-    cout<<texture_atlas.GetRegion("run_1").xy.x<<endl;
-    cout<<texture_atlas.GetRegion("run_1").xy.y<<endl;
-    cout<<texture_atlas.GetRegion("run_1").size.x<<endl;
-    cout<<texture_atlas.GetRegion("run_1").size.y<<endl;
-    cout<<texture_atlas.GetRegion("run_1").is_rotate<<endl;
+    atlas_animator_node = new Node("atlas animator");
 
-    buffer_texture = texture_atlas.CreateTexture("card_back1");
+    texture_atlas = new TextureAtlas("teest.atlas", "./resources/images/teest.png");
+    cout<<texture_atlas->GetRegion("run_1").xy.x<<endl;
+    cout<<texture_atlas->GetRegion("run_1").xy.y<<endl;
+    cout<<texture_atlas->GetRegion("run_1").size.x<<endl;
+    cout<<texture_atlas->GetRegion("run_1").size.y<<endl;
+    cout<<texture_atlas->GetRegion("run_1").is_rotate<<endl;
+
+    buffer_texture = texture_atlas->CreateTexture("card_back1");
     // buffer_texture = texture_atlas.CreateTexture("dia_red");
     // buffer_texture = texture_atlas.CreateTexture("run_1");
 
-    AtlasAnimator *atlas_animator = new AtlasAnimator(&texture_atlas);
+    atlas_animator = new AtlasAnimator(texture_atlas);
 
-    texture_atlas.UnloadBufferImage(); // memory management thingy...
+    texture_atlas->UnloadBufferImage(); // memory management thingy...
+
+    atlas_animator_node->AddComponent(atlas_animator);
 
     player = new Node("player"); // lilwitch test
     dynamic_box = new Node("dynamic box"); // box dynamic rigid body test
@@ -252,6 +260,8 @@ struct App : BaseApp, ContactListener{
     // moving static box
     static_box->GetComponent<Component::rigid_body>()->SetPosition(v2{static_box->GetPosition().x + 0.2f, static_box->GetPosition().y});
 
+    atlas_animator_node->GetComponent<Component::atlas_animator>()->PlayAnim("run", 5);
+
     B2D::Step(); // run box2d step simulation
   }
 
@@ -260,6 +270,9 @@ struct App : BaseApp, ContactListener{
     DrawText("my first raylib window", 190, 200, 20, LIGHTGRAY);
     DrawTexture(buffer_texture, 0, 0, WHITE);
     player->GetComponent<Component::animator>()->Draw();
+
+    atlas_animator_node->GetComponent<Component::atlas_animator>()->Draw();
+
     B2D::DebugDraw();
   }
 
