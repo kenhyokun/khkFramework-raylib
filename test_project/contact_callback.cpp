@@ -266,7 +266,7 @@ struct App : BaseApp, ContactListener{
     // moving static box
     static_box->GetComponent<Component::rigid_body>()->SetPosition(v2{static_box->GetPosition().x + 0.2f, static_box->GetPosition().y});
 
-    atlas_animator_node->GetComponent<Component::atlas_animator>()->PlayAnim("run_right", 5);
+    atlas_animator_node->GetComponent<Component::atlas_animator>()->PlayAnim("run_left", 5);
 
     B2D::Step(); // run box2d step simulation
   }

@@ -223,10 +223,10 @@ void Component::AtlasAnimator::_CreateAnimFrame(){
       }
       else{
 	if(posible_anim_name == last_posible_anim_name){
-	  frame_list.push_back(texture_atlas->CreateTexture(posible_anim_name + "_" + to_string(index)));
+	  frame_list.push_back(texture_atlas->CreateTexture(last_posible_anim_name + "_" + to_string(index)));
 	}
 	else{
-	  anim_frame.insert(pair<string, vector<Texture2D>>(posible_anim_name, frame_list));
+	  anim_frame.insert(pair<string, vector<Texture2D>>(last_posible_anim_name, frame_list));
 	  frame_list.clear();
 	  last_posible_anim_name = posible_anim_name;
 	  
@@ -242,10 +242,6 @@ void Component::AtlasAnimator::_CreateAnimFrame(){
     }
     else{
       anim_frame.insert(pair<string, vector<Texture2D>>(last_posible_anim_name, frame_list));
-      cout<<"last posible name:"<<last_posible_anim_name<<endl;
-      cout<<"anim frame size:"<<anim_frame.size()<<endl;
-      cout<<"frame list size:"<<anim_frame.at(last_posible_anim_name).size()<<endl;
-      cout<<"frame list size:"<<anim_frame.at("run_right").size()<<endl;
       frame_list.clear();
     }
 

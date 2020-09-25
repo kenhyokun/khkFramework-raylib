@@ -10,7 +10,7 @@ Current progress:
 
 # Features:
   - Load exported **.tmx** file from **[Tiled map editor](https://www.mapeditor.org/)** for tile mapping. (only orthogonal view for now)
-  - Load exported **.atlas** file from **[gdx texture packer](https://github.com/crashinvaders/gdx-texture-packer-gui)**. (only load image for now, animation on proggress)
+  - Load exported **.atlas** file from **[gdx texture packer](https://github.com/crashinvaders/gdx-texture-packer-gui)**.
   - box2d physics engine. (only box, circle, capsule, polygon, and edge collision for now)
 
 # Third party library:
