@@ -151,17 +151,15 @@ void TextureAtlas::_ReadSequence(){
 	_InsertAttribute("texture file", &line_list.at(line_index));
       }
       else{
-	string attribute;
-	string value;
-	string *num_of_value = new string[2];
-	_CreateValuePair(line_list.at(line_index), &attribute, &value);
-	_GetNumOfValue(value, num_of_value);
-
 	if(line_list.at(line_index) != "" && line_list.at(line_index) != "\n"){
+	  string attribute;
+	  string value;
+	  string *num_of_value = new string[2];
+	  _CreateValuePair(line_list.at(line_index), &attribute, &value);
+	  _GetNumOfValue(value, num_of_value);
 	  _InsertAttribute(attribute, num_of_value);
-	}
-
-      }
+	} // if line != "" && "\n"
+      } // else
 
       line_index++;
     }
