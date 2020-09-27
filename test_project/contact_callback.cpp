@@ -70,13 +70,13 @@ struct App : BaseApp, ContactListener{
     B2D::SetContactListener(this);
 
     JSONFile tes;
-    tes.LoadFile("tes.json");
+    tes.LoadFile("./resources/tes.json");
     float _pi = tes.json["pi"];
     cout<<_pi<<endl;
 
     atlas_animator_node = new Node("atlas animator");
 
-    texture_atlas = new TextureAtlas("texture_packer.atlas",
+    texture_atlas = new TextureAtlas("./resources/texture_packer.atlas",
 				     "./resources/images/texture_packer.png");
     cout<<texture_atlas->GetRegion("run_left_1").xy.x<<endl;
     cout<<texture_atlas->GetRegion("run_left_1").xy.y<<endl;
@@ -266,7 +266,7 @@ struct App : BaseApp, ContactListener{
     // moving static box
     static_box->GetComponent<Component::rigid_body>()->SetPosition(v2{static_box->GetPosition().x + 0.2f, static_box->GetPosition().y});
 
-    atlas_animator_node->GetComponent<Component::atlas_animator>()->PlayAnim("run_left", 5);
+    atlas_animator_node->GetComponent<Component::atlas_animator>()->PlayAnim("run_right", 5);
 
     B2D::Step(); // run box2d step simulation
   }
