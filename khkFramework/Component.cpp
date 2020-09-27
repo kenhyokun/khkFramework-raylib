@@ -163,7 +163,6 @@ void Component::AtlasAnimator::PlayAnim(string _anim_name, int fps){
     if(frame_index > anim_frame.at(anim_name).size()){
       frame_index = 1;
     }
-    
   }
 
   AtlasRegion atlas_region = 
@@ -174,9 +173,12 @@ void Component::AtlasAnimator::PlayAnim(string _anim_name, int fps){
   v2i offset = atlas_region.offset;
 
   // draw position
-  v2 position = {node->GetPosition().x,
-    		 node->GetPosition().y };
+  v2 position = {node->GetPosition().x + offset.x,
+    		 node->GetPosition().y + offset.y};
 
+  pivot = {((float)origin_size.x * node->GetScale().x) / 2.0f,
+	   ((float)origin_size.y * node->GetScale().y) / 2.0f};
+  
   src_rect = {0, 0,
   	      (float)size.x,
   	      (float)size.y};
@@ -186,6 +188,22 @@ void Component::AtlasAnimator::PlayAnim(string _anim_name, int fps){
   	      (float)size.x,
   	      (float)size.y};
 
+}
+
+void Component::AtlasAnimator::DebugDraw(){
+  for(int i = 0; i < anim_frame.at(anim_name).size(); i++){
+    Rectangle _dst_rect = {dst_rect.x + (dst_rect.width * i),
+			   dst_rect.y - dst_rect.height,
+			   dst_rect.width,
+			   dst_rect.height};
+
+    DrawTexturePro(anim_frame.at(anim_name).at(i),
+		   src_rect,
+		   _dst_rect,
+		   pivot,
+		   node->GetRotation(),
+		   WHITE);
+  }
 }
 
 void Component::AtlasAnimator::Draw(){
@@ -216,7 +234,6 @@ void Component::AtlasAnimator::_CreateAnimFrame(){
     const auto &next = std::next(it, map_index);
     
     if(_IsPosibleAnimName(next->first, &posible_anim_name, &index)){ 
-      cout<<posible_anim_name<<" >> "<<index<<endl;
       if(last_posible_anim_name == "nan"){
 	frame_list.push_back(texture_atlas->CreateTexture(posible_anim_name +"_"+ to_string(index)));
 	last_posible_anim_name = posible_anim_name;

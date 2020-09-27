@@ -117,10 +117,10 @@ namespace Component{
     int GetFrameHeight();
 
   protected:
-    int frame_index;
-    int frame_counter;
-    int frame_width;
-    int frame_height;
+    int frame_index = 0;
+    int frame_counter = 0;
+    int frame_width = 0;
+    int frame_height = 0;
 
   } *animator;
 
@@ -131,6 +131,7 @@ namespace Component{
   typedef struct AtlasAnimator : BaseComponent{
     AtlasAnimator(TextureAtlas *_texture_atlas);
     void PlayAnim(string _anim_name, int fps);
+    void DebugDraw();
     void Draw();
 
   protected:
@@ -144,7 +145,7 @@ namespace Component{
     void _CreateAnimFrame();
   
     TextureAtlas *texture_atlas = nullptr;
-    int frame_counter;
+    int frame_counter = 0;
     int frame_index = 1;
     string anim_name;
     Texture2D curr_texture;

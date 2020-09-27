@@ -50,30 +50,39 @@ TextureAtlas::TextureAtlas(string file_src, string img_src){
   _ReadSequence();
 
   //// print region map
-  for(const auto &region : *GetRegionMap()){
-    cout<<region.first<<endl;
-  }
+  // PrintGetRegion();
 
   line_list.clear();
 }
 
 void TextureAtlas::UnloadBufferImage(){UnloadImage(buffer_image);}
 
-Texture2D TextureAtlas::CreateTexture(string name){
-  AtlasRegion atlas_region = GetRegion(name);
-  Image temp_image {0};
+void TextureAtlas::PrintGetRegion(){
+  for(const auto &region : *GetRegionMap()){
+    cout<<region.first<<endl;
+  }
+}
 
-  temp_image = ImageFromImage(buffer_image,
-			      Rectangle{(float)atlas_region.xy.x,
-				  (float)atlas_region.xy.y,
-				  (float)atlas_region.size.x,
-				  (float)atlas_region.size.y
-				  });
+Image TextureAtlas::CreateImage(string name){
+  AtlasRegion atlas_region = GetRegion(name);
+  Image image = { 0 };
   
+  image = ImageFromImage(buffer_image,
+			 Rectangle{(float)atlas_region.xy.x,
+			     (float)atlas_region.xy.y,
+			     (float)atlas_region.size.x,
+			     (float)atlas_region.size.y
+			     });
+
   if(atlas_region.is_rotate){
-    ImageRotateCW(&temp_image);
+    ImageRotateCW(&image);
   }
 
+  return image;
+}
+
+Texture2D TextureAtlas::CreateTexture(string name){
+  Image temp_image = CreateImage(name);
   return LoadTextureFromImage(temp_image);
 }
 
@@ -217,7 +226,6 @@ void TextureAtlas::_ReadSequence(){
     }
 
     if(section != ""){
-      cout<<"section:"<<section<<endl;
       _InsertRegion(section, atlas_region);
     }
     

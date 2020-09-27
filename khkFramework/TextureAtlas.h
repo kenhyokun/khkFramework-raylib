@@ -51,8 +51,10 @@ struct AtlasRegion{
 struct TextureAtlas{
 
   TextureAtlas(string file_src, string img_src = "nan");
+  Image CreateImage(string name);
   Texture2D CreateTexture(string name);
   void UnloadBufferImage();
+  void PrintGetRegion();
 
   v2i GetImageSize();
   AtlasRegion GetRegion(string name);
