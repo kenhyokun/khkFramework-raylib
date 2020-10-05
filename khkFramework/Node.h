@@ -55,6 +55,8 @@ class Node{
 
 
 protected:
+  bool is_has_rigid_body_component = false;
+
   void _SetParent(Node *node);
   CTransform _GetTransform();
   void _SetTransformDirection(float up, float right);
@@ -104,6 +106,8 @@ public:
   vector<Node*>* GetChild(); // get child vector
   Node* GetChild(int index); // get child by index
   Node* GetChild(string name); // get child by name maybe...
+  void HasRigidBodyComponent();
+  bool IsHasRigidBodyComponent();
 };
 
 template<typename T>

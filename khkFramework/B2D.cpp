@@ -184,6 +184,7 @@ void Component::RigidBody::_OnAttach(){
 
   if(_IsGetCollider()){
     body->SetUserData(node);
+    node->HasRigidBodyComponent();
   }
   else{
     cout<<"you must add collider component at "<<node->name<<" first!"<<endl;

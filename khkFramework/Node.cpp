@@ -83,9 +83,10 @@ void Node::SetPosition(v2 position){
 
   if(child->size() > 0){
     for(int i = 0; i < child->size(); i++){
-      GetChild(i)->SetPosition(v2{GetChild(i)->GetPosition().x + dx,
-	    GetChild(i)->GetPosition().y + dy});
-
+      if(!GetChild(i)->IsHasRigidBodyComponent()){ // parent node cant move child node if child node have rigid body component
+	GetChild(i)->SetPosition(v2{GetChild(i)->GetPosition().x + dx,
+	      GetChild(i)->GetPosition().y + dy});
+      } // !IsHasRigidBodyComponent
     } // for
   } // if
 
@@ -136,3 +137,5 @@ float Node::GetRotation(){return transform.rotation;}
 Node* Node::GetParent(){return parent;}
 vector<Node*>* Node::GetChild(){return child;}
 Node* Node::GetChild(int index){return child->at(index);}
+void Node::HasRigidBodyComponent(){is_has_rigid_body_component = true;}
+bool Node::IsHasRigidBodyComponent(){return is_has_rigid_body_component;}
