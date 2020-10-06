@@ -30,10 +30,38 @@ TODO [kevin]:
  - resource manager maybe...
 */
 
+struct CollisionListener{
+  virtual void OnCollisionEnter(Node *collision_node) = 0;
+  virtual void OnCollisionExit(Node *collision_node) = 0;
+};
+
+struct Player : Node, CollisionListener{
+
+  Player(string name) : Node(name){}
+
+  void OnCollisionEnter(Node *collision_node) override{    
+    if(collision_node->name == "static box")
+      cout<<name<<" collide with "<<collision_node->name<<endl;
+  }
+  
+  void OnCollisionExit(Node *collision_node) override{    
+  }
+  
+};
+
+struct Temp : CollisionListener{
+  void OnCollisionEnter(Node *collision_node) override{    
+    cout<<"hello from temp"<<endl;
+  }
+  
+  void OnCollisionExit(Node *collision_node) override{    
+  }
+};
 
 struct App : BaseApp, ContactListener{
 
-  Node *player;
+  Player *player;
+  Temp *temp;
   Node *dynamic_box;
   Node *static_box;
   Node *dynamic_circle;
@@ -41,6 +69,8 @@ struct App : BaseApp, ContactListener{
   Node *dynamic_polygon;
   Node *edge_ground;
   Node *atlas_animator_node;
+
+  vector<CollisionListener*> collision_listener_list;
 
   int dir_state = 0;
 
@@ -56,6 +86,7 @@ struct App : BaseApp, ContactListener{
 
   AtlasAnimator *atlas_animator;
   TextureAtlas *texture_atlas;
+
 
   App(int _window_width, int _window_height, string _title) :
     BaseApp(_window_width, _window_height, _title){}
@@ -78,6 +109,7 @@ struct App : BaseApp, ContactListener{
 
     texture_atlas = new TextureAtlas("./resources/texture_packer.atlas",
 				     "./resources/images/texture_packer.png");
+
     cout<<texture_atlas->GetRegion("run_left_1").xy.x<<endl;
     cout<<texture_atlas->GetRegion("run_left_1").xy.y<<endl;
     cout<<texture_atlas->GetRegion("run_left_1").size.x<<endl;
@@ -99,13 +131,18 @@ struct App : BaseApp, ContactListener{
 
     atlas_animator_node->AddComponent(atlas_animator);
 
-    player = new Node("player"); // lilwitch test
+    player = new Player("player"); // lilwitch test
     dynamic_box = new Node("dynamic box"); // box dynamic rigid body test
     static_box = new Node("static box"); // box static rigid body test
     dynamic_circle = new Node("dynamic circle"); // circle dynamic rigid body test
     dynamic_capsule = new Node("dynamic capsule"); // capsule dynamic rigid body test
     dynamic_polygon = new Node("dynamic polygon"); // polygon dynamic rigid body test
     edge_ground = new Node("edge ground"); // edge rigid body test
+
+    temp = new Temp();
+
+    collision_listener_list.push_back(dynamic_cast<CollisionListener*>(player));
+    collision_listener_list.push_back(dynamic_cast<CollisionListener*>(temp));
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
     lilwitch = LoadTexture("./resources/images/lilwitch.png");
@@ -135,8 +172,8 @@ struct App : BaseApp, ContactListener{
 
     static_box->AddComponent<Component::box_collider>(new BoxCollider(100, 100));
     static_box->AddComponent<Component::rigid_body>(new RigidBody());
-    static_box->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
-    // static_box->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::KINEMATIC);
+    // static_box->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::STATIC);
+    static_box->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::KINEMATIC);
     // static_box->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
 
     dynamic_circle->AddComponent<Component::circle_collider>(new CircleCollider(50));
@@ -193,6 +230,7 @@ struct App : BaseApp, ContactListener{
     // player->GetComponent<Component::rigid_body>()->SetAngularDamping(100.0f); 
     // player->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
 
+
   }
 
   void BeginContact(b2Contact* contact) override {
@@ -203,7 +241,14 @@ struct App : BaseApp, ContactListener{
     void *user_data_a = fixture_a->GetBody()->GetUserData();
     void *user_data_b = fixture_b->GetBody()->GetUserData();
 
-    // cout<< static_cast<Node*>(user_data_b)->name<<" => "<<static_cast<Node*>(user_data_a)->name<<endl;
+    Node *node_a = static_cast<Node*>(user_data_a);
+    Node *node_b = static_cast<Node*>(user_data_b);
+
+    for(int i = 0; i < collision_listener_list.size(); i++){
+      collision_listener_list.at(i)->OnCollisionEnter(node_a);
+    }
+
+    // cout<< node_b->name<<" => "<<node_a->name<<endl;
   }
 
   void Controller(){
@@ -243,7 +288,15 @@ struct App : BaseApp, ContactListener{
     }
 
     if(!GetKeyButton("right")->IsDown() && !GetKeyButton("left")->IsDown()){
-      player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{0, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
+      // player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{0, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
+
+      if(player->GetComponent<rigid_body>()->GetLinearVelocity().x > 0){
+	player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x - 3, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
+      }
+      else if(player->GetComponent<rigid_body>()->GetLinearVelocity().x < 0){
+	player->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{player->GetComponent<rigid_body>()->GetLinearVelocity().x + 3, player->GetComponent<rigid_body>()->GetLinearVelocity().y});
+      }
+
     }
 
     if(IsKeyDown(KEY_SPACE)){
@@ -264,7 +317,8 @@ struct App : BaseApp, ContactListener{
     }
 
     // moving static box
-    static_box->GetComponent<Component::rigid_body>()->SetPosition(v2{static_box->GetPosition().x + 0.2f, static_box->GetPosition().y});
+    // static_box->GetComponent<Component::rigid_body>()->SetPosition(v2{static_box->GetPosition().x + 0.2f, static_box->GetPosition().y});
+    static_box->GetComponent<Component::rigid_body>()->SetLinearVelocity(v2{10, static_box->GetComponent<rigid_body>()->GetLinearVelocity().y});
 
     atlas_animator_node->GetComponent<Component::atlas_animator>()->PlayAnim("run_right", 5);
 

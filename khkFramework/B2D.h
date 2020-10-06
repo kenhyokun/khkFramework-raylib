@@ -178,6 +178,7 @@ namespace Component{
     v2 GetLinearVelocity();
     float GetAngularVelocity();
     float GetAngularDamping();
+    v2 GetPosition();
 
     float GetBodyRadian(); // body angle rotation (in radian)
     void SetBodyType(b2BodyType type);

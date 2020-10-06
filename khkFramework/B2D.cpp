@@ -355,6 +355,7 @@ float Component::RigidBody::GetBodyRadian(){return body->GetAngle();}
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}
 void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotation(is_fixed);}
 b2Body* Component::RigidBody::GetBody(){return body;}
+v2 Component::RigidBody::GetPosition(){return v2{body->GetTransform().p.x, body->GetTransform().p.y};}
 
 
 void B2D::Init(v2 gravity){

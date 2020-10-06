@@ -83,7 +83,7 @@ void Node::SetPosition(v2 position){
 
   if(child->size() > 0){
     for(int i = 0; i < child->size(); i++){
-      if(!GetChild(i)->IsHasRigidBodyComponent()){ // parent node cant move child node if child node have rigid body component
+      if(!GetChild(i)->IsHasRigidBodyComponent()){ // parent node can't move child node if child node have rigid body component
 	GetChild(i)->SetPosition(v2{GetChild(i)->GetPosition().x + dx,
 	      GetChild(i)->GetPosition().y + dy});
       } // !IsHasRigidBodyComponent
