@@ -23,14 +23,23 @@
   kevinhyokun91@gmail.com
 */
 
-#ifndef M_BOX2D_H
-#define M_BOX2D_H
+#ifndef CONTACT_LISTENER_H
+#define CONTACT_LISTENER_H
 
-#include<box2d/box2d.h>
-#include<Component.h>
+#include<iostream>
+#include<vector>
+#include<Node.h>
+#include<m_box2d.h>
+#include<CollisionListener.h>
 
-#define b2v2_0 b2v2{0, 0}
-typedef b2Vec2 b2v2;
-typedef b2Fixture Fixture;
+using namespace std;
+
+struct ContactListener : b2ContactListener{
+  vector<CollisionListener*> collision_listener_list;
+
+  void AddCollisionListener(CollisionListener *collision_listener);
+  void BeginContact(b2Contact *contact) override ;
+  
+};
 
 #endif

@@ -29,6 +29,7 @@
 #include<m_box2d.h>
 #include<Component.h>
 #include<B2D_DebugDraw.h>
+#include<ContactListener.h>
 
 static b2World *world;
 static float time_step = 1.0f / 60.0f;
@@ -195,6 +196,7 @@ namespace Component{
   } *rigid_body; 
 
 }; // Component namespace
+
 
 
 namespace B2D{

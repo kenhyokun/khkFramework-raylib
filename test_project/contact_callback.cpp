@@ -30,11 +30,6 @@ TODO [kevin]:
  - resource manager maybe...
 */
 
-struct CollisionListener{
-  virtual void OnCollisionEnter(Node *collision_node) = 0;
-  virtual void OnCollisionExit(Node *collision_node) = 0;
-};
-
 struct Player : Node, CollisionListener{
 
   Player(string name) : Node(name){}
@@ -141,8 +136,12 @@ struct App : BaseApp, ContactListener{
 
     temp = new Temp();
 
-    collision_listener_list.push_back(dynamic_cast<CollisionListener*>(player));
-    collision_listener_list.push_back(dynamic_cast<CollisionListener*>(temp));
+    /*
+      NOTE[kevin]:
+      collision_listener_list must be clear when game scene changed or when we dont need it any more.
+    */
+    AddCollisionListener(player);
+    AddCollisionListener(temp);
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
     lilwitch = LoadTexture("./resources/images/lilwitch.png");
@@ -231,24 +230,6 @@ struct App : BaseApp, ContactListener{
     // player->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
 
 
-  }
-
-  void BeginContact(b2Contact* contact) override {
-    // cout<<"begin contact"<<endl;
-    Fixture *fixture_a = contact->GetFixtureA();
-    Fixture *fixture_b = contact->GetFixtureB();
-
-    void *user_data_a = fixture_a->GetBody()->GetUserData();
-    void *user_data_b = fixture_b->GetBody()->GetUserData();
-
-    Node *node_a = static_cast<Node*>(user_data_a);
-    Node *node_b = static_cast<Node*>(user_data_b);
-
-    for(int i = 0; i < collision_listener_list.size(); i++){
-      collision_listener_list.at(i)->OnCollisionEnter(node_a);
-    }
-
-    // cout<< node_b->name<<" => "<<node_a->name<<endl;
   }
 
   void Controller(){

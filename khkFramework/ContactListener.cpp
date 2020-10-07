@@ -23,14 +23,20 @@
   kevinhyokun91@gmail.com
 */
 
-#ifndef M_BOX2D_H
-#define M_BOX2D_H
+#include<ContactListener.h>
 
-#include<box2d/box2d.h>
-#include<Component.h>
+void ContactListener::AddCollisionListener(CollisionListener *collision_listener){
+  collision_listener_list.push_back(collision_listener);
+}
 
-#define b2v2_0 b2v2{0, 0}
-typedef b2Vec2 b2v2;
-typedef b2Fixture Fixture;
+void ContactListener::BeginContact(b2Contact *contact){
+  Node *node_a = static_cast<Node*>
+    (contact->GetFixtureA()->GetBody()->GetUserData());
 
-#endif
+  Node *node_b = static_cast<Node*>
+    (contact->GetFixtureB()->GetBody()->GetUserData());
+
+  for(int i = 0; i < collision_listener_list.size(); i++){
+    collision_listener_list.at(i)->OnCollisionEnter(node_a);
+  }
+}

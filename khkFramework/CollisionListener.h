@@ -23,14 +23,12 @@
   kevinhyokun91@gmail.com
 */
 
-#ifndef M_BOX2D_H
-#define M_BOX2D_H
+#ifndef COLLISION_LISTENER_H
+#define COLLISION_LISTENER_H
 
-#include<box2d/box2d.h>
-#include<Component.h>
-
-#define b2v2_0 b2v2{0, 0}
-typedef b2Vec2 b2v2;
-typedef b2Fixture Fixture;
+struct CollisionListener{
+  virtual void OnCollisionEnter(Node *collision_node) = 0;
+  virtual void OnCollisionExit(Node *collision_node) = 0;
+};
 
 #endif

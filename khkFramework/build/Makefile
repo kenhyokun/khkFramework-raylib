@@ -184,6 +184,21 @@ Component.s:
 .PHONY : Component.s
 
 # target to build an object file
+ContactListener.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/ContactListener.o
+.PHONY : ContactListener.o
+
+# target to preprocess a source file
+ContactListener.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/ContactListener.i
+.PHONY : ContactListener.i
+
+# target to generate assembly for a file
+ContactListener.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/ContactListener.s
+.PHONY : ContactListener.s
+
+# target to build an object file
 File.o:
 	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/File.o
 .PHONY : File.o
@@ -249,6 +264,9 @@ help:
 	@echo "... Component.o"
 	@echo "... Component.i"
 	@echo "... Component.s"
+	@echo "... ContactListener.o"
+	@echo "... ContactListener.i"
+	@echo "... ContactListener.s"
 	@echo "... File.o"
 	@echo "... File.i"
 	@echo "... File.s"
