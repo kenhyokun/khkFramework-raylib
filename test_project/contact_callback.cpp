@@ -32,7 +32,7 @@ TODO [kevin]:
 
 struct Player : Node, CollisionListener{
 
-  Player(string name) : Node(name){}
+  Player(string name) : Node(name), CollisionListener(this){}
 
   void OnCollisionEnter(Node *collision_node) override{    
     if(collision_node->name == "static box")
@@ -44,19 +44,9 @@ struct Player : Node, CollisionListener{
   
 };
 
-struct Temp : CollisionListener{
-  void OnCollisionEnter(Node *collision_node) override{    
-    cout<<"hello from temp"<<endl;
-  }
-  
-  void OnCollisionExit(Node *collision_node) override{    
-  }
-};
-
 struct App : BaseApp, ContactListener{
 
   Player *player;
-  Temp *temp;
   Node *dynamic_box;
   Node *static_box;
   Node *dynamic_circle;
@@ -134,14 +124,12 @@ struct App : BaseApp, ContactListener{
     dynamic_polygon = new Node("dynamic polygon"); // polygon dynamic rigid body test
     edge_ground = new Node("edge ground"); // edge rigid body test
 
-    temp = new Temp();
 
     /*
       NOTE[kevin]:
       collision_listener_list must be clear when game scene changed or when we dont need it any more.
     */
     AddCollisionListener(player);
-    AddCollisionListener(temp);
 
     dia_red = LoadTexture("./resources/images/dia_red.png");
     lilwitch = LoadTexture("./resources/images/lilwitch.png");

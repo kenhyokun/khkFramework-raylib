@@ -26,9 +26,21 @@
 #ifndef COLLISION_LISTENER_H
 #define COLLISION_LISTENER_H
 
+#include<Node.h>
+#include<m_box2d.h>
+
 struct CollisionListener{
+  b2Contact *contact = nullptr;
+  bool is_exit = false;
+  
+  CollisionListener(Node *_node){node = _node;}
   virtual void OnCollisionEnter(Node *collision_node) = 0;
   virtual void OnCollisionExit(Node *collision_node) = 0;
+
+  inline Node* GetNode(){return node;}
+  
+protected:
+  Node *node = nullptr;
 };
 
 #endif
