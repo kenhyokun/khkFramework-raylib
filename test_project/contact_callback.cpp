@@ -35,7 +35,7 @@ struct Player : Node, CollisionListener{
   Player(string name) : Node(name), CollisionListener(this){}
 
   void OnCollisionEnter(Node *collision_node) override{    
-    if(collision_node->name == "static box")
+    // if(collision_node->name == "static box")
       cout<<name<<" collide with "<<collision_node->name<<endl;
   }
   
@@ -218,6 +218,10 @@ struct App : BaseApp, ContactListener{
     // player->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
 
 
+  }
+
+  void OnBeginContact(b2Contact *contact) override{
+    // cout<<"hello from OnBeginContact..."<<endl;
   }
 
   void Controller(){

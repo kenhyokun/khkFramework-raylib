@@ -36,6 +36,9 @@ void ContactListener::BeginContact(b2Contact *contact){
   Node *node_b = static_cast<Node*>
     (contact->GetFixtureB()->GetBody()->GetUserData());
 
+  /*
+    FIXME [Kevin]: there is no circle collision contact...
+  */
 
   for(int i = 0; i < collision_listener_list.size(); i++){
 
@@ -45,6 +48,8 @@ void ContactListener::BeginContact(b2Contact *contact){
 	collision_listener_list.at(i)->is_exit = false;
 	collision_listener_list.at(i)->contact = contact;
 	collision_listener_list.at(i)->OnCollisionEnter(node_a);
+
+	cout<<contact->GetManifold()->type<<endl;
       }
 
       if(collision_listener_list.at(i)->contact != nullptr && 
@@ -61,6 +66,8 @@ void ContactListener::BeginContact(b2Contact *contact){
     } // node != nullptr
   } // for
 
+
+  OnBeginContact(contact);
 }
 
 void ContactListener::OnBeginContact(b2Contact *contact){}
