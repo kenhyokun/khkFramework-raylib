@@ -37,7 +37,7 @@ void ContactListener::BeginContact(b2Contact *contact){
     (contact->GetFixtureB()->GetBody()->GetUserData());
 
   /*
-    FIXME [Kevin]: there is no circle collision contact...
+    FIXME [Kevin]: there is no circle to cirlce collision contact...
   */
 
   for(int i = 0; i < collision_listener_list.size(); i++){

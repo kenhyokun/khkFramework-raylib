@@ -43,6 +43,7 @@ void Node::_Rotate(float angle, v2 pivot){
   SetPosition(TransformRotation(Deg2Rad(angle), GetPosition(), pivot));
 }
 
+// vector
 void Node::SetParent(Node *node){
   if(parent != node){
     node->AddChild(this);
@@ -84,8 +85,8 @@ void Node::SetPosition(v2 position){
   if(child->size() > 0){
     for(int i = 0; i < child->size(); i++){
       if(!GetChild(i)->IsHasRigidBodyComponent()){ // parent node can't move child node if child node have rigid body component
-	GetChild(i)->SetPosition(v2{GetChild(i)->GetPosition().x + dx,
-	      GetChild(i)->GetPosition().y + dy});
+  	GetChild(i)->SetPosition(v2{GetChild(i)->GetPosition().x + dx,
+  	      GetChild(i)->GetPosition().y + dy});
       } // !IsHasRigidBodyComponent
     } // for
   } // if
@@ -107,12 +108,12 @@ void Node::SetRotation(float angle){
 
       // set direction
       GetChild(i)->
-	_SetTransformDirection(GetChild(i)->_GetTransform().up + da,
-			       GetChild(i)->_GetTransform().right + da);
+  	_SetTransformDirection(GetChild(i)->_GetTransform().up + da,
+  			       GetChild(i)->_GetTransform().right + da);
 
       // child transformation rotation
       if(!GetChild(i)->is_fixed_transform_rotation){
-	GetChild(i)->_Rotate(da, transform.position);
+  	GetChild(i)->_Rotate(da, transform.position);
       }
 
     } // for
@@ -120,10 +121,32 @@ void Node::SetRotation(float angle){
 
 }
 
+void Node::PrintAllChildName(){
+  if(child->size() > 0){
+    for(int i = 0; i < child->size(); i++){
+      cout<<GetChild(i)->name<<endl;
+    }
+  }
+}
+
 void Node::SetRotation(float angle, v2 pivot){
   float _da = angle - transform.rotation;
   _Rotate(_da, pivot);
   SetRotation(angle);
+}
+
+string Node::comp_name = "";
+Node* Node::_IsSearchedChild(Node *child_node){
+  if(child_node->name == comp_name){
+    return child_node;
+  }
+}
+
+Node* Node::GetChild(string name){
+  comp_name = name;
+  vector<Node*>::iterator it;
+  it = std::find_if(child->begin(), child->end(), _IsSearchedChild);
+  return *it;
 }
 
 void Node::ClearParent(){parent = nullptr;}

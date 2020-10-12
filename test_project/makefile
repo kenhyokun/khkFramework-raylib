@@ -27,7 +27,8 @@ LIB :=\
 	-lrt \
 	-lX11
 
-CURR_PROJECT := contact_callback.cpp
+# CURR_PROJECT := contact_callback.cpp
+CURR_PROJECT := basic_node.cpp
 
 all:
 	g++ -o main $(CURR_PROJECT) $(INCLUDE) $(LIB)

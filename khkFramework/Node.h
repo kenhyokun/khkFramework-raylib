@@ -56,12 +56,14 @@ class Node{
 
 protected:
   bool is_has_rigid_body_component = false;
+  static string comp_name;
 
   void _SetParent(Node *node);
   CTransform _GetTransform();
   void _SetTransformDirection(float up, float right);
   void _Rotate(float angle, v2 pivot); // transformation rotation
   void _RemoveChild(vector<Node*>::iterator it);
+  static Node* _IsSearchedChild(Node *child_node);
 
 public:
   const string unamed_node_name = "Unamed Node"; // give this name to node name if node name not set
@@ -105,9 +107,10 @@ public:
   void ClearParent();
   vector<Node*>* GetChild(); // get child vector
   Node* GetChild(int index); // get child by index
-  Node* GetChild(string name); // get child by name maybe...
+  Node* GetChild(string name); // get child by name
   void HasRigidBodyComponent();
   bool IsHasRigidBodyComponent();
+  void PrintAllChildName();
 };
 
 template<typename T>
