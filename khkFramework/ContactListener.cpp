@@ -36,36 +36,46 @@ void ContactListener::BeginContact(b2Contact *contact){
   Node *node_b = static_cast<Node*>
     (contact->GetFixtureB()->GetBody()->GetUserData());
 
-  /*
-    FIXME [Kevin]: there is no circle to cirlce collision contact...
-  */
 
   for(int i = 0; i < collision_listener_list.size(); i++){
 
     if(collision_listener_list.at(i)->GetNode() != nullptr){
       
-      if(node_b == collision_listener_list.at(i)->GetNode()){
-	collision_listener_list.at(i)->is_exit = false;
-	collision_listener_list.at(i)->contact = contact;
-	collision_listener_list.at(i)->OnCollisionEnter(node_a);
+      // collision enter / touching
+      if(node_a == collision_listener_list.at(i)->GetNode() ||
+	 node_b == collision_listener_list.at(i)->GetNode()){
 
-	cout<<contact->GetManifold()->type<<endl;
+	if(node_a == collision_listener_list.at(i)->GetNode()){
+	  collision_node = node_b;
+	}
+	else if(node_b == collision_listener_list.at(i)->GetNode()){
+	  collision_node = node_a;
+	}
+	
+  	collision_listener_list.at(i)->is_exit = false;
+	contact_listener_contact = contact;
+  	collision_listener_list.at(i)->OnCollisionEnter(collision_node);
+
       }
 
-      if(collision_listener_list.at(i)->contact != nullptr && 
-	 !collision_listener_list.at(i)->contact->IsTouching()
-	 ){
+      // collision exit / not touching any more
+      if(collision_node != nullptr &&
+      	 contact_listener_contact != nullptr && 
+      	 !contact_listener_contact->IsTouching()
+      	 ){
 
-	if(!collision_listener_list.at(i)->is_exit){
-	  cout<<"not touching any more..."<<endl;
-	  collision_listener_list.at(i)->is_exit = true;
-	}
+      	if(!collision_listener_list.at(i)->is_exit){
+      	  collision_listener_list.at(i)->OnCollisionExit(collision_node);
+      	  collision_listener_list.at(i)->is_exit = true;
+      	}
 
+	collision_node = nullptr;
+	contact_listener_contact = nullptr;
+	 
       }
 
     } // node != nullptr
   } // for
-
 
   OnBeginContact(contact);
 }

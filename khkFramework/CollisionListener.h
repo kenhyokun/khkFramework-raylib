@@ -30,7 +30,6 @@
 #include<m_box2d.h>
 
 struct CollisionListener{
-  b2Contact *contact = nullptr;
   bool is_exit = false;
   
   CollisionListener(Node *_node){node = _node;}

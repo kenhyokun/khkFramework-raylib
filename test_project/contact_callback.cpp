@@ -40,6 +40,7 @@ struct Player : Node, CollisionListener{
   }
   
   void OnCollisionExit(Node *collision_node) override{    
+    cout<<"not touching "<<collision_node->name<<" any more..."<<endl;
   }
   
 };

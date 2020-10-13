@@ -40,6 +40,10 @@ struct ContactListener : b2ContactListener{
   void AddCollisionListener(CollisionListener *collision_listener);
   void BeginContact(b2Contact *contact) override ;
   virtual void OnBeginContact(b2Contact *contact);
+
+ protected:
+  Node *collision_node = nullptr;
+  b2Contact *contact_listener_contact = nullptr;
   
 };
 

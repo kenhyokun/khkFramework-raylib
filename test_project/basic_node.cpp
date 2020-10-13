@@ -61,6 +61,9 @@ struct App : BaseApp, ContactListener{
     cout<<node1->GetChild("node2")->name<<endl;
     cout<<node1->GetChild(0)->name<<endl;
     cout<<node1->GetChild(0)->tag<<endl;
+    cout<<node1->GetChild("3rd node")->name<<endl;
+    cout<<node1->GetChild(1)->name<<endl;
+    cout<<node1->GetChild(1)->tag<<endl;
     cout<<node2->GetChild("node #5")->name<<endl;
     cout<<node2->GetChild(0)->name<<endl;
     cout<<node2->GetChild(0)->tag<<endl;
