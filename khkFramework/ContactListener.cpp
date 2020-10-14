@@ -78,6 +78,8 @@ void ContactListener::BeginContact(b2Contact *contact){
   } // for
 
   OnBeginContact(contact);
+  OnBeginContact(contact, node_a, node_b);
 }
 
 void ContactListener::OnBeginContact(b2Contact *contact){}
+void ContactListener::OnBeginContact(b2Contact *contact, Node *node_a, Node *node_b){}

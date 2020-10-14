@@ -225,6 +225,11 @@ struct App : BaseApp, ContactListener{
     // cout<<"hello from OnBeginContact..."<<endl;
   }
 
+  void OnBeginContact(b2Contact *contact, Node *node_a, Node *node_b) override{
+    // cout<<"hello from OnBeginContact..."<<endl;
+    // cout<<node_b->name<<" => "<<node_a->name<<endl;
+  }
+  
   void Controller(){
     float move_speed = 100.0f;
     float h_force = 10000;
