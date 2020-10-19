@@ -4,7 +4,7 @@ Experimental C/C++ 2D game framework with **[raylib][1]** inspired by popular ga
 </br>
 **Note: Build and tested on Ubuntu 18.04. No cross platform makefile for now.**
 
-Current progress:
+Current progress: (**[youtube][4]**)
 </br>
 <img align="center" src="https://github.com/kenhyokun/khkFramework-raylib/blob/master/github_resources/curr_progress.gif" width=712>
 
@@ -46,3 +46,4 @@ kevinhyokun91@gmail.com </br>
 [1]: https://github.com/raysan5/raylib
 [2]: https://github.com/OGRECave/ogre
 [3]: https://github.com/libgdx/libgdx
+[4]: https://www.youtube.com/playlist?list=PLIme43uR7noQXeGAkMhYSkasT2uVzyMNv
