@@ -12,16 +12,22 @@ Current progress:
   - Load exported **.tmx** file from **[Tiled map editor](https://www.mapeditor.org/)** for tile mapping. (only orthogonal view for now)
   - Load exported **.atlas** file from **[gdx texture packer](https://github.com/crashinvaders/gdx-texture-packer-gui)** to create sprite image and sprite animation.
   - box2d physics engine. (only box, circle, capsule, polygon, and edge collision for now)
+  - Dear ImGui (only imgui demo test for now. GUI and mouse position not scaled properly when window get resized)
 
 # Third party library:
   - Core / graphics engine:
     - raylib v3.0.0 (https://github.com/raysan5/raylib)
   - Physics engine:
     - box2d v2.4.0 (https://github.com/erincatto/box2d)
+  - GUI:
+    - Dear ImGui v1.79 (https://github.com/ocornut/imgui)
   - File parser:
     - tinyxml2 (https://github.com/leethomason/tinyxml2) 
     - libconfini v1.14.1 (https://github.com/madmurphy/libconfini/)
     - json (https://github.com/nlohmann/json)
+
+# Dependencies
+  - GLEW for Dear ImGui implementation.
 
 # Todo for version 1.0.0 release:
   - Add sample project.

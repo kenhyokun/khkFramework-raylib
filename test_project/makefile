@@ -7,6 +7,7 @@ INCLUDE :=\
 	-I../third_party/tinyxml2 \
 	-I../third_party/confini \
 	-I../third_party/json \
+	-I../third_party/imgui \
 	-I../khkFramework
 
 LIB :=\
@@ -15,19 +16,22 @@ LIB :=\
 	-L../third_party/confini \
 	-L../third_party/raylib \
 	-L../third_party/box2d \
+	-L../third_party/imgui \
 	-lkhkFramework \
 	-ltinyxml2 \
 	-lconfini \
 	-lraylib \
 	-lbox2d \
+	-limgui \
 	-lGL \
 	-lm \
 	-lpthread \
 	-ldl \
 	-lrt \
-	-lX11
+	-lX11 \
+	-lGLEW
 
-CURR_PROJECT := contact_callback.cpp
+CURR_PROJECT := imgui_demo_test.cpp
 
 all:
 	g++ -o main $(CURR_PROJECT) $(INCLUDE) $(LIB)
