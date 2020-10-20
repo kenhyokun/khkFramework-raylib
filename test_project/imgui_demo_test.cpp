@@ -2,7 +2,7 @@
   Kevin Haryo Kuncoro
   kevinhyokun91@gmail.com
 */
-#include <GL/glew.h>
+#include<GL/glew.h>
 #include<iostream>
 #include<string>
 #include<BaseApp.h>
@@ -23,6 +23,8 @@ using namespace Component;
   - OnDraw
 */
 
+ImGuiIO io;
+
 struct App : BaseApp, ContactListener{
 
   App(int _window_width, int _window_height, string _title) :
@@ -42,7 +44,9 @@ struct App : BaseApp, ContactListener{
 
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+    // ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io = ImGui::GetIO(); (void)io;
 
     ImGui::StyleColorsDark();
 
@@ -58,6 +62,11 @@ struct App : BaseApp, ContactListener{
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
   void OnUpdate() override {
+    cout<<"mouse x:"<<mouse.x<<", mouse y:"<<mouse.y<<endl;
+    cout<<"virtual mouse x:"<<virtual_mouse.x<<", virtual mouse y:"<<virtual_mouse.y<<endl;
+    io.MousePos = ImVec2(virtual_mouse.x, virtual_mouse.y);
+    cout<<"imgui mouse x:"<<io.MousePos.x<<", imgui mouse y:"<<io.MousePos.y<<endl;
+
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
@@ -97,9 +106,12 @@ struct App : BaseApp, ContactListener{
   }
 
   void OnDraw() override {
+    DrawText("Congrats! You created your first window!", 0, 0, 20, BLUE);
+  }
+
+  void OnDrawGUI() override{
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
   }
 
 };

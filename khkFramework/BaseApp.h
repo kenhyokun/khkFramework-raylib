@@ -36,15 +36,29 @@ using namespace std;
 
 struct CCamera{
   Camera2D camera;
+  int width = 0;
+  int height = 0;
   Node *target =  nullptr;
 
-  inline void Init(int offset_x, int offset_y){
+  CCamera (int _width, int _height){
     camera = {0};
-    camera.offset = v2{(float)offset_x, (float)offset_y};
+    camera.offset = v2{0, 0};
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
+    width = _width;
+    height = _height;
   }
 
+  inline void SetOffset(int offset_x, int offset_y){
+    camera.offset = v2{(float)offset_x, (float)offset_y};
+  }
+
+  inline void SetOffsetToCenter(){
+    SetOffset(width / 2, height / 2);
+  }
+
+  inline void Rotate(float angle){camera.rotation = angle;}
+  inline void Zoom(int _zoom){camera.zoom = _zoom;}
   inline void AttachTo(Node *node){target = node;}
   inline void Detach(){target = nullptr;}
   inline void Follow(){
@@ -62,11 +76,13 @@ struct BaseApp{
   string title = "My Game";
   int game_screen_width = window_width;
   int game_screen_height = window_height;
-  int min_window_width = 320;
-  int min_window_height = 240;
-  v2 mouse, virtual_mouse;
+  int min_window_width = 0;
+  int min_window_height = 0;
+  v2 mouse;
+  v2 virtual_mouse;
+  v2 clamp_virtual_mouse;
   float scale = 0.0f;
-  RenderTexture2D target;
+  RenderTexture2D blank_renderer;
 
   CCamera *camera;
   static map<string, Key*> key_map;

@@ -25,6 +25,9 @@
 
 #include<BaseApp.h>
 
+#define max(a, b) ((a)>(b)? (a) : (b))
+#define min(a, b) ((a)<(b)? (a) : (b))
+
 map<string, Key*> BaseApp::key_map;
 
 BaseApp::BaseApp(int _window_width, int _window_height, string _title){
@@ -32,6 +35,8 @@ BaseApp::BaseApp(int _window_width, int _window_height, string _title){
   window_height = _window_height;
   game_screen_width = window_width;
   game_screen_height = window_height;
+  min_window_width = _window_width;
+  min_window_height = _window_height;
   title = _title;
 }
 
@@ -45,8 +50,12 @@ v2 BaseApp::ClampValue(v2 value, v2 min, v2 max){
 }
 
 void BaseApp::SetGameScreen(int _game_screen_width, int _game_screen_height){
-  game_screen_width = _game_screen_width;
-  game_screen_height = _game_screen_height;
+  if(_game_screen_width < window_width &&
+     _game_screen_height < window_height){
+    
+    game_screen_width = _game_screen_width;
+    game_screen_height = _game_screen_height;
+  }
 }
 
 void BaseApp::AddKeyButton(string action_name, int key_code){
@@ -71,8 +80,6 @@ int BaseApp::SettingCallback(IniDispatch *dispatch, void *v_null){
 
       AddKeyButton(dispatch->data, key_code);
 
-      // cout<<GetKeyButton(dispatch->data)->key_code<<endl;
-
     }
   }
 
@@ -88,15 +95,14 @@ void BaseApp::Init(int texture_filter_mode){
   InitWindow(window_width, window_height, title.c_str());
   SetWindowMinSize(min_window_width, min_window_height);
 
-  target = LoadRenderTexture(game_screen_width,
-			     game_screen_height);
+  blank_renderer = LoadRenderTexture(game_screen_width,
+				     game_screen_height);
 
-  SetTextureFilter(target.texture, texture_filter_mode);
+  SetTextureFilter(blank_renderer.texture, texture_filter_mode);
   SetTargetFPS(target_fps);
 
   // init camera
-  camera = new CCamera();
-  camera->Init(game_screen_width / 2, game_screen_height / 2);
+  camera = new CCamera(game_screen_width, game_screen_height);
 
   ConfigFile setting_conf_file;
   if(setting_conf_file.LoadFile("./resources/settings.cfg", SettingCallback) == 0){
@@ -111,19 +117,19 @@ void BaseApp::Init(int texture_filter_mode){
 }
 
 void BaseApp::Update(){
+  // update window/screen scale
+  scale = min((float)GetScreenWidth() / game_screen_width,
+	      (float)GetScreenHeight() / game_screen_height);
+
   // update mouse
   mouse = GetMousePosition();
   virtual_mouse = { 0 };
   virtual_mouse.x = (mouse.x - (GetScreenWidth() - (game_screen_width * scale) ) * 0.5f) / scale;
   virtual_mouse.y = (mouse.y - (GetScreenHeight() - (game_screen_height * scale) ) * 0.5f) / scale;
 
-  virtual_mouse = ClampValue(virtual_mouse,
-			     (v2){0, 0},
-			     (v2){(float)game_screen_width, (float)game_screen_height});
-
-  // update window/screen scale
-  scale = min((float)GetScreenWidth() / game_screen_width,
-	      (float)GetScreenHeight() / game_screen_height);
+  clamp_virtual_mouse = ClampValue(virtual_mouse,
+				   (v2){0, 0},
+				   (v2){(float)game_screen_width, (float)game_screen_height});
 
   // update camera
   camera->Follow();
@@ -137,7 +143,7 @@ void BaseApp::Draw(){
 
   ClearBackground(BLACK); // black letterbox color
 
-  BeginTextureMode(target); // --- draw to target texture
+  BeginTextureMode(blank_renderer); // --- draw to blank_renderer texture
 
   ClearBackground(RAYWHITE);
 
@@ -149,9 +155,10 @@ void BaseApp::Draw(){
 
   EndTextureMode(); // ---
 
-  // draw target texture to window
-  DrawTexturePro(target.texture,
-		 (Rectangle){0.0f, 0.0f, (float)target.texture.width, (float)-target.texture.height},
+
+  // draw blank_renderer texture to window
+  DrawTexturePro(blank_renderer.texture,
+		 (Rectangle){0.0f, 0.0f, (float)blank_renderer.texture.width, (float)-blank_renderer.texture.height},
 		 (Rectangle){
 		   (GetScreenWidth() - ((float)game_screen_width * scale)) * 0.5f,
 		     (GetScreenHeight() - ((float)game_screen_height * scale)) * 0.5f,
@@ -172,7 +179,7 @@ void BaseApp::Run(){
     Draw();
   }
 
-  UnloadRenderTexture(target);
+  UnloadRenderTexture(blank_renderer);
   CloseWindow();
 }
 

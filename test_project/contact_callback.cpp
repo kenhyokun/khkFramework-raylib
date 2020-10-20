@@ -83,6 +83,8 @@ struct App : BaseApp, ContactListener{
 
   void OnInit() override {
 
+    camera->SetOffsetToCenter();
+
     B2D::Init(v2{0, 1000});
     B2D::SetContactListener(this);
 
