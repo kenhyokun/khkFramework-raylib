@@ -40,32 +40,15 @@ struct CCamera{
   int height = 0;
   Node *target =  nullptr;
 
-  CCamera (int _width, int _height){
-    camera = {0};
-    camera.offset = v2{0, 0};
-    camera.rotation = 0.0f;
-    camera.zoom = 1.0f;
-    width = _width;
-    height = _height;
-  }
+  CCamera (int _width, int _height);
 
-  inline void SetOffset(int offset_x, int offset_y){
-    camera.offset = v2{(float)offset_x, (float)offset_y};
-  }
-
-  inline void SetOffsetToCenter(){
-    SetOffset(width / 2, height / 2);
-  }
-
-  inline void Rotate(float angle){camera.rotation = angle;}
-  inline void Zoom(int _zoom){camera.zoom = _zoom;}
-  inline void AttachTo(Node *node){target = node;}
-  inline void Detach(){target = nullptr;}
-  inline void Follow(){
-    if(target != nullptr){
-      camera.target = target->GetPosition();
-    }
-  }
+  void SetOffset(int offset_x, int offset_y);
+  void SetOffsetToCenter();
+  void Rotate(float angle);
+  void Zoom(int _zoom);
+  void AttachTo(Node *node);
+  void Detach();
+  void Follow();
 
 };
 
@@ -83,7 +66,6 @@ struct BaseApp{
   v2 clamp_virtual_mouse;
   float scale = 0.0f;
   RenderTexture2D blank_renderer;
-
   CCamera *camera;
   static map<string, Key*> key_map;
 

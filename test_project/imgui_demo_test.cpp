@@ -47,6 +47,7 @@ struct App : BaseApp, ContactListener{
 
     // ImGuiIO& io = ImGui::GetIO(); (void)io;
     io = ImGui::GetIO(); (void)io;
+    // io.DisplaySize = ImVec2(game_screen_width, game_screen_height);
 
     ImGui::StyleColorsDark();
 
