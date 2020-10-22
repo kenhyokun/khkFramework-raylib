@@ -135,15 +135,15 @@ void Node::SetRotation(float angle, v2 pivot){
   SetRotation(angle);
 }
 
-string Node::comp_name = "";
+string Node::searched_name = "";
 Node* Node::_IsSearchedChild(Node *child_node){
-  if(child_node->name == comp_name){
+  if(child_node->name == searched_name){
     return child_node;
   }
 }
 
 Node* Node::GetChild(string name){
-  comp_name = name;
+  searched_name = name;
   vector<Node*>::iterator it;
   it = std::find_if(child->begin(), child->end(), _IsSearchedChild);
   return *it;
@@ -162,3 +162,5 @@ vector<Node*>* Node::GetChild(){return child;}
 Node* Node::GetChild(int index){return child->at(index);}
 void Node::HasRigidBodyComponent(){is_has_rigid_body_component = true;}
 bool Node::IsHasRigidBodyComponent(){return is_has_rigid_body_component;}
+void Node::HasDrawableComponent(){is_has_drawable_component = true;}
+bool Node::IsHasDrawableComponent(){return is_has_drawable_component;}

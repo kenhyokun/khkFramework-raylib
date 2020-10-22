@@ -56,7 +56,8 @@ class Node{
 
 protected:
   bool is_has_rigid_body_component = false;
-  static string comp_name;
+  bool is_has_drawable_component = false;
+  static string searched_name;
 
   void _SetParent(Node *node);
   CTransform _GetTransform();
@@ -110,6 +111,8 @@ public:
   Node* GetChild(string name); // get child by name
   void HasRigidBodyComponent();
   bool IsHasRigidBodyComponent();
+  void HasDrawableComponent();
+  bool IsHasDrawableComponent();
   void PrintAllChildName();
 };
 

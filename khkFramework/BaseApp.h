@@ -53,10 +53,27 @@ struct CCamera{
 };
 
 struct BaseApp{
+  BaseApp(int _window_width = 800,
+	  int _window_height = 450,
+	  string _title = "My Game",
+	  bool _is_resizable = true);
+
+  v2 ClampValue(v2 value, v2 min, v2 max);
+  void SetGameScreen(int _game_screen_width, int _game_screen_height);
+  static void AddKeyButton(string action_name, int key_code);
+  static Key* GetKeyButton(string action_name);
+  static int SettingCallback(IniDispatch *dispatch, void *v_null);
+  void Init(int texture_filter_mode = 0);
+  void Update();
+  void Draw();
+  void Run();
+
+protected:
   int target_fps = 60;
   int window_width = 800;
   int window_height = 450;
   string title = "My Game";
+  bool is_resizable = true;
   int game_screen_width = window_width;
   int game_screen_height = window_height;
   int min_window_width = 0;
@@ -69,25 +86,11 @@ struct BaseApp{
   CCamera *camera;
   static map<string, Key*> key_map;
 
-  BaseApp(int _window_width = 800,
-	  int _window_height = 450,
-	  string _title = "My Game");
-
-  v2 ClampValue(v2 value, v2 min, v2 max);
-  void SetGameScreen(int _game_screen_width, int _game_screen_height);
-  static void AddKeyButton(string action_name, int key_code);
-  static Key* GetKeyButton(string action_name);
-  static int SettingCallback(IniDispatch *dispatch, void *v_null);
-  void Init(int texture_filter_mode = 0);
-  void Update();
-  void Draw();
-  void Run();
-
   virtual void OnInit();
   virtual void OnUpdate();
   virtual void OnDraw();
   virtual void OnDrawGUI();
-
+  virtual void OnClear();
 };
 
 #endif

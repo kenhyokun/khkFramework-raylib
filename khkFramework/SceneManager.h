@@ -26,18 +26,42 @@
 #ifndef SCENE_MANAGER_H
 #define SCENE_MANAGER_H
 
-#include<Node.h>
+#include<Component.h>
 
-typedef struct SceneManager{
-  map<string, Node*> scene_map;
+typedef Node Scene;
 
-  void AttachNode(Node *node);
-  void GetScene(string scene_name);
-  void LoadScene(string scene_name);
-  void Draw();
+struct SceneManager{
+  Scene *scene_manager_node;
+
+  SceneManager(){
+    scene_manager_node = new Node("scene manager node");
+  }
+
+  inline void AddScene(Scene *scene);
+  inline void LoadScene(string scene_name);
+  inline void Draw();
+
+  inline Scene* GetScene(string scene_name);
 
 protected:
-  _Clear();
+  inline void _Sort(Scene *scene); // sort scene child node that have drawable component by sorting order
 };
+
+void SceneManager::AddScene(Scene *scene){
+  scene_manager_node->AddChild(scene);
+  _Sort(scene);
+}
+
+void SceneManager::Draw(){
+  for(int i = 0; i < scene_manager_node->GetChild(0)->GetChild()->size(); i++){
+    if(scene_manager_node->GetChild(0)->GetChild(i)->IsHasDrawableComponent()){
+      scene_manager_node->GetChild(0)->GetChild(i)->GetComponent<Component::sprite_renderer>()->Draw();
+    }
+  }
+}
+
+void SceneManager::_Sort(Scene *scene){}
+
+Scene* SceneManager::GetScene(string name){return scene_manager_node->GetChild(name);}
 
 #endif

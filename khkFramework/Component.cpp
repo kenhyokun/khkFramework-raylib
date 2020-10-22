@@ -95,6 +95,10 @@ void Component::SpriteRenderer::Draw(int state){
 
 }
 
+void Component::SpriteRenderer::_OnAttach(){
+  node->HasDrawableComponent();
+}
+
 
 /*
   Animator Component

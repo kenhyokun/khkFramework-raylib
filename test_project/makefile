@@ -33,7 +33,8 @@ LIB :=\
 
 # CURR_PROJECT := contact_callback.cpp
 # CURR_PROJECT := imgui_demo_test.cpp
-CURR_PROJECT := imgui_no_BaseApp.cpp
+# CURR_PROJECT := imgui_no_BaseApp.cpp
+CURR_PROJECT := game_scene.cpp
 
 all:
 	g++ -o main $(CURR_PROJECT) $(INCLUDE) $(LIB)

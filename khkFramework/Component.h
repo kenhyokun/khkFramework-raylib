@@ -92,11 +92,13 @@ namespace Component{
   /*
     SpriteRenderer Component
   */
-  typedef struct SpriteRenderer : BaseComponent{
+  typedef struct SpriteRenderer : BaseComponent, DrawableBaseComponent{
     Texture2D *texture = nullptr;
 
     SpriteRenderer(Texture2D *_texture);
     void Draw(int state = 0); // draw texture with center pivot point
+
+    void _OnAttach() override;
 
   protected:
     v2 pivot;
@@ -190,11 +192,6 @@ namespace Component{
     vector<int*> map_layer_list;
 
   } *tmxmap;
-
-  typedef struct SceneComponent : BaseComponent{
-    map<string, Node*> attached_node;
-    void AttachNode(Node *node);
-  } *scene_component;
 
 }; // component namespace
 

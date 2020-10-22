@@ -6,8 +6,8 @@
 cmake_minimum_required(VERSION 2.8)
 
 # set project files
-# file(GLOB curr_project_file "../contact_callback.cpp")
-file(GLOB curr_project_file "../imgui_demo_test.cpp")
+file(GLOB curr_project_file "../contact_callback.cpp")
+# file(GLOB curr_project_file "../imgui_demo_test.cpp")
 
 file(GLOB khkFramework_project_file "../../khkFramework/*.cpp")
 file(GLOB khkFramework_project_header "../../khkFramework/*.h")

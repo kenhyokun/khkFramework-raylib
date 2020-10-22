@@ -48,6 +48,7 @@ struct Player : Node, CollisionListener{
 struct App : BaseApp, ContactListener{
 
   Player *player;
+  Node *dia_red_node;
   Node *dynamic_box;
   Node *static_box;
   Node *dynamic_circle;
@@ -74,8 +75,8 @@ struct App : BaseApp, ContactListener{
   TextureAtlas *texture_atlas;
 
 
-  App(int _window_width, int _window_height, string _title) :
-    BaseApp(_window_width, _window_height, _title){}
+  App(int _window_width, int _window_height, string _title, bool _is_resizable) :
+    BaseApp(_window_width, _window_height, _title, _is_resizable){}
 
   ~App(){
     delete world;
@@ -120,6 +121,7 @@ struct App : BaseApp, ContactListener{
     atlas_animator_node->AddComponent(atlas_animator);
 
     player = new Player("player"); // lilwitch test
+    dia_red_node = new Node("dia_red");
     dynamic_box = new Node("dynamic box"); // box dynamic rigid body test
     static_box = new Node("static box"); // box static rigid body test
     dynamic_circle = new Node("dynamic circle"); // circle dynamic rigid body test
@@ -221,6 +223,7 @@ struct App : BaseApp, ContactListener{
     // player->GetComponent<Component::rigid_body>()->SetAlwaysAwake();
 
 
+    dia_red_node->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&dia_red));
   }
 
   void OnBeginContact(b2Contact *contact) override{
@@ -314,13 +317,15 @@ struct App : BaseApp, ContactListener{
 
     atlas_animator_node->GetComponent<Component::atlas_animator>()->Draw();
 
+    // dia_red_node->GetComponent<Component::sprite_renderer>()->Draw();
+
     B2D::DebugDraw();
   }
 
 };
 
 int main(){
-  App app(800, 450, "My Game");
+  App app(800, 450, "My Game", true);
   app.Init();
   app.Run();
 

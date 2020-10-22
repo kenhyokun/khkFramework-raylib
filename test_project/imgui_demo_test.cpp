@@ -27,8 +27,8 @@ ImGuiIO io;
 
 struct App : BaseApp, ContactListener{
 
-  App(int _window_width, int _window_height, string _title) :
-    BaseApp(_window_width, _window_height, _title){}
+  App(int _window_width, int _window_height, string _title, bool _is_resizable) :
+    BaseApp(_window_width, _window_height, _title, _is_resizable){}
 
   ~App(){
   }
@@ -118,7 +118,7 @@ struct App : BaseApp, ContactListener{
 };
 
 int main(){
-  App app(800, 450, "My Game");
+  App app(800, 450, "My Game", true);
   app.Init();
   app.Run();
 

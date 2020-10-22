@@ -58,7 +58,7 @@ void CCamera::Follow(){
 
 map<string, Key*> BaseApp::key_map;
 
-BaseApp::BaseApp(int _window_width, int _window_height, string _title){
+BaseApp::BaseApp(int _window_width, int _window_height, string _title, bool _is_resizable){
   window_width = _window_width;
   window_height = _window_height;
   game_screen_width = window_width;
@@ -66,6 +66,7 @@ BaseApp::BaseApp(int _window_width, int _window_height, string _title){
   min_window_width = _window_width;
   min_window_height = _window_height;
   title = _title;
+  is_resizable = _is_resizable;
 }
 
 v2 BaseApp::ClampValue(v2 value, v2 min, v2 max){
@@ -119,7 +120,10 @@ int BaseApp::SettingCallback(IniDispatch *dispatch, void *v_null){
 
 void BaseApp::Init(int texture_filter_mode){
   // init app
-  SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
+  if(is_resizable){
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_VSYNC_HINT);
+  }
+
   InitWindow(window_width, window_height, title.c_str());
   SetWindowMinSize(min_window_width, min_window_height);
 
@@ -208,6 +212,7 @@ void BaseApp::Run(){
   }
 
   UnloadRenderTexture(blank_renderer);
+  OnClear();
   CloseWindow();
 }
 
@@ -217,3 +222,4 @@ void BaseApp::OnInit(){}
 void BaseApp::OnUpdate(){}
 void BaseApp::OnDraw(){}
 void BaseApp::OnDrawGUI(){}
+void BaseApp::OnClear(){}
