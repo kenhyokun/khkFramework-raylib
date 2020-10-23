@@ -33,6 +33,13 @@ using namespace Component;
 
 typedef Node Scene;
 
+/*
+TODO[Kevin]:
+- implement sorting order to other drawable component.
+- update scene sorting data list when scene child get 
+  changed (removed or added new child).
+*/
+
 struct SortingData{
   int index = 0;
   int sorting_order = 0;

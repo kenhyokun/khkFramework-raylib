@@ -78,10 +78,6 @@ struct App : BaseApp{
   }
 
   void OnDraw() override {
-    // obj1->GetComponent<Component::sprite_renderer>()->Draw();
-    // obj2->GetComponent<Component::sprite_renderer>()->Draw();
-    // obj3->GetComponent<Component::sprite_renderer>()->Draw();
-
     scene_manager->Draw();
   }
 
