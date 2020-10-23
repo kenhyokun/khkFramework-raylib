@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/khkFramework.dir/ContactListener.o"
   "CMakeFiles/khkFramework.dir/File.o"
   "CMakeFiles/khkFramework.dir/Node.o"
+  "CMakeFiles/khkFramework.dir/SceneManager.o"
   "CMakeFiles/khkFramework.dir/TextureAtlas.o"
   "libkhkFramework.pdb"
   "libkhkFramework.a"

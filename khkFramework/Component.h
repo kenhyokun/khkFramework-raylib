@@ -47,9 +47,10 @@ namespace Component{
     - TMXMap
   */
 
-  struct BaseComponent{
-    Node* node = nullptr; // component owner
+  typedef struct BaseComponent{
+    Node *node = nullptr; // component owner
     bool is_enable = true;
+    void *user_data = nullptr;
 
     inline void Attach(){
       _OnAttach();
@@ -57,7 +58,7 @@ namespace Component{
 
   protected:
     virtual void _OnAttach(){}
-  };
+  } *base_component;
 
   struct DrawableBaseComponent{
     int sorting_order = 0;

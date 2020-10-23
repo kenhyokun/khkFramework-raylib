@@ -194,6 +194,20 @@ CMakeFiles/khkFramework.dir/Node.o
  ..//Node.h
  ..//m_raylib.h
  /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp
+CMakeFiles/khkFramework.dir/SceneManager.o
+ ../../third_party/confini/confini.h
+ ../../third_party/json/json.hpp
+ ../../third_party/raylib/raylib.h
+ ../../third_party/tinyxml2/tinyxml2.h
+ ..//CMath.h
+ ..//Component.h
+ ..//File.h
+ ..//JSON.h
+ ..//Node.h
+ ..//SceneManager.h
+ ..//TextureAtlas.h
+ ..//m_raylib.h
+ /home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp
 CMakeFiles/khkFramework.dir/TextureAtlas.o
  ../../third_party/raylib/raylib.h
  ..//TextureAtlas.h

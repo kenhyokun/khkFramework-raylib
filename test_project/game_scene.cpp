@@ -40,26 +40,30 @@ struct App : BaseApp{
     texture_atlas = new TextureAtlas("./resources/texture_packer.atlas",
 				     "./resources/images/texture_packer.png");
 
-    card_texture = texture_atlas->CreateTexture("card_back1");
     dia_texture = texture_atlas->CreateTexture("dia_red");
     tile_texture = texture_atlas->CreateTexture("tile");
+    card_texture = texture_atlas->CreateTexture("card_back1");
     
     texture_atlas->UnloadBufferImage();
 
     obj1 = new Node("obj1");
     obj1->SetPosition(v2{150, 150});
-    obj1->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&card_texture));
+    obj1->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&dia_texture));
     
     obj2 = new Node("obj2");
     obj2->SetPosition(v2{150, 150});
-    obj2->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&dia_texture));
+    obj2->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&tile_texture));
 
     obj3 = new Node("obj3");
     obj3->SetPosition(v2{150, 150});
-    obj3->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&tile_texture));
+    obj3->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&card_texture));
 
-    scene1 = new Scene();
-    scene2 = new Scene();
+    scene1 = new Scene("scene 1");
+    scene2 = new Scene("scene 2");
+
+    obj1->GetComponent<Component::sprite_renderer>()->sorting_order = 3;
+    obj2->GetComponent<Component::sprite_renderer>()->sorting_order = 2;
+    obj3->GetComponent<Component::sprite_renderer>()->sorting_order = 1;
 
     scene1->AddChild(obj1);
     scene1->AddChild(obj2);

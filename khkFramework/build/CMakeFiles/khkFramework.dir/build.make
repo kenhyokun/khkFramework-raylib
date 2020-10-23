@@ -225,9 +225,33 @@ CMakeFiles/khkFramework.dir/Node.o.provides: CMakeFiles/khkFramework.dir/Node.o.
 CMakeFiles/khkFramework.dir/Node.o.provides.build: CMakeFiles/khkFramework.dir/Node.o
 
 
+CMakeFiles/khkFramework.dir/SceneManager.o: CMakeFiles/khkFramework.dir/flags.make
+CMakeFiles/khkFramework.dir/SceneManager.o: ../SceneManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/khkFramework.dir/SceneManager.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/SceneManager.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp
+
+CMakeFiles/khkFramework.dir/SceneManager.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/SceneManager.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp > CMakeFiles/khkFramework.dir/SceneManager.i
+
+CMakeFiles/khkFramework.dir/SceneManager.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/SceneManager.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp -o CMakeFiles/khkFramework.dir/SceneManager.s
+
+CMakeFiles/khkFramework.dir/SceneManager.o.requires:
+
+.PHONY : CMakeFiles/khkFramework.dir/SceneManager.o.requires
+
+CMakeFiles/khkFramework.dir/SceneManager.o.provides: CMakeFiles/khkFramework.dir/SceneManager.o.requires
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/SceneManager.o.provides.build
+.PHONY : CMakeFiles/khkFramework.dir/SceneManager.o.provides
+
+CMakeFiles/khkFramework.dir/SceneManager.o.provides.build: CMakeFiles/khkFramework.dir/SceneManager.o
+
+
 CMakeFiles/khkFramework.dir/TextureAtlas.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/TextureAtlas.o: ../TextureAtlas.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/khkFramework.dir/TextureAtlas.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/khkFramework.dir/TextureAtlas.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/TextureAtlas.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/TextureAtlas.cpp
 
 CMakeFiles/khkFramework.dir/TextureAtlas.i: cmake_force
@@ -258,6 +282,7 @@ khkFramework_OBJECTS = \
 "CMakeFiles/khkFramework.dir/ContactListener.o" \
 "CMakeFiles/khkFramework.dir/File.o" \
 "CMakeFiles/khkFramework.dir/Node.o" \
+"CMakeFiles/khkFramework.dir/SceneManager.o" \
 "CMakeFiles/khkFramework.dir/TextureAtlas.o"
 
 # External object files for target khkFramework
@@ -270,10 +295,11 @@ libkhkFramework.a: CMakeFiles/khkFramework.dir/Component.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/ContactListener.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/File.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/Node.o
+libkhkFramework.a: CMakeFiles/khkFramework.dir/SceneManager.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/TextureAtlas.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/build.make
 libkhkFramework.a: CMakeFiles/khkFramework.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX static library libkhkFramework.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX static library libkhkFramework.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/khkFramework.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/khkFramework.dir/link.txt --verbose=$(VERBOSE)
 
@@ -289,6 +315,7 @@ CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/Component.o.re
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/ContactListener.o.requires
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/File.o.requires
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/Node.o.requires
+CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/SceneManager.o.requires
 CMakeFiles/khkFramework.dir/requires: CMakeFiles/khkFramework.dir/TextureAtlas.o.requires
 
 .PHONY : CMakeFiles/khkFramework.dir/requires

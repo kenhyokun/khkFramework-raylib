@@ -229,6 +229,21 @@ Node.s:
 .PHONY : Node.s
 
 # target to build an object file
+SceneManager.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/SceneManager.o
+.PHONY : SceneManager.o
+
+# target to preprocess a source file
+SceneManager.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/SceneManager.i
+.PHONY : SceneManager.i
+
+# target to generate assembly for a file
+SceneManager.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/SceneManager.s
+.PHONY : SceneManager.s
+
+# target to build an object file
 TextureAtlas.o:
 	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/TextureAtlas.o
 .PHONY : TextureAtlas.o
@@ -273,6 +288,9 @@ help:
 	@echo "... Node.o"
 	@echo "... Node.i"
 	@echo "... Node.s"
+	@echo "... SceneManager.o"
+	@echo "... SceneManager.i"
+	@echo "... SceneManager.s"
 	@echo "... TextureAtlas.o"
 	@echo "... TextureAtlas.i"
 	@echo "... TextureAtlas.s"

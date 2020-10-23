@@ -194,6 +194,20 @@ CMakeFiles/khkFramework.dir/Node.o: ../Node.h
 CMakeFiles/khkFramework.dir/Node.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/Node.o: ../Node.cpp
 
+CMakeFiles/khkFramework.dir/SceneManager.o: ../../third_party/confini/confini.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../../third_party/json/json.hpp
+CMakeFiles/khkFramework.dir/SceneManager.o: ../../third_party/raylib/raylib.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../../third_party/tinyxml2/tinyxml2.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../CMath.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../Component.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../File.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../JSON.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../Node.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../SceneManager.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../TextureAtlas.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../m_raylib.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../SceneManager.cpp
+
 CMakeFiles/khkFramework.dir/TextureAtlas.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/TextureAtlas.o: ../TextureAtlas.h
 CMakeFiles/khkFramework.dir/TextureAtlas.o: ../m_raylib.h

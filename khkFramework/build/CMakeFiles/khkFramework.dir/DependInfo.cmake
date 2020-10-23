@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/kevin/development-project/cpp/raylib/tes2/khkFramework/ContactListener.cpp" "/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles/khkFramework.dir/ContactListener.o"
   "/home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp" "/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles/khkFramework.dir/File.o"
   "/home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp" "/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles/khkFramework.dir/Node.o"
+  "/home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp" "/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles/khkFramework.dir/SceneManager.o"
   "/home/kevin/development-project/cpp/raylib/tes2/khkFramework/TextureAtlas.cpp" "/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles/khkFramework.dir/TextureAtlas.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

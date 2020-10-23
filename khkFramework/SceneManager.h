@@ -27,41 +27,33 @@
 #define SCENE_MANAGER_H
 
 #include<Component.h>
+#include<algorithm>
+
+using namespace Component;
 
 typedef Node Scene;
 
-struct SceneManager{
-  Scene *scene_manager_node;
-
-  SceneManager(){
-    scene_manager_node = new Node("scene manager node");
-  }
-
-  inline void AddScene(Scene *scene);
-  inline void LoadScene(string scene_name);
-  inline void Draw();
-
-  inline Scene* GetScene(string scene_name);
-
-protected:
-  inline void _Sort(Scene *scene); // sort scene child node that have drawable component by sorting order
+struct SortingData{
+  int index = 0;
+  int sorting_order = 0;
 };
 
-void SceneManager::AddScene(Scene *scene){
-  scene_manager_node->AddChild(scene);
-  _Sort(scene);
-}
+struct SceneManager{
+  Scene *scene_list;
 
-void SceneManager::Draw(){
-  for(int i = 0; i < scene_manager_node->GetChild(0)->GetChild()->size(); i++){
-    if(scene_manager_node->GetChild(0)->GetChild(i)->IsHasDrawableComponent()){
-      scene_manager_node->GetChild(0)->GetChild(i)->GetComponent<Component::sprite_renderer>()->Draw();
-    }
-  }
-}
+  SceneManager();
 
-void SceneManager::_Sort(Scene *scene){}
+  void AddScene(Scene *scene);
+  void LoadScene(string scene_name);
+  void Draw();
 
-Scene* SceneManager::GetScene(string name){return scene_manager_node->GetChild(name);}
+  Scene* GetScene(string scene_name);
+
+protected:
+  vector<SortingData> sort_data_list;
+
+  void _CreateSortingDataList(Scene *scene);
+  void _BubbleSort(); // sort scene draw by drawable component sorting order
+};
 
 #endif

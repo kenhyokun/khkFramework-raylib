@@ -700,6 +700,12 @@ m_raylib.h
 CMath.h
 -
 
+..//SceneManager.h
+Component.h
+-
+algorithm
+-
+
 ..//TextureAtlas.h
 m_raylib.h
 -
@@ -760,6 +766,10 @@ File.h
 
 /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp
 Node.h
+-
+
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp
+SceneManager.h
 -
 
 /home/kevin/development-project/cpp/raylib/tes2/khkFramework/TextureAtlas.cpp
