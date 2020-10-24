@@ -30,10 +30,24 @@ struct App : BaseApp{
   TextureAtlas *texture_atlas;
   Texture2D card_texture, dia_texture, tile_texture; // just realize that we must declare this variable here to avoid crash
 
+  Node *a, *b, *c, *d, *e, *f, *g, *h, *i, *j;
+
   App(int _window_width, int _window_height, string _title, bool _is_resizable) :
     BaseApp(_window_width, _window_height, _title, _is_resizable){}
 
   ~App(){
+  }
+
+  int node_tree_count = 0;
+  void GetNodeOnTree(Node *node){
+    cout<<node->name<<" have "<<node->GetChild()->size()<<" childs"<<endl;
+    node_tree_count++;
+    
+    if(node->GetChild()->size() > 0){
+      for(int i = 0; i < node->GetChild()->size(); i++){
+	GetNodeOnTree(node->GetChild(i));
+      }
+    }
   }
 
   void OnInit() override {
@@ -71,6 +85,33 @@ struct App : BaseApp{
 
     scene_manager = new SceneManager();
     scene_manager->AddScene(scene1);
+
+    a = new Node("a");
+    b = new Node("b");
+    c = new Node("c");
+    d = new Node("d");
+    e = new Node("e");
+    f = new Node("f");
+    g = new Node("g");
+    h = new Node("h");
+    i = new Node("i");
+    j = new Node("j");
+
+    a->AddChild(b);
+    a->AddChild(c);
+
+    b->AddChild(d);
+    b->AddChild(e);
+
+    c->AddChild(f);
+    c->AddChild(g);
+
+    d->AddChild(h);
+    d->AddChild(i);
+
+    GetNodeOnTree(a);
+
+    cout<<node_tree_count<<endl;
 
   }
 

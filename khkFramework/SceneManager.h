@@ -37,15 +37,18 @@ typedef Node Scene;
 TODO[Kevin]:
 - implement sorting order to other drawable component.
 - update scene sorting data list when scene child get 
-  changed (removed or added new child).
+  changed (removed or added new child) / drawable component
+  sorting order changed.
 */
 
 struct SortingData{
+  Node *node = nullptr;
   int index = 0;
   int sorting_order = 0;
 };
 
 struct SceneManager{
+
   Scene *scene_list;
 
   SceneManager();
@@ -58,7 +61,9 @@ struct SceneManager{
 
 protected:
   vector<SortingData> sort_data_list;
+  // vector<Node*> sort_data_list; // i think we can just use this, but for now i'll stick with sorting data just in case i add other variable later.
 
+  void _GetNodeOnTree(Node *node, SortingData *data);
   void _CreateSortingDataList(Scene *scene);
   void _BubbleSort(); // sort scene draw by drawable component sorting order
 };

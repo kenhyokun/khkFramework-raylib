@@ -45,28 +45,56 @@ void SceneManager::Draw(){
 
   vector<SortingData> *vec = static_cast<vector<SortingData>*>(scene_list->GetChild(0)->GetComponent<Component::base_component>()->user_data);
   
+  // for(int i = 0; i < vec->size(); i++){
+  //   int draw_index = vec->at(i).index;
+  //   scene_list->GetChild(0)->GetChild(draw_index)->GetComponent<Component::sprite_renderer>()->Draw();
+  // }
+
   for(int i = 0; i < vec->size(); i++){
-    int draw_index = vec->at(i).index;
-    scene_list->GetChild(0)->GetChild(draw_index)->GetComponent<Component::sprite_renderer>()->Draw();
+    vec->at(i).node->GetComponent<Component::sprite_renderer>()->Draw();
   }
 
   vec = nullptr;
 
 }
 
-void SceneManager::_CreateSortingDataList(Scene *scene){
-  SortingData data;
-  for(int i = 0; i < scene->GetChild()->size(); i++){
-    if(scene->GetChild(i)->IsHasDrawableComponent()){
-      data.index = i;
-      
-      data.sorting_order =
-	scene->GetChild(i)->
-	GetComponent<Component::sprite_renderer>()->sorting_order;
+void SceneManager::_GetNodeOnTree(Node *node, SortingData *data){
+  cout<<node->name<<" have "<<node->GetChild()->size()<<" childs"<<endl;
 
-      sort_data_list.push_back(data);
+  if(node->IsHasDrawableComponent()){
+    data->node = node;
+    // data->index = i;
+
+    data->sorting_order =
+      node->GetComponent<Component::sprite_renderer>()->sorting_order;
+
+    sort_data_list.push_back(*data);
+  }
+
+  if(node->GetChild()->size() > 0){
+    for(int i = 0; i < node->GetChild()->size(); i++){
+      _GetNodeOnTree(node->GetChild(i), data);
     }
   }
+}
+
+void SceneManager::_CreateSortingDataList(Scene *scene){
+  SortingData data;
+
+  _GetNodeOnTree(scene, &data); // call recursive function to get all node on tree.
+
+  // for(int i = 0; i < scene->GetChild()->size(); i++){
+  //   if(scene->GetChild(i)->IsHasDrawableComponent()){
+  //     data.index = i;
+      
+  //     data.sorting_order =
+  // 	scene->GetChild(i)->
+  // 	GetComponent<Component::sprite_renderer>()->sorting_order;
+
+  //     sort_data_list.push_back(data);
+  //   }
+  // }
+
 }
 
 void SceneManager::_BubbleSort(){
