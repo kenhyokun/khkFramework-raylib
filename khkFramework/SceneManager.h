@@ -43,8 +43,9 @@ TODO[Kevin]:
 
 struct SortingData{
   Node *node = nullptr;
-  int index = 0;
+  // int index = 0;
   int sorting_order = 0;
+  int drawable_component_type = 0;
 };
 
 struct SceneManager{

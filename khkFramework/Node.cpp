@@ -45,9 +45,26 @@ void Node::_Rotate(float angle, v2 pivot){
 
 // vector
 void Node::SetParent(Node *node){
-  if(parent != node){
-    node->AddChild(this);
+  if(node == nullptr){
+
+    if(parent != nullptr){
+      vector<Node*>::iterator it;
+      it = std::find(parent->GetChild()->begin(), parent->GetChild()->end(), this);
+
+      parent->_RemoveChild(it);
+    }
+
+    parent = nullptr;
+
   }
+  else{
+
+    if(parent != node){
+      node->AddChild(this);
+    }
+
+  }
+
 }
 
 void Node::AddChild(Node *node){
@@ -69,11 +86,20 @@ void Node::AddChild(Node *node){
 }
 
 void Node::_RemoveChild(vector<Node*>::iterator it){
+  static_cast<Node*>(*it)->parent = nullptr;
   child->erase(it);
 }
 
 void Node::RemoveChild(int index){
+  child->at(index)->parent = nullptr;
   child->erase(child->begin() + index);
+}
+
+void Node::RemoveChild(string name){
+  searched_name = name;
+  vector<Node*>::iterator it;
+  it = std::find_if(child->begin(), child->end(), _IsSearchedChild);
+  _RemoveChild(it);
 }
 
 void Node::SetPosition(v2 position){

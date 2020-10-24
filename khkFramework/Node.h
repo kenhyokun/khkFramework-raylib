@@ -79,6 +79,7 @@ public:
   Node(string _name = "");
   void AddChild(Node *node);
   void RemoveChild(int index); // remove child by index
+  void RemoveChild(string name); // remove child by name
 
   template<typename T>
   inline T AddComponent(T component){
