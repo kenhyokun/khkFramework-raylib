@@ -156,6 +156,9 @@ struct App : BaseApp, ContactListener{
     player->AddComponent<Component::capsule_collider>(new CapsuleCollider(20, 30));
     player->AddComponent<Component::rigid_body>(new RigidBody);
 
+    if(player->IsHasRigidBodyComponent()) cout<<player->name<<" has rigid body component..."<<endl;
+    if(player->IsHasDrawableComponent()) cout<<player->name<<" has drawble component..."<<endl;
+
     // kinematic test
     // player->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::KINEMATIC);
 

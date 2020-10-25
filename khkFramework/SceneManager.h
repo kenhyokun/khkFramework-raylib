@@ -41,14 +41,17 @@ TODO[Kevin]:
   sorting order changed.
 */
 
-struct SortingData{
-  Node *node = nullptr;
-  // int index = 0;
-  int sorting_order = 0;
-  int drawable_component_type = 0;
-};
-
 struct SceneManager{
+
+  struct SortingData{
+    Node *node = nullptr;
+    int sorting_order = 0;
+    DrawableType drawable_type = NONE;
+  };
+
+  struct SortingDataComponent : BaseComponent{
+    vector<SortingData> sort_data_list;
+  };
 
   Scene *scene_list;
 
@@ -61,12 +64,9 @@ struct SceneManager{
   Scene* GetScene(string scene_name);
 
 protected:
-  vector<SortingData> sort_data_list;
-  // vector<Node*> sort_data_list; // i think we can just use this, but for now i'll stick with sorting data just in case i add other variable later.
-
-  void _GetNodeOnTree(Node *node, SortingData *data);
-  void _CreateSortingDataList(Scene *scene);
-  void _BubbleSort(); // sort scene draw by drawable component sorting order
+  void _GetNodeOnTree(Node *node, SortingDataComponent * sorting_component);
+  void _CreateSortingDataList(Scene *scene, SortingDataComponent * sorting_component);
+  void _BubbleSort(SortingDataComponent *sorting_component); // sort scene draw by drawable component sorting order
 };
 
 #endif

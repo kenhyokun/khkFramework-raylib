@@ -699,6 +699,8 @@ m_raylib.h
 -
 CMath.h
 -
+n_component_derived_check.h
+-
 
 ..//SceneManager.h
 Component.h
@@ -738,6 +740,10 @@ Component.h
 iostream
 -
 raylib.h
+-
+
+..//n_component_derived_check.h
+iostream
 -
 
 /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D.cpp

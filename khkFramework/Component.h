@@ -47,22 +47,36 @@ namespace Component{
     - TMXMap
   */
 
-  typedef struct BaseComponent{
-    Node *node = nullptr; // component owner
+  enum DrawableType{
+    NONE,
+    SPRITE_RENDERER,
+    ANIMATOR,
+    TILEMAP,
+    TMXMAP
+  };
+
+  typedef struct BaseComponent : n_base_component{
     bool is_enable = true;
     void *user_data = nullptr;
 
-    inline void Attach(){
-      _OnAttach();
-    }
-
+    void Attach();
+    void SetNode(Node *_node);
+    Node* GetNode();
   protected:
-    virtual void _OnAttach(){}
+    Node *node = nullptr; // component owner
+
+    virtual void _OnAttach();
   } *base_component;
 
-  struct DrawableBaseComponent{
+  struct DrawableBaseComponent : n_drawable{
     int sorting_order = 0;
     bool is_visible = true;
+
+  protected:
+    Texture2D *texture = nullptr;
+    v2 pivot;
+    Rectangle src_rect;
+    Rectangle dst_rect;
   };
 
   struct GridBaseComponent{
@@ -81,7 +95,6 @@ namespace Component{
     int GetMaxHeight();
 
   protected:
-    Texture2D *texture;
     int max_width = 0;
     int max_height = 0;
 
@@ -89,29 +102,27 @@ namespace Component{
     v2 _GetTransformRotation(int column, int row); // tile transformation rotation
   };
 
+ template<typename T>
+ static bool IsHas(Node* node){
+   return false;
+ }
+
 
   /*
     SpriteRenderer Component
   */
   typedef struct SpriteRenderer : BaseComponent, DrawableBaseComponent{
-    Texture2D *texture = nullptr;
 
     SpriteRenderer(Texture2D *_texture);
-    void Draw(int state = 0); // draw texture with center pivot point
+    void Draw(); // draw texture with center pivot point
 
-    void _OnAttach() override;
-
-  protected:
-    v2 pivot;
-    Rectangle src_rect;
-    Rectangle dst_rect;
   } *sprite_renderer;
 
 
   /*
     Animator Component
   */
-  typedef struct Animator : SpriteRenderer, GridBaseComponent{
+  typedef struct Animator : BaseComponent, DrawableBaseComponent, GridBaseComponent{
     Animator(Texture2D *_texture, int _frame_width, int _frame_height);
     void PlayAnim(vector<int> anim_frame, int fps);
     void Draw();
@@ -131,7 +142,7 @@ namespace Component{
   /*
     AtlasAnimator Component
   */
-  typedef struct AtlasAnimator : BaseComponent{
+  typedef struct AtlasAnimator : BaseComponent, DrawableBaseComponent{
     AtlasAnimator(TextureAtlas *_texture_atlas);
     void PlayAnim(string _anim_name, int fps);
     void DebugDraw();
@@ -153,8 +164,6 @@ namespace Component{
     string anim_name;
     Texture2D curr_texture;
     v2 pivot {0.0f, 0.0f};
-    Rectangle src_rect;
-    Rectangle dst_rect;
     
   } *atlas_animator;
 
@@ -162,7 +171,7 @@ namespace Component{
   /*
     Tilemap Component
   */
-  typedef struct Tilemap : BaseTilemap{
+  typedef struct Tilemap : BaseTilemap, DrawableBaseComponent{
     Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map);
     void Draw();
 
@@ -177,7 +186,7 @@ namespace Component{
   /*
     TMXMap Component
   */
-  typedef struct TMXMap : BaseTilemap{
+  typedef struct TMXMap : BaseTilemap, DrawableBaseComponent{
     TMXMap(Texture2D *_texture, string tmx_file_src);
     void Draw(int layer_index);
     void Draw();

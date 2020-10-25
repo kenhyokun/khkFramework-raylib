@@ -152,7 +152,7 @@ namespace Component{
   /*
     RigidBody Component
   */
-  typedef struct RigidBody : BaseComponent{
+  typedef struct RigidBody : BaseComponent, n_rigidbody{
     static const b2BodyType STATIC = b2_staticBody;
     static const b2BodyType DYNAMIC = b2_dynamicBody;
     static const b2BodyType KINEMATIC = b2_kinematicBody;

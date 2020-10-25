@@ -30,87 +30,61 @@ SceneManager::SceneManager(){
 }
 
 void SceneManager::AddScene(Scene *scene){
+  SortingDataComponent *sorting_component = new SortingDataComponent();
 
-  _CreateSortingDataList(scene);
-  _BubbleSort();
+  _CreateSortingDataList(scene, sorting_component);
+  _BubbleSort(sorting_component);
 
-  BaseComponent *component = new BaseComponent();
-  component->user_data = &sort_data_list;
-  scene->AddComponent<base_component>(component);
-
+  scene->AddComponent<SortingDataComponent*>(sorting_component);
   scene_list->AddChild(scene);
 }
 
 void SceneManager::Draw(){
+  for(int i = 0; i < scene_list->GetChild(0)->GetComponent<SortingDataComponent*>()->sort_data_list.size(); i++){
 
-  vector<SortingData> *vec = static_cast<vector<SortingData>*>(scene_list->GetChild(0)->GetComponent<Component::base_component>()->user_data);
-  
-  // for(int i = 0; i < vec->size(); i++){
-  //   int draw_index = vec->at(i).index;
-  //   scene_list->GetChild(0)->GetChild(draw_index)->GetComponent<Component::sprite_renderer>()->Draw();
-  // }
-
-  for(int i = 0; i < vec->size(); i++){
-    vec->at(i).node->GetComponent<Component::sprite_renderer>()->Draw();
+    scene_list->GetChild(0)->GetComponent<SortingDataComponent*>()->
+      sort_data_list.at(i).node->GetComponent<Component::sprite_renderer>()->
+      Draw();
   }
-
-  vec = nullptr;
-
 }
 
-void SceneManager::_GetNodeOnTree(Node *node, SortingData *data){
-  cout<<node->name<<" have "<<node->GetChild()->size()<<" childs"<<endl;
-
+void SceneManager::_GetNodeOnTree(Node *node, SortingDataComponent * sorting_component){
   if(node->IsHasDrawableComponent()){
-    data->node = node;
-    // data->index = i;
-
-    data->sorting_order =
+    SortingData data;
+    data.node = node;
+    data.sorting_order =
       node->GetComponent<Component::sprite_renderer>()->sorting_order;
 
-    sort_data_list.push_back(*data);
+    sorting_component->sort_data_list.push_back(data);
   }
 
   if(node->GetChild()->size() > 0){
     for(int i = 0; i < node->GetChild()->size(); i++){
-      _GetNodeOnTree(node->GetChild(i), data);
+      _GetNodeOnTree(node->GetChild(i), sorting_component);
     }
   }
-}
-
-void SceneManager::_CreateSortingDataList(Scene *scene){
-  SortingData data;
-
-  _GetNodeOnTree(scene, &data); // call recursive function to get all node on tree.
-
-  // for(int i = 0; i < scene->GetChild()->size(); i++){
-  //   if(scene->GetChild(i)->IsHasDrawableComponent()){
-  //     data.index = i;
-      
-  //     data.sorting_order =
-  // 	scene->GetChild(i)->
-  // 	GetComponent<Component::sprite_renderer>()->sorting_order;
-
-  //     sort_data_list.push_back(data);
-  //   }
-  // }
 
 }
 
-void SceneManager::_BubbleSort(){
-  for(int i = 0; i < sort_data_list.size(); i++){
+void SceneManager::_CreateSortingDataList(Scene *scene, SortingDataComponent *sorting_component){
+  _GetNodeOnTree(scene, sorting_component); // call recursive function to get all node on tree.
+}
+
+void SceneManager::_BubbleSort(SortingDataComponent *sorting_component){
+  for(int i = 0; i < sorting_component->sort_data_list.size(); i++){
     int sort_index = i;
-    int sorting_order = sort_data_list.at(i).sorting_order;
+    int sorting_order = sorting_component->sort_data_list.at(i).sorting_order;
 
-    for(int j = i + 1; j < sort_data_list.size(); j++){
-      if(sort_data_list.at(j).sorting_order < sorting_order){
+    for(int j = i + 1; j < sorting_component->sort_data_list.size(); j++){
+      if(sorting_component->sort_data_list.at(j).sorting_order < sorting_order){
 	sort_index = j;
-	sorting_order = sort_data_list.at(j).sorting_order;
+	sorting_order = sorting_component->sort_data_list.at(j).sorting_order;
       }
     }
-    std::swap(sort_data_list[sort_index], sort_data_list[i]);
-  }
 
+    std::swap(sorting_component->sort_data_list[sort_index],
+	      sorting_component->sort_data_list[i]);
+  }
 }
 
 Scene* SceneManager::GetScene(string name){return scene_list->GetChild(name);}

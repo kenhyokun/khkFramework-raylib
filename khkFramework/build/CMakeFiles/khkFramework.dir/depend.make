@@ -52,6 +52,7 @@ CMakeFiles/khkFramework.dir/B2D.o: ../Node.h
 CMakeFiles/khkFramework.dir/B2D.o: ../TextureAtlas.h
 CMakeFiles/khkFramework.dir/B2D.o: ../m_box2d.h
 CMakeFiles/khkFramework.dir/B2D.o: ../m_raylib.h
+CMakeFiles/khkFramework.dir/B2D.o: ../n_component_derived_check.h
 CMakeFiles/khkFramework.dir/B2D.o: ../B2D.cpp
 
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/box2d/box2d/b2_block_allocator.h
@@ -102,6 +103,7 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../Node.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../TextureAtlas.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../m_box2d.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../m_raylib.h
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../n_component_derived_check.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../B2D_DebugDraw.cpp
 
 CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/confini/confini.h
@@ -115,6 +117,7 @@ CMakeFiles/khkFramework.dir/BaseApp.o: ../JSON.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../KeyButton.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../Node.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../m_raylib.h
+CMakeFiles/khkFramework.dir/BaseApp.o: ../n_component_derived_check.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.cpp
 
 CMakeFiles/khkFramework.dir/Component.o: ../../third_party/confini/confini.h
@@ -128,6 +131,7 @@ CMakeFiles/khkFramework.dir/Component.o: ../JSON.h
 CMakeFiles/khkFramework.dir/Component.o: ../Node.h
 CMakeFiles/khkFramework.dir/Component.o: ../TextureAtlas.h
 CMakeFiles/khkFramework.dir/Component.o: ../m_raylib.h
+CMakeFiles/khkFramework.dir/Component.o: ../n_component_derived_check.h
 CMakeFiles/khkFramework.dir/Component.o: ../Component.cpp
 
 CMakeFiles/khkFramework.dir/ContactListener.o: ../../third_party/box2d/box2d/b2_block_allocator.h
@@ -179,6 +183,7 @@ CMakeFiles/khkFramework.dir/ContactListener.o: ../Node.h
 CMakeFiles/khkFramework.dir/ContactListener.o: ../TextureAtlas.h
 CMakeFiles/khkFramework.dir/ContactListener.o: ../m_box2d.h
 CMakeFiles/khkFramework.dir/ContactListener.o: ../m_raylib.h
+CMakeFiles/khkFramework.dir/ContactListener.o: ../n_component_derived_check.h
 CMakeFiles/khkFramework.dir/ContactListener.o: ../ContactListener.cpp
 
 CMakeFiles/khkFramework.dir/File.o: ../../third_party/confini/confini.h
@@ -192,6 +197,7 @@ CMakeFiles/khkFramework.dir/Node.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/Node.o: ../CMath.h
 CMakeFiles/khkFramework.dir/Node.o: ../Node.h
 CMakeFiles/khkFramework.dir/Node.o: ../m_raylib.h
+CMakeFiles/khkFramework.dir/Node.o: ../n_component_derived_check.h
 CMakeFiles/khkFramework.dir/Node.o: ../Node.cpp
 
 CMakeFiles/khkFramework.dir/SceneManager.o: ../../third_party/confini/confini.h
@@ -206,6 +212,7 @@ CMakeFiles/khkFramework.dir/SceneManager.o: ../Node.h
 CMakeFiles/khkFramework.dir/SceneManager.o: ../SceneManager.h
 CMakeFiles/khkFramework.dir/SceneManager.o: ../TextureAtlas.h
 CMakeFiles/khkFramework.dir/SceneManager.o: ../m_raylib.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../n_component_derived_check.h
 CMakeFiles/khkFramework.dir/SceneManager.o: ../SceneManager.cpp
 
 CMakeFiles/khkFramework.dir/TextureAtlas.o: ../../third_party/raylib/raylib.h

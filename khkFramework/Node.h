@@ -32,6 +32,7 @@
 #include<algorithm>
 #include<m_raylib.h>
 #include<CMath.h>
+#include<n_component_derived_check.h>
 
 using namespace std;
 
@@ -83,7 +84,15 @@ public:
 
   template<typename T>
   inline T AddComponent(T component){
-    component->node = this;
+    if(Component::IsDerivedDrawable(*component)){
+      is_has_drawable_component = true;
+    }
+
+    if(Component::IsDerivedRigidBody(*component)){
+      is_has_rigid_body_component = true;
+    }
+
+    component->SetNode(this);
     component->Attach();
     component_map<T>.insert(pair<Node*, T>(this, component));
     return component_map<T>.at(this);
@@ -93,6 +102,9 @@ public:
   inline T GetComponent(){
     return component_map<T>.at(this);
   }
+
+  void RemoveComponent();
+  void ClearComponent();
 
   void SetTransform(CTransform _transform);
   float GetUpDirection();
@@ -107,12 +119,11 @@ public:
   void SetParent(Node *node);
   Node* GetParent();
   void ClearParent();
+  void ClearChild();
   vector<Node*>* GetChild(); // get child vector
   Node* GetChild(int index); // get child by index
   Node* GetChild(string name); // get child by name
-  void HasRigidBodyComponent();
   bool IsHasRigidBodyComponent();
-  void HasDrawableComponent();
   bool IsHasDrawableComponent();
   void PrintAllChildName();
 };

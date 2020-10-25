@@ -25,6 +25,11 @@
 
 #include<Component.h>
 
+void Component::BaseComponent::Attach(){_OnAttach();}
+void Component::BaseComponent::_OnAttach(){}
+void Component::BaseComponent::SetNode(Node *_node){if(node == nullptr) node = _node;}
+Node* Component::BaseComponent::GetNode(){return node;}
+
 Rectangle Component::GridBaseComponent::_GetSrcRect(int tile){
   int begin_column = 1;
   int range_column = texture_column - begin_column;
@@ -69,19 +74,16 @@ Component::SpriteRenderer::SpriteRenderer(Texture2D *_texture){
   src_rect = {0.0f, 0.0f, (float)texture->width, (float)texture->height};
 }
 
-void Component::SpriteRenderer::Draw(int state){
-  if(state == 0){
+void Component::SpriteRenderer::Draw(){
+  pivot = {((float)texture->width * node->GetScale().x) / 2.0f,
+	   ((float)texture->height * node->GetScale().y) / 2.0f};
 
-    pivot = {((float)texture->width * node->GetScale().x) / 2.0f,
-	     ((float)texture->height * node->GetScale().y) / 2.0f};
-
-    src_rect = {0.0f, 0.0f, (float)texture->width, (float)texture->height};
+  src_rect = {0.0f, 0.0f, (float)texture->width, (float)texture->height};
     
-    dst_rect = {node->GetPosition().x,
-		node->GetPosition().y,
-		(float)texture->width,
-		(float)texture->height};
-  }
+  dst_rect = {node->GetPosition().x,
+	      node->GetPosition().y,
+	      (float)texture->width,
+	      (float)texture->height};
 
   dst_rect.width *= node->GetScale().x;
   dst_rect.height *= node->GetScale().y;
@@ -95,18 +97,15 @@ void Component::SpriteRenderer::Draw(int state){
 
 }
 
-void Component::SpriteRenderer::_OnAttach(){
-  node->HasDrawableComponent();
-}
-
 
 /*
   Animator Component
 */
 Component::Animator::Animator(Texture2D *_texture,
 			      int _frame_width,
-			      int _frame_height) : SpriteRenderer(_texture){
+			      int _frame_height){
 
+  texture = _texture; 
   frame_width = _frame_width;
   frame_height = _frame_height;
   texture_column = texture->width / frame_width;
@@ -138,7 +137,17 @@ void Component::Animator::Draw(){
 	   ((float)frame_height * node->GetScale().y) / 2.0f};
 
   dst_rect = {node->GetPosition().x, node->GetPosition().y, (float)frame_width, (float)frame_height};
-  SpriteRenderer::Draw(1);
+  dst_rect.width *= node->GetScale().x;
+  dst_rect.height *= node->GetScale().y;
+
+  DrawTexturePro(*texture,
+		 src_rect,
+		 dst_rect,
+		 pivot,
+		 node->GetRotation(),
+		 WHITE);
+
+
 }
 
 int Component::Animator::GetFrameWidth(){return frame_width;}
@@ -288,13 +297,13 @@ void Component::Tilemap::Draw(){
 
       int tile = tile_map[_GetIndex(j, i)];
 
-      Rectangle src_rect = _GetSrcRect(tile);
+      src_rect = _GetSrcRect(tile);
       v2 transform_rotation = _GetTransformRotation(j, i);
 
-      Rectangle dst_rect = {transform_rotation.x,
-			    transform_rotation.y,
-			    (float)grid->width,
-			    (float)grid->height};
+      dst_rect = {transform_rotation.x,
+		  transform_rotation.y,
+		  (float)grid->width,
+		  (float)grid->height};
 
       DrawTexturePro(*texture,
 		     src_rect,
@@ -402,13 +411,13 @@ void Component::TMXMap::Draw(int layer_index){
       
       if(tile != 0){
 
-	Rectangle src_rect = _GetSrcRect(tile);
+	src_rect = _GetSrcRect(tile);
 	v2 transform_rotation = _GetTransformRotation(j, i);
 
-	Rectangle dst_rect = {transform_rotation.x,
-			      transform_rotation.y,
-			      (float)grid->width,
-			      (float)grid->height};
+	dst_rect = {transform_rotation.x,
+		    transform_rotation.y,
+		    (float)grid->width,
+		    (float)grid->height};
 
 	DrawTexturePro(*texture,
 		       src_rect,

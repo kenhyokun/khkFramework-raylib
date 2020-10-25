@@ -175,6 +175,13 @@ Node* Node::GetChild(string name){
   return *it;
 }
 
+void Node::ClearChild(){
+  for(int i = 0; i < GetChild()->size(); i++){
+    GetChild(i)->ClearParent();
+  }
+  child->clear();
+}
+
 void Node::ClearParent(){parent = nullptr;}
 void Node::SetTransform(CTransform _transform){transform = _transform;}
 float Node::GetUpDirection(){return transform.up;}
@@ -186,7 +193,5 @@ float Node::GetRotation(){return transform.rotation;}
 Node* Node::GetParent(){return parent;}
 vector<Node*>* Node::GetChild(){return child;}
 Node* Node::GetChild(int index){return child->at(index);}
-void Node::HasRigidBodyComponent(){is_has_rigid_body_component = true;}
 bool Node::IsHasRigidBodyComponent(){return is_has_rigid_body_component;}
-void Node::HasDrawableComponent(){is_has_drawable_component = true;}
 bool Node::IsHasDrawableComponent(){return is_has_drawable_component;}
