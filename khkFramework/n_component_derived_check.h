@@ -30,13 +30,13 @@
 
 namespace Component{
 
-struct n_base_component{};
-struct n_drawable{};
-struct n_rigidbody{};
- 
+typedef struct BaseComponent n_base;
+typedef struct DrawableBaseComponent n_drawable;
+typedef struct RigidBody n_rigidbody;
+
  template<typename T>
    static bool IsDerivedComponent(T component){
-   if(std::is_base_of<n_base_component, T>::value == 1){
+   if(std::is_base_of<BaseComponent, T>::value == 1){
      return true; 
    }
    return false;
@@ -44,7 +44,7 @@ struct n_rigidbody{};
 
  template<typename T>
    static bool IsDerivedDrawable(T component){
-   if(std::is_base_of<n_drawable, T>::value == 1){
+   if(std::is_base_of<DrawableBaseComponent, T>::value == 1){
      return true; 
    }
    return false;
@@ -52,7 +52,7 @@ struct n_rigidbody{};
 
  template<typename T>
    static bool IsDerivedRigidBody(T component){
-   if(std::is_base_of<n_rigidbody, T>::value == 1){
+   if(std::is_base_of<RigidBody, T>::value == 1){
      return true; 
    }
    return false;

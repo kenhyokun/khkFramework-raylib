@@ -55,7 +55,7 @@ namespace Component{
     TMXMAP
   };
 
-  typedef struct BaseComponent : n_base_component{
+  typedef struct BaseComponent{
     bool is_enable = true;
     void *user_data = nullptr;
 
@@ -68,7 +68,7 @@ namespace Component{
     virtual void _OnAttach();
   } *base_component;
 
-  struct DrawableBaseComponent : n_drawable{
+  struct DrawableBaseComponent{
     int sorting_order = 0;
     bool is_visible = true;
 
