@@ -158,6 +158,7 @@ struct App : BaseApp, ContactListener{
 
     if(player->IsHasRigidBodyComponent()) cout<<player->name<<" has rigid body component..."<<endl;
     if(player->IsHasDrawableComponent()) cout<<player->name<<" has drawble component..."<<endl;
+    if(Node::IsHas<Component::animator>(player)) cout<<player->name<<" has animator component..."<<endl;
 
     // kinematic test
     // player->GetComponent<Component::rigid_body>()->SetBodyType(RigidBody::KINEMATIC);

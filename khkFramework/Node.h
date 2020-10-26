@@ -44,16 +44,12 @@ struct CTransform{
   float right = 90.0f;
 };
 
-static int node_count = 1; // for auto node naming
+static int node_count = 1; // for node auto naming
 
 class Node{
   CTransform transform;
   Node *parent = nullptr;
   vector<Node*> *child = new vector<Node*>();
-
-  template<typename T>
-    static map<Node*, T> component_map;
-
 
 protected:
   bool is_has_rigid_body_component = false;
@@ -73,6 +69,9 @@ public:
   string name = unamed_node_name;
   string tag = untagged_node_tag;
   bool is_fixed_transform_rotation = false;
+
+  template<typename T>
+    static map<Node*, T> component_map;
 
   template<typename T>
     static typename map<Node*, T>::iterator component_map_it;
@@ -103,8 +102,34 @@ public:
     return component_map<T>.at(this);
   }
 
-  void RemoveComponent();
-  void ClearComponent();
+  template<typename T>
+  static bool IsHas(Node* node){
+
+    Node::component_map_it<T> =
+      Node::component_map<T>.find(node);
+
+    if(Node::component_map_it<T> != Node::component_map<T>.end()){
+      return true;
+    }
+
+    return false;
+  }
+
+  template<typename T>
+  inline void RemoveComponent(){
+    if(Node::IsHas<T>(this)){
+
+      // Node::component_map<T>.erase(this);
+      // Node::component_map<Component::sprite_renderer>.erase(this);
+
+      T component;
+      cout<<Node::component_map<T>.size()<<endl;
+
+      if(Component::IsDerivedDrawable(*component)) is_has_drawable_component = false;
+      if(Component::IsDerivedRigidBody(*component)) is_has_rigid_body_component = false;
+
+    }
+  }
 
   void SetTransform(CTransform _transform);
   float GetUpDirection();

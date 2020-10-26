@@ -63,13 +63,6 @@ namespace Component{
     - RigidBody
   */
 
-  typedef struct FixtureData{
-    b2v2 rel_position = b2v2_0;
-    v2 size = v2_0;
-    b2v2 *vertice = nullptr;
-    int32 v_count = 0; // vertice count
-  } *fixture_data;
-
   struct ColliderBaseComponent : BaseComponent{
     ColliderShape GetColliderShape();
   protected:
@@ -192,7 +185,6 @@ namespace Component{
     b2Body *body = nullptr;
     void _OnAttach() override;
     bool _IsGetCollider(int state = 0); // search and set collider shape
-
   } *rigid_body; 
 
 }; // Component namespace

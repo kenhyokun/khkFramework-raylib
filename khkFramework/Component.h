@@ -43,6 +43,7 @@ namespace Component{
     Available component:
     - SpriteRenderer
     - Animator
+    - AtlasAnimator
     - Tilemap
     - TMXMap
   */
@@ -51,13 +52,13 @@ namespace Component{
     NONE,
     SPRITE_RENDERER,
     ANIMATOR,
+    ATLAS_ANIMATOR,
     TILEMAP,
     TMXMAP
   };
 
-  typedef struct BaseComponent{
+  struct BaseComponent{
     bool is_enable = true;
-    void *user_data = nullptr;
 
     void Attach();
     void SetNode(Node *_node);
@@ -66,7 +67,7 @@ namespace Component{
     Node *node = nullptr; // component owner
 
     virtual void _OnAttach();
-  } *base_component;
+  };
 
   struct DrawableBaseComponent{
     int sorting_order = 0;
@@ -102,20 +103,13 @@ namespace Component{
     v2 _GetTransformRotation(int column, int row); // tile transformation rotation
   };
 
- template<typename T>
- static bool IsHas(Node* node){
-   return false;
- }
-
 
   /*
     SpriteRenderer Component
   */
   typedef struct SpriteRenderer : BaseComponent, DrawableBaseComponent{
-
     SpriteRenderer(Texture2D *_texture);
     void Draw(); // draw texture with center pivot point
-
   } *sprite_renderer;
 
 
@@ -135,7 +129,6 @@ namespace Component{
     int frame_counter = 0;
     int frame_width = 0;
     int frame_height = 0;
-
   } *animator;
 
 
@@ -164,7 +157,6 @@ namespace Component{
     string anim_name;
     Texture2D curr_texture;
     v2 pivot {0.0f, 0.0f};
-    
   } *atlas_animator;
 
 
@@ -179,7 +171,6 @@ namespace Component{
 
   protected:
     int *tile_map;
-
   } *tilemap;
 
 
@@ -200,7 +191,6 @@ namespace Component{
     vector<string> map_layer_name_list;
     vector<string> map_layer_str_list;
     vector<int*> map_layer_list;
-
   } *tmxmap;
 
 }; // component namespace

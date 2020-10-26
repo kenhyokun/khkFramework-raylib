@@ -53,17 +53,21 @@ struct SceneManager{
     vector<SortingData> sort_data_list;
   };
 
-  Scene *scene_list;
-
   SceneManager();
 
   void AddScene(Scene *scene);
+  void LoadScene(int scene_index);
   void LoadScene(string scene_name);
   void Draw();
 
+  Scene* GetScene(int scene_index);
   Scene* GetScene(string scene_name);
 
 protected:
+  Scene *scene_list = nullptr;
+  Scene *selected_scene = nullptr;
+
+  void _SetDrawableType(Node* node);
   void _GetNodeOnTree(Node *node, SortingDataComponent * sorting_component);
   void _CreateSortingDataList(Scene *scene, SortingDataComponent * sorting_component);
   void _BubbleSort(SortingDataComponent *sorting_component); // sort scene draw by drawable component sorting order
