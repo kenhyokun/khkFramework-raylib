@@ -59,7 +59,6 @@ struct App : BaseApp{
     obj1->SetPosition(v2{150, 150});
     obj1->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&dia_texture));
 
-    // obj1->RemoveComponent<Component::sprite_renderer>();
 
     obj2 = new Node("obj2 sprite renderer");
     obj2->SetPosition(v2{150, 150});
@@ -106,6 +105,8 @@ struct App : BaseApp{
     obj7->GetComponent<Component::tmxmap>()->layer_sorting_order[0] = 5;
     obj7->GetComponent<Component::tmxmap>()->layer_sorting_order[1] = 2;
 
+    // obj1->RemoveComponent<Component::sprite_renderer>();
+
     scene1->AddChild(obj1);
     scene1->AddChild(obj2);
     scene1->AddChild(obj3);
@@ -117,11 +118,8 @@ struct App : BaseApp{
     scene_manager = new SceneManager();
     scene_manager->AddScene(scene1);
 
-    if(obj1->IsHasDrawableComponent())cout<<obj1->name<<" has drawable component..."<<endl;
-    if(obj2->IsHasDrawableComponent())cout<<obj2->name<<" has drawable component..."<<endl;
-    if(obj3->IsHasDrawableComponent())cout<<obj3->name<<" has drawable component..."<<endl;
-    if(obj5->IsHasDrawableComponent())cout<<obj5->name<<" has drawable component..."<<endl;
-    if(obj6->IsHasDrawableComponent())cout<<obj6->name<<" has drawable component..."<<endl;
+    scene_manager->SetSortingOrder(obj4, 7);
+    scene_manager->SetSortingOrder(obj7, 1, 7);
 
   }
 
@@ -132,7 +130,6 @@ struct App : BaseApp{
 
   void OnDraw() override {
     scene_manager->Draw();
-    // obj5->GetComponent<Component::tilemap>()->Draw();
   }
 
 };

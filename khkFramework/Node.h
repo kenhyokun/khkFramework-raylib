@@ -105,10 +105,10 @@ public:
   template<typename T>
   static bool IsHas(Node* node){
 
-    Node::component_map_it<T> =
-      Node::component_map<T>.find(node);
+    component_map_it<T> =
+      component_map<T>.find(node);
 
-    if(Node::component_map_it<T> != Node::component_map<T>.end()){
+    if(component_map_it<T> != component_map<T>.end()){
       return true;
     }
 
@@ -117,17 +117,11 @@ public:
 
   template<typename T>
   inline void RemoveComponent(){
-    if(Node::IsHas<T>(this)){
-
-      // Node::component_map<T>.erase(this);
-      // Node::component_map<Component::sprite_renderer>.erase(this);
-
+    if(IsHas<T>(this)){
+      component_map<T>.erase(this);
       T component;
-      cout<<Node::component_map<T>.size()<<endl;
-
       if(Component::IsDerivedDrawable(*component)) is_has_drawable_component = false;
       if(Component::IsDerivedRigidBody(*component)) is_has_rigid_body_component = false;
-
     }
   }
 

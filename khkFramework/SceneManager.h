@@ -35,7 +35,6 @@ typedef Node Scene;
 
 /*
 TODO[Kevin]:
-- implement sorting order to other drawable component.
 - update scene sorting data list when scene child get 
   changed (removed or added new child) / drawable component
   sorting order changed.
@@ -56,6 +55,26 @@ struct SceneManager{
 
   struct SortingDataComponent : BaseComponent{
     vector<SortingData> sort_data_list;
+
+    inline int GetIndexAt(Node *node){
+      for(int i = 0; i < sort_data_list.size(); i++){
+	if(sort_data_list[i].node == node){
+	  return i;
+	}
+      }
+      return -1;
+    }
+
+    inline int GetIndexAt(Node *node, int layer_index){
+      for(int i = 0; i < sort_data_list.size(); i++){
+	if(sort_data_list[i].node == node &&
+	   sort_data_list[i].layer_index == layer_index){
+	  return i;
+	}
+      }
+      return -1;
+    }
+
   };
 
   SceneManager();
@@ -65,6 +84,8 @@ struct SceneManager{
   void LoadScene(string scene_name);
   void Draw();
 
+  void SetSortingOrder(Node *node, int sorting_order);
+  void SetSortingOrder(Node *node, int layer_index, int sorting_order);
   Scene* GetScene(int scene_index);
   Scene* GetScene(string scene_name);
 

@@ -183,5 +183,49 @@ void SceneManager::_BubbleSort(SortingDataComponent *sorting_component){
   }
 }
 
+void SceneManager::SetSortingOrder(Node *node, int sorting_order){
+  // set node sorting order
+  if(Node::IsHas<Component::sprite_renderer>(node)){
+    node->GetComponent<Component::sprite_renderer>()->sorting_order =
+      sorting_order;
+  }
+  else if(Node::IsHas<Component::animator>(node)){
+    node->GetComponent<Component::animator>()->sorting_order =
+      sorting_order;
+  }
+  else if(Node::IsHas<Component::atlas_animator>(node)){
+    node->GetComponent<Component::atlas_animator>()->sorting_order =
+      sorting_order;
+  }
+  else if(Node::IsHas<Component::tilemap>(node)){
+    node->GetComponent<Component::tilemap>()->sorting_order =
+      sorting_order;
+  }
+  else if(Node::IsHas<Component::tmxmap>(node)){
+  }
+
+  // set selected sort component list at index(n) sorting order
+  selected_scene_sort_component->
+    sort_data_list.at(selected_scene_sort_component->GetIndexAt(node)).sorting_order = sorting_order;
+
+  _BubbleSort(selected_scene_sort_component);
+}
+
+void SceneManager::SetSortingOrder(Node *node,
+				   int layer_index,
+				   int sorting_order){
+
+  node->GetComponent<Component::tmxmap>()->layer_sorting_order[layer_index] =
+    sorting_order;
+
+  selected_scene_sort_component->
+    sort_data_list.at(selected_scene_sort_component->GetIndexAt(node, layer_index)).sorting_order = sorting_order;
+
+  selected_scene_sort_component->
+    sort_data_list.at(selected_scene_sort_component->GetIndexAt(node, layer_index)).layer_index = layer_index;
+
+  _BubbleSort(selected_scene_sort_component);
+}
+
 Scene* SceneManager::GetScene(int scene_index){return scene_list->GetChild(scene_index);}
 Scene* SceneManager::GetScene(string scene_name){return scene_list->GetChild(scene_name);}

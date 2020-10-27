@@ -42,32 +42,15 @@ struct App : BaseApp, ContactListener{
   }
 
   void OnInit() override {
-    node1 = new Node("first node");
-    node2 = new Node("node2");
-    node3 = new Node("3rd node");
-    node4 = new Node("4th node");
-    node5 = new Node("node #5");
-    node6 = new Node("node number six");
+    lilwitch = LoadTexture("./resources/images/lilwitch.png");
+    node1 = new Node("node 1");
+    node1->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&lilwitch));
 
-    node1->AddChild(node2);
-    node1->AddChild(node3);
-    node1->AddChild(node4);
-    node2->AddChild(node5);
-    node2->AddChild(node6);
+    cout<<Node::component_map<Component::sprite_renderer>.size()<<endl;
+    
+    node1->RemoveComponent<Component::sprite_renderer>();
 
-    node1->PrintAllChildName();
-    cout<<"--------"<<endl;
-
-    cout<<node1->GetChild("node2")->name<<endl;
-    cout<<node1->GetChild(0)->name<<endl;
-    cout<<node1->GetChild(0)->tag<<endl;
-    cout<<node1->GetChild("3rd node")->name<<endl;
-    cout<<node1->GetChild(1)->name<<endl;
-    cout<<node1->GetChild(1)->tag<<endl;
-    cout<<node2->GetChild("node #5")->name<<endl;
-    cout<<node2->GetChild(0)->name<<endl;
-    cout<<node2->GetChild(0)->tag<<endl;
-
+    cout<<Node::component_map<Component::sprite_renderer>.size()<<endl;
   }
 
   void OnUpdate() override {
@@ -75,6 +58,7 @@ struct App : BaseApp, ContactListener{
 
   void OnDraw() override {
     DrawText("my first raylib window", 190, 200, 20, LIGHTGRAY);
+    // node1->GetComponent<Component::sprite_renderer>()->Draw();
   }
 
 };
