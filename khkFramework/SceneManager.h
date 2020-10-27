@@ -47,6 +47,11 @@ struct SceneManager{
     Node *node = nullptr;
     int sorting_order = 0;
     DrawableType drawable_type = NONE;
+
+    // multiple layer drawable component
+    int layer_count = 0;
+    int *layer_sorting_order = nullptr;
+    int layer_index = 0;
   };
 
   struct SortingDataComponent : BaseComponent{
@@ -66,11 +71,13 @@ struct SceneManager{
 protected:
   Scene *scene_list = nullptr;
   Scene *selected_scene = nullptr;
+  SortingDataComponent *selected_scene_sort_component= nullptr;
 
   void _SetDrawableType(Node* node);
   void _GetNodeOnTree(Node *node, SortingDataComponent * sorting_component);
   void _CreateSortingDataList(Scene *scene, SortingDataComponent * sorting_component);
   void _BubbleSort(SortingDataComponent *sorting_component); // sort scene draw by drawable component sorting order
+
 };
 
 #endif

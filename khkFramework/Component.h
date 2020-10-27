@@ -178,12 +178,15 @@ namespace Component{
     TMXMap Component
   */
   typedef struct TMXMap : BaseTilemap, DrawableBaseComponent{
+    int *layer_sorting_order = nullptr;
+
     TMXMap(Texture2D *_texture, string tmx_file_src);
     void Draw(int layer_index);
     void Draw();
     void PrintMapAttribute();
 
     bool IsTiled(int layer_index, int column, int row);
+    int GetLayerCount();
 
   protected:
     int layer_count;

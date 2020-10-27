@@ -30,6 +30,7 @@ struct App : BaseApp{
   Node *obj4; // animator
   Node *obj5; // tilemap
   Node *obj6; // atlas animator 
+  Node *obj7; // tmxmap 
   TextureAtlas *texture_atlas;
   Texture2D card_texture, dia_texture, tile_texture, lilwitch; // just realize that we must declare this variable here to avoid crash
   AtlasAnimator *atlas_animator;
@@ -85,14 +86,25 @@ struct App : BaseApp{
     obj6->SetPosition(v2{230, 200});
     obj6->AddComponent<Component::atlas_animator>(atlas_animator);
 
+    obj7 = new Node("obj7 tmxmap");
+    obj7->SetPosition(v2{555, 200});
+    obj7->AddComponent<Component::tmxmap>(new TMXMap(&tile_texture, "./resources/tmx/map1.tmx"));
+
     scene1 = new Scene("scene 1");
     scene2 = new Scene("scene 2");
 
     obj1->GetComponent<Component::sprite_renderer>()->sorting_order = 3;
     obj2->GetComponent<Component::sprite_renderer>()->sorting_order = 2;
     obj3->GetComponent<Component::sprite_renderer>()->sorting_order = 1;
+
     obj4->GetComponent<Component::animator>()->sorting_order = 0;
     // obj4->GetComponent<Component::animator>()->sorting_order = 4;
+
+    // obj5->GetComponent<Component::tilemap>()->sorting_order = 0;
+    obj5->GetComponent<Component::tilemap>()->sorting_order = 6;
+
+    obj7->GetComponent<Component::tmxmap>()->layer_sorting_order[0] = 5;
+    obj7->GetComponent<Component::tmxmap>()->layer_sorting_order[1] = 2;
 
     scene1->AddChild(obj1);
     scene1->AddChild(obj2);
@@ -100,6 +112,7 @@ struct App : BaseApp{
     scene1->AddChild(obj4);
     scene1->AddChild(obj5);
     scene1->AddChild(obj6);
+    scene1->AddChild(obj7);
 
     scene_manager = new SceneManager();
     scene_manager->AddScene(scene1);

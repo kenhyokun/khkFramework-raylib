@@ -39,9 +39,10 @@ void SceneManager::AddScene(Scene *scene){
   scene_list->AddChild(scene);
 
   if(selected_scene == nullptr){
-    selected_scene = new Node("selected scene");
     selected_scene = scene;
-    cout<<selected_scene->GetChild()->size()<<endl;
+
+    selected_scene_sort_component = 
+      scene->AddComponent<SortingDataComponent*>(sorting_component);
   }
 
 }
@@ -50,53 +51,53 @@ void SceneManager::Draw(){
   if(scene_list->GetChild()->size() > 0 &&
      selected_scene->GetChild()->size() > 0){
 
-    for(int i = 0; i < selected_scene->GetComponent<SortingDataComponent*>()->sort_data_list.size(); i++){
+    for(int i = 0; i < selected_scene_sort_component->sort_data_list.size(); i++){
 
-      switch(selected_scene->GetComponent<SortingDataComponent*>()->
-	     sort_data_list.at(i).drawable_type){
+      switch(selected_scene_sort_component->sort_data_list.at(i).drawable_type){
 
       case SPRITE_RENDERER:
-	selected_scene->GetComponent<SortingDataComponent*>()->
-	  sort_data_list.at(i).node->GetComponent<Component::sprite_renderer>()->
+	selected_scene_sort_component->
+	  sort_data_list.at(i).node->
+	  GetComponent<Component::sprite_renderer>()->
 	  Draw();
 	break;
 
       case ANIMATOR:
-	selected_scene->GetComponent<SortingDataComponent*>()->
-	  sort_data_list.at(i).node->GetComponent<Component::animator>()->
+	selected_scene_sort_component->
+	  sort_data_list.at(i).node->
+	  GetComponent<Component::animator>()->
 	  Draw();
 	break;
 
       case ATLAS_ANIMATOR:
-	selected_scene->GetComponent<SortingDataComponent*>()->
-	  sort_data_list.at(i).node->GetComponent<Component::atlas_animator>()->
+	selected_scene_sort_component->
+	  sort_data_list.at(i).node->
+	  GetComponent<Component::atlas_animator>()->
 	  Draw();
 	break;
 
       case TILEMAP:
-	selected_scene->GetComponent<SortingDataComponent*>()->
-	  sort_data_list.at(i).node->GetComponent<Component::tilemap>()->
+	selected_scene_sort_component->
+	  sort_data_list.at(i).node->
+	  GetComponent<Component::tilemap>()->
 	  Draw();
 	break;
 
       case TMXMAP:
-	/*
-	  TODO[Kevin]:
-	  sorting order per layer?
-	*/
-
-	selected_scene->GetComponent<SortingDataComponent*>()->
-	  sort_data_list.at(i).node->GetComponent<Component::tmxmap>()->
-	  Draw();
+	selected_scene_sort_component->
+	  sort_data_list.at(i).node->
+	  GetComponent<Component::tmxmap>()->
+	  Draw(selected_scene_sort_component->sort_data_list.at(i).layer_index);
 	break;
 
       } // switch
-
     } // for
   } // if size > 0
 }
 
 void SceneManager::_GetNodeOnTree(Node *node, SortingDataComponent * sorting_component){
+  bool should_push = true;
+  
   if(node->IsHasDrawableComponent()){
     SortingData data;
     data.node = node;
@@ -126,13 +127,31 @@ void SceneManager::_GetNodeOnTree(Node *node, SortingDataComponent * sorting_com
       data.drawable_type = TILEMAP;
     }
     else if(Node::IsHas<Component::tmxmap>(node)){
-      data.sorting_order =
-	node->GetComponent<Component::tmxmap>()->sorting_order;
+      should_push = false;
 
       data.drawable_type = TMXMAP;
+
+      data.layer_sorting_order =
+	node->GetComponent<Component::tmxmap>()->layer_sorting_order;
+
+      data.layer_count=
+	node->GetComponent<Component::tmxmap>()->GetLayerCount();
+
+      for(int i = 0; i < data.layer_count; i++){
+	data.layer_index = i;
+
+	data.sorting_order =
+	  node->GetComponent<Component::tmxmap>()->layer_sorting_order[i];
+
+	sorting_component->sort_data_list.push_back(data);
+      }
+
     }
 
-    sorting_component->sort_data_list.push_back(data);
+    if(should_push){
+      sorting_component->sort_data_list.push_back(data);
+    }
+
   }
 
   if(node->GetChild()->size() > 0){

@@ -392,6 +392,8 @@ Component::TMXMap::TMXMap(Texture2D *_texture, string tmx_file_src){
       cout<<"Not get map element..."<<endl;
     }
 
+    layer_count = map_layer_list.size();
+    layer_sorting_order = new int[layer_count]();
     
   }
   else{
@@ -451,3 +453,5 @@ bool Component::TMXMap::IsTiled(int layer_index, int column, int row){
   }
   return false;
 }
+
+int Component::TMXMap::GetLayerCount(){return layer_count;}
