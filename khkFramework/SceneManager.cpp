@@ -172,6 +172,7 @@ void SceneManager::_BubbleSort(SortingDataComponent *sorting_component){
 
     std::swap(sorting_component->sort_data_list[sort_index],
 	      sorting_component->sort_data_list[i]);
+
   }
 }
 
@@ -226,6 +227,16 @@ void SceneManager::SetSortingOrder(Node *node,
     sort_data_list.at(selected_scene_sort_component->GetIndexAt(node, layer_index)).layer_index = layer_index;
 
   _BubbleSort(selected_scene_sort_component);
+}
+
+void SceneManager::LoadScene(int scene_index){
+  selected_scene = GetScene(scene_index);
+  selected_scene_sort_component = selected_scene->GetComponent<SortingDataComponent*>();
+}
+
+void SceneManager::LoadScene(string scene_name){
+  selected_scene = GetScene(scene_name);
+  selected_scene_sort_component = selected_scene->GetComponent<SortingDataComponent*>();
 }
 
 Scene* SceneManager::GetScene(int scene_index){return scene_list->GetChild(scene_index);}

@@ -625,11 +625,19 @@ iostream
 -
 m_raylib.h
 -
-Node.h
+CCamera.h
 -
 File.h
 -
 KeyButton.h
+-
+
+..//CCamera.h
+iostream
+-
+m_raylib.h
+-
+Node.h
 -
 
 ..//CMath.h
@@ -650,6 +658,8 @@ Node.h
 File.h
 -
 TextureAtlas.h
+-
+CCamera.h
 -
 
 ..//ContactListener.h
@@ -746,39 +756,43 @@ raylib.h
 iostream
 -
 
-/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/B2D.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D.cpp
 B2D.h
 -
 
-/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/B2D_DebugDraw.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp
 B2D_DebugDraw.h
 -
 
-/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/BaseApp.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp
 BaseApp.h
 -
 
-/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/Component.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/CCamera.cpp
+CCamera.h
+-
+
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
 Component.h
 -
 
-/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/ContactListener.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/ContactListener.cpp
 ContactListener.h
 -
 
-/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/File.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp
 File.h
 -
 
-/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/Node.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp
 Node.h
 -
 
-/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/SceneManager.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp
 SceneManager.h
 -
 
-/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/TextureAtlas.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/TextureAtlas.cpp
 TextureAtlas.h
 -
 

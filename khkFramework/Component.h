@@ -29,6 +29,7 @@
 #include<Node.h>
 #include<File.h>
 #include<TextureAtlas.h>
+#include<CCamera.h>
 
 struct Grid{
   int width = 0;
@@ -85,6 +86,9 @@ namespace Component{
   struct BaseTilemap : BaseComponent, GridBaseComponent{
     int GetMaxWidth();
     int GetMaxHeight();
+
+    void GotoGrid(CCamera *camera, int x, int y);
+    void GotoGrid(Node *node, int x, int y);
 
   protected:
     int max_width = 0;

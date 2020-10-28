@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/khkFramework.dir/B2D.o"
   "CMakeFiles/khkFramework.dir/B2D_DebugDraw.o"
   "CMakeFiles/khkFramework.dir/BaseApp.o"
+  "CMakeFiles/khkFramework.dir/CCamera.o"
   "CMakeFiles/khkFramework.dir/Component.o"
   "CMakeFiles/khkFramework.dir/ContactListener.o"
   "CMakeFiles/khkFramework.dir/File.o"

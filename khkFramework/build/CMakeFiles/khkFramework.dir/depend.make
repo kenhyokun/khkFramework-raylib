@@ -42,6 +42,7 @@ CMakeFiles/khkFramework.dir/B2D.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/B2D.o: ../../third_party/tinyxml2/tinyxml2.h
 CMakeFiles/khkFramework.dir/B2D.o: ../B2D.h
 CMakeFiles/khkFramework.dir/B2D.o: ../B2D_DebugDraw.h
+CMakeFiles/khkFramework.dir/B2D.o: ../CCamera.h
 CMakeFiles/khkFramework.dir/B2D.o: ../CMath.h
 CMakeFiles/khkFramework.dir/B2D.o: ../CollisionListener.h
 CMakeFiles/khkFramework.dir/B2D.o: ../Component.h
@@ -95,6 +96,7 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/json/json.hpp
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../../third_party/tinyxml2/tinyxml2.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../B2D_DebugDraw.h
+CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../CCamera.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../CMath.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../Component.h
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../File.h
@@ -111,6 +113,7 @@ CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/json/json.hpp
 CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../../third_party/tinyxml2/tinyxml2.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.h
+CMakeFiles/khkFramework.dir/BaseApp.o: ../CCamera.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../CMath.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../File.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../JSON.h
@@ -120,10 +123,19 @@ CMakeFiles/khkFramework.dir/BaseApp.o: ../m_raylib.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../n_component_derived_check.h
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.cpp
 
+CMakeFiles/khkFramework.dir/CCamera.o: ../../third_party/raylib/raylib.h
+CMakeFiles/khkFramework.dir/CCamera.o: ../CCamera.h
+CMakeFiles/khkFramework.dir/CCamera.o: ../CMath.h
+CMakeFiles/khkFramework.dir/CCamera.o: ../Node.h
+CMakeFiles/khkFramework.dir/CCamera.o: ../m_raylib.h
+CMakeFiles/khkFramework.dir/CCamera.o: ../n_component_derived_check.h
+CMakeFiles/khkFramework.dir/CCamera.o: ../CCamera.cpp
+
 CMakeFiles/khkFramework.dir/Component.o: ../../third_party/confini/confini.h
 CMakeFiles/khkFramework.dir/Component.o: ../../third_party/json/json.hpp
 CMakeFiles/khkFramework.dir/Component.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/Component.o: ../../third_party/tinyxml2/tinyxml2.h
+CMakeFiles/khkFramework.dir/Component.o: ../CCamera.h
 CMakeFiles/khkFramework.dir/Component.o: ../CMath.h
 CMakeFiles/khkFramework.dir/Component.o: ../Component.h
 CMakeFiles/khkFramework.dir/Component.o: ../File.h
@@ -173,6 +185,7 @@ CMakeFiles/khkFramework.dir/ContactListener.o: ../../third_party/confini/confini
 CMakeFiles/khkFramework.dir/ContactListener.o: ../../third_party/json/json.hpp
 CMakeFiles/khkFramework.dir/ContactListener.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/ContactListener.o: ../../third_party/tinyxml2/tinyxml2.h
+CMakeFiles/khkFramework.dir/ContactListener.o: ../CCamera.h
 CMakeFiles/khkFramework.dir/ContactListener.o: ../CMath.h
 CMakeFiles/khkFramework.dir/ContactListener.o: ../CollisionListener.h
 CMakeFiles/khkFramework.dir/ContactListener.o: ../Component.h
@@ -204,6 +217,7 @@ CMakeFiles/khkFramework.dir/SceneManager.o: ../../third_party/confini/confini.h
 CMakeFiles/khkFramework.dir/SceneManager.o: ../../third_party/json/json.hpp
 CMakeFiles/khkFramework.dir/SceneManager.o: ../../third_party/raylib/raylib.h
 CMakeFiles/khkFramework.dir/SceneManager.o: ../../third_party/tinyxml2/tinyxml2.h
+CMakeFiles/khkFramework.dir/SceneManager.o: ../CCamera.h
 CMakeFiles/khkFramework.dir/SceneManager.o: ../CMath.h
 CMakeFiles/khkFramework.dir/SceneManager.o: ../Component.h
 CMakeFiles/khkFramework.dir/SceneManager.o: ../File.h

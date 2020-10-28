@@ -55,6 +55,10 @@ struct SceneManager{
   struct SortingDataComponent : BaseComponent{
     vector<SortingData> sort_data_list;
 
+    /*
+      FIXME[Kevin]:
+      need better solution to get sort_data_list index.
+    */
     inline int GetIndexAt(Node *node){
       for(int i = 0; i < sort_data_list.size(); i++){
 	if(sort_data_list[i].node == node){
@@ -78,6 +82,7 @@ struct SceneManager{
 
   SceneManager();
 
+  void SetCamera(CCamera *camera);
   void AddScene(Scene *scene);
   void LoadScene(int scene_index);
   void LoadScene(string scene_name);
@@ -88,7 +93,6 @@ struct SceneManager{
   Scene* GetScene(int scene_index);
   Scene* GetScene(string scene_name);
   Scene* GetSelectedScene();
-  
 
 protected:
   Scene *scene_list = nullptr;

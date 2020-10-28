@@ -28,34 +28,6 @@
 #define max(a, b) ((a)>(b)? (a) : (b))
 #define min(a, b) ((a)<(b)? (a) : (b))
 
-CCamera::CCamera (int _width, int _height){
-  camera = {0};
-  camera.offset = v2{0, 0};
-  camera.rotation = 0.0f;
-  camera.zoom = 1.0f;
-  width = _width;
-  height = _height;
-}
-
-void CCamera::SetOffset(int offset_x, int offset_y){
-  camera.offset = v2{(float)offset_x, (float)offset_y};
-}
-
-void CCamera::SetOffsetToCenter(){
-  SetOffset(width / 2, height / 2);
-}
-
-void CCamera::Rotate(float angle){camera.rotation = angle;}
-void CCamera::Zoom(int _zoom){camera.zoom = _zoom;}
-void CCamera::AttachTo(Node *node){target = node;}
-void CCamera::Detach(){target = nullptr;}
-void CCamera::Follow(){
-  if(target != nullptr){
-    camera.target = target->GetPosition();
-  }
-}
-
-
 map<string, Key*> BaseApp::key_map;
 
 BaseApp::BaseApp(int _window_width, int _window_height, string _title, bool _is_resizable){

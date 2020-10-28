@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework
+CMAKE_SOURCE_DIR = /home/kevin/development-project/cpp/raylib/tes2/khkFramework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build
+CMAKE_BINARY_DIR = /home/kevin/development-project/cpp/raylib/tes2/khkFramework/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles /home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -167,6 +167,21 @@ BaseApp.i:
 BaseApp.s:
 	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/BaseApp.s
 .PHONY : BaseApp.s
+
+# target to build an object file
+CCamera.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/CCamera.o
+.PHONY : CCamera.o
+
+# target to preprocess a source file
+CCamera.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/CCamera.i
+.PHONY : CCamera.i
+
+# target to generate assembly for a file
+CCamera.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/CCamera.s
+.PHONY : CCamera.s
 
 # target to build an object file
 Component.o:
@@ -276,6 +291,9 @@ help:
 	@echo "... BaseApp.o"
 	@echo "... BaseApp.i"
 	@echo "... BaseApp.s"
+	@echo "... CCamera.o"
+	@echo "... CCamera.i"
+	@echo "... CCamera.s"
 	@echo "... Component.o"
 	@echo "... Component.i"
 	@echo "... Component.s"

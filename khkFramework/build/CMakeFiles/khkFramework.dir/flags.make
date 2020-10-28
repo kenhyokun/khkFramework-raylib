@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework -I/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/../third_party/box2d -I/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/../third_party/raylib -I/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/../third_party/tinyxml2 -I/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/../third_party/confini -I/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/../third_party/json 
+CXX_INCLUDES = -I/home/kevin/development-project/cpp/raylib/tes2/khkFramework -I/home/kevin/development-project/cpp/raylib/tes2/khkFramework/../third_party/box2d -I/home/kevin/development-project/cpp/raylib/tes2/khkFramework/../third_party/raylib -I/home/kevin/development-project/cpp/raylib/tes2/khkFramework/../third_party/tinyxml2 -I/home/kevin/development-project/cpp/raylib/tes2/khkFramework/../third_party/confini -I/home/kevin/development-project/cpp/raylib/tes2/khkFramework/../third_party/json 
 

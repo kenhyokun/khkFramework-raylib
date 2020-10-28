@@ -28,29 +28,11 @@
 
 #include<iostream>
 #include<m_raylib.h>
-#include<Node.h>
+#include<CCamera.h>
 #include<File.h>
 #include<KeyButton.h>
 
 using namespace std;
-
-struct CCamera{
-  Camera2D camera;
-  int width = 0;
-  int height = 0;
-  Node *target =  nullptr;
-
-  CCamera (int _width, int _height);
-
-  void SetOffset(int offset_x, int offset_y);
-  void SetOffsetToCenter();
-  void Rotate(float angle);
-  void Zoom(int _zoom);
-  void AttachTo(Node *node);
-  void Detach();
-  void Follow();
-
-};
 
 struct BaseApp{
   BaseApp(int _window_width = 800,

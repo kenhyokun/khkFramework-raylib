@@ -107,14 +107,6 @@ struct App : BaseApp{
 
     // obj1->RemoveComponent<Component::sprite_renderer>();
 
-    cout<<obj1->name<<" "<<obj1->component_entity.drawable_type<<endl;
-    cout<<obj2->name<<" "<<obj2->component_entity.drawable_type<<endl;
-    cout<<obj3->name<<" "<<obj3->component_entity.drawable_type<<endl;
-    cout<<obj4->name<<" "<<obj4->component_entity.drawable_type<<endl;
-    cout<<obj5->name<<" "<<obj5->component_entity.drawable_type<<endl;
-    cout<<obj6->name<<" "<<obj6->component_entity.drawable_type<<endl;
-    cout<<obj7->name<<" "<<obj7->component_entity.drawable_type<<endl;
-
     scene1->AddChild(obj1);
     scene1->AddChild(obj2);
     scene1->AddChild(obj3);
