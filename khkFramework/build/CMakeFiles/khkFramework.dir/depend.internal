@@ -54,7 +54,7 @@ CMakeFiles/khkFramework.dir/B2D.o
  ..//m_box2d.h
  ..//m_raylib.h
  ..//n_component_derived_check.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D.cpp
+ /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/B2D.cpp
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
  ../../third_party/box2d/box2d/b2_block_allocator.h
  ../../third_party/box2d/box2d/b2_body.h
@@ -105,7 +105,7 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
  ..//m_box2d.h
  ..//m_raylib.h
  ..//n_component_derived_check.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp
+ /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/B2D_DebugDraw.cpp
 CMakeFiles/khkFramework.dir/BaseApp.o
  ../../third_party/confini/confini.h
  ../../third_party/json/json.hpp
@@ -119,7 +119,7 @@ CMakeFiles/khkFramework.dir/BaseApp.o
  ..//Node.h
  ..//m_raylib.h
  ..//n_component_derived_check.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp
+ /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/BaseApp.cpp
 CMakeFiles/khkFramework.dir/Component.o
  ../../third_party/confini/confini.h
  ../../third_party/json/json.hpp
@@ -133,7 +133,7 @@ CMakeFiles/khkFramework.dir/Component.o
  ..//TextureAtlas.h
  ..//m_raylib.h
  ..//n_component_derived_check.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
+ /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/Component.cpp
 CMakeFiles/khkFramework.dir/ContactListener.o
  ../../third_party/box2d/box2d/b2_block_allocator.h
  ../../third_party/box2d/box2d/b2_body.h
@@ -185,21 +185,21 @@ CMakeFiles/khkFramework.dir/ContactListener.o
  ..//m_box2d.h
  ..//m_raylib.h
  ..//n_component_derived_check.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/ContactListener.cpp
+ /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/ContactListener.cpp
 CMakeFiles/khkFramework.dir/File.o
  ../../third_party/confini/confini.h
  ../../third_party/json/json.hpp
  ../../third_party/tinyxml2/tinyxml2.h
  ..//File.h
  ..//JSON.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp
+ /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/File.cpp
 CMakeFiles/khkFramework.dir/Node.o
  ../../third_party/raylib/raylib.h
  ..//CMath.h
  ..//Node.h
  ..//m_raylib.h
  ..//n_component_derived_check.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp
+ /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/Node.cpp
 CMakeFiles/khkFramework.dir/SceneManager.o
  ../../third_party/confini/confini.h
  ../../third_party/json/json.hpp
@@ -214,9 +214,9 @@ CMakeFiles/khkFramework.dir/SceneManager.o
  ..//TextureAtlas.h
  ..//m_raylib.h
  ..//n_component_derived_check.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp
+ /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/SceneManager.cpp
 CMakeFiles/khkFramework.dir/TextureAtlas.o
  ../../third_party/raylib/raylib.h
  ..//TextureAtlas.h
  ..//m_raylib.h
- /home/kevin/development-project/cpp/raylib/tes2/khkFramework/TextureAtlas.cpp
+ /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/TextureAtlas.cpp

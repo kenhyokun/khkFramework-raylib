@@ -91,8 +91,6 @@ public:
   inline T AddComponent(T component){
 
     if(Component::IsDerivedDrawable(*component)){
-      component_entity.is_has_drawable_component = true;
-
       if(Component::IsDerivedSpriteRenderer(*component)){
 	component_entity.drawable_type = Component::SPRITE_RENDERER;
       }
@@ -108,6 +106,8 @@ public:
       if(Component::IsDerivedTMXMap(*component)){
 	component_entity.drawable_type = Component::TMXMAP;
       }
+
+      component_entity.is_has_drawable_component = true;
     }
 
     if(Component::IsDerivedRigidBody(*component)){

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kevin/development-project/cpp/raylib/tes2/khkFramework
+CMAKE_SOURCE_DIR = /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kevin/development-project/cpp/raylib/tes2/khkFramework/build
+CMAKE_BINARY_DIR = /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/khkFramework.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/khkFramework.dir/flags.make
 
 CMakeFiles/khkFramework.dir/B2D.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/B2D.o: ../B2D.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/khkFramework.dir/B2D.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/B2D.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/khkFramework.dir/B2D.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/B2D.o -c /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/B2D.cpp
 
 CMakeFiles/khkFramework.dir/B2D.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/B2D.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D.cpp > CMakeFiles/khkFramework.dir/B2D.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/B2D.cpp > CMakeFiles/khkFramework.dir/B2D.i
 
 CMakeFiles/khkFramework.dir/B2D.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/B2D.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D.cpp -o CMakeFiles/khkFramework.dir/B2D.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/B2D.cpp -o CMakeFiles/khkFramework.dir/B2D.s
 
 CMakeFiles/khkFramework.dir/B2D.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/khkFramework.dir/B2D.o.provides.build: CMakeFiles/khkFramework.dir/B2
 
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o: ../B2D_DebugDraw.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/khkFramework.dir/B2D_DebugDraw.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/B2D_DebugDraw.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/khkFramework.dir/B2D_DebugDraw.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/B2D_DebugDraw.o -c /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/B2D_DebugDraw.cpp
 
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/B2D_DebugDraw.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp > CMakeFiles/khkFramework.dir/B2D_DebugDraw.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/B2D_DebugDraw.cpp > CMakeFiles/khkFramework.dir/B2D_DebugDraw.i
 
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/B2D_DebugDraw.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp -o CMakeFiles/khkFramework.dir/B2D_DebugDraw.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/B2D_DebugDraw.cpp -o CMakeFiles/khkFramework.dir/B2D_DebugDraw.s
 
 CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/khkFramework.dir/B2D_DebugDraw.o.provides.build: CMakeFiles/khkFramew
 
 CMakeFiles/khkFramework.dir/BaseApp.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/BaseApp.o: ../BaseApp.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/khkFramework.dir/BaseApp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/BaseApp.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/khkFramework.dir/BaseApp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/BaseApp.o -c /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/BaseApp.cpp
 
 CMakeFiles/khkFramework.dir/BaseApp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/BaseApp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp > CMakeFiles/khkFramework.dir/BaseApp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/BaseApp.cpp > CMakeFiles/khkFramework.dir/BaseApp.i
 
 CMakeFiles/khkFramework.dir/BaseApp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/BaseApp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp -o CMakeFiles/khkFramework.dir/BaseApp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/BaseApp.cpp -o CMakeFiles/khkFramework.dir/BaseApp.s
 
 CMakeFiles/khkFramework.dir/BaseApp.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/khkFramework.dir/BaseApp.o.provides.build: CMakeFiles/khkFramework.di
 
 CMakeFiles/khkFramework.dir/Component.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/Component.o: ../Component.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/khkFramework.dir/Component.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/Component.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/khkFramework.dir/Component.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/Component.o -c /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/Component.cpp
 
 CMakeFiles/khkFramework.dir/Component.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/Component.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp > CMakeFiles/khkFramework.dir/Component.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/Component.cpp > CMakeFiles/khkFramework.dir/Component.i
 
 CMakeFiles/khkFramework.dir/Component.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/Component.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp -o CMakeFiles/khkFramework.dir/Component.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/Component.cpp -o CMakeFiles/khkFramework.dir/Component.s
 
 CMakeFiles/khkFramework.dir/Component.o.requires:
 
@@ -155,16 +155,16 @@ CMakeFiles/khkFramework.dir/Component.o.provides.build: CMakeFiles/khkFramework.
 
 CMakeFiles/khkFramework.dir/ContactListener.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/ContactListener.o: ../ContactListener.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/khkFramework.dir/ContactListener.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/ContactListener.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/ContactListener.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/khkFramework.dir/ContactListener.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/ContactListener.o -c /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/ContactListener.cpp
 
 CMakeFiles/khkFramework.dir/ContactListener.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/ContactListener.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/ContactListener.cpp > CMakeFiles/khkFramework.dir/ContactListener.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/ContactListener.cpp > CMakeFiles/khkFramework.dir/ContactListener.i
 
 CMakeFiles/khkFramework.dir/ContactListener.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/ContactListener.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/ContactListener.cpp -o CMakeFiles/khkFramework.dir/ContactListener.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/ContactListener.cpp -o CMakeFiles/khkFramework.dir/ContactListener.s
 
 CMakeFiles/khkFramework.dir/ContactListener.o.requires:
 
@@ -179,16 +179,16 @@ CMakeFiles/khkFramework.dir/ContactListener.o.provides.build: CMakeFiles/khkFram
 
 CMakeFiles/khkFramework.dir/File.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/File.o: ../File.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/khkFramework.dir/File.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/File.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/khkFramework.dir/File.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/File.o -c /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/File.cpp
 
 CMakeFiles/khkFramework.dir/File.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/File.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp > CMakeFiles/khkFramework.dir/File.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/File.cpp > CMakeFiles/khkFramework.dir/File.i
 
 CMakeFiles/khkFramework.dir/File.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/File.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp -o CMakeFiles/khkFramework.dir/File.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/File.cpp -o CMakeFiles/khkFramework.dir/File.s
 
 CMakeFiles/khkFramework.dir/File.o.requires:
 
@@ -203,16 +203,16 @@ CMakeFiles/khkFramework.dir/File.o.provides.build: CMakeFiles/khkFramework.dir/F
 
 CMakeFiles/khkFramework.dir/Node.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/Node.o: ../Node.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/khkFramework.dir/Node.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/Node.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/khkFramework.dir/Node.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/Node.o -c /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/Node.cpp
 
 CMakeFiles/khkFramework.dir/Node.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/Node.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp > CMakeFiles/khkFramework.dir/Node.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/Node.cpp > CMakeFiles/khkFramework.dir/Node.i
 
 CMakeFiles/khkFramework.dir/Node.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/Node.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp -o CMakeFiles/khkFramework.dir/Node.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/Node.cpp -o CMakeFiles/khkFramework.dir/Node.s
 
 CMakeFiles/khkFramework.dir/Node.o.requires:
 
@@ -227,16 +227,16 @@ CMakeFiles/khkFramework.dir/Node.o.provides.build: CMakeFiles/khkFramework.dir/N
 
 CMakeFiles/khkFramework.dir/SceneManager.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/SceneManager.o: ../SceneManager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/khkFramework.dir/SceneManager.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/SceneManager.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/khkFramework.dir/SceneManager.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/SceneManager.o -c /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/SceneManager.cpp
 
 CMakeFiles/khkFramework.dir/SceneManager.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/SceneManager.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp > CMakeFiles/khkFramework.dir/SceneManager.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/SceneManager.cpp > CMakeFiles/khkFramework.dir/SceneManager.i
 
 CMakeFiles/khkFramework.dir/SceneManager.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/SceneManager.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp -o CMakeFiles/khkFramework.dir/SceneManager.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/SceneManager.cpp -o CMakeFiles/khkFramework.dir/SceneManager.s
 
 CMakeFiles/khkFramework.dir/SceneManager.o.requires:
 
@@ -251,16 +251,16 @@ CMakeFiles/khkFramework.dir/SceneManager.o.provides.build: CMakeFiles/khkFramewo
 
 CMakeFiles/khkFramework.dir/TextureAtlas.o: CMakeFiles/khkFramework.dir/flags.make
 CMakeFiles/khkFramework.dir/TextureAtlas.o: ../TextureAtlas.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/khkFramework.dir/TextureAtlas.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/TextureAtlas.o -c /home/kevin/development-project/cpp/raylib/tes2/khkFramework/TextureAtlas.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/khkFramework.dir/TextureAtlas.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/khkFramework.dir/TextureAtlas.o -c /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/TextureAtlas.cpp
 
 CMakeFiles/khkFramework.dir/TextureAtlas.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/khkFramework.dir/TextureAtlas.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/tes2/khkFramework/TextureAtlas.cpp > CMakeFiles/khkFramework.dir/TextureAtlas.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/TextureAtlas.cpp > CMakeFiles/khkFramework.dir/TextureAtlas.i
 
 CMakeFiles/khkFramework.dir/TextureAtlas.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/khkFramework.dir/TextureAtlas.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/tes2/khkFramework/TextureAtlas.cpp -o CMakeFiles/khkFramework.dir/TextureAtlas.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/TextureAtlas.cpp -o CMakeFiles/khkFramework.dir/TextureAtlas.s
 
 CMakeFiles/khkFramework.dir/TextureAtlas.o.requires:
 
@@ -299,7 +299,7 @@ libkhkFramework.a: CMakeFiles/khkFramework.dir/SceneManager.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/TextureAtlas.o
 libkhkFramework.a: CMakeFiles/khkFramework.dir/build.make
 libkhkFramework.a: CMakeFiles/khkFramework.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX static library libkhkFramework.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX static library libkhkFramework.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/khkFramework.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/khkFramework.dir/link.txt --verbose=$(VERBOSE)
 
@@ -325,6 +325,6 @@ CMakeFiles/khkFramework.dir/clean:
 .PHONY : CMakeFiles/khkFramework.dir/clean
 
 CMakeFiles/khkFramework.dir/depend:
-	cd /home/kevin/development-project/cpp/raylib/tes2/khkFramework/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kevin/development-project/cpp/raylib/tes2/khkFramework /home/kevin/development-project/cpp/raylib/tes2/khkFramework /home/kevin/development-project/cpp/raylib/tes2/khkFramework/build /home/kevin/development-project/cpp/raylib/tes2/khkFramework/build /home/kevin/development-project/cpp/raylib/tes2/khkFramework/build/CMakeFiles/khkFramework.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build /home/kevin/development-project/cpp/raylib/khkFramework-raylib/khkFramework/build/CMakeFiles/khkFramework.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/khkFramework.dir/depend
 
