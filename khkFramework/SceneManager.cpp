@@ -53,7 +53,9 @@ void SceneManager::Draw(){
 
     for(int i = 0; i < selected_scene_sort_component->sort_data_list.size(); i++){
 
-      switch(selected_scene_sort_component->sort_data_list.at(i).drawable_type){
+      switch(selected_scene_sort_component->
+	     sort_data_list.at(i).node->
+	     component_entity.drawable_type){
 
       case SPRITE_RENDERER:
 	selected_scene_sort_component->
@@ -102,34 +104,24 @@ void SceneManager::_GetNodeOnTree(Node *node, SortingDataComponent * sorting_com
     SortingData data;
     data.node = node;
 
-    if(Node::IsHas<Component::sprite_renderer>(node)){
+    if(node->component_entity.drawable_type == SPRITE_RENDERER){
       data.sorting_order =
 	node->GetComponent<Component::sprite_renderer>()->sorting_order;
-
-      data.drawable_type = SPRITE_RENDERER;
     }
-    else if(Node::IsHas<Component::animator>(node)){
+    else if(node->component_entity.drawable_type == ANIMATOR){
       data.sorting_order =
 	node->GetComponent<Component::animator>()->sorting_order;
-
-      data.drawable_type = ANIMATOR;
     }
-    else if(Node::IsHas<Component::atlas_animator>(node)){
+    else if(node->component_entity.drawable_type == ATLAS_ANIMATOR){
       data.sorting_order =
 	node->GetComponent<Component::atlas_animator>()->sorting_order;
-
-      data.drawable_type = ATLAS_ANIMATOR;
     }
-    else if(Node::IsHas<Component::tilemap>(node)){
+    else if(node->component_entity.drawable_type == TILEMAP){
       data.sorting_order =
 	node->GetComponent<Component::tilemap>()->sorting_order;
-
-      data.drawable_type = TILEMAP;
     }
-    else if(Node::IsHas<Component::tmxmap>(node)){
+    else if(node->component_entity.drawable_type == TMXMAP){
       should_push = false;
-
-      data.drawable_type = TMXMAP;
 
       data.layer_sorting_order =
 	node->GetComponent<Component::tmxmap>()->layer_sorting_order;
@@ -184,24 +176,33 @@ void SceneManager::_BubbleSort(SortingDataComponent *sorting_component){
 }
 
 void SceneManager::SetSortingOrder(Node *node, int sorting_order){
+
   // set node sorting order
-  if(Node::IsHas<Component::sprite_renderer>(node)){
+  switch(node->component_entity.drawable_type){
+
+  case SPRITE_RENDERER:
     node->GetComponent<Component::sprite_renderer>()->sorting_order =
       sorting_order;
-  }
-  else if(Node::IsHas<Component::animator>(node)){
+    break;
+
+  case ANIMATOR:
     node->GetComponent<Component::animator>()->sorting_order =
       sorting_order;
-  }
-  else if(Node::IsHas<Component::atlas_animator>(node)){
+    break;
+
+  case ATLAS_ANIMATOR:
     node->GetComponent<Component::atlas_animator>()->sorting_order =
       sorting_order;
-  }
-  else if(Node::IsHas<Component::tilemap>(node)){
+    break;
+
+  case TILEMAP:
     node->GetComponent<Component::tilemap>()->sorting_order =
       sorting_order;
-  }
-  else if(Node::IsHas<Component::tmxmap>(node)){
+    break;
+
+  case TMXMAP:
+    break;
+
   }
 
   // set selected sort component list at index(n) sorting order
@@ -229,3 +230,4 @@ void SceneManager::SetSortingOrder(Node *node,
 
 Scene* SceneManager::GetScene(int scene_index){return scene_list->GetChild(scene_index);}
 Scene* SceneManager::GetScene(string scene_name){return scene_list->GetChild(scene_name);}
+Scene* SceneManager::GetSelectedScene(){return selected_scene;}

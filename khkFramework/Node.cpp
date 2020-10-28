@@ -193,5 +193,5 @@ float Node::GetRotation(){return transform.rotation;}
 Node* Node::GetParent(){return parent;}
 vector<Node*>* Node::GetChild(){return child;}
 Node* Node::GetChild(int index){return child->at(index);}
-bool Node::IsHasRigidBodyComponent(){return is_has_rigid_body_component;}
-bool Node::IsHasDrawableComponent(){return is_has_drawable_component;}
+bool Node::IsHasRigidBodyComponent(){return component_entity.is_has_rigidbody_component;}
+bool Node::IsHasDrawableComponent(){return component_entity.is_has_drawable_component;}

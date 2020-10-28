@@ -30,9 +30,23 @@
 
 namespace Component{
 
+  enum DrawableType{
+    NONE,
+    SPRITE_RENDERER,
+    ANIMATOR,
+    ATLAS_ANIMATOR,
+    TILEMAP,
+    TMXMAP
+  };
+
 typedef struct BaseComponent n_base;
 typedef struct DrawableBaseComponent n_drawable;
 typedef struct RigidBody n_rigidbody;
+typedef struct SpriteRenderer n_sprite_renderer;
+typedef struct Animator n_animator;
+typedef struct AtlasAnimator n_atlas_animator;
+typedef struct Tilemap n_tilemap;
+typedef struct TMXMap n_tmxmap;
 
  template<typename T>
    static bool IsDerivedComponent(T component){
@@ -53,6 +67,46 @@ typedef struct RigidBody n_rigidbody;
  template<typename T>
    static bool IsDerivedRigidBody(T component){
    if(std::is_base_of<RigidBody, T>::value == 1){
+     return true; 
+   }
+   return false;
+ }
+
+ template<typename T>
+   static bool IsDerivedSpriteRenderer(T component){
+   if(std::is_base_of<SpriteRenderer, T>::value == 1){
+     return true; 
+   }
+   return false;
+ }
+
+ template<typename T>
+   static bool IsDerivedAnimator(T component){
+   if(std::is_base_of<Animator, T>::value == 1){
+     return true; 
+   }
+   return false;
+ }
+
+ template<typename T>
+   static bool IsDerivedAtlasAnimator(T component){
+   if(std::is_base_of<AtlasAnimator, T>::value == 1){
+     return true; 
+   }
+   return false;
+ }
+
+ template<typename T>
+   static bool IsDerivedTilemap(T component){
+   if(std::is_base_of<Tilemap, T>::value == 1){
+     return true; 
+   }
+   return false;
+ }
+
+ template<typename T>
+   static bool IsDerivedTMXMap(T component){
+   if(std::is_base_of<TMXMap, T>::value == 1){
      return true; 
    }
    return false;

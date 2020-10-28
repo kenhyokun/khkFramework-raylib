@@ -46,14 +46,19 @@ struct CTransform{
 
 static int node_count = 1; // for node auto naming
 
-class Node{
+struct Node{
+private:
+  struct ComponentEntity{
+    bool is_has_rigidbody_component = false;
+    bool is_has_drawable_component = false;
+    Component::DrawableType drawable_type = Component::NONE;
+  };
+
   CTransform transform;
   Node *parent = nullptr;
   vector<Node*> *child = new vector<Node*>();
 
 protected:
-  bool is_has_rigid_body_component = false;
-  bool is_has_drawable_component = false;
   static string searched_name;
 
   void _SetParent(Node *node);
@@ -64,6 +69,7 @@ protected:
   static Node* _IsSearchedChild(Node *child_node);
 
 public:
+  ComponentEntity component_entity;
   const string unamed_node_name = "Unamed Node"; // give this name to node name if node name not set
   const string untagged_node_tag = "Untagged Node"; // give this tag to node tag if node tag not set
   string name = unamed_node_name;
@@ -83,12 +89,29 @@ public:
 
   template<typename T>
   inline T AddComponent(T component){
+
     if(Component::IsDerivedDrawable(*component)){
-      is_has_drawable_component = true;
+      component_entity.is_has_drawable_component = true;
+
+      if(Component::IsDerivedSpriteRenderer(*component)){
+	component_entity.drawable_type = Component::SPRITE_RENDERER;
+      }
+      if(Component::IsDerivedAnimator(*component)){
+	component_entity.drawable_type = Component::ANIMATOR;
+      }
+      if(Component::IsDerivedAtlasAnimator(*component)){
+	component_entity.drawable_type = Component::ATLAS_ANIMATOR;
+      }
+      if(Component::IsDerivedTilemap(*component)){
+	component_entity.drawable_type = Component::TILEMAP;
+      }
+      if(Component::IsDerivedTMXMap(*component)){
+	component_entity.drawable_type = Component::TMXMAP;
+      }
     }
 
     if(Component::IsDerivedRigidBody(*component)){
-      is_has_rigid_body_component = true;
+      component_entity.is_has_rigidbody_component = true;
     }
 
     component->SetNode(this);
@@ -120,8 +143,8 @@ public:
     if(IsHas<T>(this)){
       component_map<T>.erase(this);
       T component;
-      if(Component::IsDerivedDrawable(*component)) is_has_drawable_component = false;
-      if(Component::IsDerivedRigidBody(*component)) is_has_rigid_body_component = false;
+      if(Component::IsDerivedDrawable(*component)) component_entity.is_has_drawable_component = false;
+      if(Component::IsDerivedRigidBody(*component)) component_entity.is_has_rigidbody_component = false;
     }
   }
 

@@ -48,15 +48,6 @@ namespace Component{
     - TMXMap
   */
 
-  enum DrawableType{
-    NONE,
-    SPRITE_RENDERER,
-    ANIMATOR,
-    ATLAS_ANIMATOR,
-    TILEMAP,
-    TMXMAP
-  };
-
   struct BaseComponent{
     bool is_enable = true;
 

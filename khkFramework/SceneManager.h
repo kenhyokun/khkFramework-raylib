@@ -45,7 +45,6 @@ struct SceneManager{
   struct SortingData{
     Node *node = nullptr;
     int sorting_order = 0;
-    DrawableType drawable_type = NONE;
 
     // multiple layer drawable component
     int layer_count = 0;
@@ -88,6 +87,8 @@ struct SceneManager{
   void SetSortingOrder(Node *node, int layer_index, int sorting_order);
   Scene* GetScene(int scene_index);
   Scene* GetScene(string scene_name);
+  Scene* GetSelectedScene();
+  
 
 protected:
   Scene *scene_list = nullptr;
