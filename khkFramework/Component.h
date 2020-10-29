@@ -86,14 +86,13 @@ namespace Component{
   struct BaseTilemap : BaseComponent, GridBaseComponent{
     int GetMaxWidth();
     int GetMaxHeight();
-    v2 GetGridPosition(int column, int row, bool is_center = true);
+    v2 GetGridPosition(int column, int row);
 
   protected:
     int max_width = 0;
     int max_height = 0;
 
     int _GetIndex(int column, int row);
-    v2 _GetTransformRotation(int column, int row); // tile transformation rotation
   };
 
 

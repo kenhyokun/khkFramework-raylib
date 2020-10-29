@@ -50,7 +50,7 @@ Rectangle Component::GridBaseComponent::_GetSrcRect(int tile){
 
 Grid* Component::GridBaseComponent::GetGrid(){return grid;}
 
-v2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
+v2 Component::BaseTilemap::GetGridPosition(int column, int row){
   float x0 = node->GetPosition().x - (max_width / 2);
   float y0 = node->GetPosition().y - (max_height / 2);
   float _x = (grid->width * column) + (grid->width / 2);
@@ -59,10 +59,6 @@ v2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
   float ty = y0 + _y;
 
   return TransformRotation(Deg2Rad(node->GetRotation()), v2{tx, ty}, node->GetPosition());
-}
-
-v2 Component::BaseTilemap::GetGridPosition(int column, int row, bool is_center){
-  return _GetTransformRotation(column, row);
 }
 
 int Component::BaseTilemap::GetMaxWidth(){return max_width;}
@@ -303,7 +299,7 @@ void Component::Tilemap::Draw(){
 
       if(IsTiled(j, i)){
 	src_rect = _GetSrcRect(tile);
-	v2 transform_rotation = _GetTransformRotation(j, i);
+	v2 transform_rotation = GetGridPosition(j, i);
 
 	dst_rect = {transform_rotation.x,
 		    transform_rotation.y,
@@ -420,7 +416,7 @@ void Component::TMXMap::Draw(int layer_index){
       if(tile != 0){
 
 	src_rect = _GetSrcRect(tile);
-	v2 transform_rotation = _GetTransformRotation(j, i);
+	v2 transform_rotation = GetGridPosition(j, i);
 
 	dst_rect = {transform_rotation.x,
 		    transform_rotation.y,
