@@ -34,7 +34,6 @@ struct App : BaseApp, ContactListener{
   Tilemap *tilemap;
   TMXMap *tmxmap;
 
-
   App(int _window_width, int _window_height, string _title) :
     BaseApp(_window_width, _window_height, _title){}
 
@@ -42,15 +41,25 @@ struct App : BaseApp, ContactListener{
   }
 
   void OnInit() override {
-    lilwitch = LoadTexture("./resources/images/lilwitch.png");
+    lilwitch = LoadTexture("./resources/images/circle.png");
+    tile = LoadTexture("./resources/images/tile.png");
+
     node1 = new Node("node 1");
     node1->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&lilwitch));
 
-    cout<<Node::component_map<Component::sprite_renderer>.size()<<endl;
-    
-    node1->RemoveComponent<Component::sprite_renderer>();
+    int *tile_map = new int[9]{1,2,3,
+			       4,1,4,
+			       3,2,1};
 
-    cout<<Node::component_map<Component::sprite_renderer>.size()<<endl;
+    node2 = new Node("node 2");
+    node2->AddComponent<Component::tilemap>(new Tilemap(&tile, new Grid{48, 48, 3, 3}, tile_map));
+    node2->SetPosition(v2{300, 300});
+
+    node2->SetRotation(45);
+
+    node1->SetPosition(node2->GetComponent<Component::tilemap>()->
+		       GetGridPosition(0, 0));
+
   }
 
   void OnUpdate() override {
@@ -58,7 +67,8 @@ struct App : BaseApp, ContactListener{
 
   void OnDraw() override {
     DrawText("my first raylib window", 190, 200, 20, LIGHTGRAY);
-    // node1->GetComponent<Component::sprite_renderer>()->Draw();
+    node2->GetComponent<Component::tilemap>()->Draw();
+    node1->GetComponent<Component::sprite_renderer>()->Draw();
   }
 
 };

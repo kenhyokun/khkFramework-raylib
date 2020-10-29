@@ -61,6 +61,10 @@ v2 Component::BaseTilemap::_GetTransformRotation(int column, int row){
   return TransformRotation(Deg2Rad(node->GetRotation()), v2{tx, ty}, node->GetPosition());
 }
 
+v2 Component::BaseTilemap::GetGridPosition(int column, int row, bool is_center){
+  return _GetTransformRotation(column, row);
+}
+
 int Component::BaseTilemap::GetMaxWidth(){return max_width;}
 int Component::BaseTilemap::GetMaxHeight(){return max_height;}
 int Component::BaseTilemap::_GetIndex(int column, int row){return (row * grid->column + column);}
@@ -293,26 +297,28 @@ Component::Tilemap::Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map){
 
 void Component::Tilemap::Draw(){
   for(int i = 0; i < grid->row; i++){
-   for(int j = 0; j < grid->column; j++){
+    for(int j = 0; j < grid->column; j++){
 
       int tile = tile_map[_GetIndex(j, i)];
 
-      src_rect = _GetSrcRect(tile);
-      v2 transform_rotation = _GetTransformRotation(j, i);
+      if(IsTiled(j, i)){
+	src_rect = _GetSrcRect(tile);
+	v2 transform_rotation = _GetTransformRotation(j, i);
 
-      dst_rect = {transform_rotation.x,
-      		  transform_rotation.y,
-      		  (float)grid->width,
-      		  (float)grid->height};
+	dst_rect = {transform_rotation.x,
+		    transform_rotation.y,
+		    (float)grid->width,
+		    (float)grid->height};
 
-      DrawTexturePro(*texture,
-      		     src_rect,
-      		     dst_rect,
-      		     v2{(float)grid->width * 0.5f, (float)grid->height * 0.5f},
-      		     node->GetRotation(),
-      		     WHITE);
+	DrawTexturePro(*texture,
+		       src_rect,
+		       dst_rect,
+		       v2{(float)grid->width * 0.5f, (float)grid->height * 0.5f},
+		       node->GetRotation(),
+		       WHITE);
 
-   } // j
+      } // is tiled 
+    } // j
   } // i
 
 }

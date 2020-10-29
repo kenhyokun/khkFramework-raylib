@@ -86,9 +86,7 @@ namespace Component{
   struct BaseTilemap : BaseComponent, GridBaseComponent{
     int GetMaxWidth();
     int GetMaxHeight();
-
-    void GotoGrid(CCamera *camera, int x, int y);
-    void GotoGrid(Node *node, int x, int y);
+    v2 GetGridPosition(int column, int row, bool is_center = true);
 
   protected:
     int max_width = 0;
