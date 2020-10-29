@@ -58,7 +58,7 @@ struct App : BaseApp, ContactListener{
     node2->SetRotation(45);
 
     node1->SetPosition(node2->GetComponent<Component::tilemap>()->
-		       GetGridPosition(0, 0));
+		       GetGridPosition(1, 0));
 
   }
 

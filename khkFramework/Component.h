@@ -186,6 +186,8 @@ namespace Component{
     vector<string> map_layer_name_list;
     vector<string> map_layer_str_list;
     vector<int*> map_layer_list;
+
+    void _OnAttach() override;
   } *tmxmap;
 
 }; // component namespace

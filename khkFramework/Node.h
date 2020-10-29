@@ -52,6 +52,7 @@ private:
     bool is_has_rigidbody_component = false;
     bool is_has_drawable_component = false;
     Component::DrawableType drawable_type = Component::NONE;
+    int *draw_sort_index = nullptr; // drawable component index on scene manager sort component
   };
 
   CTransform transform;
@@ -93,18 +94,23 @@ public:
     if(Component::IsDerivedDrawable(*component)){
       if(Component::IsDerivedSpriteRenderer(*component)){
 	component_entity.drawable_type = Component::SPRITE_RENDERER;
+	component_entity.draw_sort_index = new int[1]();
       }
       if(Component::IsDerivedAnimator(*component)){
 	component_entity.drawable_type = Component::ANIMATOR;
+	component_entity.draw_sort_index = new int[1]();
       }
       if(Component::IsDerivedAtlasAnimator(*component)){
 	component_entity.drawable_type = Component::ATLAS_ANIMATOR;
+	component_entity.draw_sort_index = new int[1]();
       }
       if(Component::IsDerivedTilemap(*component)){
 	component_entity.drawable_type = Component::TILEMAP;
+	component_entity.draw_sort_index = new int[1]();
       }
       if(Component::IsDerivedTMXMap(*component)){
 	component_entity.drawable_type = Component::TMXMAP;
+	// initilize draw_sort_index on _OnAttach function.
       }
 
       component_entity.is_has_drawable_component = true;

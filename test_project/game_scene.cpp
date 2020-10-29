@@ -120,7 +120,6 @@ struct App : BaseApp{
 
     scene_manager->SetSortingOrder(obj4, 7);
     scene_manager->SetSortingOrder(obj7, 1, 7);
-
   }
 
   void OnUpdate() override {

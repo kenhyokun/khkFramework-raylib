@@ -36,8 +36,7 @@ typedef Node Scene;
 /*
 TODO[Kevin]:
 - update scene sorting data list when scene child get 
-  changed (removed or added new child) / drawable component
-  sorting order changed.
+  changed (removed or added new child).
 */
 
 struct SceneManager{
@@ -47,43 +46,19 @@ struct SceneManager{
     int sorting_order = 0;
 
     // multiple layer drawable component
-    int layer_count = 0;
-    int *layer_sorting_order = nullptr;
+    int layer_count = 0; // tmxmap layer count
+    int *layer_sorting_order = nullptr; // tmxmap layer sorting order
     int layer_index = 0;
   };
 
   struct SortingDataComponent : BaseComponent{
     vector<SortingData> sort_data_list;
-
-    /*
-      FIXME[Kevin]:
-      need better solution to get sort_data_list index.
-    */
-    inline int GetIndexAt(Node *node){
-      for(int i = 0; i < sort_data_list.size(); i++){
-	if(sort_data_list[i].node == node){
-	  return i;
-	}
-      }
-      return -1;
-    }
-
-    inline int GetIndexAt(Node *node, int layer_index){
-      for(int i = 0; i < sort_data_list.size(); i++){
-	if(sort_data_list[i].node == node &&
-	   sort_data_list[i].layer_index == layer_index){
-	  return i;
-	}
-      }
-      return -1;
-    }
-
   };
 
   SceneManager();
 
   void SetCamera(CCamera *camera);
-  void AddScene(Scene *scene);
+  void AddScene(Node *scene);
   void LoadScene(int scene_index);
   void LoadScene(string scene_name);
   void Draw();

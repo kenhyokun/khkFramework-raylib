@@ -173,11 +173,22 @@ void SceneManager::_BubbleSort(SortingDataComponent *sorting_component){
     std::swap(sorting_component->sort_data_list[sort_index],
 	      sorting_component->sort_data_list[i]);
 
+    if(sorting_component->sort_data_list.at(i).node->
+       component_entity.drawable_type != Component::TMXMAP){
+
+      sorting_component->sort_data_list.at(i).node->
+	component_entity.draw_sort_index[0] = i;
+    }
+    else{
+      sorting_component->sort_data_list.at(i).node->
+	component_entity.
+	draw_sort_index[sorting_component->sort_data_list.at(i).layer_index] = i;
+    }
+
   }
 }
 
 void SceneManager::SetSortingOrder(Node *node, int sorting_order){
-
   // set node sorting order
   switch(node->component_entity.drawable_type){
 
@@ -201,14 +212,14 @@ void SceneManager::SetSortingOrder(Node *node, int sorting_order){
       sorting_order;
     break;
 
-  case TMXMAP:
-    break;
+    // case TMXMAP:
+    // break;
 
   }
 
   // set selected sort component list at index(n) sorting order
   selected_scene_sort_component->
-    sort_data_list.at(selected_scene_sort_component->GetIndexAt(node)).sorting_order = sorting_order;
+    sort_data_list.at(node->component_entity.draw_sort_index[0]).sorting_order = sorting_order;
 
   _BubbleSort(selected_scene_sort_component);
 }
@@ -221,10 +232,12 @@ void SceneManager::SetSortingOrder(Node *node,
     sorting_order;
 
   selected_scene_sort_component->
-    sort_data_list.at(selected_scene_sort_component->GetIndexAt(node, layer_index)).sorting_order = sorting_order;
+    sort_data_list.at(node->component_entity.draw_sort_index[layer_index]).
+    sorting_order = sorting_order;
 
   selected_scene_sort_component->
-    sort_data_list.at(selected_scene_sort_component->GetIndexAt(node, layer_index)).layer_index = layer_index;
+    sort_data_list.at(node->component_entity.draw_sort_index[layer_index]).
+    layer_index = layer_index;
 
   _BubbleSort(selected_scene_sort_component);
 }

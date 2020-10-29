@@ -58,7 +58,10 @@ v2 Component::BaseTilemap::GetGridPosition(int column, int row){
   float tx = x0 + _x;
   float ty = y0 + _y;
 
-  return TransformRotation(Deg2Rad(node->GetRotation()), v2{tx, ty}, node->GetPosition());
+  if(node->GetRotation() > 0){
+    return TransformRotation(Deg2Rad(node->GetRotation()), v2{tx, ty}, node->GetPosition());
+  }
+  return v2{tx, ty};
 }
 
 int Component::BaseTilemap::GetMaxWidth(){return max_width;}
@@ -439,6 +442,10 @@ void Component::TMXMap::Draw(){
   for(int i = 0; i < map_layer_list.size(); i++){
     Draw(i);
   }
+}
+
+void Component::TMXMap::_OnAttach(){
+  node->component_entity.draw_sort_index = new int[layer_count]();
 }
 
 void Component::TMXMap::PrintMapAttribute(){
