@@ -107,6 +107,15 @@ struct App : BaseApp{
 
     // obj1->RemoveComponent<Component::sprite_renderer>();
 
+    // obj1->GetComponent<Component::sprite_renderer>()->is_visible = false;
+    // obj2->GetComponent<Component::sprite_renderer>()->is_visible = false;
+    // obj3->GetComponent<Component::sprite_renderer>()->is_visible = false;
+    // obj4->GetComponent<Component::animator>()->is_visible = false;
+    // obj5->GetComponent<Component::tilemap>()->is_visible = false;
+    // obj6->GetComponent<Component::atlas_animator>()->is_visible = false;
+    // obj7->GetComponent<Component::tmxmap>()->is_enable = false;
+    // obj7->GetComponent<Component::tmxmap>()->is_visible = false;
+
     scene1->AddChild(obj1);
     scene1->AddChild(obj2);
     scene1->AddChild(obj3);

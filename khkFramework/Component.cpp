@@ -30,6 +30,14 @@ void Component::BaseComponent::_OnAttach(){}
 void Component::BaseComponent::SetNode(Node *_node){if(node == nullptr) node = _node;}
 Node* Component::BaseComponent::GetNode(){return node;}
 
+void Component::DrawableBaseComponent::Draw(int layer_index){
+  if(is_enable && is_visible){
+    _OnDraw(layer_index);
+  }
+}
+
+void Component::DrawableBaseComponent::_OnDraw(int layer_index){}
+
 Rectangle Component::GridBaseComponent::_GetSrcRect(int tile){
   int begin_column = 1;
   int range_column = texture_column - begin_column;
@@ -77,7 +85,7 @@ Component::SpriteRenderer::SpriteRenderer(Texture2D *_texture){
   src_rect = {0.0f, 0.0f, (float)texture->width, (float)texture->height};
 }
 
-void Component::SpriteRenderer::Draw(){
+void Component::SpriteRenderer::_OnDraw(int layer_index){
   pivot = {((float)texture->width * node->GetScale().x) / 2.0f,
 	   ((float)texture->height * node->GetScale().y) / 2.0f};
 
@@ -97,7 +105,6 @@ void Component::SpriteRenderer::Draw(){
 		 pivot,
 		 node->GetRotation(),
 		 WHITE);
-
 }
 
 
@@ -134,8 +141,7 @@ void Component::Animator::PlayAnim(vector<int> anim_frame, int fps){
   src_rect = _GetSrcRect(anim_frame.at(frame_index));
 }
 
-void Component::Animator::Draw(){
-
+void Component::Animator::_OnDraw(int layer_index){
   pivot = {((float)frame_width * node->GetScale().x) / 2.0f,
 	   ((float)frame_height * node->GetScale().y) / 2.0f};
 
@@ -149,7 +155,6 @@ void Component::Animator::Draw(){
 		 pivot,
 		 node->GetRotation(),
 		 WHITE);
-
 
 }
 
@@ -207,22 +212,24 @@ void Component::AtlasAnimator::PlayAnim(string _anim_name, int fps){
 }
 
 void Component::AtlasAnimator::DebugDraw(){
-  for(int i = 0; i < anim_frame.at(anim_name).size(); i++){
-    Rectangle _dst_rect = {dst_rect.x + (dst_rect.width * i),
-			   dst_rect.y - dst_rect.height,
-			   dst_rect.width,
-			   dst_rect.height};
+  if(is_enable && is_visible){
+    for(int i = 0; i < anim_frame.at(anim_name).size(); i++){
+      Rectangle _dst_rect = {dst_rect.x + (dst_rect.width * i),
+			     dst_rect.y - dst_rect.height,
+			     dst_rect.width,
+			     dst_rect.height};
 
-    DrawTexturePro(anim_frame.at(anim_name).at(i),
-		   src_rect,
-		   _dst_rect,
-		   pivot,
-		   node->GetRotation(),
-		   WHITE);
+      DrawTexturePro(anim_frame.at(anim_name).at(i),
+		     src_rect,
+		     _dst_rect,
+		     pivot,
+		     node->GetRotation(),
+		     WHITE);
+    }
   }
 }
 
-void Component::AtlasAnimator::Draw(){
+void Component::AtlasAnimator::_OnDraw(int layer_index){
   DrawTexturePro(anim_frame.at(anim_name).at(frame_index - 1),
 		 src_rect,
 		 dst_rect,
@@ -294,7 +301,7 @@ Component::Tilemap::Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map){
   texture_row = texture->height / grid->height;
 }
 
-void Component::Tilemap::Draw(){
+void Component::Tilemap::_OnDraw(int layer_index){
   for(int i = 0; i < grid->row; i++){
     for(int j = 0; j < grid->column; j++){
 
@@ -319,7 +326,6 @@ void Component::Tilemap::Draw(){
       } // is tiled 
     } // j
   } // i
-
 }
 
 bool Component::Tilemap::IsTiled(int column, int row){
@@ -410,7 +416,16 @@ Component::TMXMap::TMXMap(Texture2D *_texture, string tmx_file_src){
     
 }
 
-void Component::TMXMap::Draw(int layer_index){
+void Component::TMXMap::_OnDraw(int layer_index){
+  if(layer_index >= 0){
+    _DrawLayer(layer_index);
+  }
+  else{
+    _DrawAllLayer();
+  }
+}
+
+void Component::TMXMap::_DrawLayer(int layer_index){
   for(int i = 0; i < grid->row; i++){
     for(int j = 0; j < grid->column; j++){
 
@@ -438,7 +453,7 @@ void Component::TMXMap::Draw(int layer_index){
   }// j 
 }
 
-void Component::TMXMap::Draw(){
+void Component::TMXMap::_DrawAllLayer(){
   for(int i = 0; i < map_layer_list.size(); i++){
     Draw(i);
   }

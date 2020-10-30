@@ -61,15 +61,18 @@ namespace Component{
     virtual void _OnAttach();
   };
 
-  struct DrawableBaseComponent{
+  struct DrawableBaseComponent : BaseComponent{
     int sorting_order = 0;
     bool is_visible = true;
+    void Draw(int layer_index = -1); // draw when component enable and visible
 
   protected:
     Texture2D *texture = nullptr;
-    v2 pivot;
-    Rectangle src_rect;
-    Rectangle dst_rect;
+    v2 pivot {0.0f, 0.0f};
+    Rectangle src_rect{0.0f, 0.0f, 0.0f, 0.0f};
+    Rectangle dst_rect{0.0f, 0.0f, 0.0f, 0.0f};
+
+    virtual void _OnDraw(int layer_index);
   };
 
   struct GridBaseComponent{
@@ -83,7 +86,7 @@ namespace Component{
     Rectangle _GetSrcRect(int tile);
   };
 
-  struct BaseTilemap : BaseComponent, GridBaseComponent{
+  struct BaseTilemap : DrawableBaseComponent, GridBaseComponent{
     int GetMaxWidth();
     int GetMaxHeight();
     v2 GetGridPosition(int column, int row);
@@ -99,19 +102,20 @@ namespace Component{
   /*
     SpriteRenderer Component
   */
-  typedef struct SpriteRenderer : BaseComponent, DrawableBaseComponent{
+  typedef struct SpriteRenderer : DrawableBaseComponent{
     SpriteRenderer(Texture2D *_texture);
-    void Draw(); // draw texture with center pivot point
+
+  protected:
+    void _OnDraw(int layer_index) override;
   } *sprite_renderer;
 
 
   /*
     Animator Component
   */
-  typedef struct Animator : BaseComponent, DrawableBaseComponent, GridBaseComponent{
+  typedef struct Animator : DrawableBaseComponent, GridBaseComponent{
     Animator(Texture2D *_texture, int _frame_width, int _frame_height);
     void PlayAnim(vector<int> anim_frame, int fps);
-    void Draw();
 
     int GetFrameWidth();
     int GetFrameHeight();
@@ -121,17 +125,18 @@ namespace Component{
     int frame_counter = 0;
     int frame_width = 0;
     int frame_height = 0;
+
+    void _OnDraw(int layer_index);
   } *animator;
 
 
   /*
     AtlasAnimator Component
   */
-  typedef struct AtlasAnimator : BaseComponent, DrawableBaseComponent{
+  typedef struct AtlasAnimator : DrawableBaseComponent{
     AtlasAnimator(TextureAtlas *_texture_atlas);
     void PlayAnim(string _anim_name, int fps);
     void DebugDraw();
-    void Draw();
 
   protected:
 
@@ -140,41 +145,40 @@ namespace Component{
     string last_posible_anim_name = "nan";
     vector<Texture2D> frame_list;
 
-    bool _IsPosibleAnimName(string region_map_name, string *posible_anim_name, int *index);
-    void _CreateAnimFrame();
-  
     TextureAtlas *texture_atlas = nullptr;
     int frame_counter = 0;
     int frame_index = 1;
     string anim_name;
     Texture2D curr_texture;
-    v2 pivot {0.0f, 0.0f};
+
+    bool _IsPosibleAnimName(string region_map_name, string *posible_anim_name, int *index);
+    void _CreateAnimFrame();
+    void _OnDraw(int layer_index) override;
   } *atlas_animator;
 
 
   /*
     Tilemap Component
   */
-  typedef struct Tilemap : BaseTilemap, DrawableBaseComponent{
+  typedef struct Tilemap : BaseTilemap{
     Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map);
-    void Draw();
 
     bool IsTiled(int column, int row);
 
   protected:
     int *tile_map;
+
+    void _OnDraw(int layer_index) override;
   } *tilemap;
 
 
   /*
     TMXMap Component
   */
-  typedef struct TMXMap : BaseTilemap, DrawableBaseComponent{
+  typedef struct TMXMap : BaseTilemap{
     int *layer_sorting_order = nullptr;
 
     TMXMap(Texture2D *_texture, string tmx_file_src);
-    void Draw(int layer_index);
-    void Draw();
     void PrintMapAttribute();
 
     bool IsTiled(int layer_index, int column, int row);
@@ -187,6 +191,9 @@ namespace Component{
     vector<string> map_layer_str_list;
     vector<int*> map_layer_list;
 
+    void _OnDraw(int layer_index) override;
+    void _DrawLayer(int layer_index);
+    void _DrawAllLayer();
     void _OnAttach() override;
   } *tmxmap;
 
