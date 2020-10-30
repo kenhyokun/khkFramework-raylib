@@ -68,7 +68,7 @@ namespace Component{
 
   protected:
     Texture2D *texture = nullptr;
-    v2 pivot {0.0f, 0.0f};
+    v2 pivot{0.0f, 0.0f};
     Rectangle src_rect{0.0f, 0.0f, 0.0f, 0.0f};
     Rectangle dst_rect{0.0f, 0.0f, 0.0f, 0.0f};
 
@@ -139,7 +139,6 @@ namespace Component{
     void DebugDraw();
 
   protected:
-
     map<string, vector<Texture2D>> anim_frame;
     int map_index = 0;
     string last_posible_anim_name = "nan";
@@ -162,7 +161,6 @@ namespace Component{
   */
   typedef struct Tilemap : BaseTilemap{
     Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map);
-
     bool IsTiled(int column, int row);
 
   protected:

@@ -109,7 +109,7 @@ void Node::SetPosition(v2 position){
   transform.position = position;
 
   if(child->size() > 0){
-    for(int i = 0; i < child->size(); i++){
+    for(int i = 0; i < child->size(); ++i){
       if(!GetChild(i)->IsHasRigidBodyComponent()){ // parent node can't move child node if child node have rigid body component
   	GetChild(i)->SetPosition(v2{GetChild(i)->GetPosition().x + dx,
   	      GetChild(i)->GetPosition().y + dy});
@@ -128,7 +128,7 @@ void Node::SetRotation(float angle){
   transform.right += da;
 
   if(child->size() > 0){
-    for(int i = 0; i < child->size(); i++){
+    for(int i = 0; i < child->size(); ++i){
 
       GetChild(i)->SetRotation(transform.rotation);
 
@@ -149,7 +149,7 @@ void Node::SetRotation(float angle){
 
 void Node::PrintAllChildName(){
   if(child->size() > 0){
-    for(int i = 0; i < child->size(); i++){
+    for(int i = 0; i < child->size(); ++i){
       cout<<GetChild(i)->name<<endl;
     }
   }
@@ -176,7 +176,7 @@ Node* Node::GetChild(string name){
 }
 
 void Node::ClearChild(){
-  for(int i = 0; i < GetChild()->size(); i++){
+  for(int i = 0; i < GetChild()->size(); ++i){
     GetChild(i)->ClearParent();
   }
   child->clear();

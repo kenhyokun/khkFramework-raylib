@@ -39,7 +39,7 @@ void B2D_DebugDraw::DrawPolygon(const b2v2 *vertices, int32 v_count, const b2Col
 
 void B2D_DebugDraw::DrawSolidPolygon(const b2v2 *vertices, int32 v_count, const b2Color &color){
   b2v2 p1 = vertices[v_count - 1];
-  for (int32 i = 0; i < v_count; i++){
+  for (int32 i = 0; i < v_count; ++i){
     b2v2 p2 = vertices[i];
     DrawSegment(p1, p2, b2Color{0, 0, 0, 1});
     p1 = p2;

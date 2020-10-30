@@ -37,7 +37,7 @@ void ContactListener::BeginContact(b2Contact *contact){
     (contact->GetFixtureB()->GetBody()->GetUserData());
 
 
-  for(int i = 0; i < collision_listener_list.size(); i++){
+  for(int i = 0; i < collision_listener_list.size(); ++i){
 
     if(collision_listener_list.at(i)->GetNode() != nullptr){
       

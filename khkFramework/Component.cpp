@@ -213,7 +213,7 @@ void Component::AtlasAnimator::PlayAnim(string _anim_name, int fps){
 
 void Component::AtlasAnimator::DebugDraw(){
   if(is_enable && is_visible){
-    for(int i = 0; i < anim_frame.at(anim_name).size(); i++){
+    for(int i = 0; i < anim_frame.at(anim_name).size(); ++i){
       Rectangle _dst_rect = {dst_rect.x + (dst_rect.width * i),
 			     dst_rect.y - dst_rect.height,
 			     dst_rect.width,
@@ -302,7 +302,7 @@ Component::Tilemap::Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map){
 }
 
 void Component::Tilemap::_OnDraw(int layer_index){
-  for(int i = 0; i < grid->row; i++){
+  for(int i = 0; i < grid->row; ++i){
     for(int j = 0; j < grid->column; j++){
 
       int tile = tile_map[_GetIndex(j, i)];
@@ -382,7 +382,7 @@ Component::TMXMap::TMXMap(Texture2D *_texture, string tmx_file_src){
 	  map_layer_str_list.push_back(temp_str);		    
 	  int *map = new int[grid->column * grid->row];
 
-	  for(int i = 0; i < temp_str.length(); i++){	    
+	  for(int i = 0; i < temp_str.length(); ++i){	    
 	    string get_char = "";
 	    get_char.push_back(temp_str[i]);
 	  	    
@@ -426,7 +426,7 @@ void Component::TMXMap::_OnDraw(int layer_index){
 }
 
 void Component::TMXMap::_DrawLayer(int layer_index){
-  for(int i = 0; i < grid->row; i++){
+  for(int i = 0; i < grid->row; ++i){
     for(int j = 0; j < grid->column; j++){
 
       int tile = map_layer_list.at(layer_index)[_GetIndex(j, i)];
@@ -454,7 +454,7 @@ void Component::TMXMap::_DrawLayer(int layer_index){
 }
 
 void Component::TMXMap::_DrawAllLayer(){
-  for(int i = 0; i < map_layer_list.size(); i++){
+  for(int i = 0; i < map_layer_list.size(); ++i){
     Draw(i);
   }
 }

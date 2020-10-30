@@ -34,7 +34,7 @@ int32 Component::VerticeColliderBaseComponent::GetVerticeCount(){return v_count;
 
 void Component::VerticeColliderBaseComponent::_OnAttach(){
   vertice = new b2v2[vertice_list.size()];
-  for(int i = 0; i < vertice_list.size(); i++){
+  for(int i = 0; i < vertice_list.size(); ++i){
 
     v2 rel_position = v2{vertice_list.at(i).x - node->GetPosition().x,
 			 vertice_list.at(i).y - node->GetPosition().y };

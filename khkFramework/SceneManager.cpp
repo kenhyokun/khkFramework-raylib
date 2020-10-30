@@ -51,7 +51,7 @@ void SceneManager::Draw(){
   if(scene_list->GetChild()->size() > 0 &&
      selected_scene->GetChild()->size() > 0){
 
-    for(int i = 0; i < selected_scene_sort_component->sort_data_list.size(); i++){
+    for(int i = 0; i < selected_scene_sort_component->sort_data_list.size(); ++i){
 
       switch(selected_scene_sort_component->
 	     sort_data_list.at(i).node->
@@ -129,7 +129,7 @@ void SceneManager::_GetNodeOnTree(Node *node, SortingDataComponent * sorting_com
       data.layer_count=
 	node->GetComponent<Component::tmxmap>()->GetLayerCount();
 
-      for(int i = 0; i < data.layer_count; i++){
+      for(int i = 0; i < data.layer_count; ++i){
 	data.layer_index = i;
 
 	data.sorting_order =
@@ -147,7 +147,7 @@ void SceneManager::_GetNodeOnTree(Node *node, SortingDataComponent * sorting_com
   }
 
   if(node->GetChild()->size() > 0){
-    for(int i = 0; i < node->GetChild()->size(); i++){
+    for(int i = 0; i < node->GetChild()->size(); ++i){
       _GetNodeOnTree(node->GetChild(i), sorting_component);
     }
   }
@@ -159,7 +159,7 @@ void SceneManager::_CreateSortingDataList(Scene *scene, SortingDataComponent *so
 }
 
 void SceneManager::_BubbleSort(SortingDataComponent *sorting_component){
-  for(int i = 0; i < sorting_component->sort_data_list.size(); i++){
+  for(int i = 0; i < sorting_component->sort_data_list.size(); ++i){
     int sort_index = i;
     int sorting_order = sorting_component->sort_data_list.at(i).sorting_order;
 
