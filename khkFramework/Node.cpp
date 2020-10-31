@@ -36,14 +36,12 @@ Node::Node(string _name){
 }
 
 void Node::_SetParent(Node *node){parent = node;}
-CTransform Node::_GetTransform(){return transform;}
 void Node::_SetTransformDirection(float up, float right){transform.up = up; transform.right = right;}
 
 void Node::_Rotate(float angle, v2 pivot){
   SetPosition(TransformRotation(Deg2Rad(angle), GetPosition(), pivot));
 }
 
-// vector
 void Node::SetParent(Node *node){
   if(node == nullptr){
 
@@ -134,8 +132,8 @@ void Node::SetRotation(float angle){
 
       // set direction
       GetChild(i)->
-  	_SetTransformDirection(GetChild(i)->_GetTransform().up + da,
-  			       GetChild(i)->_GetTransform().right + da);
+  	_SetTransformDirection(GetChild(i)->GetTransform().up + da,
+  			       GetChild(i)->GetTransform().right + da);
 
       // child transformation rotation
       if(!GetChild(i)->is_fixed_transform_rotation){
@@ -184,6 +182,7 @@ void Node::ClearChild(){
 
 void Node::ClearParent(){parent = nullptr;}
 void Node::SetTransform(CTransform _transform){transform = _transform;}
+CTransform Node::GetTransform(){return transform;}
 float Node::GetUpDirection(){return transform.up;}
 float Node::GetRightDirection(){return transform.right;}
 v2 Node::GetPosition(){return transform.position;}

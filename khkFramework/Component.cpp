@@ -27,7 +27,7 @@
 
 void Component::BaseComponent::Attach(){_OnAttach();}
 void Component::BaseComponent::_OnAttach(){}
-void Component::BaseComponent::SetNode(Node *_node){if(node == nullptr) node = _node;}
+void Component::BaseComponent::SetNode(Node *_node){if(_node != nullptr && node == nullptr) node = _node;}
 Node* Component::BaseComponent::GetNode(){return node;}
 
 void Component::DrawableBaseComponent::Draw(int layer_index){
@@ -334,6 +334,8 @@ bool Component::Tilemap::IsTiled(int column, int row){
   }
   return false;
 }
+
+int* Component::Tilemap::GetTileMap(){return tile_map;}
 
 
 /*

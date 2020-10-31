@@ -63,7 +63,6 @@ protected:
   static string searched_name;
 
   void _SetParent(Node *node);
-  CTransform _GetTransform();
   void _SetTransformDirection(float up, float right);
   void _Rotate(float angle, v2 pivot); // transformation rotation
   void _RemoveChild(vector<Node*>::iterator it);
@@ -155,6 +154,7 @@ public:
   }
 
   void SetTransform(CTransform _transform);
+  CTransform GetTransform();
   float GetUpDirection();
   float GetRightDirection();
   void SetPosition(v2 position);

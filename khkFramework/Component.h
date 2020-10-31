@@ -62,12 +62,12 @@ namespace Component{
   };
 
   struct DrawableBaseComponent : BaseComponent{
+    Texture2D *texture = nullptr;
     int sorting_order = 0;
     bool is_visible = true;
     void Draw(int layer_index = -1); // draw when component enable and visible
 
   protected:
-    Texture2D *texture = nullptr;
     v2 pivot{0.0f, 0.0f};
     Rectangle src_rect{0.0f, 0.0f, 0.0f, 0.0f};
     Rectangle dst_rect{0.0f, 0.0f, 0.0f, 0.0f};
@@ -162,6 +162,7 @@ namespace Component{
   typedef struct Tilemap : BaseTilemap{
     Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map);
     bool IsTiled(int column, int row);
+    int* GetTileMap();
 
   protected:
     int *tile_map;
@@ -196,5 +197,4 @@ namespace Component{
   } *tmxmap;
 
 }; // component namespace
-
 #endif

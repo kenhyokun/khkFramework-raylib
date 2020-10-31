@@ -20,6 +20,55 @@ using namespace Component;
   - OnDraw
 */
 
+// just leave this here. not sure if I need instantiate function or not.
+static Node* Instantiate(Node* node, string name = "", v2 position = {0.0f, 0.0f}){
+  Node *inst_node = nullptr; 
+  Texture2D *texture = nullptr;
+  int sorting_order = 0;
+
+  if(name != ""){
+    inst_node = new Node(name);
+  }
+  else{
+    inst_node = new Node();
+  }
+
+  inst_node->SetPosition(position);
+
+  switch(node->component_entity.drawable_type){
+
+  case Component::SPRITE_RENDERER:
+    texture = node->GetComponent<Component::sprite_renderer>()->texture; // need more test for texture instantiate... I mean... pointer...
+    sorting_order = node->GetComponent<Component::sprite_renderer>()->sorting_order;
+    inst_node->AddComponent<Component::sprite_renderer>(new Component::SpriteRenderer(texture));
+    break;
+
+  case Component::ANIMATOR:
+    int frame_width;
+    int frame_height;
+    frame_width = node->GetComponent<Component::animator>()->GetFrameWidth();
+    frame_height = node->GetComponent<Component::animator>()->GetFrameHeight();
+    texture = node->GetComponent<Component::animator>()->texture;
+    sorting_order = node->GetComponent<Component::animator>()->sorting_order;
+    inst_node->AddComponent<Component::animator>(new Component::Animator(texture, frame_width, frame_height));
+    break;
+
+  case Component::ATLAS_ANIMATOR:
+    break;
+
+  case Component::TILEMAP:
+    break;
+
+  case Component::TMXMAP:
+    break;
+
+  }
+
+  return inst_node;
+}
+
+static Node* Instantiate(Node* node, string name, CTransform transform){}
+
 struct App : BaseApp, ContactListener{
 
   Node *node1, *node2, *node3,
@@ -60,6 +109,8 @@ struct App : BaseApp, ContactListener{
     node1->SetPosition(node2->GetComponent<Component::tilemap>()->
 		       GetGridPosition(1, 0));
 
+    node3 = Instantiate(node1);
+    node3->SetPosition(v2{0,0});
   }
 
   void OnUpdate() override {
@@ -69,6 +120,7 @@ struct App : BaseApp, ContactListener{
     DrawText("my first raylib window", 190, 200, 20, LIGHTGRAY);
     node2->GetComponent<Component::tilemap>()->Draw();
     node1->GetComponent<Component::sprite_renderer>()->Draw();
+    node3->GetComponent<Component::sprite_renderer>()->Draw();
   }
 
 };
