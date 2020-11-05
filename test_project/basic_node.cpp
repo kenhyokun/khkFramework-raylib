@@ -96,18 +96,22 @@ struct App : BaseApp, ContactListener{
     node1 = new Node("node 1");
     node1->AddComponent<Component::sprite_renderer>(new SpriteRenderer(&lilwitch));
 
-    int *tile_map = new int[9]{1,2,3,
-			       4,1,4,
-			       3,2,1};
+    Grid *tilemap_grid = new Grid{48, 48, 5, 5};
+    int *tile_map = new int[25]{1,1,0,1,1,
+				1,1,1,1,1,
+				0,0,0,0,0,
+				3,3,0,4,4,
+				3,3,0,4,4
+    };
 
     node2 = new Node("node 2");
-    node2->AddComponent<Component::tilemap>(new Tilemap(&tile, new Grid{48, 48, 3, 3}, tile_map));
+    node2->AddComponent<Component::tilemap>(new Tilemap(&tile, tilemap_grid, tile_map));
     node2->SetPosition(v2{300, 300});
 
-    node2->SetRotation(45);
+    // node2->SetRotation(45);
 
     node1->SetPosition(node2->GetComponent<Component::tilemap>()->
-		       GetGridPosition(1, 0));
+		       GetGridPosition(1, 4));
 
     node3 = Instantiate(node1);
     node3->SetPosition(v2{0,0});

@@ -47,7 +47,7 @@ Rectangle Component::GridBaseComponent::_GetSrcRect(int tile){
   
   int src_x = temp_column - 1;
   int src_y = temp_row - 1;
-	
+
   return Rectangle{
     (float)src_x * (float)grid->width,
       (float)src_y * (float)grid->height,
@@ -131,12 +131,11 @@ void Component::Animator::PlayAnim(vector<int> anim_frame, int fps){
   if(frame_counter >= (60 / fps)){
     frame_counter = 0;
     frame_index++;
+  }
 
-    if(frame_index > anim_frame.size() - 1){
-      frame_index = 0;
-    } // frame index
-
-  } // frame counter
+  if(frame_index > anim_frame.size() - 1){
+    frame_index = 0;
+  }
 
   src_rect = _GetSrcRect(anim_frame.at(frame_index));
 }

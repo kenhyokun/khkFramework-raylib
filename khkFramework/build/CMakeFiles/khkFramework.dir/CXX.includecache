@@ -604,7 +604,7 @@ android/log.h
 assert.h
 -
 
-..//B2D.h
+../include/B2D.h
 m_box2d.h
 -
 Component.h
@@ -614,13 +614,13 @@ B2D_DebugDraw.h
 ContactListener.h
 -
 
-..//B2D_DebugDraw.h
+../include/B2D_DebugDraw.h
 m_box2d.h
 -
 m_raylib.h
 -
 
-..//BaseApp.h
+../include/BaseApp.h
 iostream
 -
 m_raylib.h
@@ -632,7 +632,7 @@ File.h
 KeyButton.h
 -
 
-..//CCamera.h
+../include/CCamera.h
 iostream
 -
 m_raylib.h
@@ -640,19 +640,19 @@ m_raylib.h
 Node.h
 -
 
-..//CMath.h
+../include/CMath.h
 m_raylib.h
 -
 cmath
 -
 
-..//CollisionListener.h
+../include/CollisionListener.h
 Node.h
 -
 m_box2d.h
 -
 
-..//Component.h
+../include/Component.h
 Node.h
 -
 File.h
@@ -662,7 +662,7 @@ TextureAtlas.h
 CCamera.h
 -
 
-..//ContactListener.h
+../include/ContactListener.h
 iostream
 -
 vector
@@ -674,7 +674,7 @@ m_box2d.h
 CollisionListener.h
 -
 
-..//File.h
+../include/File.h
 iostream
 -
 fstream
@@ -688,15 +688,15 @@ confini.h
 JSON.h
 -
 
-..//JSON.h
+../include/JSON.h
 json.hpp
 -
 
-..//KeyButton.h
+../include/KeyButton.h
 m_raylib.h
 -
 
-..//Node.h
+../include/Node.h
 iostream
 -
 vector
@@ -712,13 +712,13 @@ CMath.h
 n_component_derived_check.h
 -
 
-..//SceneManager.h
+../include/SceneManager.h
 Component.h
 -
 algorithm
 -
 
-..//TextureAtlas.h
+../include/TextureAtlas.h
 m_raylib.h
 -
 algorithm
@@ -740,59 +740,59 @@ vector
 map
 -
 
-..//m_box2d.h
+../include/m_box2d.h
 box2d/box2d.h
 -
 Component.h
 -
 
-..//m_raylib.h
+../include/m_raylib.h
 iostream
 -
 raylib.h
 -
 
-..//n_component_derived_check.h
+../include/n_component_derived_check.h
 iostream
 -
 
-/home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/src/B2D.cpp
 B2D.h
 -
 
-/home/kevin/development-project/cpp/raylib/tes2/khkFramework/B2D_DebugDraw.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/src/B2D_DebugDraw.cpp
 B2D_DebugDraw.h
 -
 
-/home/kevin/development-project/cpp/raylib/tes2/khkFramework/BaseApp.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/src/BaseApp.cpp
 BaseApp.h
 -
 
-/home/kevin/development-project/cpp/raylib/tes2/khkFramework/CCamera.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/src/CCamera.cpp
 CCamera.h
 -
 
-/home/kevin/development-project/cpp/raylib/tes2/khkFramework/Component.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/src/Component.cpp
 Component.h
 -
 
-/home/kevin/development-project/cpp/raylib/tes2/khkFramework/ContactListener.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/src/ContactListener.cpp
 ContactListener.h
 -
 
-/home/kevin/development-project/cpp/raylib/tes2/khkFramework/File.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/src/File.cpp
 File.h
 -
 
-/home/kevin/development-project/cpp/raylib/tes2/khkFramework/Node.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/src/Node.cpp
 Node.h
 -
 
-/home/kevin/development-project/cpp/raylib/tes2/khkFramework/SceneManager.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/src/SceneManager.cpp
 SceneManager.h
 -
 
-/home/kevin/development-project/cpp/raylib/tes2/khkFramework/TextureAtlas.cpp
+/home/kevin/development-project/cpp/raylib/tes2/khkFramework/src/TextureAtlas.cpp
 TextureAtlas.h
 -
 

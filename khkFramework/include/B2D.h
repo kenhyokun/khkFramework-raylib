@@ -150,7 +150,10 @@ namespace Component{
     static const b2BodyType DYNAMIC = b2_dynamicBody;
     static const b2BodyType KINEMATIC = b2_kinematicBody;
 
-    RigidBody(float _density = 1.0f);
+    float density = 1.0f;
+    b2BodyType body_type = DYNAMIC;
+
+    RigidBody();
     void Step();
     void ApplyForce(const v2 &force, bool awake = true);
     void ApplyForce(const v2 &force, const v2 &point, bool awake = true);
@@ -180,7 +183,6 @@ namespace Component{
     b2Body* GetBody();
 
   protected:
-    float density;
     b2Fixture *fixture;
     b2Body *body = nullptr;
     void _OnAttach() override;

@@ -124,154 +124,154 @@ khkFramework/fast:
 .PHONY : khkFramework/fast
 
 # target to build an object file
-B2D.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/B2D.o
-.PHONY : B2D.o
+src/B2D.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/B2D.o
+.PHONY : src/B2D.o
 
 # target to preprocess a source file
-B2D.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/B2D.i
-.PHONY : B2D.i
+src/B2D.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/B2D.i
+.PHONY : src/B2D.i
 
 # target to generate assembly for a file
-B2D.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/B2D.s
-.PHONY : B2D.s
+src/B2D.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/B2D.s
+.PHONY : src/B2D.s
 
 # target to build an object file
-B2D_DebugDraw.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/B2D_DebugDraw.o
-.PHONY : B2D_DebugDraw.o
+src/B2D_DebugDraw.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/B2D_DebugDraw.o
+.PHONY : src/B2D_DebugDraw.o
 
 # target to preprocess a source file
-B2D_DebugDraw.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/B2D_DebugDraw.i
-.PHONY : B2D_DebugDraw.i
+src/B2D_DebugDraw.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/B2D_DebugDraw.i
+.PHONY : src/B2D_DebugDraw.i
 
 # target to generate assembly for a file
-B2D_DebugDraw.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/B2D_DebugDraw.s
-.PHONY : B2D_DebugDraw.s
+src/B2D_DebugDraw.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/B2D_DebugDraw.s
+.PHONY : src/B2D_DebugDraw.s
 
 # target to build an object file
-BaseApp.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/BaseApp.o
-.PHONY : BaseApp.o
+src/BaseApp.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/BaseApp.o
+.PHONY : src/BaseApp.o
 
 # target to preprocess a source file
-BaseApp.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/BaseApp.i
-.PHONY : BaseApp.i
+src/BaseApp.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/BaseApp.i
+.PHONY : src/BaseApp.i
 
 # target to generate assembly for a file
-BaseApp.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/BaseApp.s
-.PHONY : BaseApp.s
+src/BaseApp.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/BaseApp.s
+.PHONY : src/BaseApp.s
 
 # target to build an object file
-CCamera.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/CCamera.o
-.PHONY : CCamera.o
+src/CCamera.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/CCamera.o
+.PHONY : src/CCamera.o
 
 # target to preprocess a source file
-CCamera.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/CCamera.i
-.PHONY : CCamera.i
+src/CCamera.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/CCamera.i
+.PHONY : src/CCamera.i
 
 # target to generate assembly for a file
-CCamera.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/CCamera.s
-.PHONY : CCamera.s
+src/CCamera.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/CCamera.s
+.PHONY : src/CCamera.s
 
 # target to build an object file
-Component.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/Component.o
-.PHONY : Component.o
+src/Component.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/Component.o
+.PHONY : src/Component.o
 
 # target to preprocess a source file
-Component.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/Component.i
-.PHONY : Component.i
+src/Component.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/Component.i
+.PHONY : src/Component.i
 
 # target to generate assembly for a file
-Component.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/Component.s
-.PHONY : Component.s
+src/Component.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/Component.s
+.PHONY : src/Component.s
 
 # target to build an object file
-ContactListener.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/ContactListener.o
-.PHONY : ContactListener.o
+src/ContactListener.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/ContactListener.o
+.PHONY : src/ContactListener.o
 
 # target to preprocess a source file
-ContactListener.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/ContactListener.i
-.PHONY : ContactListener.i
+src/ContactListener.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/ContactListener.i
+.PHONY : src/ContactListener.i
 
 # target to generate assembly for a file
-ContactListener.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/ContactListener.s
-.PHONY : ContactListener.s
+src/ContactListener.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/ContactListener.s
+.PHONY : src/ContactListener.s
 
 # target to build an object file
-File.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/File.o
-.PHONY : File.o
+src/File.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/File.o
+.PHONY : src/File.o
 
 # target to preprocess a source file
-File.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/File.i
-.PHONY : File.i
+src/File.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/File.i
+.PHONY : src/File.i
 
 # target to generate assembly for a file
-File.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/File.s
-.PHONY : File.s
+src/File.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/File.s
+.PHONY : src/File.s
 
 # target to build an object file
-Node.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/Node.o
-.PHONY : Node.o
+src/Node.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/Node.o
+.PHONY : src/Node.o
 
 # target to preprocess a source file
-Node.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/Node.i
-.PHONY : Node.i
+src/Node.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/Node.i
+.PHONY : src/Node.i
 
 # target to generate assembly for a file
-Node.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/Node.s
-.PHONY : Node.s
+src/Node.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/Node.s
+.PHONY : src/Node.s
 
 # target to build an object file
-SceneManager.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/SceneManager.o
-.PHONY : SceneManager.o
+src/SceneManager.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/SceneManager.o
+.PHONY : src/SceneManager.o
 
 # target to preprocess a source file
-SceneManager.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/SceneManager.i
-.PHONY : SceneManager.i
+src/SceneManager.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/SceneManager.i
+.PHONY : src/SceneManager.i
 
 # target to generate assembly for a file
-SceneManager.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/SceneManager.s
-.PHONY : SceneManager.s
+src/SceneManager.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/SceneManager.s
+.PHONY : src/SceneManager.s
 
 # target to build an object file
-TextureAtlas.o:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/TextureAtlas.o
-.PHONY : TextureAtlas.o
+src/TextureAtlas.o:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/TextureAtlas.o
+.PHONY : src/TextureAtlas.o
 
 # target to preprocess a source file
-TextureAtlas.i:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/TextureAtlas.i
-.PHONY : TextureAtlas.i
+src/TextureAtlas.i:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/TextureAtlas.i
+.PHONY : src/TextureAtlas.i
 
 # target to generate assembly for a file
-TextureAtlas.s:
-	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/TextureAtlas.s
-.PHONY : TextureAtlas.s
+src/TextureAtlas.s:
+	$(MAKE) -f CMakeFiles/khkFramework.dir/build.make CMakeFiles/khkFramework.dir/src/TextureAtlas.s
+.PHONY : src/TextureAtlas.s
 
 # Help Target
 help:
@@ -282,36 +282,36 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... khkFramework"
 	@echo "... edit_cache"
-	@echo "... B2D.o"
-	@echo "... B2D.i"
-	@echo "... B2D.s"
-	@echo "... B2D_DebugDraw.o"
-	@echo "... B2D_DebugDraw.i"
-	@echo "... B2D_DebugDraw.s"
-	@echo "... BaseApp.o"
-	@echo "... BaseApp.i"
-	@echo "... BaseApp.s"
-	@echo "... CCamera.o"
-	@echo "... CCamera.i"
-	@echo "... CCamera.s"
-	@echo "... Component.o"
-	@echo "... Component.i"
-	@echo "... Component.s"
-	@echo "... ContactListener.o"
-	@echo "... ContactListener.i"
-	@echo "... ContactListener.s"
-	@echo "... File.o"
-	@echo "... File.i"
-	@echo "... File.s"
-	@echo "... Node.o"
-	@echo "... Node.i"
-	@echo "... Node.s"
-	@echo "... SceneManager.o"
-	@echo "... SceneManager.i"
-	@echo "... SceneManager.s"
-	@echo "... TextureAtlas.o"
-	@echo "... TextureAtlas.i"
-	@echo "... TextureAtlas.s"
+	@echo "... src/B2D.o"
+	@echo "... src/B2D.i"
+	@echo "... src/B2D.s"
+	@echo "... src/B2D_DebugDraw.o"
+	@echo "... src/B2D_DebugDraw.i"
+	@echo "... src/B2D_DebugDraw.s"
+	@echo "... src/BaseApp.o"
+	@echo "... src/BaseApp.i"
+	@echo "... src/BaseApp.s"
+	@echo "... src/CCamera.o"
+	@echo "... src/CCamera.i"
+	@echo "... src/CCamera.s"
+	@echo "... src/Component.o"
+	@echo "... src/Component.i"
+	@echo "... src/Component.s"
+	@echo "... src/ContactListener.o"
+	@echo "... src/ContactListener.i"
+	@echo "... src/ContactListener.s"
+	@echo "... src/File.o"
+	@echo "... src/File.i"
+	@echo "... src/File.s"
+	@echo "... src/Node.o"
+	@echo "... src/Node.i"
+	@echo "... src/Node.s"
+	@echo "... src/SceneManager.o"
+	@echo "... src/SceneManager.i"
+	@echo "... src/SceneManager.s"
+	@echo "... src/TextureAtlas.o"
+	@echo "... src/TextureAtlas.i"
+	@echo "... src/TextureAtlas.s"
 .PHONY : help
 
 

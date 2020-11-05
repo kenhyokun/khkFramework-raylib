@@ -139,8 +139,7 @@ void Component::EdgeCollider::_OnAttach(){
 /*
   RigidBody Component
 */
-Component::RigidBody::RigidBody(float _density){
-  density = _density;
+Component::RigidBody::RigidBody(){
 }
 
 void Component::RigidBody::Step(){
@@ -184,6 +183,7 @@ void Component::RigidBody::_OnAttach(){
 
   if(_IsGetCollider()){
     body->SetUserData(node);
+    SetBodyType(body_type);
   }
   else{
     cout<<"you must add collider component at "<<node->name<<" first!"<<endl;
