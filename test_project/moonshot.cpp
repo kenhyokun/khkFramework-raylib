@@ -58,7 +58,7 @@ struct App : BaseApp, ContactListener{
 
     tilemap = new Node("tilemap");
     hero = new Node("hero octocat");
-    hero->AddComponent<Component::animator>(new Animator(&octocat, 75, 119));
+    hero->AddComponent<Component::animator>(new Animator(75, 119, &octocat));
     hero->SetPosition(v2{150, 150});
   }
 

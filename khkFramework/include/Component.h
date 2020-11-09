@@ -49,6 +49,12 @@ namespace Component{
     - TMXMap
   */
 
+  /*
+    NOTE[kevin]:
+    PlayAnim function on animator and atlas animator component only
+    run if texture != nullptr.
+  */
+
   struct BaseComponent{
     bool is_enable = true;
 
@@ -75,18 +81,16 @@ namespace Component{
     virtual void _OnDraw(int layer_index);
   };
 
-  struct GridBaseComponent{
+  struct GridBaseComponent : DrawableBaseComponent{
     Grid* GetGrid();
 
   protected:
     Grid *grid = nullptr;
-    int texture_column = 0;
-    int texture_row = 0;
 
     Rectangle _GetSrcRect(int tile);
   };
 
-  struct BaseTilemap : DrawableBaseComponent, GridBaseComponent{
+  struct BaseTilemap : GridBaseComponent{
     int GetMaxWidth();
     int GetMaxHeight();
     v2 GetGridPosition(int column, int row);
@@ -103,7 +107,7 @@ namespace Component{
     SpriteRenderer Component
   */
   typedef struct SpriteRenderer : DrawableBaseComponent{
-    SpriteRenderer(Texture2D *_texture);
+    SpriteRenderer(Texture2D *_texture = nullptr);
 
   protected:
     void _OnDraw(int layer_index) override;
@@ -113,18 +117,13 @@ namespace Component{
   /*
     Animator Component
   */
-  typedef struct Animator : DrawableBaseComponent, GridBaseComponent{
-    Animator(Texture2D *_texture, int _frame_width, int _frame_height);
+  typedef struct Animator : GridBaseComponent{
+    Animator(int frame_width, int frame_height, Texture2D *_texture = nullptr);
     void PlayAnim(vector<int> anim_frame, int fps);
-
-    int GetFrameWidth();
-    int GetFrameHeight();
 
   protected:
     int frame_index = 0;
     int frame_counter = 0;
-    int frame_width = 0;
-    int frame_height = 0;
 
     void _OnDraw(int layer_index);
   } *animator;
@@ -148,7 +147,6 @@ namespace Component{
     int frame_counter = 0;
     int frame_index = 1;
     string anim_name;
-    Texture2D curr_texture;
 
     bool _IsPosibleAnimName(string region_map_name, string *posible_anim_name, int *index);
     void _CreateAnimFrame();
@@ -160,13 +158,13 @@ namespace Component{
     Tilemap Component
   */
   typedef struct Tilemap : BaseTilemap{
-    Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map);
+    int *tile_map;
+
+    Tilemap(Grid *_grid, int* _tile_map, Texture2D *_texture = nullptr);
     bool IsTiled(int column, int row);
     int* GetTileMap();
 
   protected:
-    int *tile_map;
-
     void _OnDraw(int layer_index) override;
   } *tilemap;
 
@@ -177,7 +175,7 @@ namespace Component{
   typedef struct TMXMap : BaseTilemap{
     int *layer_sorting_order = nullptr;
 
-    TMXMap(Texture2D *_texture, string tmx_file_src);
+    TMXMap(string tmx_file_src, Texture2D *_texture = nullptr);
     void PrintMapAttribute();
 
     bool IsTiled(int layer_index, int column, int row);

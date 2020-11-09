@@ -32,13 +32,17 @@ Node* Component::BaseComponent::GetNode(){return node;}
 
 void Component::DrawableBaseComponent::Draw(int layer_index){
   if(is_enable && is_visible){
-    _OnDraw(layer_index);
+    if(texture != nullptr){
+      _OnDraw(layer_index);
+    }
   }
 }
 
 void Component::DrawableBaseComponent::_OnDraw(int layer_index){}
 
 Rectangle Component::GridBaseComponent::_GetSrcRect(int tile){
+  int texture_column = texture->width / grid->width;
+  int texture_row = texture->height / grid->height;
   int begin_column = 1;
   int range_column = texture_column - begin_column;
   int temp_row = (tile + range_column) / texture_column;
@@ -111,40 +115,46 @@ void Component::SpriteRenderer::_OnDraw(int layer_index){
 /*
   Animator Component
 */
-Component::Animator::Animator(Texture2D *_texture,
-			      int _frame_width,
-			      int _frame_height){
+Component::Animator::Animator(int frame_width,
+			      int frame_height,
+			      Texture2D *_texture){
 
   texture = _texture; 
-  frame_width = _frame_width;
-  frame_height = _frame_height;
-  texture_column = texture->width / frame_width;
-  texture_row = texture->height / frame_height;
-  grid = new Grid{frame_width, frame_height, texture_column, texture_row};
-  
+
+  grid = new Grid();
+  grid->width = frame_width;
+  grid->height = frame_height;
+
   src_rect = {0.0f, 0.0f, (float)frame_width, (float)frame_height};
 }
 
 void Component::Animator::PlayAnim(vector<int> anim_frame, int fps){
-  frame_counter++;
+  if(texture != nullptr){
+    frame_counter++;
 
-  if(frame_counter >= (60 / fps)){
-    frame_counter = 0;
-    frame_index++;
+    if(frame_counter >= (60 / fps)){
+      frame_counter = 0;
+      frame_index++;
+    }
+
+    if(frame_index > anim_frame.size() - 1){
+      frame_index = 0;
+    }
+
+    src_rect = _GetSrcRect(anim_frame.at(frame_index));
   }
-
-  if(frame_index > anim_frame.size() - 1){
-    frame_index = 0;
-  }
-
-  src_rect = _GetSrcRect(anim_frame.at(frame_index));
 }
 
 void Component::Animator::_OnDraw(int layer_index){
-  pivot = {((float)frame_width * node->GetScale().x) / 2.0f,
-	   ((float)frame_height * node->GetScale().y) / 2.0f};
+  pivot = {((float)grid->width * node->GetScale().x) / 2.0f,
+	   ((float)grid->height * node->GetScale().y) / 2.0f};
 
-  dst_rect = {node->GetPosition().x, node->GetPosition().y, (float)frame_width, (float)frame_height};
+  dst_rect = {node->GetPosition().x,
+	      node->GetPosition().y,
+	      (float)grid->width,
+	      (float)grid->height
+  };
+
   dst_rect.width *= node->GetScale().x;
   dst_rect.height *= node->GetScale().y;
 
@@ -157,9 +167,6 @@ void Component::Animator::_OnDraw(int layer_index){
 
 }
 
-int Component::Animator::GetFrameWidth(){return frame_width;}
-int Component::Animator::GetFrameHeight(){return frame_height;}
-
 
 /* 
    AtlasAnimator Component
@@ -167,47 +174,46 @@ int Component::Animator::GetFrameHeight(){return frame_height;}
 Component::AtlasAnimator::AtlasAnimator(TextureAtlas *_texture_atlas){
   texture_atlas = _texture_atlas;
   _CreateAnimFrame();
-
-  cout<<"anim_frame:"<<anim_frame.at("run_right").size()<<endl;
-
+  frame_list.clear();
 }
 
 void Component::AtlasAnimator::PlayAnim(string _anim_name, int fps){
-  frame_counter++;
-  anim_name = _anim_name;
+  if(texture != nullptr){
+    frame_counter++;
+    anim_name = _anim_name;
 
-  if(frame_counter >= (60 / fps)){
-    frame_counter = 0;
-    frame_index++;
+    if(frame_counter >= (60 / fps)){
+      frame_counter = 0;
+      frame_index++;
 
-    if(frame_index > anim_frame.at(anim_name).size()){
-      frame_index = 1;
+      if(frame_index > anim_frame.at(anim_name).size()){
+	frame_index = 1;
+      }
     }
-  }
 
-  AtlasRegion atlas_region = 
-    texture_atlas->GetRegion(anim_name + "_" + to_string(frame_index));
+    AtlasRegion atlas_region = 
+      texture_atlas->GetRegion(anim_name + "_" + to_string(frame_index));
 
-  v2i size = atlas_region.size;
-  v2i origin_size = atlas_region.orig;
-  v2i offset = atlas_region.offset;
+    v2i size = atlas_region.size;
+    v2i origin_size = atlas_region.orig;
+    v2i offset = atlas_region.offset;
 
-  // draw position
-  v2 position = {node->GetPosition().x + offset.x,
-    		 node->GetPosition().y + offset.y};
+    // draw position
+    v2 position = {node->GetPosition().x + offset.x,
+		   node->GetPosition().y + offset.y};
 
-  pivot = {((float)origin_size.x * node->GetScale().x) / 2.0f,
-	   ((float)origin_size.y * node->GetScale().y) / 2.0f};
+    pivot = {((float)origin_size.x * node->GetScale().x) / 2.0f,
+	     ((float)origin_size.y * node->GetScale().y) / 2.0f};
   
-  src_rect = {0, 0,
-  	      (float)size.x,
-  	      (float)size.y};
+    src_rect = {0, 0,
+		(float)size.x,
+		(float)size.y};
 
-  dst_rect = {position.x,
-  	      position.y,
-  	      (float)size.x,
-  	      (float)size.y};
-
+    dst_rect = {position.x,
+		position.y,
+		(float)size.x,
+		(float)size.y};
+  }
 }
 
 void Component::AtlasAnimator::DebugDraw(){
@@ -229,7 +235,8 @@ void Component::AtlasAnimator::DebugDraw(){
 }
 
 void Component::AtlasAnimator::_OnDraw(int layer_index){
-  DrawTexturePro(anim_frame.at(anim_name).at(frame_index - 1),
+  texture = &anim_frame.at(anim_name).at(frame_index - 1);
+  DrawTexturePro(*texture,
 		 src_rect,
 		 dst_rect,
 		 pivot,
@@ -259,6 +266,8 @@ void Component::AtlasAnimator::_CreateAnimFrame(){
       if(last_posible_anim_name == "nan"){
 	frame_list.push_back(texture_atlas->CreateTexture(posible_anim_name +"_"+ to_string(index)));
 	last_posible_anim_name = posible_anim_name;
+
+	if(texture == nullptr) texture = &frame_list.at(0);
       }
       else{
 	if(posible_anim_name == last_posible_anim_name){
@@ -290,14 +299,14 @@ void Component::AtlasAnimator::_CreateAnimFrame(){
 /*
   Tilemap Component
 */
-Component::Tilemap::Tilemap(Texture2D *_texture, Grid *_grid, int* _tile_map){
+Component::Tilemap::Tilemap(Grid *_grid,
+			    int* _tile_map,
+			    Texture2D *_texture){
   texture = _texture;
   grid = _grid;
   tile_map = _tile_map;
   max_width = grid->width * grid->column;
   max_height = grid->height * grid->row;
-  texture_column = texture->width / grid->width;
-  texture_row = texture->height / grid->height;
 }
 
 void Component::Tilemap::_OnDraw(int layer_index){
@@ -340,7 +349,7 @@ int* Component::Tilemap::GetTileMap(){return tile_map;}
 /*
   TMXMap Component
 */
-Component::TMXMap::TMXMap(Texture2D *_texture, string tmx_file_src){
+Component::TMXMap::TMXMap(string tmx_file_src, Texture2D *_texture){
   texture = _texture;
   grid = new Grid();
   XMLFile xml_file;
@@ -411,10 +420,6 @@ Component::TMXMap::TMXMap(Texture2D *_texture, string tmx_file_src){
   else{
     xml_file.PrintError();
   }
-
-  texture_column = texture->width / grid->width;
-  texture_row = texture->height / grid->height;
-    
 }
 
 void Component::TMXMap::_OnDraw(int layer_index){

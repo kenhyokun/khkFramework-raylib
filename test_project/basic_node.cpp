@@ -50,7 +50,7 @@ static Node* Instantiate(Node* node, string name = "", v2 position = {0.0f, 0.0f
     frame_height = node->GetComponent<Component::animator>()->GetFrameHeight();
     texture = node->GetComponent<Component::animator>()->texture;
     sorting_order = node->GetComponent<Component::animator>()->sorting_order;
-    inst_node->AddComponent<Component::animator>(new Component::Animator(texture, frame_width, frame_height));
+    inst_node->AddComponent<Component::animator>(new Component::Animator(frame_width, frame_height, texture));
     break;
 
   case Component::ATLAS_ANIMATOR:
@@ -105,7 +105,7 @@ struct App : BaseApp, ContactListener{
     };
 
     node2 = new Node("node 2");
-    node2->AddComponent<Component::tilemap>(new Tilemap(&tile, tilemap_grid, tile_map));
+    node2->AddComponent<Component::tilemap>(new Tilemap(tilemap_grid, tile_map, &tile));
     node2->SetPosition(v2{300, 300});
 
     // node2->SetRotation(45);

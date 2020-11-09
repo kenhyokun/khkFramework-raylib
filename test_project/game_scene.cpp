@@ -70,7 +70,7 @@ struct App : BaseApp{
 
     obj4 = new Node("obj4 animator");
     obj4->SetPosition(v2{230, 150});
-    obj4->AddComponent<Component::animator>(new Animator(&lilwitch, 78, 87));
+    obj4->AddComponent<Component::animator>(new Animator(78, 87, &lilwitch));
 
     obj5 = new Node("obj5 tilemap");
     obj5->SetPosition(v2{330, 150});
@@ -79,7 +79,7 @@ struct App : BaseApp{
 			       4,4,4,
 			       3,2,1};
 
-    obj5->AddComponent<Component::tilemap>(new Tilemap(&tile_texture, new Grid{48, 48, 3, 3}, tile_map));
+    obj5->AddComponent<Component::tilemap>(new Tilemap(new Grid{48, 48, 3, 3}, tile_map, &tile_texture));
 
     obj6 = new Node("obj6 atlas animator");
     obj6->SetPosition(v2{230, 200});
@@ -87,7 +87,7 @@ struct App : BaseApp{
 
     obj7 = new Node("obj7 tmxmap");
     obj7->SetPosition(v2{555, 200});
-    obj7->AddComponent<Component::tmxmap>(new TMXMap(&tile_texture, "./resources/tmx/map1.tmx"));
+    obj7->AddComponent<Component::tmxmap>(new TMXMap("./resources/tmx/map1.tmx", &tile_texture));
 
     scene1 = new Scene("scene 1");
     scene2 = new Scene("scene 2");

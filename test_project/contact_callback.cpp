@@ -140,7 +140,7 @@ struct App : BaseApp, ContactListener{
     lilwitch = LoadTexture("./resources/images/lilwitch.png");
     tile = LoadTexture("./resources/images/tile.png");
     sprite_renderer = new SpriteRenderer(&dia_red);
-    animator = new Animator(&lilwitch, 78, 87);
+    animator = new Animator(78, 87, &lilwitch);
 
     player->SetPosition(v2{50.0f, 50.0f});
     dynamic_box->SetPosition(v2{30.0f, 50.0f});
