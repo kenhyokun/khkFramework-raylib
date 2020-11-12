@@ -36,6 +36,9 @@
 
 using namespace std;
 
+#define UNAMED_NODE  "Unamed node"
+#define UNTAGGED_NODE "Untagged node"
+
 struct CTransform{
   v2 position = v2_0;
   v2 scale = v2_1;
@@ -70,10 +73,8 @@ protected:
 
 public:
   ComponentEntity component_entity;
-  const string unamed_node_name = "Unamed Node"; // give this name to node name if node name not set
-  const string untagged_node_tag = "Untagged Node"; // give this tag to node tag if node tag not set
-  string name = unamed_node_name;
-  string tag = untagged_node_tag;
+  string name = UNAMED_NODE;
+  string tag = UNTAGGED_NODE;
   bool is_fixed_transform_rotation = false;
 
   template<typename T>
@@ -82,7 +83,7 @@ public:
   template<typename T>
     static typename map<Node*, T>::iterator component_map_it;
 
-  Node(string _name = "");
+  Node(string _name = UNAMED_NODE);
   void AddChild(Node *node);
   void RemoveChild(int index); // remove child by index
   void RemoveChild(string name); // remove child by name

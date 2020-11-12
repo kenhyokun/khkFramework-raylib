@@ -25,7 +25,7 @@
 
 #include<ContactListener.h>
 
-void ContactListener::AddCollisionListener(CollisionListener *collision_listener){
+void ContactListener::AddContactListener(CollisionListener *collision_listener){
   collision_listener_list.push_back(collision_listener);
 }
 
@@ -36,50 +36,66 @@ void ContactListener::BeginContact(b2Contact *contact){
   Node *node_b = static_cast<Node*>
     (contact->GetFixtureB()->GetBody()->GetUserData());
 
+  Node *collision_node = nullptr;
 
   for(int i = 0; i < collision_listener_list.size(); ++i){
 
     if(collision_listener_list.at(i)->GetNode() != nullptr){
       
-      // collision enter / touching
       if(node_a == collision_listener_list.at(i)->GetNode() ||
-	 node_b == collision_listener_list.at(i)->GetNode()){
+  	 node_b == collision_listener_list.at(i)->GetNode()){
 
-	if(node_a == collision_listener_list.at(i)->GetNode()){
-	  collision_node = node_b;
-	}
-	else if(node_b == collision_listener_list.at(i)->GetNode()){
-	  collision_node = node_a;
-	}
+  	if(node_a == collision_listener_list.at(i)->GetNode()){
+  	  collision_node = node_b;
+  	}
+  	else if(node_b == collision_listener_list.at(i)->GetNode()){
+  	  collision_node = node_a;
+  	}
 	
-  	collision_listener_list.at(i)->is_exit = false;
-	contact_listener_contact = contact;
   	collision_listener_list.at(i)->OnCollisionEnter(collision_node);
-
       }
-
-      // collision exit / not touching any more
-      if(collision_node != nullptr &&
-      	 contact_listener_contact != nullptr && 
-      	 !contact_listener_contact->IsTouching()
-      	 ){
-
-      	if(!collision_listener_list.at(i)->is_exit){
-      	  collision_listener_list.at(i)->OnCollisionExit(collision_node);
-      	  collision_listener_list.at(i)->is_exit = true;
-      	}
-
-	collision_node = nullptr;
-	contact_listener_contact = nullptr;
-	 
-      }
-
+      
     } // node != nullptr
-  } // for
+  } // for 
 
   OnBeginContact(contact);
   OnBeginContact(contact, node_a, node_b);
 }
 
+void ContactListener::EndContact(b2Contact *contact){
+  Node *node_a = static_cast<Node*>
+    (contact->GetFixtureA()->GetBody()->GetUserData());
+
+  Node *node_b = static_cast<Node*>
+    (contact->GetFixtureB()->GetBody()->GetUserData());
+
+  Node *collision_node = nullptr;
+
+  for(int i = 0; i < collision_listener_list.size(); ++i){
+
+    if(collision_listener_list.at(i)->GetNode() != nullptr){
+      
+      if(node_a == collision_listener_list.at(i)->GetNode() ||
+  	 node_b == collision_listener_list.at(i)->GetNode()){
+
+  	if(node_a == collision_listener_list.at(i)->GetNode()){
+  	  collision_node = node_b;
+  	}
+  	else if(node_b == collision_listener_list.at(i)->GetNode()){
+  	  collision_node = node_a;
+  	}
+	
+  	collision_listener_list.at(i)->OnCollisionExit(collision_node);
+      }
+      
+    } // node != nullptr
+  } // for 
+
+  OnEndContact(contact);
+  OnEndContact(contact, node_a, node_b);
+}
+
 void ContactListener::OnBeginContact(b2Contact *contact){}
 void ContactListener::OnBeginContact(b2Contact *contact, Node *node_a, Node *node_b){}
+void ContactListener::OnEndContact(b2Contact *contact){}
+void ContactListener::OnEndContact(b2Contact *contact, Node *node_a, Node *node_b){}

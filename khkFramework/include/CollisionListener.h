@@ -30,9 +30,10 @@
 #include<m_box2d.h>
 
 struct CollisionListener{
-  bool is_exit = false;
+  // bool is_exit = false;
   
-  CollisionListener(Node *_node){node = _node;}
+  CollisionListener(Node *_node = nullptr){node = _node;}
+  inline void AddCollisionListener(Node *_node){node = _node;}
   virtual void OnCollisionEnter(Node *collision_node) = 0;
   virtual void OnCollisionExit(Node *collision_node) = 0;
 

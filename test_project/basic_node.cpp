@@ -46,8 +46,8 @@ static Node* Instantiate(Node* node, string name = "", v2 position = {0.0f, 0.0f
   case Component::ANIMATOR:
     int frame_width;
     int frame_height;
-    frame_width = node->GetComponent<Component::animator>()->GetFrameWidth();
-    frame_height = node->GetComponent<Component::animator>()->GetFrameHeight();
+    frame_width = node->GetComponent<Component::animator>()->GetGrid()->width;
+    frame_height = node->GetComponent<Component::animator>()->GetGrid()->height;
     texture = node->GetComponent<Component::animator>()->texture;
     sorting_order = node->GetComponent<Component::animator>()->sorting_order;
     inst_node->AddComponent<Component::animator>(new Component::Animator(frame_width, frame_height, texture));
@@ -90,6 +90,9 @@ struct App : BaseApp, ContactListener{
   }
 
   void OnInit() override {
+    B2D::Init(v2{0, 1000});
+    B2D::SetContactListener(this);
+
     lilwitch = LoadTexture("./resources/images/circle.png");
     tile = LoadTexture("./resources/images/tile.png");
 
@@ -115,9 +118,14 @@ struct App : BaseApp, ContactListener{
 
     node3 = Instantiate(node1);
     node3->SetPosition(v2{0,0});
+
+  }
+
+  void OnBeginContact(b2Contact *contact) override{
   }
 
   void OnUpdate() override {
+    B2D::Step();
   }
 
   void OnDraw() override {
@@ -125,6 +133,8 @@ struct App : BaseApp, ContactListener{
     node2->GetComponent<Component::tilemap>()->Draw();
     node1->GetComponent<Component::sprite_renderer>()->Draw();
     node3->GetComponent<Component::sprite_renderer>()->Draw();
+
+    B2D::DebugDraw();
   }
 
 };

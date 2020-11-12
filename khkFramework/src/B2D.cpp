@@ -145,6 +145,18 @@ Component::RigidBody::RigidBody(){
 void Component::RigidBody::Step(){
   node->SetPosition(v2{body->GetPosition().x, body->GetPosition().y});
   node->SetRotation(Rad2Deg(body->GetAngle()));
+
+  // affecting child node rigidbody linear velocity
+  for(int i = 0; i < node->GetChild()->size(); ++i){
+    if(node->GetChild(i)->IsHasRigidBodyComponent()){ // parent node can't move child node if child node have rigid body component
+
+      node->GetChild(i)->
+	GetComponent<rigidbody>()->
+	SetLinearVelocity(node->GetComponent<rigidbody>()->GetLinearVelocity());
+
+    }
+  } 
+
 }
 
 void Component::RigidBody::ApplyForce(const v2 &force, bool awake){
@@ -370,7 +382,7 @@ void B2D::Step(){
   world->Step(time_step, velocity_iterations, position_iterations); 
 
   for(b2Body *body = world->GetBodyList(); body; body = body->GetNext()){
-    static_cast<Node*>(body->GetUserData())->GetComponent<Component::rigid_body>()->Step();
+    static_cast<Node*>(body->GetUserData())->GetComponent<Component::rigidbody>()->Step();
   }
 }
 

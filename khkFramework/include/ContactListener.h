@@ -37,15 +37,13 @@ using namespace std;
 struct ContactListener : b2ContactListener{
   vector<CollisionListener*> collision_listener_list;
 
-  void AddCollisionListener(CollisionListener *collision_listener);
+  void AddContactListener(CollisionListener *collision_listener);
   void BeginContact(b2Contact *contact) override ;
+  void EndContact(b2Contact *contact) override ;
   virtual void OnBeginContact(b2Contact *contact);
   virtual void OnBeginContact(b2Contact *contact, Node *node_a, Node *node_b);
-
- protected:
-  Node *collision_node = nullptr;
-  b2Contact *contact_listener_contact = nullptr;
-  
+  virtual void OnEndContact(b2Contact *contact);
+  virtual void OnEndContact(b2Contact *contact, Node *node_a, Node *node_b);
 };
 
 #endif

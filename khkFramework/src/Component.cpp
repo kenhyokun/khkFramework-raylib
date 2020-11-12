@@ -311,7 +311,7 @@ Component::Tilemap::Tilemap(Grid *_grid,
 
 void Component::Tilemap::_OnDraw(int layer_index){
   for(int i = 0; i < grid->row; ++i){
-    for(int j = 0; j < grid->column; j++){
+    for(int j = 0; j < grid->column; ++j){
 
       int tile = tile_map[_GetIndex(j, i)];
 

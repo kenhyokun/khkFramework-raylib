@@ -26,9 +26,8 @@
 #include<Node.h>
 
 Node::Node(string _name){
-  if(_name == ""){
+  if(_name == UNAMED_NODE){
     name += to_string(node_count);
-    node_count++;
   }
   else{
     name = _name;

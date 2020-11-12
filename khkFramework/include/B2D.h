@@ -187,7 +187,7 @@ namespace Component{
     b2Body *body = nullptr;
     void _OnAttach() override;
     bool _IsGetCollider(int state = 0); // search and set collider shape
-  } *rigid_body; 
+  } *rigidbody; 
 
 }; // Component namespace
 
