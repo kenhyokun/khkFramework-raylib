@@ -139,23 +139,28 @@ void Component::EdgeCollider::_OnAttach(){
 /*
   RigidBody Component
 */
-Component::RigidBody::RigidBody(){
-}
-
 void Component::RigidBody::Step(){
   node->SetPosition(v2{body->GetPosition().x, body->GetPosition().y});
   node->SetRotation(Rad2Deg(body->GetAngle()));
 
+  /*
+    TODO[kevin]:
+    need better and proper way to affecting child node rigidbody
+  */
+  
   // affecting child node rigidbody linear velocity
-  for(int i = 0; i < node->GetChild()->size(); ++i){
-    if(node->GetChild(i)->IsHasRigidBodyComponent()){ // parent node can't move child node if child node have rigid body component
+  if(node->GetChild()->size() > 0){
 
-      node->GetChild(i)->
-	GetComponent<rigidbody>()->
-	SetLinearVelocity(node->GetComponent<rigidbody>()->GetLinearVelocity());
+    for(int i = 0; i < node->GetChild()->size(); ++i){
+      if(node->GetChild(i)->IsHasRigidBodyComponent()){
 
-    }
-  } 
+  	node->GetChild(i)->
+  	  GetComponent<Component::rigidbody>()->
+  	  SetLinearVelocity(node->GetComponent<Component::rigidbody>()->GetLinearVelocity());
+
+      } // if
+    } // for 
+  }
 
 }
 
@@ -353,6 +358,12 @@ void Component::RigidBody::SetDensity(float _density){
   body->ResetMassData();
 }
 
+float Component::RigidBody::GetMass(){
+  b2MassData mass_data;
+  body->GetMassData(&mass_data);
+  return mass_data.mass;
+}
+
 void Component::RigidBody::SetAwake(bool is_awake){body->SetAwake(is_awake);}
 void Component::RigidBody::SetEnabled(bool is_enable){body->SetEnabled(is_enable);}
 void Component::RigidBody::SetFriction(float friction){fixture->SetFriction(friction);}
@@ -366,6 +377,7 @@ float Component::RigidBody::GetBodyRadian(){return body->GetAngle();}
 void Component::RigidBody::SetBodyType(b2BodyType type){body->SetType(type);}
 void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotation(is_fixed);}
 b2Body* Component::RigidBody::GetBody(){return body;}
+float Component::RigidBody::GetDensity(){return fixture->GetDensity();}
 v2 Component::RigidBody::GetPosition(){return v2{body->GetTransform().p.x, body->GetTransform().p.y};}
 
 
@@ -383,6 +395,12 @@ void B2D::Step(){
 
   for(b2Body *body = world->GetBodyList(); body; body = body->GetNext()){
     static_cast<Node*>(body->GetUserData())->GetComponent<Component::rigidbody>()->Step();
+  }
+}
+
+void B2D::Clear(){
+  for(b2Body *body = world->GetBodyList(); body; body->GetNext()){
+    world->DestroyBody(body);
   }
 }
 

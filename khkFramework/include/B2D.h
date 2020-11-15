@@ -153,7 +153,6 @@ namespace Component{
     float density = 1.0f;
     b2BodyType body_type = DYNAMIC;
 
-    RigidBody();
     void Step();
     void ApplyForce(const v2 &force, bool awake = true);
     void ApplyForce(const v2 &force, const v2 &point, bool awake = true);
@@ -171,6 +170,8 @@ namespace Component{
     void SetAlwaysAwake(bool is_awake = true);
     void SetAwake(bool is_awake);
     void SetEnabled(bool is_enable = true);
+    float GetMass();
+    float GetDensity();
     v2 GetBodyPosition();
     v2 GetLinearVelocity();
     float GetAngularVelocity();
@@ -200,6 +201,7 @@ namespace B2D{
   void Init(v2 gravity);
   void SetContactListener(ContactListener *contact_listener = nullptr);
   void Step();
+  void Clear();
   void DebugDraw(float opacity = 0.666f, Color color1 = GREEN, Color color2 = RED);
 
 }; // B2D namespace

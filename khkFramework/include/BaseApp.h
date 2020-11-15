@@ -45,7 +45,7 @@ struct BaseApp{
   static void AddKeyButton(string action_name, int key_code);
   static Key* GetKeyButton(string action_name);
   static int SettingCallback(IniDispatch *dispatch, void *v_null);
-  void Init(int texture_filter_mode = 0);
+  void Init(int texture_filter_mode = FILTER_POINT);
   void Update();
   void Draw();
   void Run();
