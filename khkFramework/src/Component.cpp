@@ -327,7 +327,7 @@ void Component::Tilemap::_OnDraw(int layer_index){
 	DrawTexturePro(*texture,
 		       src_rect,
 		       dst_rect,
-		       v2{(float)grid->width * 0.5f, (float)grid->height * 0.5f},
+		       Vector2{(float)grid->width * 0.5f, (float)grid->height * 0.5f},
 		       node->GetRotation(),
 		       WHITE);
 
@@ -450,7 +450,7 @@ void Component::TMXMap::_DrawLayer(int layer_index){
 	DrawTexturePro(*texture,
 		       src_rect,
 		       dst_rect,
-		       v2{(float)grid->width * 0.5f, (float)grid->height * 0.5f},
+		       Vector2{(float)grid->width * 0.5f, (float)grid->height * 0.5f},
 		       node->GetRotation(),
 		       WHITE);
 

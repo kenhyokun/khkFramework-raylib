@@ -30,20 +30,47 @@
 
 using namespace std;
 
-#define v2_0  Vector2{0.0f, 0.0f}
-#define v2_half  Vector2{0.5f, 0.5f} // I don't know why this feels like necessary
-#define v2_1  Vector2{1.0f, 1.0f}
-typedef Vector2 v2;
+/* #define v2_0 Vector2{0.0f, 0.0f} */
+/* #define v2_half Vector2{0.5f, 0.5f} // I don't know why this feels like necessary */
+/* #define v2_1 Vector2{1.0f, 1.0f} */
+/* typedef Vector2 v2; */
+
+struct v2{
+  float x, y;
+
+  v2 operator+ (const v2& _v2){
+    v2 result;
+    result.x = x + _v2.x;
+    result.y = y + _v2.y;
+    return result;
+  }
+
+  v2 operator- (const v2& _v2){
+    v2 result;
+    result.x = x - _v2.x;
+    result.y = y - _v2.y;
+    return result;
+  }
+
+  v2 Normalize(){}
+  v2 Magnitude(v2 origin = v2{0.0f, 0.0f}){}
+  v2 Distance(v2 _v2){}
+
+};
+
+#define v2_0 v2{0.0f, 0.0f}
+#define v2_half v2{0.5f, 0.5f} // I don't know why this feels like necessary
+#define v2_1 v2{1.0f, 1.0f}
 
 struct v2i{
   int x,y;
 };
 
+#define v2i_0 v2i{0, 0}
+
 struct Rectanglei{
   int x, y, width, height;
 };
-
-#define v2i_0 v2i{0, 0}
 
 inline void log(string log_str){
   cout<<log_str<<endl;
@@ -55,7 +82,7 @@ inline void rlDrawCircle(float x, float y, float r, Color color){
 
 inline void DrawRectangle(float x, float y, int width, int height, Color color, float rotation = 0.0f){
   DrawRectanglePro(Rectangle{x, y, (float)width, (float)height},
-		   v2{width * 0.5f, height * 0.5f},
+		   Vector2{width * 0.5f, height * 0.5f},
 		   rotation,
 		   color);
 }

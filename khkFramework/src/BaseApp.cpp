@@ -127,7 +127,7 @@ void BaseApp::Update(){
 	      (float)GetScreenHeight() / game_screen_height);
 
   // update mouse
-  mouse = GetMousePosition();
+  mouse = v2{GetMousePosition().x, GetMousePosition().y};
   virtual_mouse = { 0 };
   virtual_mouse.x = (mouse.x - (GetScreenWidth() - (game_screen_width * scale) ) * 0.5f) / scale;
   virtual_mouse.y = (mouse.y - (GetScreenHeight() - (game_screen_height * scale) ) * 0.5f) / scale;
@@ -169,7 +169,7 @@ void BaseApp::Draw(){
 		     (float)game_screen_width * scale,
 		     (float)game_screen_height * scale
 		     },
-		 (v2){0, 0},
+		 (Vector2){0, 0},
 		 0.0f,
 		 WHITE
 		 );

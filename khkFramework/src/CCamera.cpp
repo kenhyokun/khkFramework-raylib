@@ -27,7 +27,8 @@
 
 CCamera::CCamera (int _width, int _height){
   camera = {0};
-  camera.offset = v2{0, 0};
+  // camera.offset = v2{0, 0};
+  camera.offset = Vector2{0, 0};
   camera.rotation = 0.0f;
   camera.zoom = 1.0f;
   width = _width;
@@ -35,7 +36,7 @@ CCamera::CCamera (int _width, int _height){
 }
 
 void CCamera::SetOffset(int offset_x, int offset_y){
-  camera.offset = v2{(float)offset_x, (float)offset_y};
+  camera.offset = Vector2{(float)offset_x, (float)offset_y};
 }
 
 void CCamera::SetOffsetToCenter(){
@@ -48,6 +49,6 @@ void CCamera::AttachTo(Node *node){target = node;}
 void CCamera::Detach(){target = nullptr;}
 void CCamera::Follow(){
   if(target != nullptr){
-    camera.target = target->GetPosition();
+    camera.target = Vector2{target->GetPosition().x, target->GetPosition().y};
   }
 }

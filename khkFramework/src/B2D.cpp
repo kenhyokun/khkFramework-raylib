@@ -364,6 +364,7 @@ float Component::RigidBody::GetMass(){
   return mass_data.mass;
 }
 
+void Component::RigidBody::SetGravityScale(float scale){body->SetGravityScale(scale);}
 void Component::RigidBody::SetAwake(bool is_awake){body->SetAwake(is_awake);}
 void Component::RigidBody::SetEnabled(bool is_enable){body->SetEnabled(is_enable);}
 void Component::RigidBody::SetFriction(float friction){fixture->SetFriction(friction);}
@@ -379,6 +380,7 @@ void Component::RigidBody::SetFixedRotation(bool is_fixed){body->SetFixedRotatio
 b2Body* Component::RigidBody::GetBody(){return body;}
 float Component::RigidBody::GetDensity(){return fixture->GetDensity();}
 v2 Component::RigidBody::GetPosition(){return v2{body->GetTransform().p.x, body->GetTransform().p.y};}
+float Component::RigidBody::GetGravityScale(){return body->GetGravityScale();}
 
 
 void B2D::Init(v2 gravity){

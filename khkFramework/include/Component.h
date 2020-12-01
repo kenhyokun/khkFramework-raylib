@@ -74,7 +74,7 @@ namespace Component{
     void Draw(int layer_index = -1); // draw when component enable and visible
 
   protected:
-    v2 pivot{0.0f, 0.0f};
+    Vector2 pivot{0.0f, 0.0f};
     Rectangle src_rect{0.0f, 0.0f, 0.0f, 0.0f};
     Rectangle dst_rect{0.0f, 0.0f, 0.0f, 0.0f};
 

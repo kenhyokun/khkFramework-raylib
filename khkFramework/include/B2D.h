@@ -170,6 +170,8 @@ namespace Component{
     void SetAlwaysAwake(bool is_awake = true);
     void SetAwake(bool is_awake);
     void SetEnabled(bool is_enable = true);
+    void SetGravityScale(float scale);
+    float GetGravityScale();
     float GetMass();
     float GetDensity();
     v2 GetBodyPosition();
