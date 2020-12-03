@@ -25,8 +25,10 @@
 
 #ifndef M_RAYLIB
 #define M_RAYLIB
+
 #include<iostream>
 #include<raylib.h>
+#include<cmath>
 
 using namespace std;
 
@@ -38,23 +40,43 @@ using namespace std;
 struct v2{
   float x, y;
 
-  v2 operator+ (const v2& _v2){
+  inline v2 operator+ (const v2& _v2){
     v2 result;
     result.x = x + _v2.x;
     result.y = y + _v2.y;
     return result;
   }
 
-  v2 operator- (const v2& _v2){
+  inline v2 operator- (const v2& _v2){
     v2 result;
     result.x = x - _v2.x;
     result.y = y - _v2.y;
     return result;
   }
 
-  v2 Normalize(){}
-  v2 Magnitude(v2 origin = v2{0.0f, 0.0f}){}
-  v2 Distance(v2 _v2){}
+  inline float Magnitude(v2 origin = v2{0.0f, 0.0f}){
+    float magnitude = 0.0f;
+    float rx = x - origin.x;
+    float ry = y - origin.y;
+    magnitude = sqrt( pow(rx, 2) + pow(ry, 2) );
+    return magnitude;
+  }
+
+  inline v2 Normalize(v2 origin = v2{0.0f, 0.0f}){
+    v2 norm;
+    float rx = x - origin.x;
+    float ry = y - origin.y;
+    float magnitude = Magnitude(origin);
+    norm.x = rx / magnitude;
+    norm.y = ry / magnitude;
+    return norm;
+  }
+
+  inline float Distance(v2 _v2){
+    float dist = 0.0f;
+    sqrt( pow( _v2.x - x, 2 ) + pow( _v2.y - y, 2 ) );
+    return dist;
+  }
 
 };
 

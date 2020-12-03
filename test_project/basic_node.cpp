@@ -111,13 +111,24 @@ struct App : BaseApp, ContactListener{
     node2->AddComponent<Component::tilemap>(new Tilemap(tilemap_grid, tile_map, &tile));
     node2->SetPosition(v2{300, 300});
 
-    // node2->SetRotation(45);
+    node2->SetRotation(45);
 
     node1->SetPosition(node2->GetComponent<Component::tilemap>()->
 		       GetGridPosition(1, 4));
 
     node3 = Instantiate(node1);
     node3->SetPosition(v2{0,0});
+
+
+    v2 a{5.0f, 6.0f};
+    v2 b{6.0f, 7.0f};
+    v2 c = a + b;
+    v2 d = b - a;
+
+    cout<<a.x<<", "<<a.y<<endl;
+    cout<<b.x<<", "<<b.y<<endl;
+    cout<<c.x<<", "<<c.y<<endl;
+    cout<<d.x<<", "<<d.y<<endl;
 
   }
 

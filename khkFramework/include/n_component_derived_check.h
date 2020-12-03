@@ -49,7 +49,7 @@ typedef struct Tilemap n_tilemap;
 typedef struct TMXMap n_tmxmap;
 
  template<typename T>
-   static bool IsDerivedComponent(T component){
+   inline bool IsDerivedComponent(T component){
    if(std::is_base_of<BaseComponent, T>::value == 1){
      return true; 
    }
@@ -57,7 +57,7 @@ typedef struct TMXMap n_tmxmap;
  }
 
  template<typename T>
-   static bool IsDerivedDrawable(T component){
+   inline bool IsDerivedDrawable(T component){
    if(std::is_base_of<DrawableBaseComponent, T>::value == 1){
      return true; 
    }
@@ -65,7 +65,7 @@ typedef struct TMXMap n_tmxmap;
  }
 
  template<typename T>
-   static bool IsDerivedRigidBody(T component){
+   inline bool IsDerivedRigidBody(T component){
    if(std::is_base_of<RigidBody, T>::value == 1){
      return true; 
    }
@@ -73,7 +73,7 @@ typedef struct TMXMap n_tmxmap;
  }
 
  template<typename T>
-   static bool IsDerivedSpriteRenderer(T component){
+   inline bool IsDerivedSpriteRenderer(T component){
    if(std::is_base_of<SpriteRenderer, T>::value == 1){
      return true; 
    }
@@ -81,7 +81,7 @@ typedef struct TMXMap n_tmxmap;
  }
 
  template<typename T>
-   static bool IsDerivedAnimator(T component){
+   inline bool IsDerivedAnimator(T component){
    if(std::is_base_of<Animator, T>::value == 1){
      return true; 
    }
@@ -89,7 +89,7 @@ typedef struct TMXMap n_tmxmap;
  }
 
  template<typename T>
-   static bool IsDerivedAtlasAnimator(T component){
+   inline bool IsDerivedAtlasAnimator(T component){
    if(std::is_base_of<AtlasAnimator, T>::value == 1){
      return true; 
    }
@@ -97,7 +97,7 @@ typedef struct TMXMap n_tmxmap;
  }
 
  template<typename T>
-   static bool IsDerivedTilemap(T component){
+   inline bool IsDerivedTilemap(T component){
    if(std::is_base_of<Tilemap, T>::value == 1){
      return true; 
    }
@@ -105,7 +105,7 @@ typedef struct TMXMap n_tmxmap;
  }
 
  template<typename T>
-   static bool IsDerivedTMXMap(T component){
+   inline bool IsDerivedTMXMap(T component){
    if(std::is_base_of<TMXMap, T>::value == 1){
      return true; 
    }

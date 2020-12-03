@@ -751,6 +751,8 @@ iostream
 -
 raylib.h
 -
+cmath
+-
 
 ../include/n_component_derived_check.h
 iostream

@@ -51,6 +51,7 @@ static int node_count = 1; // for node auto naming
 
 struct Node{
 private:
+
   struct ComponentEntity{
     bool is_has_rigidbody_component = false;
     bool is_has_drawable_component = false;

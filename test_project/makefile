@@ -32,10 +32,10 @@ LIB :=\
 	-lGLEW
 
 # CURR_PROJECT := basic_node.cpp
-CURR_PROJECT := contact_callback.cpp
+# CURR_PROJECT := contact_callback.cpp
 # CURR_PROJECT := imgui_demo_test.cpp
 # CURR_PROJECT := imgui_no_BaseApp.cpp
-# CURR_PROJECT := game_scene.cpp
+CURR_PROJECT := game_scene.cpp
 # CURR_PROJECT := moonshot.cpp
 
 all:
