@@ -10,7 +10,8 @@
 #include<Component.h>
 #include<SceneManager.h>
 
-using namespace std;
+using std::cout;
+using std::endl;
 using namespace Component;
 
 /*

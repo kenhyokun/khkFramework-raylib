@@ -1,6 +1,6 @@
 /*
   license under zlib license
-  Copyright (C) 2020 Kevin Haryo Kuncoro
+  Copyright (C) 2020-2021 Kevin Haryo Kuncoro
 
   This software is provided 'as-is', without any express or implied
   warranty.  In no event will the authors be held liable for any damages

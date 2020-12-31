@@ -40,7 +40,7 @@ Current progress: (**[youtube][4]**)
 <p>
 Kevin Haryo Kuncoro </br>
 kevinhyokun91@gmail.com </br>
-2020 
+2020-2021 
 </p>
 
 [1]: https://github.com/raysan5/raylib
